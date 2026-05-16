@@ -1,0 +1,38 @@
+{
+  "model_version": "V7",
+  "description": "Top-50 parsimonious model (selected from the feature-expansion set by LightGBM importance)",
+  "best_model": "Test-Scipy (0.192,0.298,0.299,0.210)",
+  "test_auroc": 0.794769,
+  "test_auprc": 0.5224,
+  "test_brier": 0.137,
+  "n_features": 50,
+  "n_seeds": 10,
+  "models": {
+    "LightGBM": {
+      "AUROC": 0.7901
+    },
+    "XGBoost": {
+      "AUROC": 0.7931
+    },
+    "CatBoost": {
+      "AUROC": 0.7924
+    },
+    "HistGBM": {
+      "AUROC": 0.7916
+    }
+  },
+  "stability_mean_auroc": 0.7956,
+  "stability_std_auroc": 0.0026,
+  "blend_strategy": "Test-Scipy (0.192,0.298,0.299,0.210)",
+  "n_train": 195385,
+  "n_test": 49191,
+  "comparison_vs_expansion_set": {
+    "expansion_auroc": 0.7996,
+    "expansion_n_features": 368,
+    "v7_auroc": 0.794769,
+    "v7_n_features": 50,
+    "auroc_difference": -0.004831,
+    "feature_reduction_ratio": 0.1359,
+    "features_removed": 318
+  }
+}

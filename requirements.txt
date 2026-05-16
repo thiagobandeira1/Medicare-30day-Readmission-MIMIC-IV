@@ -1,0 +1,27 @@
+# Python 3.12.x (publication run executed on 3.12.10 via Anaconda)
+# Install with: pip install -r requirements.txt
+# (or use environment.yml for a conda environment)
+
+# Core scientific stack
+numpy>=1.26,<3
+pandas==2.3.3
+scipy==1.17.1
+matplotlib>=3.8,<4
+seaborn==0.13.2
+
+# ML
+scikit-learn==1.8.0
+lightgbm==4.6.0
+xgboost==3.2.0
+catboost==1.2.10
+shap>=0.49,<1
+
+# Data I/O
+pyarrow>=15
+duckdb>=1.4,<2
+
+# Notebook execution + reproducibility
+nbformat>=5.9,<6
+nbclient>=0.8
+jupyter-core>=5.7
+ipykernel>=6.28

@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+type: software
+title: "Predicting 30-Day Hospital Readmission in Medicare Patients: An Interpretable XGBoost Model on MIMIC-IV v3.1"
+authors:
+  - family-names: "Bandeira"
+    given-names: "Thiago"
+    affiliation: "Florida International University, Miami, FL, USA"
+    email: "tbati006@fiu.edu"
+  - family-names: "Gonzalez"
+    given-names: "Armando"
+    affiliation: "Florida International University, Miami, FL, USA"
+  - family-names: "Poellabauer"
+    given-names: "Christian"
+    affiliation: "Florida International University, Miami, FL, USA"
+year: 2026
+abstract: >-
+  A reproducible XGBoost pipeline for predicting 30-day all-cause readmission
+  in Medicare patients using MIMIC-IV v3.1. Parsimonious 50-feature model
+  trained under a strict 60/20/20 patient-grouped train/validation/test
+  protocol, with SHAP-based interpretability and benchmarking against LACE
+  and ClinicalBERT.
+keywords:
+  - "30-day readmission"
+  - "Medicare"
+  - "MIMIC-IV"
+  - "gradient boosting"
+  - "XGBoost"
+  - "SHAP"
+  - "interpretable machine learning"
+  - "clinical decision support"
+license: MIT
+repository-code: "https://github.com/<TBD>/medicare-readmission-publication"

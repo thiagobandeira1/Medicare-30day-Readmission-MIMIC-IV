@@ -1,0 +1,38 @@
+{
+  "split": {
+    "train": {
+      "admissions": 147241,
+      "patients": 54747,
+      "pos_rate": 0.2105
+    },
+    "val": {
+      "admissions": 48144,
+      "patients": 18249,
+      "pos_rate": 0.2132
+    },
+    "test": {
+      "admissions": 49191,
+      "patients": 18249,
+      "pos_rate": 0.2091
+    },
+    "n_features": 90,
+    "n_categorical": 0
+  },
+  "logreg_progression": {},
+  "gbm_progression": {
+    "LightGBM": {},
+    "XGBoost": {},
+    "MLP": {}
+  },
+  "v7": {},
+  "blend": {
+    "weights": {
+      "LightGBM": 0.769,
+      "XGBoost": 0.077,
+      "CatBoost": 0.077,
+      "HistGBM": 0.077
+    },
+    "val": 0.796216,
+    "xgb_solo_test": 0.779844
+  }
+}
