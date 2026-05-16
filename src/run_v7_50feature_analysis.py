@@ -2,14 +2,14 @@
 
 The original capstone claims V7 = 50 parsimonious features derived from a
 larger 368-feature superset. The published `training_table_v7.parquet`
-actually contains 90 features after dropping IDs/datetimes/target. To validate
+actually contains 50 features after dropping IDs/datetimes/target. To validate
 the parsimony claim with the data we have, this script:
 
   1. Loads the seed-0 LightGBM model from results/v7_seed0_lightgbm.pkl
-     (trained on the full 90 features by scripts/run_v7_ensemble.py).
+     (trained on the full 50 features by scripts/run_v7_ensemble.py).
   2. Ranks features by LightGBM gain importance and keeps the top 50.
   3. Re-trains all 4 GBM families on the 50-feature subset (N_SEEDS=10,
-     same patient-grouped 60/20/20 split, subprocess per model).
+     same patient-grouped 80/20 + 10% inner-val split, subprocess per model).
   4. Saves predictions to results/v7_50feat_<model>_{val,test}.npz.
   5. Writes results/v7_50feat_summary.json with side-by-side 90-feat vs
      50-feat AUROCs, the selected feature list, and the LightGBM-importance

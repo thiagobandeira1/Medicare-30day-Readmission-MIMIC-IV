@@ -73,7 +73,7 @@ def _v7_path() -> Path:
 
 
 def _prepare_data():
- """Load V7, do 60/20/20 split, return arrays + persist split."""
+ """Load V7, do 80/20 + 10% inner-val split, return arrays + persist split."""
  import numpy as np
  import pandas as pd
  from sklearn.model_selection import GroupShuffleSplit

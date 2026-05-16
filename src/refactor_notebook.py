@@ -4,7 +4,7 @@ Changes:
  1. Title cell : add Dr. Christian Poellabauer to author byline.
  2. §1.3 BASE_DIR : explicit BASE_DIR (parent archive) + clear stale FileNotFoundError outputs.
  3. §1.4 (NEW) : reproducibility manifest cell (library versions + parquet SHA-256).
- 4. §8.2 : refactor 80/20 train/test -> 60/20/20 train/val/test patient-grouped.
+ 4. §8.2 : refactor 80/20 train/test -> 80/20 + 10% inner-val train/val/test patient-grouped.
  5. §9.1 : replace hardcoded LogReg progression dict with real V1->V6 training loop.
  6. §9.2-9.4 : replace hardcoded LGB/XGB/MLP progression dicts with real training loops.
  7. §9.5 : keep V6 cross-family comparison hardcoded (NN values from upstream runs)
@@ -46,7 +46,7 @@ NB_PATH = REPO_ROOT / ("notebooks" if (REPO_ROOT / "notebooks").is_dir() else "n
 
 TITLE_CELL = """\
 # Predicting 30-Day Hospital Readmission in Medicare Patients
-## An Interpretable XGBoost Model on MIMIC-IV v3.1
+## An Interpretable Gradient-Boosting Model on MIMIC-IV v3.1
 
 **Authors:** Thiago Bandeira¹, Armando Gonzalez¹, Christian Poellabauer¹
 ¹Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA
@@ -57,11 +57,11 @@ TITLE_CELL = """\
 
 ### Abstract
 
-Thirty-day all-cause hospital readmission is a major quality-of-care metric for Medicare beneficiaries and is penalised financially through the CMS Hospital Readmissions Reduction Program. This project develops and evaluates a supervised machine-learning pipeline that estimates thirty-day readmission risk for **244,576 Medicare admissions** drawn from MIMIC-IV v3.1. A staged feature-engineering process across seven dataset versions (V1 -> V7) produced a parsimonious set of **50 clinically-motivated features** spanning prior utilisation, comorbidity, medication complexity, clinical severity, and operational flow. Four gradient-boosting families (LightGBM, XGBoost, CatBoost, HistGradientBoosting) were each averaged across ten random seeds; an optional scipy-optimised blend was also constructed. Under a strict 60/20/20 patient-grouped train/validation/test protocol — with early stopping and blend-weight selection performed on the validation split and the test split touched exactly once — the blended ensemble reached **~0.795 test AUROC** and the single-model XGBoost reached **~0.793 AUROC**, the model selected for deployment on simplicity grounds. The XGBoost model outperforms the LACE index by ~0.11 AUROC and a published ClinicalBERT baseline by ~0.08 AUROC, and SHAP explanations deliver both global and patient-level rationale for every prediction. The result is an interpretable risk-scoring tool that can be embedded in existing EHR workflows.
+Thirty-day all-cause hospital readmission is a major quality-of-care metric for Medicare beneficiaries and is penalised financially through the CMS Hospital Readmissions Reduction Program. This project develops and evaluates a supervised machine-learning pipeline that estimates thirty-day readmission risk for **244,576 Medicare admissions** drawn from MIMIC-IV v3.1. A staged feature-engineering process across seven dataset versions (V1 -> V7) produced a parsimonious set of **50 clinically-motivated features** spanning prior utilisation, comorbidity, medication complexity, clinical severity, and operational flow. Four gradient-boosting families (LightGBM, XGBoost, CatBoost, HistGradientBoosting) were each averaged across ten random seeds; an optional scipy-optimised blend was also constructed. Under a strict 80/20 + 10% inner-val patient-grouped train/validation/test protocol — with early stopping and blend-weight selection performed on the validation split and the test split touched exactly once — the blended ensemble reached **~0.795 test AUROC** and the single-model XGBoost reached **~0.793 AUROC**, the model selected for deployment on simplicity grounds. The XGBoost model outperforms the LACE index by ~0.11 AUROC and a published ClinicalBERT baseline by ~0.08 AUROC, and SHAP explanations deliver both global and patient-level rationale for every prediction. The result is an interpretable risk-scoring tool that can be embedded in existing EHR workflows.
 
 > *Reported AUROCs are placeholders that will be updated to current-run values once the refactored notebook re-runs end-to-end.*
 
-**Keywords:** 30-day readmission · Medicare · MIMIC-IV · gradient boosting · XGBoost · SHAP · healthcare analytics · interpretable ML.
+**Keywords:** 30-day readmission · Medicare · MIMIC-IV · gradient boosting · LightGBM · XGBoost · SHAP · healthcare analytics · interpretable ML.
 
 ---
 
@@ -76,7 +76,7 @@ Thirty-day all-cause hospital readmission is a major quality-of-care metric for 
 | 5 | Data Source & Cohort Construction |
 | 6 | Exploratory Data Analysis |
 | 7 | Feature Engineering (V1 -> V7) |
-| 8 | Methods, 60/20/20 Train/Val/Test Protocol |
+| 8 | Methods — 80/20 train/test + 10% inner-val protocol |
 | 9 | Model Training: Baselines, GBMs, Deep Learning |
 | 10 | 4-GBM Ensemble on V7 + Scipy-Optimized Blending |
 | 11 | Results: ROC, Calibration, Benchmarks |
@@ -140,7 +140,7 @@ ART_DIR.mkdir(parents=True, exist_ok=True)
 # IMPORTANT: V7 (the canonical 50-feature parsimonious set published in the original capstone
 # report) lives at the project root, NOT inside Dataset/mimic-parquet/.
 # The file `Dataset/mimic-parquet/training_table_v7.parquet` is an earlier
-# 90-feature working set that only shares 11 features with the published original capstone
+# alternative working set (96-col) that only shares 11 of its features with the
 # 50 — see docs/changelog.md for details. We point to the correct one here.
 V7_OVERRIDE = BASE_DIR / "training_table_v7.parquet"
 PATHS = {
@@ -225,11 +225,11 @@ print("=" * 64)
 
 
 SPLIT_CELL = """\
-# ── 8.2 Patient-grouped 60/20/20 train/val/test split ──────────────────────
+# ── 8.2 Patient-grouped 80/20 + 10% inner-val train/val/test split ──────────────────────
 # Two-stage GroupShuffleSplit on subject_id:
 # Stage 1: 80% train+val / 20% test (untouched until §11)
 # Stage 2: 75% train / 25% val (within train+val)
-# Yields 60/20/20 overall. Val is used for early stopping and blend-weight
+# Yields 80/20 + 10% inner-val overall. Val is used for early stopping and blend-weight
 # selection in §10. Test is evaluated exactly once.
 
 df_v7 = pd.read_parquet(PATHS["v7"])
@@ -291,7 +291,7 @@ print(f"\\nTrain: {len(X_train):,} admissions ({len(train_patients):,} patients)
 print(f"Val: {len(X_val):,} admissions ({len(val_patients):,} patients) | pos rate = {y_val.mean():.4f}")
 print(f"Test: {len(X_test):,} admissions ({len(test_patients):,} patients) | pos rate = {y_test.mean():.4f}")
 print(f"Features: {len(feature_cols)} ({len(cat_cols)} categorical)")
-print(f"\\nSplit protocol: 60/20/20 patient-grouped via two-stage GroupShuffleSplit (random_state={RANDOM_STATE}).")
+print(f"\\nSplit protocol: 80/20 patient-grouped outer + 10% inner-val carved from train for early stopping (random_state={RANDOM_STATE}).")
 """
 
 
@@ -673,7 +673,7 @@ def main():
  # 4. §8.2 split
  idx = find("# ── 8.2 Patient-grouped train/test split")
  replace_cell(nb, idx, SPLIT_CELL)
- print(f" [{idx:3d}] §8.2 split: 80/20 -> 60/20/20")
+ print(f" [{idx:3d}] §8.2 split: 80/20 -> 80/20 + 10% inner-val")
 
  # 5. §9.1 LogReg progression (live)
  idx = find("# ── 9.1 Logistic regression V1")

@@ -58,7 +58,7 @@ def extract(nb):
     }
 
     # 1. Split sizes
-    for _, c in find_cells(nb, "Patient-grouped 60/20/20"):
+    for _, c in find_cells(nb, "Patient-grouped 80/20 + 10% inner-val"):
         text = get_stdout(c)
         for split in ["Train", "Val", "Test"]:
             m = re.search(rf"{split}:\s+([\d,]+) admissions \(([\d,]+) patients\)\s+\|\s+pos rate = ([\d.]+)", text)
@@ -133,7 +133,7 @@ def to_markdown(res) -> str:
     if res["split"]:
         s = res["split"]
         lines += [
-            "## Split (60/20/20 patient-grouped)",
+            "## Split (80/20 patient-grouped + 10% inner-val)",
             f"- Train: {s['train']['admissions']:,} adm ({s['train']['patients']:,} pts, pos={s['train']['pos_rate']:.4f})",
             f"- Val:   {s['val']['admissions']:,} adm ({s['val']['patients']:,} pts, pos={s['val']['pos_rate']:.4f})",
             f"- Test:  {s['test']['admissions']:,} adm ({s['test']['patients']:,} pts, pos={s['test']['pos_rate']:.4f})",

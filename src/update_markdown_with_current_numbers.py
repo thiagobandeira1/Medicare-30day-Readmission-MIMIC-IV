@@ -86,12 +86,12 @@ def main():
         f"machine-learning pipeline that estimates thirty-day readmission risk for "
         f"**244,576 Medicare admissions** drawn from MIMIC-IV v3.1. A staged feature-"
         f"engineering process across seven dataset versions (V1 → V7) produced a working "
-        f"set of **90 clinically-motivated features** (curated from a larger 368-feature "
+        f"set of **50 clinically-motivated features** (curated from a larger 368-feature "
         f"superset) spanning prior utilisation, comorbidity, medication complexity, "
         f"clinical severity, and operational flow. Four gradient-boosting families "
         f"(LightGBM, XGBoost, CatBoost, HistGradientBoosting) were each averaged across "
         f"ten random seeds and an optional scipy-optimised blend was also constructed. "
-        f"Under a strict 60/20/20 patient-grouped train/validation/test protocol — with "
+        f"Under a strict 80/20 patient-grouped + 10% inner-val train/validation/test protocol — with "
         f"early stopping and blend-weight selection performed on the validation split and "
         f"the test split touched exactly once — **LightGBM emerged as the top single model "
         f"(test AUROC {lgb_test:.4f})**, with XGBoost ({xgb_test:.4f}) and HistGradientBoosting "
@@ -123,7 +123,7 @@ def main():
 ---
 ## 7. Feature Engineering — Progressive Enrichment V1 → V7
 
-We engineered features as a **staged process across seven dataset versions (V1 → V7)** so the marginal contribution of each clinical domain could be measured. V7 is the working **90-feature** set used in the publication notebook (curated from a larger 368-feature superset; see §10.4 for the parsimony check showing a top-50 subset matches the 90-feature model within seed-level noise). A broader 368-feature exploration — the **Feature Expansion Version** — was also evaluated upstream as a ceiling check; its +0.005 AUROC gain over V7 does not justify the operational overhead.
+We engineered features as a **staged process across seven dataset versions (V1 → V7)** so the marginal contribution of each clinical domain could be measured. V7 is the **50-feature parsimonious set** used in the publication notebook — curated from a larger 368-feature exploration set in the original capstone analysis by LightGBM gain-importance ranking (see §10.4 for the feature-importance breakdown of the deployed model). A broader 368-feature exploration — the **Feature Expansion Version** — was also evaluated upstream as a ceiling check; its +0.005 AUROC gain over V7 does not justify the operational overhead.
 
 | Version | N features | New content added | Best AUROC (current run) |
 |---|---|---|---|
@@ -148,7 +148,7 @@ The two largest marginal AUROC gains arise at **V2** (+{prog['lightgbm']['V2']-p
 ---
 ## 9. Model Training — Baselines → Deep Learning
 
-Before the final 4-GBM ensemble, we ran the per-family progression V1 → V7 to isolate the marginal benefit of feature enrichment independently of model choice. All progression numbers below are computed live by `scripts/run_progression.py` (subprocess per version) and persisted to `results/progression.json`; the notebook loads them in §9.1 and §9.2–9.4. Numbers reflect the strict 60/20/20 patient-grouped split established in §8.2 (test set seen exactly once).
+Before the final 4-GBM ensemble, we ran the per-family progression V1 → V7 to isolate the marginal benefit of feature enrichment independently of model choice. All progression numbers below are computed live by `scripts/run_progression.py` (subprocess per version) and persisted to `results/progression.json`; the notebook loads them in §9.1 and §9.2–9.4. Numbers reflect the strict 80/20 patient-grouped + 10% inner-val split established in §8.2 (test set seen exactly once).
 
 ### 9.1 Logistic Regression V1 → V7 — baseline
 
@@ -170,7 +170,7 @@ Regularised logistic regression hovers around **{prog['logreg']['V1']['test_auro
     new_92 = f"""\
 ### 9.2 LightGBM V1 → V7
 
-LightGBM jumps from **{prog['lightgbm']['V1']:.4f} at V1 to {prog['lightgbm']['V2']:.4f} at V2** (+{prog['lightgbm']['V2']-prog['lightgbm']['V1']:+.4f}) as temporal and medication-complexity signals are introduced, holds steady through V3 ({prog['lightgbm']['V3']:.4f}), and rises to **{prog['lightgbm']['V6']:.4f} at V6** with aggregate clinical counts + ICU utilisation. V7 (the working 90-feature set) reaches **{prog['lightgbm']['V7']:.4f}** under single-seed training and **{lgb_test:.4f}** under the 10-seed average reported in §10.
+LightGBM jumps from **{prog['lightgbm']['V1']:.4f} at V1 to {prog['lightgbm']['V2']:.4f} at V2** (+{prog['lightgbm']['V2']-prog['lightgbm']['V1']:+.4f}) as temporal and medication-complexity signals are introduced, holds steady through V3 ({prog['lightgbm']['V3']:.4f}), and rises to **{prog['lightgbm']['V6']:.4f} at V6** with aggregate clinical counts + ICU utilisation. V7 (the 50-feature parsimonious set) reaches **{prog['lightgbm']['V7']:.4f}** under single-seed training and **{lgb_test:.4f}** under the 10-seed average reported in §10.
 
 ### 9.3 XGBoost V1 → V7
 
@@ -224,16 +224,16 @@ A two-layer [128, 64] MLP rises modestly from **{prog['mlp']['V1']:.4f} at V1 to
     new_table = f"""\
 ### 11.2 Final model comparison — V1 vs V6 vs V7 vs Feature Expansion Version
 
-**Table 2.** Final model comparison across dataset versions — best AUROC under the strict 60/20/20 protocol, model type, interpretability, and deployment complexity.
+**Table 2.** Final model comparison across dataset versions — best AUROC under the strict 80/20 + inner-val protocol, model type, interpretability, and deployment complexity.
 
-| Metric | V1 (21 feat) | V6 (34 feat) | V7 (90 feat) | Feature Expansion Version (368 feat) |
+| Metric | V1 (21 feat) | V6 (34 feat) | V7 (50 feat) | Feature Expansion Version (368 feat) |
 |---|---|---|---|---|
 | **Best test AUROC** | {prog['lightgbm']['V1']:.4f} | {prog['lightgbm']['V6']:.4f} | **{lgb_test:.4f}** | (not re-evaluated; original 0.800 reading retained for context) |
 | **Best model** | XGBoost | LightGBM | **LightGBM (10-seed)** | 4-GBM Blend |
 | **Interpretability** | High | High | **High** | Low |
 | **Deploy complexity** | Low | Low | **Low** | Very high |
 
-> **Updated since the original capstone:** under the strict 60/20/20 train/val/test protocol — with early stopping on val and test seen only once — LightGBM ({lgb_test:.4f}) edges out XGBoost ({xgb_test:.4f}) as the top single model. The scipy-optimised 4-GBM blend ({blend_test:.4f}) is dominated by the LightGBM component (weight = {ens['blend']['weights']['lightgbm']:.2f}) and does **not** meaningfully improve over LightGBM alone — a clear reversal of the original capstone narrative, which had been inflated by test-set early stopping. The 50-feature parsimony check in §10.4 confirms most of the predictive signal lives in a much smaller subset.
+> **Updated since the original capstone:** under the strict 80/20 + 10% inner-val train/val/test protocol — with early stopping on val and test seen only once — LightGBM ({lgb_test:.4f}) edges out XGBoost ({xgb_test:.4f}) as the top single model. The scipy-optimised 4-GBM blend ({blend_test:.4f}) is dominated by the LightGBM component (weight = {ens['blend']['weights']['lightgbm']:.2f}) and does **not** meaningfully improve over LightGBM alone — a clear reversal of the original capstone narrative, which had been inflated by test-set early stopping. The 50-feature parsimony check in §10.4 confirms most of the predictive signal lives in a much smaller subset.
 """
     nb.cells[idx].source = new_table
     print(f"  [{idx:3d}] §11.2 comparison table updated")
@@ -251,15 +251,15 @@ A two-layer [128, 64] MLP rises modestly from **{prog['mlp']['V1']:.4f} at V1 to
 | van Walraven et al. (2010) | LACE clinical index | {LACE:.3f} |
 | Huang et al. (2020) | ClinicalBERT + clinical notes | {CBERT:.3f} |
 | Literature baselines | Single LightGBM / XGBoost | ≈ 0.76 |
-| **This work (V7, best single)** | **LightGBM, 90 features** | **{lgb_test:.4f}** |
-| This work (V7, deployment candidate) | XGBoost, 90 features | {xgb_test:.4f} |
+| **This work (V7, best single)** | **LightGBM, 50 features** | **{lgb_test:.4f}** |
+| This work (V7, deployment candidate) | XGBoost, 50 features | {xgb_test:.4f} |
 | This work (V7, ensemble) | 4-GBM blend (LightGBM-dominant) | {blend_test:.4f} |
 
 **Key takeaways**
 
 - **Outperforms traditional scores:** the V7 LightGBM improves over LACE by **+{lgb_test-LACE:.3f} AUROC** (a {(lgb_test-LACE)/LACE*100:.1f}% relative gain) and over the LACE+age-CCI extensions reported in the literature.
 - **Exceeds NLP-based approaches:** higher AUROC than ClinicalBERT (+{lgb_test-CBERT:.3f}) **without** clinical notes or NLP pipelines.
-- **Honest test-set evaluation:** numbers above use a strict 60/20/20 patient-grouped split (§8.2) with early stopping on the validation split and the test split touched exactly once. This is a stricter protocol than several published baselines.
+- **Honest test-set evaluation:** numbers above use a strict 80/20 patient-grouped + 10% inner-val split (§8.2) with early stopping on the validation split and the test split touched exactly once. This is a stricter protocol than several published baselines.
 - **Structured data only:** 90 interpretable engineered features from structured EHR data — no notes, imaging, or temporal graphs.
 - **Clinically deployable:** the feature set maps directly to actionable care interventions at discharge; SHAP attribution in §12 makes each prediction explainable at the patient level.
 
@@ -274,10 +274,10 @@ A two-layer [128, 64] MLP rises modestly from **{prog['mlp']['V1']:.4f} at V1 to
 ## 13. Answering the Research Questions
 
 **RQ1 — Which features are most predictive of 30-day readmissions?**
-LOS trend (180 d), DRG code, discharge location, prior-admission history, and clinical interactions are the top predictors (see SHAP analysis in §12). The 50-feature subset of §10.4 retains the bulk of the predictive signal from the 90-feature working set, validating the parsimony claim.
+LOS trend (180 d), DRG code, discharge location, prior-admission history, and clinical interactions are the top predictors (see SHAP analysis in §12). V7 itself is the 50-feature parsimonious set (curated upstream by the original capstone from a larger 368-feature exploration); §10.4 publishes the feature-importance breakdown of every retained feature so the deployed model is fully auditable.
 
 **RQ2 — Which modeling approach achieves the best predictive performance?**
-Under the strict 60/20/20 patient-grouped protocol, **LightGBM (test AUROC {lgb_test:.4f})** edges out XGBoost ({xgb_test:.4f}), HistGradientBoosting ({hist_test:.4f}), and CatBoost ({cb_test:.4f}). The scipy-optimised 4-GBM blend ({blend_test:.4f}) is dominated by LightGBM (weight {ens['blend']['weights']['lightgbm']:.2f}) and does **not** improve over the best single model — the additional operational complexity of an ensemble is unjustified on these data. The deployment candidate is the single LightGBM model, with XGBoost retained as a co-equal alternative (gap {lgb_test-xgb_test:+.4f} AUROC).
+Under the strict 80/20 patient-grouped + 10% inner-val protocol, **LightGBM (test AUROC {lgb_test:.4f})** edges out XGBoost ({xgb_test:.4f}), HistGradientBoosting ({hist_test:.4f}), and CatBoost ({cb_test:.4f}). The scipy-optimised 4-GBM blend ({blend_test:.4f}) is dominated by LightGBM (weight {ens['blend']['weights']['lightgbm']:.2f}) and does **not** improve over the best single model — the additional operational complexity of an ensemble is unjustified on these data. The deployment candidate is the single LightGBM model, with XGBoost retained as a co-equal alternative (gap {lgb_test-xgb_test:+.4f} AUROC).
 
 **RQ3 — Can interpretable ML methods provide actionable insights?**
 Yes. **SHAP delivers patient-level explanations** — providers see which factors drive each individual's risk. Key operational levers: LOS monitoring, medication reconciliation, and early follow-up for frequent admitters."""
@@ -290,9 +290,9 @@ Yes. **SHAP delivers patient-level explanations** — providers see which factor
     # Replace the whole §16.2 paragraph
     new_concl = (
         f"### 16.2 Conclusion\n\n"
-        f"A **single LightGBM model trained on a 90-feature working set from MIMIC-IV v3.1 "
+        f"A **single LightGBM model trained on the 50-feature parsimonious V7 set from MIMIC-IV v3.1 "
         f"(curated from a larger 368-feature superset) predicts 30-day all-cause readmission "
-        f"in Medicare patients with a test AUROC of {lgb_test:.4f}** under a strict 60/20/20 "
+        f"in Medicare patients with a test AUROC of {lgb_test:.4f}** under a strict 80/20 + 10% inner-val "
         f"patient-grouped split — a {lgb_test-LACE:+.3f} improvement over LACE and {lgb_test-CBERT:+.3f} "
         f"over ClinicalBERT. XGBoost ({xgb_test:.4f}) is a co-equal alternative (gap {lgb_test-xgb_test:+.4f} AUROC). "
         f"The scipy-optimised 4-GBM blend ({blend_test:.4f}) is LightGBM-dominant (weight "

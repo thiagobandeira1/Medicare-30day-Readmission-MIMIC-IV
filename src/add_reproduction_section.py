@@ -58,7 +58,7 @@ python scripts/execute_notebook.py
 
 ### Determinism
 
-- Patient-grouped 60/20/20 split: `random_state=42` (defined in §1.3, used in §8.2).
+- Patient-grouped 80/20 + 10% inner-val split: `random_state=42` (defined in §1.3, used in §8.2).
 - Per-model multi-seed averaging: seeds `42, 43, …, 42 + N_SEEDS - 1` in §10.1.
 - LogReg, MLP, HistGBM internal early stopping all use `random_state=42`.
 - SHAP sample: `random_state=42` in §12.1.

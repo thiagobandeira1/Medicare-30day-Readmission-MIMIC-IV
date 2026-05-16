@@ -200,7 +200,7 @@ print(f"\\nTrain: {len(X_train):,} admissions ({len(train_patients):,} patients)
 print(f"Val: {len(X_val):,} admissions ({len(val_patients):,} patients) | pos rate = {y_val.mean():.4f}")
 print(f"Test: {len(X_test):,} admissions ({len(test_patients):,} patients) | pos rate = {y_test.mean():.4f}")
 print(f"Features: {len(feature_cols)} ({X.select_dtypes(include=['object','category']).shape[1]} categorical)")
-print(f"\\nSplit protocol: 60/20/20 patient-grouped via two-stage GroupShuffleSplit (random_state={RANDOM_STATE}).")
+print(f"\\nSplit protocol: 80/20 patient-grouped outer + 10% inner-val carved from train for early stopping (random_state={RANDOM_STATE}).")
 """
 
 
@@ -223,7 +223,7 @@ def main():
  nb = nbf.read(NB_PATH, as_version=4)
  print(f"Loaded {NB_PATH.name}: {len(nb.cells)} cells")
 
- idx = find_cell(nb, "# ── 8.2 Patient-grouped 60/20/20")
+ idx = find_cell(nb, "# ── 8.2 Patient-grouped 80/20 + 10% inner-val")
  replace(nb, idx, SPLIT_CELL_FROM_DISK)
  print(f" [{idx:3d}] §8.2 split now loads from v7_split_indices.npz")
 
