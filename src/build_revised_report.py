@@ -112,8 +112,9 @@ def set_run_font(run, name="Times New Roman", size=11, bold=False, italic=False,
     rFonts.set(qn("w:cs"), name)
 
 
-def add_para(doc, text="", *, bold=False, italic=False, size=11,
-             align=None, space_after=6, font="Times New Roman", color=None):
+def add_para(doc, text="", *, bold=False, italic=False, size=10,
+             align=WD_ALIGN_PARAGRAPH.JUSTIFY, space_after=6,
+             font="Times New Roman", color=None):
     p = doc.add_paragraph()
     p.paragraph_format.space_after = Pt(space_after)
     if align is not None:
@@ -124,9 +125,7 @@ def add_para(doc, text="", *, bold=False, italic=False, size=11,
     return p
 
 
-def add_heading(doc, text, level=1, size=None, space_before=12, space_after=6):
-    if size is None:
-        size = {1: 14, 2: 12, 3: 11}.get(level, 11)
+def add_heading(doc, text, level=1, size=11, space_before=12, space_after=6):
     p = doc.add_paragraph()
     p.paragraph_format.space_before = Pt(space_before)
     p.paragraph_format.space_after = Pt(space_after)
