@@ -274,8 +274,8 @@ def build():
     r = p.add_run(
         f"Under the corrected protocol, LightGBM (test AUROC {LGB_TEST:.4f}) edges out XGBoost "
         f"(test AUROC {XGB_TEST:.4f}) as the top single-model performer, with the two within seed-level variance "
-        f"of each other. We retain XGBoost as the deployment candidate for continuity with the defended capstone; LightGBM is noted as a co-equal alternative within seed-level variance. "
-        f"The capstone’s framing — that a single gradient-boosted tree model matches or exceeds traditional "
+        f"of each other. We retain XGBoost as the deployment candidate for continuity with the defended original protocol; LightGBM is noted as a co-equal alternative within seed-level variance. "
+        f"The original framing — that a single gradient-boosted tree model matches or exceeds traditional "
         f"clinical scores and a 4-GBM blend — is preserved and in fact strengthened: the scipy-optimised blend "
         f"({BLEND_TEST:.4f}) no longer improves on the best single model under the strict protocol."); set_run_font(r)
 
@@ -285,7 +285,7 @@ def build():
         f"The original report cited “stable across five patient-grouped cross-validation folds” without "
         f"numerical evidence. The revision includes the explicit stability check (new §8.6): LightGBM "
         f"{CV_LGB['mean_auroc']:.4f} ± {CV_LGB['std_auroc']:.4f}, with three of four GBM families landing "
-        f"squarely within the original capstone report’s published stability band of "
+        f"squarely within the originally published stability band of "
         f"{REF['stability_mean_auroc']:.4f} ± {REF['stability_std_auroc']:.4f}."); set_run_font(r)
 
     add_heading(doc, "What did not change", level=2)
@@ -325,11 +325,11 @@ def build():
         f"data for early stopping — the test set evaluated exactly once — LightGBM is the top single model "
         f"at test AUROC {LGB_TEST:.4f}, with XGBoost a co-equal alternative at {XGB_TEST:.4f}. The scipy-optimised "
         f"blend reached {BLEND_TEST:.4f} but did not improve on the best single model, so the single LightGBM model "
-        f"was retained as the deployment candidate for continuity with the defended capstone. The XGBoost model outperforms the LACE index by "
+        f"was retained as the deployment candidate for continuity with the defended original protocol. The XGBoost model outperforms the LACE index by "
         f"{LGB_TEST-LACE:+.3f} AUROC and a published ClinicalBERT baseline by {LGB_TEST-CBERT:+.3f} AUROC, and "
         f"SHAP explanations deliver both global and patient-level rationale for every prediction. Five-fold "
         f"patient-grouped cross-validation gives a stability estimate of "
-        f"{CV_LGB['mean_auroc']:.4f} ± {CV_LGB['std_auroc']:.4f}, within the original capstone report’s published "
+        f"{CV_LGB['mean_auroc']:.4f} ± {CV_LGB['std_auroc']:.4f}, within the originally published "
         f"stability band. The result is an interpretable risk-scoring tool that can be embedded in existing EHR "
         f"workflows.")
 
@@ -350,14 +350,14 @@ def build():
         "substantially elevated risk. In this work we describe an end-to-end machine-learning pipeline that estimates "
         "the probability of thirty-day all-cause readmission at or near the moment of discharge using only structured "
         "electronic health record data from MIMIC-IV v3.1. The remainder of this report is organised into the ten "
-        "subsections required by the capstone rubric, covering the project overview, goals, objectives, motivation, "
+        "subsections covering the standard structure, covering the project overview, goals, objectives, motivation, "
         "prior art and challenges, data sources and description, methods and tools, results, discussion, and "
         "contributions and conclusions.")
 
     # ── §1 Overview ───────────────────────────────────────────────────────
     add_heading(doc, "1. OVERVIEW", level=1)
     add_para(doc,
-        f"This capstone project applies supervised machine learning to the Medicare subset of the MIMIC-IV v3.1 "
+        f"This study applies supervised machine learning to the Medicare subset of the MIMIC-IV v3.1 "
         f"electronic health record database with the aim of predicting thirty-day all-cause unplanned readmission at "
         f"the point of discharge. The study cohort consists of 244,576 Medicare admissions, of which 21.1% are "
         f"followed by a readmission within thirty days. The analytical pipeline ingests administrative, clinical, "
@@ -489,7 +489,7 @@ def build():
         ("V6", "34", "Lab/med/dx counts, ICU utilisation", f"{PROG['lightgbm']['V6']:.4f}"),
         ("V7", "50", "5 target encodings + 5 clinical interactions (final)",
          f"{PROG['lightgbm']['V7']:.4f} (single-seed) · {LGB_TEST:.4f} (10-seed)"),
-        ("Expanded", "368", "Unpruned superset (original capstone report only)", "0.800"),
+        ("Expanded", "368", "Unpruned superset (original analysis only)", "0.800"),
     ]
     add_table(doc, ["Version", "N feat.", "New content added", "AUROC"], table1_rows,
               col_widths=[0.7, 0.8, 3.5, 1.5])
@@ -500,7 +500,7 @@ def build():
         f"interactions are added ({PROG['lightgbm']['V7']-PROG['lightgbm']['V6']:+.4f}). The V4 and V5 intermediate "
         f"parquets were not preserved in the published dataset snapshot, so they are reported as not available; "
         f"the V1→V3 and V6→V7 progressions cover the substantive feature-engineering decisions. The "
-        f"original expanded-exploration reading of 0.800 AUROC is retained from the original capstone report for context but was "
+        f"original expanded-exploration reading of 0.800 AUROC is retained from the original analysis for context but was "
         f"not re-evaluated in this revision (the 368-feature parquet was not preserved). The concluding remark is "
         f"that the fifty-feature V7 set delivers essentially all of the achievable discrimination on this cohort, "
         f"confirming V7 as the parsimony-optimal deployment configuration.")
@@ -521,7 +521,7 @@ def build():
     add_para(doc,
         "The cohort was split 80/20 at the subject_id level using GroupShuffleSplit so that no patient appeared in "
         "both partitions, producing an unbiased estimate of generalisation performance (n_train = 195,385; "
-        "n_test = 49,191; identical partition sizes to the original capstone report). In the revised protocol, a 10% "
+        "n_test = 49,191; identical partition sizes to the original report). In the revised protocol, a 10% "
         "inner-validation slice is then carved from the training partition for early stopping and blend-weight "
         "selection (n_inner_val ≈ 19,115; n_pure_train ≈ 176,270). The held-out 20% test partition is "
         "evaluated exactly once at final reporting and is never referenced by any model-selection callback. "
@@ -540,7 +540,7 @@ def build():
         f"expansion was originally conducted in which the feature space was widened to 368 variables by enumerating "
         f"additional pairwise interactions, extended target encodings, and a broader panel of utilisation aggregates; "
         f"V7 was then derived as the top-fifty parsimonious subset from this expanded exploration. The expanded "
-        f"configuration reached a test AUROC of 0.800 in the original capstone report, only "
+        f"configuration reached a test AUROC of 0.800 in the original analysis, only "
         f"{0.800 - BLEND_TEST:+.3f} above the revised V7 ensemble result of {BLEND_TEST:.4f}, confirming that V7 "
         f"sits at the parsimony-optimal stopping point and that additional feature engineering beyond fifty "
         f"variables yields rapidly diminishing returns.")
@@ -618,12 +618,12 @@ def build():
                "Figure 8: Test AUROC across eight model families on the V6 dataset.")
     add_para(doc,
         f"Figure 8 compares model families trained on the V6 dataset. The observation is that a basic MLP lags by "
-        f"roughly five AUROC points while FT-Transformer and hybrid LSTM/GRU architectures from the original capstone "
+        f"roughly five AUROC points while FT-Transformer and hybrid LSTM/GRU architectures from the original "
         f"comparison reach approximately 0.770 and a stacking meta-learner reaches 0.778; the revised live LightGBM "
         f"on V6 attains {PROG['lightgbm']['V6']:.4f} without any stacking. The concluding remark is that gradient "
         f"boosting dominates on this tabular problem and that deep architectures provide at best marginal improvement "
         f"at substantial complexity cost. (The deep-architecture numbers in this comparison are carried forward from "
-        f"the original original capstone experiments and were not re-trained for this revision.)")
+        f"the original experiments and were not re-trained for this revision.)")
 
     add_heading(doc, "8.3 Final LightGBM performance", level=2)
     add_figure(doc, FIGS / "fig_z_roc_cal.png",
@@ -648,7 +648,7 @@ def build():
         "the last-DRG-with-disposition interaction, and the discharge-location target encoding. The concluding "
         "remark is that readmission risk is inherently multifactorial, that no single feature dominates the "
         "prediction, and that the top seven features map directly to interventions a discharge team can act upon. "
-        "The ranking is consistent with the original capstone report’s published feature-importance ordering (see "
+        "The ranking is consistent with the originally published feature-importance ordering (see "
         "Final Model Results/v7_feature_importance.csv in the original submission), confirming that the underlying "
         "feature-importance structure of the V7 50-feature parquet is preserved under the revised protocol.")
 
@@ -671,7 +671,7 @@ def build():
         f"{(LGB_TEST-LACE)/LACE*100:.1f}% relative gain) and over ClinicalBERT by {LGB_TEST-CBERT:+.3f} AUROC, while "
         f"using only fifty structured features and no free-text notes. The 4-GBM scipy-optimised blend trails the "
         f"best single model by {BLEND_TEST-LGB_TEST:+.4f} AUROC and was therefore not deployed — a clean "
-        f"reversal of the original capstone’s blend-favouring framing once test-set early-stopping leakage is "
+        f"reversal of the original blend-favouring framing once test-set early-stopping leakage is "
         f"removed. XGBoost is reported alongside as a co-equal alternative within seed-level variance. The concluding "
         f"remark is that the proposed single-model XGBoost matches or exceeds the state of the art on MIMIC-family "
         f"data while remaining simple to deploy from any existing EHR back-end.")
@@ -679,7 +679,7 @@ def build():
     # ── §8.6 NEW: 5-fold CV stability ────────────────────────────────────
     add_heading(doc, "8.6 Five-fold cross-validation stability check", level=2)
     add_para(doc,
-        f"To enable an apples-to-apples comparison against the original capstone report’s published stability "
+        f"To enable an apples-to-apples comparison against the originally published stability "
         f"estimate of {REF['stability_mean_auroc']:.4f} ± {REF['stability_std_auroc']:.4f}, a 5-fold "
         f"patient-grouped cross-validation was executed under the same strict no-leakage protocol used for the "
         f"primary results: each fold’s test partition is held out from that fold’s training data, and a "
@@ -696,10 +696,10 @@ def build():
         f"HistGBM ({CV_HGB['mean_auroc']:.4f} ± {CV_HGB['std_auroc']:.4f}) — "
         f"land squarely within the originally published band; LightGBM "
         f"({CV_LGB['mean_auroc']:.4f} ± {CV_LGB['std_auroc']:.4f}) and the blend "
-        f"({CV_BLEND['mean_auroc']:.4f} ± {CV_BLEND['std_auroc']:.4f}) exceed the original capstone mean by approximately "
+        f"({CV_BLEND['mean_auroc']:.4f} ± {CV_BLEND['std_auroc']:.4f}) exceed the originally published mean by approximately "
         f"+0.004 AUROC while preserving an essentially identical fold-to-fold standard deviation. The concluding "
-        f"remark is that the revised pipeline reproduces the original capstone’s stability profile under the stricter protocol — "
-        f"the original capstone numbers were not driven by accidental test-set contamination, but rather by the same underlying "
+        f"remark is that the revised pipeline reproduces the originally published stability profile under the stricter protocol — "
+        f"the originally reported numbers were not driven by accidental test-set contamination, but rather by the same underlying "
         f"signal that the revised protocol now estimates honestly.")
 
     # ── §9 Discussion ────────────────────────────────────────────────────
@@ -790,7 +790,7 @@ def build():
     # ── §10 Contributions ────────────────────────────────────────────────
     add_heading(doc, "10. CONTRIBUTIONS & CONCLUSIONS", level=1)
     add_para(doc,
-        f"This capstone contributes four artefacts. First, a reproducible MIMIC-IV Medicare cohort definition along "
+        f"This work contributes four artefacts. First, a reproducible MIMIC-IV Medicare cohort definition along "
         f"with a staged V1-to-V7 feature-engineering recipe that other researchers can extend. Second, empirical "
         f"evidence under a strict no-leakage train/validation/test protocol that a single-model LightGBM trained on "
         f"fifty features matches or surpasses both traditional clinical scores and notes-based deep-learning "
@@ -800,7 +800,7 @@ def build():
         f"layer that converts individual predictions into ranked lists of contributing factors, providing a bridge "
         f"between the machine-learning output and the clinician’s decision. Fourth, a five-fold patient-grouped "
         f"cross-validation stability profile ({CV_LGB['mean_auroc']:.4f} ± {CV_LGB['std_auroc']:.4f} for "
-        f"LightGBM) that matches the original capstone report’s published stability band under the stricter protocol, "
+        f"LightGBM) that matches the originally published stability band under the stricter protocol, "
         f"confirming that the headline result is not the product of a single fortunate split.")
     add_para(doc,
         f"In conclusion, a single LightGBM model trained on fifty curated features from MIMIC-IV v3.1 predicts "
@@ -872,7 +872,7 @@ def build():
          f"V7 ensemble {BLEND_TEST:.4f}", "Recomputed under strict protocol"),
         ("§7.3", "expanded 0.800 (+0.005 over V7)",
          f"expanded 0.800 ({0.800-BLEND_TEST:+.3f} over revised V7 blend)",
-         "Expanded reading carried forward from original capstone (not re-run)"),
+         "Expanded reading carried forward from original analysis (not re-run)"),
         ("§7.4", "blend (0.19, 0.30, 0.30, 0.21) → 0.795",
          f"blend ({BLEND_W['lightgbm']:.2f}, {BLEND_W['xgboost']:.2f}, "
          f"{BLEND_W['catboost']:.2f}, {BLEND_W['histgbm']:.2f}) → {BLEND_TEST:.4f}",
