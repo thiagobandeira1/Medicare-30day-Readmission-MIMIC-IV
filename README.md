@@ -12,8 +12,8 @@ Under a strict 80/20 patient-grouped split with a 10% inner-validation slice car
 
 | Model | Current test AUROC | original capstone target | Δ |
 |---|---:|---:|---:|
-| **LightGBM** | **0.7970** | 0.7901 | **+0.0069** |
-| XGBoost | 0.7935 | 0.7931 | +0.0004 |
+| **XGBoost** (deployed) | **0.7935** | 0.7931 | **+0.0004** |
+| LightGBM (co-equal) | 0.7970 | 0.7901 | +0.0069 |
 | CatBoost | 0.7937 | 0.7924 | +0.0013 |
 | HistGradientBoosting | 0.7943 | 0.7916 | +0.0027 |
 | 4-GBM scipy-blend | 0.7968 | 0.7948 | +0.0020 |

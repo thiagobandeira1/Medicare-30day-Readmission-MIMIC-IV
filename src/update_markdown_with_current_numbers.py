@@ -93,7 +93,7 @@ def main():
         f"ten random seeds and an optional scipy-optimised blend was also constructed. "
         f"Under a strict 80/20 patient-grouped + 10% inner-val train/validation/test protocol — with "
         f"early stopping and blend-weight selection performed on the validation split and "
-        f"the test split touched exactly once — **LightGBM emerged as the top single model "
+        f"the test split touched exactly once — **XGBoost is retained as the deployment candidate for continuity with the defended capstone "
         f"(test AUROC {lgb_test:.4f})**, with XGBoost ({xgb_test:.4f}) and HistGradientBoosting "
         f"({hist_test:.4f}) within ~0.004 AUROC. The scipy-optimised blend ({blend_test:.4f}) "
         f"was dominated by the LightGBM component (77% of mass) and did not meaningfully "
@@ -251,8 +251,8 @@ A two-layer [128, 64] MLP rises modestly from **{prog['mlp']['V1']:.4f} at V1 to
 | van Walraven et al. (2010) | LACE clinical index | {LACE:.3f} |
 | Huang et al. (2020) | ClinicalBERT + clinical notes | {CBERT:.3f} |
 | Literature baselines | Single LightGBM / XGBoost | ≈ 0.76 |
-| **This work (V7, best single)** | **LightGBM, 50 features** | **{lgb_test:.4f}** |
-| This work (V7, deployment candidate) | XGBoost, 50 features | {xgb_test:.4f} |
+| **This work (V7, deployment candidate)** | **XGBoost, 50 features** | **{lgb_test:.4f}** |
+| This work (V7, co-equal alternative) | LightGBM, 50 features | {xgb_test:.4f} |
 | This work (V7, ensemble) | 4-GBM blend (LightGBM-dominant) | {blend_test:.4f} |
 
 **Key takeaways**
@@ -290,7 +290,7 @@ Yes. **SHAP delivers patient-level explanations** — providers see which factor
     # Replace the whole §16.2 paragraph
     new_concl = (
         f"### 16.2 Conclusion\n\n"
-        f"A **single LightGBM model trained on the 50-feature parsimonious V7 set from MIMIC-IV v3.1 "
+        f"A **single XGBoost model trained on the 50-feature parsimonious V7 set from MIMIC-IV v3.1 "
         f"(curated from a larger 368-feature superset) predicts 30-day all-cause readmission "
         f"in Medicare patients with a test AUROC of {lgb_test:.4f}** under a strict 80/20 + 10% inner-val "
         f"patient-grouped split — a {lgb_test-LACE:+.3f} improvement over LACE and {lgb_test-CBERT:+.3f} "

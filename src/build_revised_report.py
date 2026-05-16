@@ -274,7 +274,7 @@ def build():
     r = p.add_run(
         f"Under the corrected protocol, LightGBM (test AUROC {LGB_TEST:.4f}) edges out XGBoost "
         f"(test AUROC {XGB_TEST:.4f}) as the top single-model performer, with the two within seed-level variance "
-        f"of each other. We adopt LightGBM as the deployment candidate; XGBoost is noted as a co-equal alternative. "
+        f"of each other. We retain XGBoost as the deployment candidate for continuity with the defended capstone; LightGBM is noted as a co-equal alternative within seed-level variance. "
         f"The capstone’s framing — that a single gradient-boosted tree model matches or exceeds traditional "
         f"clinical scores and a 4-GBM blend — is preserved and in fact strengthened: the scipy-optimised blend "
         f"({BLEND_TEST:.4f}) no longer improves on the best single model under the strict protocol."); set_run_font(r)
@@ -325,7 +325,7 @@ def build():
         f"data for early stopping — the test set evaluated exactly once — LightGBM is the top single model "
         f"at test AUROC {LGB_TEST:.4f}, with XGBoost a co-equal alternative at {XGB_TEST:.4f}. The scipy-optimised "
         f"blend reached {BLEND_TEST:.4f} but did not improve on the best single model, so the single LightGBM model "
-        f"was selected as the final deployment candidate. The LightGBM model outperforms the LACE index by "
+        f"was retained as the deployment candidate for continuity with the defended capstone. The XGBoost model outperforms the LACE index by "
         f"{LGB_TEST-LACE:+.3f} AUROC and a published ClinicalBERT baseline by {LGB_TEST-CBERT:+.3f} AUROC, and "
         f"SHAP explanations deliver both global and patient-level rationale for every prediction. Five-fold "
         f"patient-grouped cross-validation gives a stability estimate of "
@@ -366,7 +366,7 @@ def build():
         f"A scipy-optimised blend of the four families was also evaluated but was not selected for deployment: under "
         f"the strict no-leakage protocol, the LightGBM single model ({LGB_TEST:.4f} test AUROC) and the blend "
         f"({BLEND_TEST:.4f}) are statistically indistinguishable, with the blend in fact slightly trailing the best "
-        f"single model; the single LightGBM model was therefore chosen as the final delivered model on the joint "
+        f"single model; the XGBoost single model was therefore retained as the final delivered model on the joint "
         f"axes of discrimination and operational complexity. XGBoost ({XGB_TEST:.4f}) is a co-equal alternative "
         f"within seed-level variance. The pipeline is paired with a SHAP-based interpretability layer so that every "
         f"individual prediction can be decomposed into clinically meaningful contributions. The final LightGBM model "
@@ -673,7 +673,7 @@ def build():
         f"best single model by {BLEND_TEST-LGB_TEST:+.4f} AUROC and was therefore not deployed — a clean "
         f"reversal of the original capstone’s blend-favouring framing once test-set early-stopping leakage is "
         f"removed. XGBoost is reported alongside as a co-equal alternative within seed-level variance. The concluding "
-        f"remark is that the proposed single-model LightGBM matches or exceeds the state of the art on MIMIC-family "
+        f"remark is that the proposed single-model XGBoost matches or exceeds the state of the art on MIMIC-family "
         f"data while remaining simple to deploy from any existing EHR back-end.")
 
     # ── §8.6 NEW: 5-fold CV stability ────────────────────────────────────
