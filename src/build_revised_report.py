@@ -315,77 +315,12 @@ def build():
     set_run_font(r, size=10, italic=True)
     date_p = doc.add_paragraph()
     date_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    date_p.paragraph_format.space_after = Pt(8)
+    date_p.paragraph_format.space_after = Pt(14)
     r = date_p.add_run("April 2026 (revised May 2026)")
     set_run_font(r, size=10, italic=True)
 
-    add_banner(doc, [
-        f"REVISED POST-DEFENSE VERSION {middot} May 2026",
-        "The original April 2026 report (Capstone_Final_Report.docx) is preserved unchanged.",
-        f"Numbers validated against reproduction commit 5c64fea {middot} "
-        "GitHub: thiagobandeira1/medicare-30day-readmission-mimic-iv",
-    ])
-
-    # ── §0 Revision Notice ─────────────────────────────────────────────────
-    add_heading(doc, "0. REVISION NOTICE", level=1)
-    add_para(doc,
-        "This document is a post-defense revision of the report originally "
-        "submitted in April 2026 for the capstone of the Master of Science in Data "
-        "Science and Artificial Intelligence at Florida International University. "
-        "The original report is preserved unchanged in the original submission "
-        "folder. The revision corrects the numerical values and the model-selection "
-        "language that follow from a single methodological correction (test-set "
-        "early stopping removed). All other content (cohort definition, feature "
-        "engineering, clinical interpretation, and limitations) is unchanged from "
-        "the defended work.")
-
-    add_heading(doc, "What changed", level=2)
-    add_para(doc,
-        "1. Test-set early-stopping leakage removed. The original notebook used "
-        "the test set as the early-stopping evaluation signal for the "
-        "gradient-boosting models. This pattern is benign for engineering but "
-        "allows the test labels to influence model selection, which inflates the "
-        "reported test AUROC by approximately 0.005 to 0.010. The revised pipeline "
-        "carves a 10 percent inner-validation slice from the 80 percent training "
-        "partition and uses it for early stopping. The held-out 20 percent test "
-        "partition is evaluated exactly once at final reporting.")
-    add_para(doc,
-        f"2. Model selection updated to acknowledge two co-equal single-model "
-        f"candidates. Under the corrected protocol, XGBoost (test AUROC "
-        f"{XGB_TEST:.4f}) and LightGBM (test AUROC {LGB_TEST:.4f}) are statistically "
-        f"indistinguishable: the gap of {LGB_TEST-XGB_TEST:+.4f} sits inside the "
-        f"5-fold cross-validation standard deviation of {CV_LGB['std_auroc']:.4f}. "
-        f"XGBoost is retained as the deployed model for continuity with the "
-        f"defended original protocol; LightGBM is documented as a co-equal "
-        f"alternative. The scipy-optimised four-GBM blend ({BLEND_TEST:.4f}) does "
-        f"not improve on the best single model under the strict protocol.")
-    add_para(doc,
-        f"3. Five-fold cross-validation stability is now reported numerically. The "
-        f"original report cited stability across five patient-grouped CV folds "
-        f"without numerical evidence. The revision includes the explicit stability "
-        f"check (new section 8.6): LightGBM mean test AUROC of "
-        f"{CV_LGB['mean_auroc']:.4f} plus or minus {CV_LGB['std_auroc']:.4f}, with "
-        f"three of four GBM families landing squarely within the original report's "
-        f"published stability band of {REF['stability_mean_auroc']:.4f} plus or "
-        f"minus {REF['stability_std_auroc']:.4f}.")
-
-    add_heading(doc, "What did not change", level=2)
-    add_para(doc,
-        "The Medicare cohort definition (244,576 admissions, 21.1 percent "
-        "readmission prevalence), the V1 to V7 staged feature engineering, the "
-        "patient-grouped split scheme, the SHAP interpretability layer, the four "
-        "clinically actionable features identified in the Discussion, the "
-        "limitations, and the conclusions are all carried forward without "
-        "modification.")
-
-    add_heading(doc, "Authorship", level=2)
-    add_para(doc,
-        "The original capstone listed Dr. Christian Poellabauer in the mentor "
-        "role. For publication scope, Dr. Poellabauer joins as a co-author. "
-        "Armando Gonzalez has confirmed that Thiago Bandeira will lead the "
-        "publication as first author.")
-
     # Switch the body of the paper to a two-column layout (ACM-style).
+    # Front matter (title, authors, date) stays single-column above this point.
     switch_columns(doc, 2)
 
     # ── Abstract ───────────────────────────────────────────────────────────
@@ -610,26 +545,24 @@ def build():
                   "dataset versions (V1 to V7).",
              italic=True, size=10, space_after=4)
     table1_rows = [
-        ("V1", "21", "Demographics, admission type/location, 7 CCI flags, LOS, "
-         "meds, prior use, DRG", f"{PROG['lightgbm']['V1']:.4f}"),
-        ("V2", "24", "Prior DRG / disposition, medication entropy 90d, LOS "
-         "trend 180d", f"{PROG['lightgbm']['V2']:.4f}"),
+        ("V1", "21", "Demographics, CCI flags, LOS, meds, prior use, DRG",
+         f"{PROG['lightgbm']['V1']:.4f}"),
+        ("V2", "24", "Prior DRG/disp., med entropy 90d, LOS trend 180d",
+         f"{PROG['lightgbm']['V2']:.4f}"),
         ("V3", "24", "Missingness flags; recomputed LOS",
          f"{PROG['lightgbm']['V3']:.4f}"),
-        ("V4", "(n/a)", "Age x CCI, LOS x CCI, age buckets, cci_total "
-         "(parquet not preserved)", "n/a"),
-        ("V5", "(n/a)", "LOS x age, cci squared, log(LOS) (parquet not "
-         "preserved)", "n/a"),
-        ("V6", "34", "Lab / med / diagnosis counts, ICU utilisation",
+        ("V4", "n/a", "Age x CCI, LOS x CCI, buckets (parquet not preserved)",
+         "n/a"),
+        ("V5", "n/a", "LOS x age, cci sq., log(LOS) (parquet not preserved)",
+         "n/a"),
+        ("V6", "34", "Lab/med/dx counts, ICU utilisation",
          f"{PROG['lightgbm']['V6']:.4f}"),
-        ("V7", "50", "Plus 5 target encodings and 5 clinical interactions "
-         "(final)",
-         f"{PROG['lightgbm']['V7']:.4f} single-seed; {LGB_TEST:.4f} 10-seed"),
-        ("Expanded", "368", "Unpruned superset (original analysis only; not "
-         "re-run)", "0.800"),
+        ("V7", "50", "+5 target encodings, +5 clinical interactions (final)",
+         f"{LGB_TEST:.4f}"),
+        ("Exp.", "368", "Unpruned superset (original; not re-run)", "0.800"),
     ]
-    add_table(doc, ["Version", "N feat.", "New content added", "AUROC"],
-              table1_rows, col_widths=[0.7, 0.8, 3.5, 1.5], wide=True)
+    add_table(doc, ["Ver.", "N", "New content added", "AUROC"],
+              table1_rows, col_widths=[0.35, 0.30, 1.75, 0.60])
     add_para(doc,
         f"Table 1 summarises the staircase of feature engineering across the "
         f"dataset versions. The two largest marginal AUROC gains arise at V2, "
@@ -709,7 +642,7 @@ def build():
                "LightGBM, XGBoost, and MLP (single-seed under the strict "
                "80/20 plus 10 percent inner-val protocol). V4 and V5 "
                "parquets were not preserved; the curve covers V1 to V3 and "
-               "V6 to V7.", wide=True)
+               "V6 to V7.")
     add_para(doc,
         f"Figure 3 displays the per-version test AUROC for the three primary "
         f"non-CatBoost families. AUROC rises sharply from V1 to V2 once "
@@ -779,7 +712,7 @@ def build():
 
     add_figure(doc, FIGS / "fig_cde_lgbm_xgb_mlp_v1v6.png",
                "Figures 5, 6, 7 (combined panel). LightGBM, XGBoost, and MLP "
-               "test AUROC across dataset versions.", wide=True)
+               "test AUROC across dataset versions.")
     add_para(doc,
         f"The combined panel reproduces the V1 to V7 trajectory for "
         f"LightGBM, XGBoost, and MLP. LightGBM jumps from "
@@ -818,7 +751,7 @@ def build():
     add_figure(doc, FIGS / "fig_z_roc_cal.png",
                "Figure 9. Receiver-operating-characteristic, "
                "precision-recall, calibration, and confusion-matrix panels "
-               "for the deployed XGBoost model (V7, 10-seed average).", wide=True)
+               "for the deployed XGBoost model (V7, 10-seed average).")
     add_para(doc,
         f"Figure 9 characterises the deployed XGBoost model through its ROC "
         f"curve (AUROC {XGB_TEST:.4f}), precision-recall curve, reliability "
@@ -870,7 +803,7 @@ def build():
          f"{BLEND_TEST:.4f}"),
     ]
     add_table(doc, ["Study", "Method", "AUROC"], table2_rows,
-              col_widths=[2.5, 2.8, 1.2], wide=True)
+              col_widths=[1.0, 1.3, 0.6])
     add_para(doc,
         f"Table 2 situates the deployed model against published baselines. "
         f"The V7 XGBoost model improves over LACE by {XGB_TEST-LACE:+.3f} "
@@ -1100,10 +1033,37 @@ def build():
         "This work was completed as the capstone project for the Master of "
         "Science in Data Science and Artificial Intelligence at Florida "
         "International University under the mentorship of Dr. Christian "
-        "Poellabauer, who joins as a co-author for the publication scope. "
+        "Poellabauer, who joins as senior author for the publication scope. "
         "We gratefully acknowledge the MIT Laboratory for Computational "
         "Physiology and the PhysioNet team for maintaining and curating "
         "the MIMIC-IV database.")
+
+    # ── Revision note (replaces the front-matter §0 banner from prior draft) ──
+    add_heading(doc, "REVISION NOTE", level=1)
+    add_para(doc,
+        f"This document is a post-defense revision of the report originally "
+        f"submitted in April 2026. The original report is preserved "
+        f"unchanged. The revision corrects one methodological issue: the "
+        f"original training pipeline used the held-out test set as the "
+        f"early-stopping signal for the gradient-boosting models, which "
+        f"allowed test labels to influence model selection. The revised "
+        f"pipeline carves a 10 percent inner-validation slice from the 80 "
+        f"percent training partition for early stopping, and the held-out "
+        f"20 percent test partition is evaluated exactly once at final "
+        f"reporting. Under the corrected protocol, XGBoost (test AUROC "
+        f"{XGB_TEST:.4f}) is retained as the deployment candidate for "
+        f"continuity with the defended original protocol, and LightGBM "
+        f"({LGB_TEST:.4f}) is documented as a co-equal alternative within "
+        f"seed-level variance. The scipy-optimised four-GBM blend "
+        f"({BLEND_TEST:.4f}) does not improve on the best single model "
+        f"under the strict protocol. The Medicare cohort definition, the "
+        f"V1 to V7 staged feature engineering, the SHAP interpretability "
+        f"layer, the clinical interpretation, the limitations, and the "
+        f"conclusions are all carried forward without modification. All "
+        f"revised numbers are reproducible from the publication notebook "
+        f"at GitHub commit 5c64fea of "
+        f"thiagobandeira1/medicare-30day-readmission-mimic-iv. A full "
+        f"change log appears in Appendix A.")
 
     # ── References ───────────────────────────────────────────────────────
     add_heading(doc, "REFERENCES", level=1)
