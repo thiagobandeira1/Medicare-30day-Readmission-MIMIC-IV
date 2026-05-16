@@ -29,7 +29,7 @@ from nbclient import NotebookClient
 from nbclient.exceptions import CellExecutionError
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-NB_PATH = REPO_ROOT / "notebook" / "Capstone_Final_Notebook.ipynb"
+NB_PATH = REPO_ROOT / "notebooks" / "Capstone_Final_Notebook.ipynb"
 
 
 def apply_smoke_overrides(nb):
@@ -94,7 +94,7 @@ def main():
         nb,
         timeout=args.timeout,
         kernel_name="python3",
-        resources={"metadata": {"path": str(REPO_ROOT / "notebook")}},
+        resources={"metadata": {"path": str(REPO_ROOT / "notebooks")}},
     )
 
     t0 = time.time()

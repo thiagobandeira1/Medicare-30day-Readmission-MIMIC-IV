@@ -37,7 +37,7 @@ except AttributeError:
 import nbformat as nbf
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-NB_PATH = REPO_ROOT / "notebook" / "Capstone_Final_Notebook.ipynb"
+NB_PATH = REPO_ROOT / ("notebooks" if (REPO_ROOT / "notebooks").is_dir() else "notebook") / "Capstone_Final_Notebook.ipynb"
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -128,7 +128,7 @@ DATA_DIR = BASE_DIR / "Dataset" / "mimic-parquet"
 
 # Figures + artefacts live inside this repo, not in BASE_DIR.
 REPO_ROOT = Path.cwd().resolve()
-while REPO_ROOT != REPO_ROOT.parent and not (REPO_ROOT / "notebook").is_dir():
+while REPO_ROOT != REPO_ROOT.parent and not ((REPO_ROOT / "notebook").is_dir() or (REPO_ROOT / "notebooks").is_dir()):
     REPO_ROOT = REPO_ROOT.parent
 FIG_DIR  = REPO_ROOT / "figures"
 ART_DIR  = REPO_ROOT / "results"
