@@ -4,9 +4,9 @@ from __future__ import annotations
 import io, json, sys
 from pathlib import Path
 try:
-    sys.stdout.reconfigure(encoding="utf-8")
+ sys.stdout.reconfigure(encoding="utf-8")
 except AttributeError:
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
+ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 import nbformat as nbf
 
@@ -35,11 +35,11 @@ NEW_S16 = f"""\
 
 A **single LightGBM model trained on a 90-feature working set from MIMIC-IV v3.1 (curated from a larger 368-feature superset) predicts 30-day all-cause readmission in Medicare patients with a test AUROC of {lgb:.4f}** under a strict 80/20 patient-grouped split with a 10% inner-validation slice carved from the training portion for early stopping — a {lgb-LACE:+.3f} improvement over LACE and {lgb-CBERT:+.3f} over ClinicalBERT. XGBoost ({xgb:.4f}) is a co-equal alternative (gap {lgb-xgb:+.4f} AUROC). The scipy-optimised 4-GBM blend ({blend:.4f}) is LightGBM-dominant (weight {ens['blend']['weights']['lightgbm']:.2f}) and does not improve on the best single model, so the additional operational complexity of an ensemble is unjustified.
 
-The single-split test AUROC sits ~0.011 below the original V17 report's 5-fold-CV stability mean of 0.7956 ± 0.0026 (see the reproduction validator in §10.3b). The drift is attributable to (a) single-split variance vs cross-validation averaging and (b) removal of the V17 implementation's test-set early-stopping leakage, which mildly inflated the originally reported numbers. The headline pattern — interpretable boosting at ~0.79 AUROC, with parsimony preserved at 50 features — is robust across both protocols.
+The single-split test AUROC sits ~0.011 below the original capstone report's 5-fold-CV stability mean of 0.7956 ± 0.0026 (see the reproduction validator in §10.3b). The drift is attributable to (a) single-split variance vs cross-validation averaging and (b) removal of the original capstone implementation's test-set early-stopping leakage, which mildly inflated the originally reported numbers. The headline pattern — interpretable boosting at ~0.79 AUROC, with parsimony preserved at 50 features — is robust across both protocols.
 
 The model is interpretable at both global and individual levels via SHAP, well calibrated in the operating range that matters for care-coordination triage, and simple enough to be embedded in existing EHR workflows without additional infrastructure.
 
-**Next steps:** external validation on multi-hospital data, fairness analysis across demographic subgroups, prospective evaluation of the downstream intervention pathway, and a 5-fold CV stability re-run to obtain a direct apples-to-apples comparison with the V17 report's stability estimate.
+**Next steps:** external validation on multi-hospital data, fairness analysis across demographic subgroups, prospective evaluation of the downstream intervention pathway, and a 5-fold CV stability re-run to obtain a direct apples-to-apples comparison with the original capstone report's stability estimate.
 
 ---
 
@@ -49,16 +49,16 @@ This work was completed as the capstone project for the MS in Data Science & Art
 """
 
 def main():
-    nb = nbf.read(NB_PATH, as_version=4)
-    for i, c in enumerate(nb.cells):
-        if c.cell_type != "markdown": continue
-        src = "".join(c.source) if isinstance(c.source, list) else c.source
-        if "## 16. Contributions & Conclusions" in src:
-            nb.cells[i].source = NEW_S16
-            print(f"  [{i:3d}] §16 rewritten with current numbers + protocol")
-            break
-    nbf.write(nb, NB_PATH)
-    print(f"Saved to {NB_PATH}")
+ nb = nbf.read(NB_PATH, as_version=4)
+ for i, c in enumerate(nb.cells):
+ if c.cell_type != "markdown": continue
+ src = "".join(c.source) if isinstance(c.source, list) else c.source
+ if "## 16. Contributions & Conclusions" in src:
+ nb.cells[i].source = NEW_S16
+ print(f" [{i:3d}] §16 rewritten with current numbers + protocol")
+ break
+ nbf.write(nb, NB_PATH)
+ print(f"Saved to {NB_PATH}")
 
 if __name__ == "__main__":
-    main()
+ main()
