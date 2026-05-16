@@ -31,8 +31,40 @@ from docx import Document
 from docx.shared import Inches, Pt, RGBColor
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
+from docx.enum.section import WD_SECTION
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
+
+
+# ── two-column / section-break helpers ───────────────────────────────────────
+
+def _set_section_columns(section, num=1, space=432):
+    """Set the number of body-text columns on a section."""
+    sect_pr = section._sectPr
+    cols = sect_pr.find(qn('w:cols'))
+    if cols is None:
+        cols = OxmlElement('w:cols')
+        sect_pr.append(cols)
+    cols.set(qn('w:num'), str(num))
+    cols.set(qn('w:space'), str(space))
+
+
+def switch_columns(doc, num_columns):
+    """Insert a continuous section break and set its column count.
+
+    Page dimensions and margins are inherited from the previous section.
+    """
+    new_section = doc.add_section(WD_SECTION.CONTINUOUS)
+    if len(doc.sections) >= 2:
+        prev = doc.sections[-2]
+        new_section.top_margin = prev.top_margin
+        new_section.bottom_margin = prev.bottom_margin
+        new_section.left_margin = prev.left_margin
+        new_section.right_margin = prev.right_margin
+        new_section.page_height = prev.page_height
+        new_section.page_width = prev.page_width
+    _set_section_columns(new_section, num_columns)
+    return new_section
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 RESULTS = REPO_ROOT / "results"
@@ -63,7 +95,7 @@ CBERT = 0.714
 
 # ── helpers ──────────────────────────────────────────────────────────────────
 
-def set_run_font(run, name="Arial", size=11, bold=False, italic=False, color=None):
+def set_run_font(run, name="Times New Roman", size=11, bold=False, italic=False, color=None):
     run.font.name = name
     run.font.size = Pt(size)
     run.font.bold = bold
@@ -81,7 +113,7 @@ def set_run_font(run, name="Arial", size=11, bold=False, italic=False, color=Non
 
 
 def add_para(doc, text="", *, bold=False, italic=False, size=11,
-             align=None, space_after=6, font="Arial", color=None):
+             align=None, space_after=6, font="Times New Roman", color=None):
     p = doc.add_paragraph()
     p.paragraph_format.space_after = Pt(space_after)
     if align is not None:
@@ -100,26 +132,43 @@ def add_heading(doc, text, level=1, size=None, space_before=12, space_after=6):
     p.paragraph_format.space_after = Pt(space_after)
     p.style = doc.styles[f"Heading {level}"]
     r = p.add_run(text)
-    set_run_font(r, name="Arial", size=size, bold=True, color=RGBColor(0, 0, 0))
+    set_run_font(r, name="Times New Roman", size=size, bold=True, color=RGBColor(0, 0, 0))
     return p
 
 
-def add_figure(doc, image_path: Path, caption_text: str, width_inches=5.5):
+def add_figure(doc, image_path: Path, caption_text: str, width_inches=3.1, wide=False):
+    """Insert a figure plus its caption.
+
+    In a 2-column body section, set wide=True to make the figure span both
+    columns (the function temporarily switches to a single-column section
+    and switches back after the caption).
+    """
+    if wide:
+        switch_columns(doc, 1)
+        eff_width = 6.5
+    else:
+        eff_width = width_inches
     if not image_path.exists():
         add_para(doc, f"[Figure missing: {image_path.name}]", italic=True,
                  color=RGBColor(0xC0, 0, 0))
-        return
-    p = doc.add_paragraph()
-    p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    p.add_run().add_picture(str(image_path), width=Inches(width_inches))
+    else:
+        p = doc.add_paragraph()
+        p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+        p.add_run().add_picture(str(image_path), width=Inches(eff_width))
     cap = doc.add_paragraph()
     cap.alignment = WD_ALIGN_PARAGRAPH.CENTER
     cap.paragraph_format.space_after = Pt(12)
     r = cap.add_run(caption_text)
-    set_run_font(r, name="Arial", size=10, italic=True)
+    set_run_font(r, name="Times New Roman", size=9, italic=True)
+    if wide:
+        switch_columns(doc, 2)
 
 
-def add_table(doc, headers, rows, col_widths=None, header_shading="E7E6E6"):
+def add_table(doc, headers, rows, col_widths=None, header_shading="E7E6E6", wide=False):
+    """Insert a table. Set wide=True in a 2-column body section to make the
+    table span both columns."""
+    if wide:
+        switch_columns(doc, 1)
     table = doc.add_table(rows=1 + len(rows), cols=len(headers))
     table.style = "Light Grid Accent 1"
     table.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -133,7 +182,7 @@ def add_table(doc, headers, rows, col_widths=None, header_shading="E7E6E6"):
         cell.text = ""
         p = cell.paragraphs[0]
         r = p.add_run(txt)
-        set_run_font(r, name="Arial", size=10, bold=True)
+        set_run_font(r, name="Times New Roman", size=10, bold=True)
         tcPr = cell._tc.get_or_add_tcPr()
         shd = OxmlElement("w:shd")
         shd.set(qn("w:val"), "clear")
@@ -145,8 +194,10 @@ def add_table(doc, headers, rows, col_widths=None, header_shading="E7E6E6"):
             cell.text = ""
             p = cell.paragraphs[0]
             r = p.add_run(str(txt))
-            set_run_font(r, name="Arial", size=10)
+            set_run_font(r, name="Times New Roman", size=10)
     doc.add_paragraph().paragraph_format.space_after = Pt(6)
+    if wide:
+        switch_columns(doc, 2)
     return table
 
 
@@ -175,7 +226,7 @@ def add_banner(doc, lines):
         p.paragraph_format.space_after = Pt(2)
         is_first = (i == 0)
         r = p.add_run(line)
-        set_run_font(r, name="Arial", size=11 if is_first else 10,
+        set_run_font(r, name="Times New Roman", size=11 if is_first else 10,
                      bold=is_first, color=RGBColor(0x1F, 0x3F, 0x5A))
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
@@ -194,48 +245,79 @@ def build():
         section.page_width = Inches(8.5)
 
     style = doc.styles["Normal"]
-    style.font.name = "Arial"
-    style.font.size = Pt(11)
+    style.font.name = "Times New Roman"
+    style.font.size = Pt(10)
 
-    # Title block
+    middot = chr(0xB7)
+
+    # ── Title (full width) ──
     title_p = doc.add_paragraph()
     title_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    title_p.paragraph_format.space_after = Pt(0)
+    title_p.paragraph_format.space_after = Pt(2)
     r = title_p.add_run("Predicting 30-Day Hospital Readmission in Medicare Patients")
-    set_run_font(r, size=16, bold=True)
+    set_run_font(r, size=18, bold=True)
 
     sub_p = doc.add_paragraph()
     sub_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    sub_p.paragraph_format.space_after = Pt(8)
+    sub_p.paragraph_format.space_after = Pt(14)
     r = sub_p.add_run("An Interpretable Gradient-Boosting Model on MIMIC-IV v3.1")
-    set_run_font(r, size=14, italic=True)
+    set_run_font(r, size=13, italic=True)
 
-    auth_p = doc.add_paragraph()
-    auth_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    auth_p.paragraph_format.space_after = Pt(2)
-    superscript_1 = chr(0xB9)
-    middot = chr(0xB7)
-    r = auth_p.add_run(
-        f"Thiago Bandeira{superscript_1} {middot} "
-        f"Armando Gonzalez{superscript_1} {middot} "
-        f"Christian Poellabauer{superscript_1}"
-    )
-    set_run_font(r, size=12, bold=True)
+    # ── ACM-style author block: Thiago left, Armando right (2-cell table) ──
+    auth_table = doc.add_table(rows=1, cols=2)
+    auth_table.alignment = WD_TABLE_ALIGNMENT.CENTER
+    for cell in auth_table.rows[0].cells:
+        cell.width = Inches(3.25)
+        tcPr = cell._tc.get_or_add_tcPr()
+        tcBorders = OxmlElement("w:tcBorders")
+        for side in ("top", "left", "bottom", "right"):
+            b = OxmlElement(f"w:{side}")
+            b.set(qn("w:val"), "nil")
+            tcBorders.append(b)
+        tcPr.append(tcBorders)
 
-    aff_p = doc.add_paragraph()
-    aff_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    aff_p.paragraph_format.space_after = Pt(2)
-    r = aff_p.add_run(
-        f"{superscript_1}Knight Foundation School of Computing and Information Sciences, "
-        "Florida International University, Miami, Florida, USA"
-    )
+    authors_lhs = [
+        ("Thiago Bandeira", 12, True, False),
+        ("(First author)", 10, False, True),
+        ("Florida International University", 11, False, True),
+        ("Miami, Florida", 11, False, True),
+        ("tbati006@fiu.edu", 11, False, True),
+    ]
+    authors_rhs = [
+        ("Armando Gonzalez", 12, True, False),
+        ("(Co-author)", 10, False, True),
+        ("Florida International University", 11, False, True),
+        ("Miami, Florida", 11, False, True),
+        ("agonz1689@fiu.edu", 11, False, True),
+    ]
+    for col_idx, lines in enumerate([authors_lhs, authors_rhs]):
+        cell = auth_table.rows[0].cells[col_idx]
+        cell.text = ""
+        for i, (txt, sz, bd, it) in enumerate(lines):
+            p = cell.paragraphs[0] if i == 0 else cell.add_paragraph()
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            p.paragraph_format.space_after = Pt(0)
+            r = p.add_run(txt)
+            set_run_font(r, size=sz, bold=bd, italic=it)
+
+    # ── Senior author below ──
+    senior_p = doc.add_paragraph()
+    senior_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    senior_p.paragraph_format.space_before = Pt(10)
+    senior_p.paragraph_format.space_after = Pt(0)
+    r = senior_p.add_run("Senior author: Dr. Christian Poellabauer")
+    set_run_font(r, size=11, bold=True)
+    aff2_p = doc.add_paragraph()
+    aff2_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    aff2_p.paragraph_format.space_after = Pt(0)
+    r = aff2_p.add_run("Knight Foundation School of Computing and Information Sciences, "
+                       "Florida International University")
     set_run_font(r, size=10, italic=True)
-
-    contact_p = doc.add_paragraph()
-    contact_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
-    contact_p.paragraph_format.space_after = Pt(8)
-    r = contact_p.add_run("Corresponding author: tbati006@fiu.edu")
-    set_run_font(r, size=10)
+    date_p = doc.add_paragraph()
+    date_p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+    date_p.paragraph_format.space_after = Pt(8)
+    r = date_p.add_run("April 2026 (revised May 2026)")
+    set_run_font(r, size=10, italic=True)
 
     add_banner(doc, [
         f"REVISED POST-DEFENSE VERSION {middot} May 2026",
@@ -303,7 +385,8 @@ def build():
         "Armando Gonzalez has confirmed that Thiago Bandeira will lead the "
         "publication as first author.")
 
-    doc.add_page_break()
+    # Switch the body of the paper to a two-column layout (ACM-style).
+    switch_columns(doc, 2)
 
     # ── Abstract ───────────────────────────────────────────────────────────
     add_heading(doc, "ABSTRACT", level=1)
@@ -546,7 +629,7 @@ def build():
          "re-run)", "0.800"),
     ]
     add_table(doc, ["Version", "N feat.", "New content added", "AUROC"],
-              table1_rows, col_widths=[0.7, 0.8, 3.5, 1.5])
+              table1_rows, col_widths=[0.7, 0.8, 3.5, 1.5], wide=True)
     add_para(doc,
         f"Table 1 summarises the staircase of feature engineering across the "
         f"dataset versions. The two largest marginal AUROC gains arise at V2, "
@@ -626,7 +709,7 @@ def build():
                "LightGBM, XGBoost, and MLP (single-seed under the strict "
                "80/20 plus 10 percent inner-val protocol). V4 and V5 "
                "parquets were not preserved; the curve covers V1 to V3 and "
-               "V6 to V7.")
+               "V6 to V7.", wide=True)
     add_para(doc,
         f"Figure 3 displays the per-version test AUROC for the three primary "
         f"non-CatBoost families. AUROC rises sharply from V1 to V2 once "
@@ -696,7 +779,7 @@ def build():
 
     add_figure(doc, FIGS / "fig_cde_lgbm_xgb_mlp_v1v6.png",
                "Figures 5, 6, 7 (combined panel). LightGBM, XGBoost, and MLP "
-               "test AUROC across dataset versions.")
+               "test AUROC across dataset versions.", wide=True)
     add_para(doc,
         f"The combined panel reproduces the V1 to V7 trajectory for "
         f"LightGBM, XGBoost, and MLP. LightGBM jumps from "
@@ -735,7 +818,7 @@ def build():
     add_figure(doc, FIGS / "fig_z_roc_cal.png",
                "Figure 9. Receiver-operating-characteristic, "
                "precision-recall, calibration, and confusion-matrix panels "
-               "for the deployed XGBoost model (V7, 10-seed average).")
+               "for the deployed XGBoost model (V7, 10-seed average).", wide=True)
     add_para(doc,
         f"Figure 9 characterises the deployed XGBoost model through its ROC "
         f"curve (AUROC {XGB_TEST:.4f}), precision-recall curve, reliability "
@@ -787,7 +870,7 @@ def build():
          f"{BLEND_TEST:.4f}"),
     ]
     add_table(doc, ["Study", "Method", "AUROC"], table2_rows,
-              col_widths=[2.5, 2.8, 1.2])
+              col_widths=[2.5, 2.8, 1.2], wide=True)
     add_para(doc,
         f"Table 2 situates the deployed model against published baselines. "
         f"The V7 XGBoost model improves over LACE by {XGB_TEST-LACE:+.3f} "
@@ -1052,7 +1135,8 @@ def build():
     for i, ref in enumerate(refs, 1):
         add_para(doc, f"[{i}] {ref}", size=10, space_after=4)
 
-    # ── Appendix A: Change log ───────────────────────────────────────────
+    # ── Appendix A: Change log (switch back to single column for the wide table) ──
+    switch_columns(doc, 1)
     doc.add_page_break()
     add_heading(doc, "APPENDIX A. CHANGE LOG", level=1)
     add_para(doc,
