@@ -1,5 +1,28 @@
 # Predicting 30-Day Hospital Readmission in Medicare Patients
 
+![status](https://img.shields.io/badge/status-post--defense_revision-blue)
+![python](https://img.shields.io/badge/python-3.12-blue?logo=python&logoColor=white)
+![pandas](https://img.shields.io/badge/pandas-2.3-150458?logo=pandas&logoColor=white)
+![numpy](https://img.shields.io/badge/numpy-≥1.26-013243?logo=numpy&logoColor=white)
+![PyArrow](https://img.shields.io/badge/PyArrow-parquet-FFA500)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.8-F7931E?logo=scikit-learn&logoColor=white)
+![XGBoost](https://img.shields.io/badge/XGBoost-0.7935-C71585?logo=xgboost&logoColor=white)
+![LightGBM](https://img.shields.io/badge/LightGBM-0.7970-2E8B57)
+![CatBoost](https://img.shields.io/badge/CatBoost-0.7937-FFC107)
+![HistGBM](https://img.shields.io/badge/HistGBM-0.7943-8B5CF6)
+![Blend](https://img.shields.io/badge/4--GBM_blend-0.7968-4C72B0)
+![5-fold CV](https://img.shields.io/badge/5--fold_CV-0.7993_±_0.0027-1E88E5)
+![SHAP](https://img.shields.io/badge/SHAP-0.51-8E8E93)
+![MIMIC-IV](https://img.shields.io/badge/MIMIC--IV-v3.1-B22222)
+![admissions](https://img.shields.io/badge/Medicare_admissions-244,576-1F77B4)
+![cohort](https://img.shields.io/badge/readmit_30d-21.1%25-DD8452)
+![protocol](https://img.shields.io/badge/protocol-80%2F20_+_10%25_inner--val-2C5F2D)
+![test-AUROC](https://img.shields.io/badge/test_AUROC-0.7935_(deployed)-228B22)
+![vs LACE](https://img.shields.io/badge/vs_LACE-+0.110-00875A)
+![vs ClinicalBERT](https://img.shields.io/badge/vs_ClinicalBERT-+0.080-00875A)
+![validator](https://img.shields.io/badge/reproduction_validator-✓_all_targets_met-success)
+![license](https://img.shields.io/badge/license-MIT-green)
+
 > **An interpretable gradient-boosting pipeline on MIMIC-IV v3.1, with a strict 80/20 patient-grouped train/test protocol and an inner-validation slice for early stopping. Test set is touched exactly once.**
 
 Companion repository for the manuscript by **Thiago Bandeira**, **Armando Gonzalez**, and **Dr. Christian Poellabauer** (Knight Foundation School of Computing and Information Sciences, Florida International University).
