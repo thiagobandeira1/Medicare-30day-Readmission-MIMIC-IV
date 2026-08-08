@@ -1,0 +1,196 @@
+{
+  "model": "V8 (66 features, race excluded)",
+  "overall_auroc": 0.794713,
+  "threshold": 0.2175961434841156,
+  "age_band": {
+    "<65": {
+      "n": 10288,
+      "auroc": 0.7832,
+      "ci": [
+        0.7735,
+        0.7926
+      ],
+      "ece": 0.013,
+      "mean_predicted": 0.2698,
+      "observed": 0.2731,
+      "sensitivity": 0.815,
+      "fpr": 0.419
+    },
+    "65-74": {
+      "n": 15099,
+      "auroc": 0.8004,
+      "ci": [
+        0.7934,
+        0.8077
+      ],
+      "ece": 0.0085,
+      "mean_predicted": 0.212,
+      "observed": 0.2104,
+      "sensitivity": 0.759,
+      "fpr": 0.318
+    },
+    "75-84": {
+      "n": 14011,
+      "auroc": 0.7917,
+      "ci": [
+        0.7835,
+        0.8007
+      ],
+      "ece": 0.0074,
+      "mean_predicted": 0.1916,
+      "observed": 0.188,
+      "sensitivity": 0.714,
+      "fpr": 0.295
+    },
+    "85+": {
+      "n": 9793,
+      "auroc": 0.7862,
+      "ci": [
+        0.7753,
+        0.7968
+      ],
+      "ece": 0.0105,
+      "mean_predicted": 0.1742,
+      "observed": 0.1701,
+      "sensitivity": 0.679,
+      "fpr": 0.271
+    }
+  },
+  "sex": {
+    "Female": {
+      "n": 25206,
+      "auroc": 0.7967,
+      "ci": [
+        0.7901,
+        0.8038
+      ],
+      "ece": 0.0082,
+      "mean_predicted": 0.2005,
+      "observed": 0.1953,
+      "sensitivity": 0.734,
+      "fpr": 0.298
+    },
+    "Male": {
+      "n": 23985,
+      "auroc": 0.7913,
+      "ci": [
+        0.7854,
+        0.7978
+      ],
+      "ece": 0.0078,
+      "mean_predicted": 0.2215,
+      "observed": 0.2237,
+      "sensitivity": 0.765,
+      "fpr": 0.345
+    }
+  },
+  "race_cat": {
+    "White": {
+      "n": 36094,
+      "auroc": 0.7928,
+      "ci": [
+        0.7875,
+        0.7983
+      ],
+      "ece": 0.0059,
+      "mean_predicted": 0.2064,
+      "observed": 0.2069,
+      "sensitivity": 0.737,
+      "fpr": 0.313
+    },
+    "Black": {
+      "n": 6860,
+      "auroc": 0.7582,
+      "ci": [
+        0.746,
+        0.771
+      ],
+      "ece": 0.0094,
+      "mean_predicted": 0.2352,
+      "observed": 0.2303,
+      "sensitivity": 0.761,
+      "fpr": 0.387
+    },
+    "Hispanic/Latino": {
+      "n": 2038,
+      "auroc": 0.8095,
+      "ci": [
+        0.7907,
+        0.8288
+      ],
+      "ece": 0.0249,
+      "mean_predicted": 0.2612,
+      "observed": 0.2684,
+      "sensitivity": 0.819,
+      "fpr": 0.382
+    },
+    "Asian": {
+      "n": 1145,
+      "auroc": 0.8292,
+      "ci": [
+        0.8013,
+        0.8549
+      ],
+      "ece": 0.0404,
+      "mean_predicted": 0.2331,
+      "observed": 0.2306,
+      "sensitivity": 0.837,
+      "fpr": 0.308
+    },
+    "Other/Unknown": {
+      "n": 3054,
+      "auroc": 0.8599,
+      "ci": [
+        0.8434,
+        0.8757
+      ],
+      "ece": 0.029,
+      "mean_predicted": 0.1645,
+      "observed": 0.1398,
+      "sensitivity": 0.794,
+      "fpr": 0.243
+    }
+  },
+  "prior_utilization_calibration": [
+    {
+      "Prior admits (6mo)": "0",
+      "n": "29,176",
+      "Mean predicted": "0.152",
+      "Observed": "0.150",
+      "pred - obs": "+0.002"
+    },
+    {
+      "Prior admits (6mo)": "1",
+      "n": "10,316",
+      "Mean predicted": "0.224",
+      "Observed": "0.218",
+      "pred - obs": "+0.006"
+    },
+    {
+      "Prior admits (6mo)": "2-3",
+      "n": "6,727",
+      "Mean predicted": "0.317",
+      "Observed": "0.317",
+      "pred - obs": "+0.000"
+    },
+    {
+      "Prior admits (6mo)": "4+",
+      "n": "2,972",
+      "Mean predicted": "0.502",
+      "Observed": "0.513",
+      "pred - obs": "-0.010"
+    }
+  ],
+  "race_ablation": {
+    "auroc_with_race": 0.794571,
+    "auroc_without_race": 0.794713,
+    "difference": -0.000142,
+    "difference_ci95": [
+      -0.001034,
+      0.000789
+    ],
+    "p_value": 0.748,
+    "white_minus_black_gap_with": 0.0328,
+    "white_minus_black_gap_without": 0.0346
+  }
+}

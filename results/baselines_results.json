@@ -1,0 +1,7 @@
+{
+  "auroc_model": 0.7935365087783612,
+  "auroc_lace_samecohort": 0.5924168166246453,
+  "auroc_hospital_samecohort": 0.6259572495874669,
+  "uplift_vs_lace": 0.20111969215371595,
+  "uplift_vs_hospital": 0.16757925919089434
+}

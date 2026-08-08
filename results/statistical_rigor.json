@@ -1,0 +1,18 @@
+{
+  "n_test": 49191,
+  "n_boot": 2000,
+  "auroc": {
+    "xgboost": 0.7935365087783613,
+    "lightgbm": 0.7969948974807559,
+    "catboost": 0.7937380077844417,
+    "histgbm": 0.7943094855120514
+  },
+  "deployed_calibration": {
+    "brier": 0.1331972526914448,
+    "ece": 0.004021072500807336,
+    "slope": 1.0283708888373289,
+    "intercept": 0.016203652601503953
+  },
+  "lace_auroc_samecohort": 0.5924168166246453,
+  "hospital_auroc_samecohort": 0.6259572495874669
+}

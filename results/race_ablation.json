@@ -1,0 +1,42 @@
+{
+  "n_features_with": 67,
+  "n_features_without": 66,
+  "auroc_with_race": 0.794571,
+  "auroc_without_race": 0.794713,
+  "difference": -0.000142,
+  "difference_ci95": [
+    -0.001055,
+    0.000793
+  ],
+  "p_value": 0.772,
+  "cv_fold_sd_reference": 0.0027,
+  "subgroups": {
+    "White": {
+      "n": 36094,
+      "auroc_with_race": 0.7917,
+      "auroc_without_race": 0.7928
+    },
+    "Black": {
+      "n": 6860,
+      "auroc_with_race": 0.7589,
+      "auroc_without_race": 0.7582
+    },
+    "Hispanic/Latino": {
+      "n": 2038,
+      "auroc_with_race": 0.8058,
+      "auroc_without_race": 0.8095
+    },
+    "Asian": {
+      "n": 1145,
+      "auroc_with_race": 0.8308,
+      "auroc_without_race": 0.8292
+    },
+    "Other/Unknown": {
+      "n": 3054,
+      "auroc_with_race": 0.8675,
+      "auroc_without_race": 0.8599
+    }
+  },
+  "white_minus_black_gap_with": 0.0328,
+  "white_minus_black_gap_without": 0.0346
+}

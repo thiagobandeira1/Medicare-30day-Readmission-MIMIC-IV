@@ -550,10 +550,10 @@ def build():
          f"{PROG['lightgbm']['V2']:.4f}"),
         ("V3", "24", "Missingness flags; recomputed LOS",
          f"{PROG['lightgbm']['V3']:.4f}"),
-        ("V4", "n/a", "Age x CCI, LOS x CCI, buckets (parquet not preserved)",
-         "n/a"),
-        ("V5", "n/a", "LOS x age, cci sq., log(LOS) (parquet not preserved)",
-         "n/a"),
+        ("V4", "33", "Age x CCI, LOS x CCI, age buckets, CCI total",
+         "0.763*"),
+        ("V5", "36", "LOS x age, CCI squared, log(LOS)",
+         "0.763*"),
         ("V6", "34", "Lab/med/dx counts, ICU utilisation",
          f"{PROG['lightgbm']['V6']:.4f}"),
         ("V7", "50", "+5 target encodings, +5 clinical interactions (final)",
@@ -563,16 +563,28 @@ def build():
     add_table(doc, ["Ver.", "N", "New content added", "AUROC"],
               table1_rows, col_widths=[0.35, 0.30, 1.75, 0.60])
     add_para(doc,
+        "* V4 and V5 AUROC values are original-protocol single-model estimates "
+        "(approximately 0.763 each) recovered from the original capstone "
+        "analysis. The V4 and V5 training-table parquets were not preserved in "
+        "the published dataset snapshot and therefore could not be recomputed "
+        "under the strict no-leakage protocol used for the other versions; both "
+        "sit on the flat V3 to V5 performance plateau.",
+        italic=True, size=9, space_after=6)
+    add_para(doc,
         f"Table 1 summarises the staircase of feature engineering across the "
         f"dataset versions. The two largest marginal AUROC gains arise at V2, "
         f"where temporal and medication-complexity signals are introduced "
         f"(plus {PROG['lightgbm']['V2']-PROG['lightgbm']['V1']:.4f}), and at "
         f"V7, where target encodings and clinical interactions are added "
         f"(plus {PROG['lightgbm']['V7']-PROG['lightgbm']['V6']:.4f}). The V4 "
-        f"and V5 intermediate parquet files were not preserved in the "
-        f"published dataset snapshot, so they are reported as not available; "
-        f"the V1 to V3 and V6 to V7 progressions cover the substantive "
-        f"feature-engineering decisions. The original expanded-exploration "
+        f"and V5 entries (approximately 0.763 AUROC each) are original-protocol "
+        f"estimates carried over from the original capstone analysis: their "
+        f"intermediate parquet files were not preserved in the published "
+        f"dataset snapshot, so they could not be recomputed under the strict "
+        f"no-leakage protocol, but the recorded values confirm the flat V3 to "
+        f"V5 plateau before the V6 clinical-counts gain. The V1 to V3 and V6 "
+        f"to V7 progressions cover the substantive feature-engineering "
+        f"decisions. The original expanded-exploration "
         f"reading of 0.800 AUROC is retained from the original analysis for "
         f"context but was not re-evaluated in this revision (the 368-feature "
         f"parquet was not preserved). The 50-feature V7 set delivers "
@@ -1199,9 +1211,13 @@ def build():
         "stopping. The held-out 20 percent test partition is described as "
         "evaluated exactly once.")
     add_para(doc,
-        "(d) The Table 1 entries for V4 and V5 are now marked n/a because "
-        "the V4 and V5 training-table parquets were not preserved in the "
-        "published Dataset/mimic-parquet snapshot.")
+        "(d) The Table 1 entries for V4 and V5 (33 and 36 features; "
+        "approximately 0.763 AUROC each) are original-protocol estimates "
+        "recovered from the original capstone analysis. The V4 and V5 "
+        "training-table parquets were not preserved in the published "
+        "Dataset/mimic-parquet snapshot, so these values could not be "
+        "recomputed under the strict no-leakage protocol and are flagged "
+        "accordingly.")
     add_para(doc,
         "(e) Authorship updated: Dr. Christian Poellabauer moves from the "
         "mentor byline to third co-author for the publication scope. "

@@ -1,0 +1,564 @@
+
+===== SLIDE 1 =====
+  [PICTURE: Picture 15]
+  Thiago Bandeira | Track: Business Analytics
+  Armando Gonzalez | Track: Artificial Intelligence
+  Mentor: Christian Poellabauer
+  April 13th , 2026
+  Predicting 30-Day Hospital Readmission in Medicare Patients
+  1
+
+===== SLIDE 2 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Motivation & Background
+  30-day readmissions are a major healthcare challenge, linked to high costs and poorer outcomes.
+  Medicare beneficiaries (age 65+) are particularly vulnerable to readmissions.
+  Reducing readmissions is a key national priority, reinforced by CMS through the Hospital Readmissions Reduction Program (HRRP).
+  Data-driven prediction at discharge can help primary care providers identify at-risk patients early and enable timely interventions.
+  Source: Centers for Medicare & Medicaid Services (CMS), Hospital Readmissions Reduction Program.
+  2
+
+===== SLIDE 3 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Problem Definition
+  Challenge: Identifying Medicare patients at highest risk of 30-day readmission is difficult at the time of discharge.
+  Goal: Develop a predictive model using MIMIC-IV v3.1 dataset to assess readmission risk for Medicare beneficiaries.
+  Outcome: Deliver an interpretable risk-scoring tool that supports primary care providers with targeted interventions.
+  Impact: Missed risk predictions → avoidable hospitalizations, higher costs, poorer patient outcomes.
+  3
+
+===== SLIDE 4 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Research Questions
+  4
+  RQ1: Which features are most predictive of 30-day readmissions in Medicare beneficiaries?
+  RQ2: Which modeling approach (statistical, boosting, deep learning, or ensemble) achieves the best predictive performance?
+  RQ3: Can interpretable ML methods (e.g., SHAP) provide actionable insights for primary care providers at discharge?
+
+===== SLIDE 5 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset
+  Source: MIMIC-IV v3.1 (PhysioNet) from Beth Israel Deaconess Medical Center, Boston, MA.
+  Full Dataset: 546,028 admissions with 305 raw features.
+  Cohort: 244,576 Medicare admissions (insurance == Medicare)
+  Target: readmit_30d (binary) (21.1% positive rate)
+  Source: Johnson et al., “MIMIC-IV, a freely accessible electronic health record dataset,” Scientific Data, 2023.
+  5
+
+===== SLIDE 6 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Exploratory Data Analysis (EDA)
+  Dataset is imbalanced: 21.1% of admissions were readmitted within 30 days
+  Imbalance justifies using AUC-ROC and calibrated probabilities instead of accuracy
+  Feature distributions (age, Length of Stay (LOS), comorbidities, meds) show broad clinical variability
+  No strong multicollinearity detected among baseline features (not shown for simplicity)
+  6
+  [PICTURE: Picture 4]
+
+===== SLIDE 7 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Exploratory Data Analysis (EDA)
+  7
+  Takeaways: 1. Discharge destination shows wide variation in readmission rates (3.9% to 50.3%), suggesting strong predictive potential.2. Care-coordination interventions can target the 56K Home Health patients readmitting at 25.1%.
+  Discharge Destination
+  Chronic/LTAC = Long-Term Acute Care facilities
+
+===== SLIDE 8 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Versions V1-V7
+  8
+
+===== SLIDE 9 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Versions V1-V6
+  9
+  Version 1 – Baseline Feature Set:
+  Demographics: age, gender
+  Admission info: admission type, admission location, discharge location
+  Comorbidities (7 flags): MI, CHF, diabetes, COPD, cerebrovascular, renal, cancer
+  Stay context: Length of Stay (LOS), discharge hour, weekend discharge
+  Medication burden: distinct drugs, polypharmacy flag
+  Prior use (6 months): prior admissions, mean prior LOS, any ED
+  Diagnosis Related Group (DRG) code
+  [TABLE 7x2]
+    | Version | Feature / Count
+    | V1 | 21
+    | V2 | 24
+    | V3 | 28
+    | V4 | 33
+    | V5 | 36
+    | V6 | 40
+  Table 1: Feature count per model version, showing progressive enrichment from V1 to V6.
+
+===== SLIDE 10 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Versions V1-V6
+  9
+  Version 2 – Temporal & Complexity Signals added:
+  Added 3 engineered features on top of V1:
+  Prior DRG + discharge disposition: combined category (last_drg_dispo) from the previous admission
+  Medication complexity (last 90 days): Shannon entropy of medication classes (med_entropy_90d)
+  Length of Stay (LOS) trend across admissions: mean change in length of stay vs the prior admission (los_trend_180d)
+  [TABLE 7x2]
+    | Version | Feature / Count
+    | V1 | 21
+    | V2 | 24
+    | V3 | 28
+    | V4 | 33
+    | V5 | 36
+    | V6 | 40
+  Table 1: Feature count per model version, showing progressive enrichment from V1 to V6.
+
+===== SLIDE 11 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Versions V1-V6
+  9
+  Version 3 – Data Quality & Length of Stay Refinement:
+  Adds 4 engineered features on top of V2:
+  Recomputed Length of Stay  (los_days) – calculated directly as (discharge − admit) ÷ 24 to ensure consistent LOS across all encounters
+  Diagnosis Related Group (DRG) missing flag (drg_code_is_missing) – 1 if DRG code is null, capturing unusual billing or incomplete documentation
+  Discharge missing flag (discharge_location_is_missing) – 1 when discharge disposition is absent, signaling atypical workflows
+  Length of Stay missing flag (los_days_is_missing) – identifies encounters with incomplete timestamps or irregular LOS patterns
+  [TABLE 7x2]
+    | Version | Feature / Count
+    | V1 | 21
+    | V2 | 24
+    | V3 | 28
+    | V4 | 33
+    | V5 | 36
+    | V6 | 40
+  Table 1: Feature count per model version, showing progressive enrichment from V1 to V6.
+
+===== SLIDE 12 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Versions V1-V6
+  9
+  Version 4 – Clinical Severity & Interaction Features
+  Added 5 engineered features on top of V3:
+  Age buckets (age_bucket)
+  Age grouped into 4 clinical bands (lt65, 65–74, 75–84, 85+).
+  Comorbidity score (cci_total)
+  Sum of all CCI flags to create a single measure of comorbidity burden.
+  Admission acuity score (admission_type_ord)
+  Admission type mapped to an ordered severity scale (ELECTIVE=0 → TRAUMA=3).
+  Age × comorbidity (age_cci_interaction)
+  Interaction term capturing patients who are both older and highly comorbid.
+  Length of Stay × comorbidity (los_cci_interaction)
+  Interaction term capturing long stays combined with higher comorbidity.
+  [TABLE 7x2]
+    | Version | Feature / Count
+    | V1 | 21
+    | V2 | 24
+    | V3 | 28
+    | V4 | 33
+    | V5 | 36
+    | V6 | 40
+  Table 1: Feature count per model version, showing progressive enrichment from V1 to V6.
+
+===== SLIDE 13 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Versions V1-V6
+  9
+  Version 5 – Nonlinear & Interaction Enhancements
+  Added 3 engineered features on top of V4:
+  Length of Stay × Age (los_age_interaction)
+  Engineered feature: los_days * age_at_admit
+  Captures nonlinear risk for older patients with long stays.
+  Squared comorbidity score (cci_total_sq)
+  Engineered feature: cci_total ** 2
+  Amplifies risk for very high comorbidity burden.
+  Log-transformed Length of Stay (log_los_days)
+  Engineered feature: log1p(los_days)
+  Reduces effect of extreme LOS values and stabilizes long-stay distributions.
+  [TABLE 7x2]
+    | Version | Feature / Count
+    | V1 | 21
+    | V2 | 24
+    | V3 | 28
+    | V4 | 33
+    | V5 | 36
+    | V6 | 40
+  Table 1: Feature count per model version, showing progressive enrichment from V1 to V6.
+
+===== SLIDE 14 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Versions V1-V6
+  9
+  Version 6 — Clinical Feature Expansion
+  In V6, I expanded the dataset by adding raw clinical information from other MIMIC-IV tables:
+  Added Clinical Features (Aggregated per admission):
+  Diagnosis complexity: n_diagnoses
+  Procedure complexity: n_procedures
+  Medication burden: n_meds_total, n_meds_unique
+  Lab intensity: n_labs_total, n_lab_item_types, n_labs_abnormal
+  ICU utilization: icu_flag, icu_total_hrs
+  Patient history: prior_admissions_all
+  [TABLE 7x2]
+    | Version | Feature / Count
+    | V1 | 21
+    | V2 | 24
+    | V3 | 28
+    | V4 | 33
+    | V5 | 36
+    | V6 | 40
+  Table 1: Feature count per model version, showing progressive enrichment from V1 to V6.
+
+===== SLIDE 15 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Dataset Version V7
+  15
+  V6 established 40 core clinical features. V7 adds 10 advanced features in two categories to capture non-linear relationships the base features miss.
+  [PICTURE: Picture 53]
+  [PICTURE: Picture 56]
+  DRG = Diagnosis-Related Group | ICD = Diagnosis coding system | LOS = Length of Stay | dx = Diagnosis
+
+===== SLIDE 16 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Feature Expansion V7
+  16
+  V1 → V7
+  +0.086 AUROC gain
+  Core clinical features
+  V7 → Expanded
+  +0.005 AUROC gain
+  Minimal improvement
+  A core set of ~50 clinically-motivated features captures 99.4% of the predictive signal. Additional feature engineering yields only marginal improvement, confirming the parsimonious model as ideal for deployment.
+
+===== SLIDE 17 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Model Performance
+  17
+
+===== SLIDE 18 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Logistic Regression Performance
+  18
+  V1 of the Dataset gets the best performance from this baseline model
+  With increasing dataset complexity, the logistic regression model starts to underfit.
+  [PICTURE: Picture 4]
+
+===== SLIDE 19 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  LightGBM
+  Model Performance
+  19
+  V1: Baseline, lowest performance (0.709)
+  V2: Biggest jump from added complexity
+  V3-V5: No significant gains from additional features
+  V6: Clinical counts boosted final AUROC (0.769)
+  [PICTURE: Picture 3]
+
+===== SLIDE 20 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  XGBoost Performance
+  20
+  V1: Baseline dataset with low features gave us low performance (0.7070)
+  V2: Biggest jump from added features and complexity (0.7629)
+  V3-V5: No Significant Gains
+  V6: Clinical counts features boosted final AUROC (0.7711)
+  [PICTURE: Picture 3]
+
+===== SLIDE 21 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  MLP Performance
+  21
+  V6 obtains the best result but not by a significant margin.
+  Current Best Model Layer Architecture of [128, 64] may be underfitting the complexity required from the datasets.
+  [PICTURE: Picture 3]
+
+===== SLIDE 22 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Advanced Neural Networks
+  22
+  Goal: Capture temporal dynamics, feature interactions and complementary signals beyond basic MLPs
+  LSTM = Long Short-Term Memory · GRU = Gated Recurrent Unit · FT-Transformer = Feature-Tokenizer Transformer
+
+===== SLIDE 23 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  FT-Transformer
+  23
+  Purpose-built Transformer architecture for tabular data (Gorishniy et al., 2021)
+  FT-Transformer = Feature-Tokenizer Transformer | [CLS] = Classification token
+  How It Works
+  1  Feature Tokenizer
+  Numeric + categorical features → individual d-dimensional vector
+  2  [CLS] Token
+  Learnable summary token prepended to the feature tokens
+  3  Self-Attention
+  Each token attends to all others: discovers which features interact
+  4  Classification
+  [CLS] output → LayerNorm → Dense(64) → Sigmoid → readmission probability
+  Why It Adds Value
+  MLPs
+  Blend all features together: interactions emerge implicitly through layers
+  LightGBM
+  Finds interactions via sequential tree splits: locally greedy
+  FT-Transformer
+  Explicitly learns which feature pairs matter via attention: global and differentiable
+  Different error patterns → valuable for stacking ensemble
+
+===== SLIDE 24 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  GRU+MLP Architecture
+  24
+  How the Hybrid Model Works
+  Sequence Branch
+  10 prior admissions × 15 temporal features → GRU layers → temporal representation
+  Static Branch
+  25 numeric features + 5 categorical embeddings → Dense layers
+  Fusion Layer
+  Concatenate both branches → Dense(128) → Dense(64) → Sigmoid
+  Table 2. Test AUROC
+  Key finding: Standalone RNNs (0.636) confirm that sequences alone are insufficient. The hybrid approach combining temporal + static features is essential.
+  GRU = Gated Recurrent Unit · LSTM = Long Short-Term Memory · MLP = Multi-Layer Perceptron · RNN = Recurrent Neural Network
+  [TABLE 4x3]
+    | Model Family | Best Model | AUROC
+    | Hybrid GRU | HybridGRU_1L32 | 0.7711
+    | Hybrid LSTM | Hybrid_LSTM32 | 0.7695
+    | Standalone RNN | BiGRU_2L64 | 0.6365
+
+===== SLIDE 25 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Stacking Ensemble with
+  Meta Learn
+  25
+  Hybrid
+  GRU×4
+  FT-Transformer
+  ×3
+  LightGBM
+  ×2
+  Learns optimal weights: which model to trust for which patients
+  Layer 2: Meta-Learner (Logistic Regression)
+  Final Prediction: AUROC = 0.7778
+  MLP
+  ×2
+  ▼  Each model produces probability predictions  ▼
+  Layer 1: Base Models (trained independently)
+  ▼
+  MLP = Multi-Layer Perceptron · GRU = Gated Recurrent Unit · FT-Transformer = Feature-Tokenizer Transformer
+
+===== SLIDE 26 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  AUC-ROC Results on V6
+  26
+  Test AUC-ROC across all model families and ensembles (V6 dataset, 244K admissions)
+  GRU = Gated Recurrent Unit · LSTM = Long Short-Term Memory · MLP = Multi-Layer Perceptron · RNN = Recurrent Neural Network · FT-Trans = Feature Tokenizer Transformer
+  [PICTURE: Picture 21]
+  0.7778
+
+===== SLIDE 27 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Boosting: Four-Model Ensemble with V7
+  27
+  LightGBM
+  0.790
+  AUROC
+  Histogram-based,
+  leaf-wise growth.
+  Fast training, handles categoricals.
+  XGBoost
+  0.793
+  AUROC
+  Lossguide tree policy
+  Best individual performer
+  CatBoost
+  0.792
+  AUROC
+  Ordered boosting
+  Native categorical handling
+  HistGBM
+  0.792
+  AUROC
+  Sklearn histogram gradient
+  Native missing value support
+
+===== SLIDE 28 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Ensemble Blending Strategy
+  28
+  LightGBM
+  19%
+  XGBoost
+  30%
+  CatBoost
+  30%
+  HistGBM
+  21%
+  Scipy-Optimized
+  Blend
+  AUROC: 0.795
+  Blending Details
+  Scipy minimize with AUROC objective on Out-of-Fold predictions
+  Constrained: weights sum to 1.0, each weight in [0, 1]
+  10 random seeds per model for variance reduction
+  Out-of-fold predictions prevent overfitting in meta-learner
+  XGBoost and CatBoost receive highest weight (30% each)
+
+===== SLIDE 29 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  29
+  Why Gradient Boosting for V7?
+  [PICTURE: Image 0]
+  Temporal Features
+  Not in V7
+  GRU/LSTM hybrids used 10 prior admissions × 15 temporal features. V7's new features are all static tabular, there is no sequences to leverage.
+  [PICTURE: Image 1]
+  Diminishing
+  Returns
+  Best ensemble (0.778) beat best single GBM (0.769) by only +0.009 AUROC. Neural nets did not outperform boosting on V6.
+  [PICTURE: Image 2]
+  Interpretability
+  Required
+  GBMs support full SHAP attribution which is  essential for actionable discharge insights and answering RQ3.
+  [PICTURE: Image 3]
+  V7: 50 Static
+  Features
+  V6 (40 feat) + 5 target encodings + 5 clinical interactions = 50 features. All tabular → ideal for GBM architectures.
+  Conclusion: GBMs are the optimal architecture for V7  matching the data structure, preserving interpretability, and achieving 0.795 AUROC
+
+===== SLIDE 30 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Final Model Comparison:
+  V1 vs V6 vs V7 vs Expanded
+  30
+  [TABLE 5x5]
+    | Metric | V1 (21 feat) | V6 (40 feat) | V7 (50 feat) | Expanded
+    | Best AUROC | 0.709 | 0.778 | 0.795 | 0.800
+    | Best Model | Logistic Reg. | Stacking | 4-GBM Blend | 4-GBM Blend
+    | Interpretability | High | Moderate | High | Low
+    | Deploy Complexity | Low | High | Low | Very High
+  V7 achieves 99.4% of the expanded model's performance with a compact, interpretable feature set. Additional feature engineering beyond the core clinical domains yielded only marginal improvement (+0.005 AUROC).
+  Table 3. Final model comparison across dataset versions: Best AUROC, model type, interpretability, and deployment complexity.
+
+===== SLIDE 31 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  31
+  Benchmark Comparison
+  30-Day All-Cause Readmission Prediction on MIMIC Data
+  Published Benchmarks
+  Study
+  Approach
+  AUROC
+  LACE Index (van Walraven et al., 2010)
+  Traditional Clinical Score
+  0.684
+  Huang et al., 2020 (ClinicalBERT)
+  BERT + Clinical Notes
+  0.714
+  Ours (2026)
+  GBM Ensemble (50 features)
+  0.795
+  Key Takeaways
+  Outperforms Traditional Scores
+  Our model surpasses the LACE index by +0.111 AUROC, a 16% relative improvement
+  Exceeds NLP-Based Approaches
+  Achieves higher AUROC than ClinicalBERT without requiring clinical notes or NLP pipelines
+  Structured Data Only
+  50 interpretable engineered features from structured EHR data — no notes, imaging, or temporal graphs
+  Clinically Deployable
+  Parsimonious feature set maps directly to actionable care interventions at discharge
+  Sources: van Walraven et al. (CMAJ, 2010); Huang et al. (arXiv, 2020)
+
+===== SLIDE 32 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  SHAP: Top 7
+  Feature Explanations
+  32
+  [PICTURE: Image 0]
+  Top 7 — Clinical Insights
+  LOS Trend 180d — Rising stay lengths over 6 months are the strongest signal of instability
+  DRG Code — Clinical mix carries enormous predictive power (11–66% readmission range)
+  Late Order Rate — Operational chaos during stay predicts post-discharge failure
+  Primary Dx Chapter — Disease category shapes baseline risk profile
+  Prior Admits 6m² — Acceleration in utilization compounds risk non-linearly
+  Last DRG + Disposition — Prior discharge pathway predicts future readmission patterns
+  Discharge Location — Where patients go after discharge directly impacts readmission risk
+  SHAP: SHapley Additive exPlanations. | LOS: Length of Stay. | DRG: Diagnosis-Related Group. | Dx: Diagnosis. | TE: Target Encoding.
+
+===== SLIDE 33 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Answering the Research Questions
+  33
+  RQ1
+  Most Predictive Features
+  LOS trend (180d), DRG code, discharge location, prior admission history, and clinical interactions are the top predictors. A core set of 50 features captures 99.4% of predictive performance.
+  RQ2
+  Best Modeling Approach
+  XGBoost (AUROC: 0.793) was selected over the top-performing blended ensemble (0.795), as the negligible 0.002 difference does not justify the added complexity and XGBoost preserves full feature interpretability for actionable insights.
+  RQ3
+  Actionable SHAP Insights
+  SHAP provides patient-level explanations: providers see which factors drive each individual's risk. Key: LOS monitoring, medication reconciliation, early follow-up for frequent admitters.
+
+===== SLIDE 34 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Limitations
+  34
+  Single Hospital System
+  Data from Beth Israel Deaconess (Boston) only, which may limit generalizability to other hospitals, regions, or populations.
+  No Unstructured Clinical Notes
+  Physician notes, discharge summaries, and radiology reports were not used. NLP-based features could improve predictions.
+  No Social Determinants of Health
+  Housing stability, social support, health literacy, and transportation are known risk factors but unavailable in MIMIC-IV.
+  Diminishing Returns
+  Expanding features beyond the core clinical set yielded only marginal improvement, suggesting a ceiling with available structured data.
+  Temporal Limitation
+  30-day readmissions occurring at different hospitals are not captured in MIMIC-IV.
+
+===== SLIDE 35 =====
+  [PICTURE: Picture 25]
+  [PICTURE: Picture 55]
+  Future Work
+  35
+  External Validation
+  Test on data from other hospital systems to assess generalizability.
+  NLP Integration
+  Incorporate unstructured clinical notes using text mining for richer patient context.
+  Real-Time Deployment
+  Develop an API/dashboard for real-time risk scoring within EHR workflows at discharge.
+  Fairness Analysis
+  Evaluate performance across demographic subgroups to identify and mitigate biases.
+  Causal Inference
+  Move beyond prediction to identify causal factors enabling more effective interventions.
+  Cost-Effectiveness
+  Quantify the economic impact of implementing the prediction model in hospital operations.
+  NLP: Natural Language Processing (analyzing clinical text). | API: Interface that connects systems. | EHR: Electronic Health Record
+
+===== SLIDE 36 =====
+  [PICTURE: Picture 25]
+  Thank you!
+  Questions or Comments
+  36
