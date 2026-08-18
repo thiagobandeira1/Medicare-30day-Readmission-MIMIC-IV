@@ -1,25 +1,43 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
 type: software
-title: "Predicting 30-Day Hospital Readmission in Medicare Patients: An Interpretable XGBoost Model on MIMIC-IV v3.1"
+title: "Predicting 30-Day Hospital Readmission in Medicare Patients: An Interpretable Gradient-Boosting Model on MIMIC-IV v3.1"
 authors:
   - family-names: "Bandeira"
     given-names: "Thiago"
-    affiliation: "Florida International University, Miami, FL, USA"
+    affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
     email: "tbati006@fiu.edu"
+    orcid: "https://orcid.org/0009-0006-0204-5298"
   - family-names: "Gonzalez"
     given-names: "Armando"
-    affiliation: "Florida International University, Miami, FL, USA"
+    affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
+    orcid: "https://orcid.org/0009-0007-6777-6072"
   - family-names: "Poellabauer"
     given-names: "Christian"
-    affiliation: "Florida International University, Miami, FL, USA"
+    affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
+    orcid: "https://orcid.org/0000-0002-0599-7941"
+  - family-names: "Mondal"
+    given-names: "Ananda Mohan"
+    affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
+    orcid: "https://orcid.org/0000-0002-4005-9942"
 year: 2026
+doi: "10.5281/zenodo.21987702"
 abstract: >-
-  A reproducible XGBoost pipeline for predicting 30-day all-cause readmission
-  in Medicare patients using MIMIC-IV v3.1. Parsimonious 50-feature model
-  trained under a strict 60/20/20 patient-grouped train/validation/test
-  protocol, with SHAP-based interpretability and benchmarking against LACE
-  and ClinicalBERT.
+  Frozen software snapshot for the JMIR AI manuscript "Predicting 30-Day
+  Hospital Readmission in Medicare Patients: An Interpretable
+  Gradient-Boosting Model on MIMIC-IV v3.1". Contains the leakage-safe,
+  development-only staged recursive feature elimination pipeline and the
+  final consensus-31 XGBoost model (src/pipeline_v5_v6), canonical
+  machine-readable results (results_v6/final_model_v6.json and companions),
+  publication figures, the reproducibility report, the value-level
+  consistency report, and the 207-predictor audit workbook. Three evidence
+  tiers: development-data out-of-fold AUROC of the complete selection
+  procedure 0.7748 (95% CI 0.7715 to 0.7782, primary), grouped development
+  cross-validation of the fixed consensus-31 set 0.7756 (secondary), and
+  0.7738 (95% CI 0.7671 to 0.7804) on the historically exposed test
+  partition (tertiary). Same-cohort baselines: adapted LACE 0.605 and
+  12-month HOSPITAL 0.649. MIMIC-IV row-level data are not included, per
+  the PhysioNet Credentialed Health Data Use Agreement.
 keywords:
   - "30-day readmission"
   - "Medicare"
@@ -30,4 +48,4 @@ keywords:
   - "interpretable machine learning"
   - "clinical decision support"
 license: MIT
-repository-code: "https://github.com/<TBD>/medicare-readmission-publication"
+repository-code: "https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV"
