@@ -1,72 +1,7 @@
-# v6.4 value-level consistency report
+# Consistency report v6.4 (superseded)
 
-- OK   primary OOF: '0.7748' x8
-- OK   secondary CV: '0.7756' x4
-- OK   tertiary test: '0.7738' x7
-- OK   n features: '31-feature' x17
-- OK   threshold: '0.216' x3
-- OK   slope: '1.04' x3
-- OK   ECE: '0.007' x2
-- OK   LACE: '0.6050' x3
-- OK   HOSPITAL12: '0.6493' x4
-- OK   WB gap: '0.0344' x1
-- OK   fixed diff: '−0.0001' x4
-- OK   fixed31 CV: '0.7756' x4
-- OK   fixed142 CV: '0.7757' x1
-- OK   tie C alt: '0.7345' x1
-- OK   boundary safe: '0.7660' x1
-- OK   AFT C: '0.7349' x2
-- OK   sameday refit: '0.7777' x1
-- OK   unplanned refit: '0.7689' x1
-- OK   nonelective: '0.7735' x1
-- OK   72%: '72%' x2
-- OK   8%: '8%' x4
-- OK   20%: '20%' x3
-- OK   80/10/10: '80/10/10' x0
-- OK   6-month proxy as available: '6-month window as available proxy' x0
-- OK   indistinguishable: 'indistinguishab' x0
-- OK   prespecified conservative tie rule: 'a prespecified conservative rule' x0
-- OK   stale 33-feature: '33-feature' x0
-- OK   stale 143: '143-feature' x0
-- OK   proved provenance: 'showed it was built by' x0
-- OK   validation-derived threshold: 'validation-derived threshold' x0
-- OK   paired WB claim: 'identical observations - out-of-fold comparators and the White-Black' x0
-- OK   consensus-31 mislabel of OOF: 'consensus-31) 0.7748' x0
-- OK   P=.758 removed: 'P=.758' x0
-- OK   deployable removed: 'deployable' x0
-- OK   equal-optimism claim removed: 'same selection-aggregation optimism' x0
-- OK   decision-time conflation removed: 'exactly when the discharge decision' x0
-- OK   day-of-discharge separability removed: 'separable on the day of discharge' x0
-- OK   absolute never-claims removed: 'never used' x0
-- OK   contributed-to-none removed: 'contributed to none' x0
-- OK   only-31-features attached to OOF removed: 'with only 31 nonbilling structured features' x0
-- OK   procedure described as 27-38 features: '27-38' x3
-- OK   bootstrap scope disclosed: 'were not repeated within bootstrap samples' x1
-- OK   consensus predictor set naming: 'final consensus predictor set' x1
-- OK   difference direction defined: 'comparator minus the RFE procedure' x1
-- OK   hyperparameter indirect-influence wording: 'may have been indirectly influenced by earlier test-partition' x1
-- OK   absolute hyperparameter claim removed: 'contributed to feature selection, encoding, hyperparameters, or threshold' x0
-- OK   44.5% capacity: '44.5%' x1
-- OK   cohort-wide denominator: 'cohort-wide prevalence' x1
-- OK   ties cohort/test split: 'same-date ties in the cohort' x1
-- OK   SHAP expanded at first use: 'Shapley additive explanations (SHAP)' x1
-- OK   approx glyph: '≈0.714' x1
-- OK   abbrev OOF: 'OOF: out-of-fold' x2
-- OK   abbrev STROBE: 'STROBE:' x1
-- OK   CMS URL: 'hospital-readmissions-reduction-program-hrrp' x1
-- OK   Adisa arXiv: 'arXiv:2604.22535' x1
-- OK   em dashes present: '—' x41
-- OK   Appendix figure unnumbered: '(Multimedia Appendix figure)' x0
-- OK   spaced hyphens gone: ' - ' x0
-- OK   PRIMARY caps: 'PRIMARY' x0
-- OK   SAME COHORT caps: 'SAME COHORT' x0
-- OK   the-same-66 wording: 'the same 66' x0
-- OK   honest negative flourish: 'An honest negative' x0
-- OK   Dr. honorific: 'Dr. ' x0
-- OK   August 2026 date: 'August 2026' x0
-- OK   Harrell C [28,29]: 'Harrell C [28,29]' x0
-- OK   straight apostrophe: "'" x0
-- OK   no over-precise P values: []
-- figures referenced: ['1', '2', '3', '4', '5', '6', '7', '8']; tables referenced: ['1', '2']
-
-OVERALL: PASS
+This report has been superseded by
+[CONSISTENCY_REPORT_FINAL.md](CONSISTENCY_REPORT_FINAL.md), which reflects the
+FINAL submission build (no-dash typography pass of 2026-08-17, all author
+fields resolved). The v6.4 report contents remain available in the git history
+of this file.

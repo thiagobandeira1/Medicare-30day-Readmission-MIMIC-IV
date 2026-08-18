@@ -1,4 +1,4 @@
-# Manuscript Additions — Draft Text
+# Manuscript Additions: Draft Text
 
 Publication-ready prose for the new analyses, written in the paper's style (no em-dashes), with the
 verified numbers from the executed notebooks. Each block notes where it belongs in the manuscript.

@@ -1,4 +1,4 @@
-# Reproducibility report — v6 pipeline (2026-08-12)
+# Reproducibility report: v6 pipeline (2026-08-12)
 
 v6 = v5 final model (unchanged: consensus-31 XGBoost, artifacts_v5/) plus
 corrected inference, new supplementary analyses, and estimand-clean reporting.
@@ -23,7 +23,7 @@ what changed is how contrasts are computed/described and the manuscript text.
    b. LACE and HOSPITAL-12m uplifts re-bootstrapped: paired same-draw
       patient-cluster resampling, 5,000 draws, plus-one correction.
    c. White-Black AUROC gap re-bootstrapped: stratified design (patients
-      resampled independently WITHIN each subgroup), 5,000 draws — the
+      resampled independently WITHIN each subgroup), 5,000 draws; the
       subgroups are disjoint, so this is not a paired comparison and is no
       longer described as one.
    d. Death/readmission same-date tie-rule sensitivity: primary death-first
@@ -59,7 +59,7 @@ what changed is how contrasts are computed/described and the manuscript text.
   conservative exclusion (original code unavailable; pattern inconsistent
   with a single training-only map).
 - Tie rule no longer called "prespecified"; both orderings reported.
-- Calibration values of record: slope 1.04 (1.0363), ECE 0.007 (0.0068) —
+- Calibration values of record: slope 1.04 (1.0363), ECE 0.007 (0.0068);
   earlier summary documents that carried 1.03/0.006 were stale (the v5
   manuscript itself was already correct).
 
@@ -72,7 +72,7 @@ what changed is how contrasts are computed/described and the manuscript text.
   paired diff -0.0001 [-0.0009, 0.0007], P=.758 (5,000 draws)
 - (uplift and W-B P values: see v6_extras.json / manuscript, 5,000 draws)
 
-## v6.1 addendum (2026-08-12) — surgical corrections, no model rerun
+## v6.1 addendum (2026-08-12): surgical corrections, no model rerun
 
 Builders: _build_jmir_v61_part1.py / _build_jmir_v61_part2.py ->
 "Paper JMIR AI Submission v6.1.docx" + PDF (14 pages).
