@@ -1,0 +1,6 @@
+{
+ "n_boundary": 6658,
+ "share": 0.1397,
+ "auroc_all": 0.7738,
+ "auroc_safe": 0.766
+}

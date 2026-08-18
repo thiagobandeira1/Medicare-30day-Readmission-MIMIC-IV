@@ -1,0 +1,87 @@
+{
+ "fixed31_vs_fixed142_paired_cv": {
+  "auroc_fixed31_cv": 0.7756,
+  "auroc_fixed142_cv": 0.7757,
+  "paired_diff_31_minus_142": -0.0001,
+  "ci95": [
+   -0.0009,
+   0.0007
+  ],
+  "p_two_sided_plus1": 0.7584,
+  "n_boot": 5000,
+  "note": "both fixed sets defined after selection, so both carry selection optimism; the DIFFERENCE is a fair fixed-vs-fixed contrast on identical development folds"
+ },
+ "highdraw_contrasts_5000": {
+  "lace_uplift": {
+   "point": 0.1688,
+   "ci95": [
+    0.1603,
+    0.1776
+   ],
+   "p_two_sided_plus1": 0.0004,
+   "n_boot": 5000,
+   "design": "paired same-draw patient-cluster bootstrap",
+   "point_definition": "observed difference from unrounded point estimates; bootstrap distribution used for CI and P only (previous field held the bootstrap mean)"
+  },
+  "hospital12_uplift": {
+   "point": 0.1244,
+   "ci95": [
+    0.1178,
+    0.1313
+   ],
+   "p_two_sided_plus1": 0.0004,
+   "n_boot": 5000,
+   "design": "paired same-draw patient-cluster bootstrap",
+   "point_definition": "observed difference from unrounded point estimates; bootstrap distribution used for CI and P only (previous field held the bootstrap mean)"
+  },
+  "white_minus_black": {
+   "point": 0.0344,
+   "ci95": [
+    0.017,
+    0.0528
+   ],
+   "p_two_sided_plus1": 0.0004,
+   "n_boot": 5000,
+   "design": "stratified patient-cluster bootstrap: patients resampled within each subgroup independently; disjoint groups, not a paired comparison",
+   "point_definition": "observed difference from unrounded point estimates; bootstrap distribution used for CI and P only (previous field held the bootstrap mean)"
+  }
+ },
+ "tie_rule_sensitivity": {
+  "death_first_primary": {
+   "test_readmissions": 10117,
+   "test_deaths": 1170,
+   "harrell_c": 0.7349,
+   "tdauc_day1": 0.8485,
+   "tdauc_day29": 0.7613,
+   "aj_cif30_readmission": 0.2122,
+   "aj_cif30_death": 0.0245
+  },
+  "readmission_first": {
+   "test_readmissions": 10133,
+   "test_deaths": 1154,
+   "harrell_c": 0.7345,
+   "tdauc_day1": 0.849,
+   "tdauc_day29": 0.7608,
+   "aj_cif30_readmission": 0.2126,
+   "aj_cif30_death": 0.0242
+  },
+  "n_ties": 66,
+  "n_ties_test": 16,
+  "note": "registry death dates are day-granular; same-date readmission/death order is not observable, so both orderings are reported"
+ },
+ "transfer_band": {
+  "delta_definition": "next admittime minus index dischtime, exact timestamps, in fractional days",
+  "primary_label": "readmission iff 0 < delta <= 30",
+  "transfer_band": "-2 < delta <= 0 (treated as transfer/continuation)",
+  "n_band_total": 650,
+  "n_band_by_partition": {
+   "train": 458,
+   "val": 52,
+   "test": 140
+  },
+  "n_delta_below_minus2": 0,
+  "rationale": "a subsequent record beginning at or within 48 hours before the index discharge timestamp reflects inter-unit transfer or administrative re-registration, not a community return; no records fall below the -2-day bound in this cohort"
+ },
+ "boot_draws": 5000,
+ "seed": 42
+}

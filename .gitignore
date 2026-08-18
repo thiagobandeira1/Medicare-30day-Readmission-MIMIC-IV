@@ -68,3 +68,11 @@ dist/
 *.cbm
 *.txt.gz
 catboost_info/
+
+# DUA protection: never commit row-level or patient-identified derived data
+*.npz
+*.parquet
+*.csv.gz
+Dataset/
+*.log
+*.log.err

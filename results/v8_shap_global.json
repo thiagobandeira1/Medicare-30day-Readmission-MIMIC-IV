@@ -1,0 +1,332 @@
+[
+ {
+  "feature": "los_trend_180d",
+  "mean_abs_shap": 0.47626569867134094,
+  "rank": 1
+ },
+ {
+  "feature": "los_trend_x_prior_admits",
+  "mean_abs_shap": 0.22158342599868774,
+  "rank": 2
+ },
+ {
+  "feature": "freq_x_recency",
+  "mean_abs_shap": 0.21685871481895447,
+  "rank": 3
+ },
+ {
+  "feature": "discharge_location_te",
+  "mean_abs_shap": 0.20640087127685547,
+  "rank": 4
+ },
+ {
+  "feature": "drg_code_te",
+  "mean_abs_shap": 0.10180183500051498,
+  "rank": 5
+ },
+ {
+  "feature": "prior_admissions_6m",
+  "mean_abs_shap": 0.09166985750198364,
+  "rank": 6
+ },
+ {
+  "feature": "hemoglobin_last",
+  "mean_abs_shap": 0.07479878515005112,
+  "rank": 7
+ },
+ {
+  "feature": "time_since_last_discharge",
+  "mean_abs_shap": 0.06631488353013992,
+  "rank": 8
+ },
+ {
+  "feature": "prior_readmission_count",
+  "mean_abs_shap": 0.06265854090452194,
+  "rank": 9
+ },
+ {
+  "feature": "primary_dx_chapter_te",
+  "mean_abs_shap": 0.06183905526995659,
+  "rank": 10
+ },
+ {
+  "feature": "prior_mean_los_6m",
+  "mean_abs_shap": 0.05873604118824005,
+  "rank": 11
+ },
+ {
+  "feature": "n_lab_item_types",
+  "mean_abs_shap": 0.051311999559402466,
+  "rank": 12
+ },
+ {
+  "feature": "sodium_last",
+  "mean_abs_shap": 0.048404760658741,
+  "rank": 13
+ },
+ {
+  "feature": "prior_admissions_all",
+  "mean_abs_shap": 0.047326017171144485,
+  "rank": 14
+ },
+ {
+  "feature": "los_per_prior_admit",
+  "mean_abs_shap": 0.04543028026819229,
+  "rank": 15
+ },
+ {
+  "feature": "lab_abnormal_rate",
+  "mean_abs_shap": 0.04115596041083336,
+  "rank": 16
+ },
+ {
+  "feature": "drg_code",
+  "mean_abs_shap": 0.040526483207941055,
+  "rank": 17
+ },
+ {
+  "feature": "wbc_last",
+  "mean_abs_shap": 0.039398860186338425,
+  "rank": 18
+ },
+ {
+  "feature": "los_trend_x_prior_6m",
+  "mean_abs_shap": 0.039141945540905,
+  "rank": 19
+ },
+ {
+  "feature": "discharge_location",
+  "mean_abs_shap": 0.03906935825943947,
+  "rank": 20
+ },
+ {
+  "feature": "n_emar_details",
+  "mean_abs_shap": 0.03877033293247223,
+  "rank": 21
+ },
+ {
+  "feature": "age_at_admit",
+  "mean_abs_shap": 0.037673112004995346,
+  "rank": 22
+ },
+ {
+  "feature": "severity_x_lab_abnormal",
+  "mean_abs_shap": 0.03616825491189957,
+  "rank": 23
+ },
+ {
+  "feature": "n_lab_orders",
+  "mean_abs_shap": 0.03580717369914055,
+  "rank": 24
+ },
+ {
+  "feature": "elix_solid_tumor",
+  "mean_abs_shap": 0.03502852842211723,
+  "rank": 25
+ },
+ {
+  "feature": "bilirubin_max",
+  "mean_abs_shap": 0.03373066335916519,
+  "rank": 26
+ },
+ {
+  "feature": "n_meds_x_age",
+  "mean_abs_shap": 0.033010777086019516,
+  "rank": 27
+ },
+ {
+  "feature": "provider_fragmentation_x_los",
+  "mean_abs_shap": 0.032459601759910583,
+  "rank": 28
+ },
+ {
+  "feature": "distinct_drugs",
+  "mean_abs_shap": 0.03196576237678528,
+  "rank": 29
+ },
+ {
+  "feature": "los_days",
+  "mean_abs_shap": 0.02875252068042755,
+  "rank": 30
+ },
+ {
+  "feature": "n_late_orders",
+  "mean_abs_shap": 0.027839485555887222,
+  "rank": 31
+ },
+ {
+  "feature": "n_discharge_drugs",
+  "mean_abs_shap": 0.02732783555984497,
+  "rank": 32
+ },
+ {
+  "feature": "discharge_hour",
+  "mean_abs_shap": 0.026770491153001785,
+  "rank": 33
+ },
+ {
+  "feature": "bmi_last",
+  "mean_abs_shap": 0.025991154834628105,
+  "rank": 34
+ },
+ {
+  "feature": "clinical_complexity",
+  "mean_abs_shap": 0.025958077982068062,
+  "rank": 35
+ },
+ {
+  "feature": "n_procedures",
+  "mean_abs_shap": 0.025607341900467873,
+  "rank": 36
+ },
+ {
+  "feature": "n_distinct_providers",
+  "mean_abs_shap": 0.02450936660170555,
+  "rank": 37
+ },
+ {
+  "feature": "n_labs_total",
+  "mean_abs_shap": 0.024147074669599533,
+  "rank": 38
+ },
+ {
+  "feature": "late_order_burden",
+  "mean_abs_shap": 0.02374695986509323,
+  "rank": 39
+ },
+ {
+  "feature": "los_x_n_diagnoses",
+  "mean_abs_shap": 0.023434864357113838,
+  "rank": 40
+ },
+ {
+  "feature": "primary_dx_chapter",
+  "mean_abs_shap": 0.021782375872135162,
+  "rank": 41
+ },
+ {
+  "feature": "n_meds_total",
+  "mean_abs_shap": 0.021246368065476418,
+  "rank": 42
+ },
+ {
+  "feature": "admission_location",
+  "mean_abs_shap": 0.020313002169132233,
+  "rank": 43
+ },
+ {
+  "feature": "last_drg_dispo_te",
+  "mean_abs_shap": 0.018827857449650764,
+  "rank": 44
+ },
+ {
+  "feature": "bicarbonate_last",
+  "mean_abs_shap": 0.01864776946604252,
+  "rank": 45
+ },
+ {
+  "feature": "elix_mets",
+  "mean_abs_shap": 0.018557116389274597,
+  "rank": 46
+ },
+ {
+  "feature": "orders_last_6h",
+  "mean_abs_shap": 0.018340962007641792,
+  "rank": 47
+ },
+ {
+  "feature": "med_orders_ratio",
+  "mean_abs_shap": 0.01833161897957325,
+  "rank": 48
+ },
+ {
+  "feature": "iv_admin_rate",
+  "mean_abs_shap": 0.018131565302610397,
+  "rank": 49
+ },
+ {
+  "feature": "orders_per_day",
+  "mean_abs_shap": 0.017286935821175575,
+  "rank": 50
+ },
+ {
+  "feature": "bun_creatinine_ratio",
+  "mean_abs_shap": 0.017097003757953644,
+  "rank": 51
+ },
+ {
+  "feature": "last_drg_dispo",
+  "mean_abs_shap": 0.015782468020915985,
+  "rank": 52
+ },
+ {
+  "feature": "new_med_rate_48h",
+  "mean_abs_shap": 0.015474378131330013,
+  "rank": 53
+ },
+ {
+  "feature": "glucose_last",
+  "mean_abs_shap": 0.015088235028088093,
+  "rank": 54
+ },
+ {
+  "feature": "severity_composite",
+  "mean_abs_shap": 0.01419085543602705,
+  "rank": 55
+ },
+ {
+  "feature": "bp_diastolic_outpatient",
+  "mean_abs_shap": 0.01341779064387083,
+  "rank": 56
+ },
+ {
+  "feature": "albumin_x_los",
+  "mean_abs_shap": 0.013334532268345356,
+  "rank": 57
+ },
+ {
+  "feature": "albumin_last",
+  "mean_abs_shap": 0.012668128125369549,
+  "rank": 58
+ },
+ {
+  "feature": "bun_last",
+  "mean_abs_shap": 0.012535993941128254,
+  "rank": 59
+ },
+ {
+  "feature": "creatinine_x_bun",
+  "mean_abs_shap": 0.012496311217546463,
+  "rank": 60
+ },
+ {
+  "feature": "admission_type",
+  "mean_abs_shap": 0.01182699203491211,
+  "rank": 61
+ },
+ {
+  "feature": "elix_psychoses",
+  "mean_abs_shap": 0.011390399187803268,
+  "rank": 62
+ },
+ {
+  "feature": "comorbidity_pc4",
+  "mean_abs_shap": 0.01073976419866085,
+  "rank": 63
+ },
+ {
+  "feature": "late_order_rate",
+  "mean_abs_shap": 0.01020678412169218,
+  "rank": 64
+ },
+ {
+  "feature": "n_order_types",
+  "mean_abs_shap": 0.008768020197749138,
+  "rank": 65
+ },
+ {
+  "feature": "log_time_since_discharge",
+  "mean_abs_shap": 0.006488455459475517,
+  "rank": 66
+ }
+]
