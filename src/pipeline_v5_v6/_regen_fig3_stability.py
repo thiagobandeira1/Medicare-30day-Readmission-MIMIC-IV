@@ -27,9 +27,9 @@ cols = [TEAL if v >= 3 else "#B9C4CF" for v in vals]
 fig, ax = plt.subplots(figsize=(5.4, 8.2))
 ax.barh(names, vals, color=cols, height=0.72)
 ax.axvline(3, color=CORAL, ls="--", lw=1.2)
-ax.annotate("consensus threshold\n(3 of 5 folds)", xy=(3, len(names) - 1.2),
-            xytext=(3.35, len(names) - 4.5), color=CORAL, fontsize=8,
-            fontweight="bold",
+ax.annotate("consensus threshold\n(3 of 5 folds)", xy=(3, 5.4),
+            xytext=(3.45, 2.0), color=CORAL, fontsize=8, fontweight="bold",
+            bbox=dict(facecolor="white", edgecolor="none", alpha=0.9),
             arrowprops=dict(arrowstyle="->", color=CORAL, lw=1))
 ax.set_xlabel("Outer folds selecting the feature (of 5)", fontsize=10)
 ax.set_title(f"Feature-selection stability\n(teal = consensus set, n={NF}; "

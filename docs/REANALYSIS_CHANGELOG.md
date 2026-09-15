@@ -624,3 +624,94 @@ pre-submission read.
 
 Files rebuilt: both FINAL DOCX/PDF pairs (14 pp / 23 pp, unchanged page
 counts); CONSISTENCY_REPORT_FINAL.md regenerated; packet zip refreshed.
+
+
+## Mentor revision round 1 (2026-09-14, Dr. Poellabauer markup)
+
+Source: his tracked edits and 6 comments in the returned single-column copy
+plus his email of 2026-09-14.
+
+- Title: "Predicting 30-Day Hospital Readmission at Discharge: A
+  Leakage-Safe, Calibrated EHR Model in Medicare-Insured Adults" (his
+  tracked edit). Design subtitle kept in JMIR convention: "Retrospective
+  Development and Internal Validation of an Interpretable Gradient-Boosting
+  Model on MIMIC-IV v3.1" (answer to his subtitle comment: JMIR expects the
+  study design in the title).
+- Abstract: his Background reframing sentence adopted (replaces the
+  overlapping original clause); Objective now "at hospital discharge"; his
+  two Methods sentences (fold-local leakage prevention; prespecified
+  procedure-level primary estimate) merged in; Results opening clarified
+  ("This procedure, in which each outer fold selected its own 27 to 38
+  predictors"); compensating trims; abstract exactly 450 words.
+- Introduction restructured per his related-work comment: new Related Work
+  section with four subsections (Clinical Scores and Regression-Based
+  Models; Machine Learning for Readmission Prediction; Data Leakage and
+  Validation Pitfalls, new, citing refs 34 to 36; Prior Work on MIMIC),
+  then an explicit Study Rationale section.
+- Research questions: his RQ1 to RQ3 wording adopted (his "HER" typo
+  corrected to "EHR"); new RQ4 on timing and subgroups per his comment;
+  Answers to the Research Questions rewritten for all four (RQ2 now answers
+  improvement over clinical scores; learner comparison demoted to a
+  parenthetical).
+- Principal Findings reordered: leakage-safety, timing, fairness, then the
+  clinical-score comparison.
+- References 34 to 36 added, verified against PubMed: Kapoor and Narayanan
+  2023 (Patterns), Futoma et al 2020 (Lancet Digit Health), Wiens et al
+  2019 (Nat Med).
+- Keywords: "data leakage" added.
+- Not adopted: two ambiguous punctuation insertions in the Cohort section
+  (no reconstructable content change).
+- Consistency checker extended with 15 new checks. OVERALL: PASS. Dash
+  scans clean. Totals: ~8,400 words, 36 references, abstract 450, 15 pp
+  two-column and 23 pp single-column.
+
+
+## Critical-review round (2026-09-15 overnight, 44-agent adversarial pass)
+
+A 40-agent review workflow (6 reviewer lenses including a mentor-perspective
+read and a hostile referee, 4 figure inspectors reading the PNGs, 2
+reproducibility auditors recomputing headline numbers from stored
+predictions) plus a 4-agent confirmation pass. 13 upheld majors, 65 minors,
+and the actionable nits were implemented:
+
+- Citations now renumber themselves by first appearance at build time
+  (regress-proof pass inside the builders); 4 new verified references:
+  Graham 2015 (early vs late readmissions), Krumholz 2013 (post-hospital
+  syndrome), Seyyed-Kalantari 2021 (underdiagnosis bias), Blanche 2013
+  (competing-risks td-AUC). 40 references total, all cited, strict order
+  verified programmatically.
+- Related Work gains a Readmission Timing and Subgroup Performance
+  subsection; Background motivates timing and equity; abstract now carries
+  all four RQ threads at 447 words.
+- Fairness reporting quantified: age-band AUROC range (0.7542 to 0.7854)
+  with CIs, age-band calibration slopes excluding 1, race AUROCs at stored
+  4-decimal precision, threshold-level specificity difference disclosed,
+  within-system label-bias caveat added, "stable across age bands" claim
+  removed as contradicted by Table 1.
+- td-AUROC estimand made explicit: cause-specific competing-risks
+  definition, deaths retained as nonevents, Blanche cited beside Uno;
+  Figure 5 caption aligned.
+- Two new canonical sensitivity blocks in final_model_v6.json
+  (_extend_v6_extras.py): era-stratified test AUROC by anchor_year_group
+  (0.7437 rising to 0.8556 across 2008 to 2022 bands, prevalence falling
+  24.6% to 17.2%) now reported as sensitivity item 5; payer-scope
+  verification (readmission search covers all payers; 743 non-Medicare next
+  admissions, 741 counted).
+- Leakage-safe scoping definition added to Methods (answers the
+  self-certification attack on the title); temporal-split rationale
+  rewritten around anchor_year_group; sample-size justification
+  (events-per-candidate above 250); multiplicity statement; Youden
+  threshold framed as illustrative; software environment rendered from the
+  canonical env block; death-as-nonevent deployment caveat; single-site
+  characterization expanded; Conclusions demoted to a Discussion
+  subsection; funding folded into Acknowledgments; dozens of grammar,
+  tense, abbreviation, and rounding fixes (Jaccard 0.755, prevalences from
+  integer counts).
+- Figure 3 regenerated with all 44 selected features (was truncated to 40)
+  and an annotated consensus threshold; Figure 1/4/6/7 captions corrected.
+- Confirmation pass: reference integrity PASS, new numbers PASS after
+  Jaccard fix, 13 prose artifacts repaired, Figure 3 annotation relocated.
+
+Totals: about 9,619 words, 40 references, abstract 447, 16 pp two-column,
+26 pp single-column. Consistency checker (about 130 checks): OVERALL PASS.
+Dash scans: 0 em, 0 en, 0 spaced hyphens.

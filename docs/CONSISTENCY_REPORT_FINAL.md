@@ -2,7 +2,7 @@
 
 - OK   primary OOF: '0.7748' x8
 - OK   secondary CV: '0.7756' x4
-- OK   tertiary test: '0.7738' x7
+- OK   tertiary test: '0.7738' x10
 - OK   n features: '31-feature' x17
 - OK   threshold: '0.216' x3
 - OK   slope: '1.04' x3
@@ -43,7 +43,7 @@
 - OK   procedure described as 27 to 38 features: '27 to 38' x3
 - OK   bootstrap scope disclosed: 'were not repeated within bootstrap samples' x1
 - OK   consensus predictor set naming: 'final consensus predictor set' x1
-- OK   difference direction defined: 'comparator minus the RFE procedure' x1
+- OK   difference direction defined: 'comparator minus the selection procedure' x1
 - OK   hyperparameter indirect-influence wording: 'may have been indirectly influenced by earlier test-partition' x1
 - OK   absolute hyperparameter claim removed: 'contributed to feature selection, encoding, hyperparameters, or threshold' x0
 - OK   44.5% capacity: '44.5%' x1
@@ -52,10 +52,50 @@
 - OK   SHAP expanded at first use: 'Shapley additive explanations (SHAP)' x1
 - OK   approx glyph: '≈0.714' x1
 - OK   abbrev OOF: 'OOF: out-of-fold' x2
-- OK   abbrev STROBE: 'STROBE:' x1
 - OK   CMS URL: 'hospital-readmissions-reduction-program-hrrp' x1
 - OK   Adisa arXiv: 'arXiv:2604.22535' x1
+- OK   new title: 'Leakage-Safe, Calibrated Electronic Health Record Model' x1
+- OK   timing subsection: 'Readmission Timing and Subgroup Performance' x1
+- OK   Graham ref: 'early and late readmissions' x2
+- OK   Krumholz ref: 'Post-hospital syndrome' x1
+- OK   Seyyed-Kalantari ref: 'Underdiagnosis bias' x1
+- OK   Blanche ref: 'censored event times with competing risks' x1
+- OK   leakage-safe scoped: 'leakage-safe denotes this design' x1
+- OK   payer scope stated: 'carried non-Medicare insurance' x1
+- OK   era sensitivity: 'anchor_year_group era band' x1
+- OK   sample size stated: 'events-per-candidate ratio' x1
+- OK   multiplicity stated: 'no adjustment for multiple comparisons' x1
+- OK   cause-specific tdAUC: 'remain in the ' x1
+- OK   age-band gap quantified: '0.7542' x3
+- OK   Black AUROC 4dp: '0.7375' x3
+- OK   threshold equity: 'share of nonreadmitted Black patients' x1
+- OK   within-system label bias: 'differential outcome misclassification' x1
+- OK   death nonevent caveat: 'must not be ' x1
+- OK   appendix 5 cited: 'Multimedia Appendix 5' x2
+- OK   design subtitle kept: 'Retrospective Development and Internal Validation' x1
+- OK   Related Work section: 'Related Work' x1
+- OK   leakage pitfalls subsection: 'Data Leakage and Validation Pitfalls' x1
+- OK   Study Rationale section: 'The gap, therefore, is not another' x1
+- OK   four RQs: 'Four research questions organize the study' x1
+- OK   RQ4 answered: 'RQ4 (timing and subgroups)' x1
+- OK   Kapoor ref: 'Kapoor S, Narayanan A' x1
+- OK   Futoma ref: 'The myth of' x1
+- OK   Wiens ref: 'Do no harm' x1
+- OK   keyword data leakage: 'data leakage; calibration' x1
 - OK   Appendix figure unnumbered: '(Multimedia Appendix figure)' x0
+- OK   old prior-work heading gone: 'Prior Work on MIMIC-IV and Study Rationale' x0
+- OK   age-stability claim gone: 'stable across age bands' x0
+- OK   four-findings label gone: 'Four findings carry the study' x0
+- OK   STROBE label gone: 'STROBE-style' x0
+- OK   re-implemented gone: 're-implemented' x0
+- OK   RFE-procedure naming gone: 'the RFE procedure' x0
+- OK   ECE deciles wording gone: 'error over deciles' x0
+- OK   dual python claim gone: 'Python 3.11 and 3.12' x0
+- OK   funding heading gone: 'Funding Statement' x0
+- OK   adapted-scores naming gone: 'adapted' x0
+- OK   old RQ2 framing gone: 'best modeling approach' x0
+- OK   old three-RQ framing gone: 'Three research questions' x0
+- OK   HER typo absent: 'HER features' x0
 - OK   em dashes gone: '—' x0
 - OK   en dashes gone: '–' x0
 - OK   spaced hyphens gone: ' - ' x0
