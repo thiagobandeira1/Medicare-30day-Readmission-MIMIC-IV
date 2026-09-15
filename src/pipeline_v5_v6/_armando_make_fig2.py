@@ -11,10 +11,11 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import matplotlib
 
-SRC = ("/Users/armandogonzalez/Downloads/FIU CAPSTONE CODING/"
-       "JMIR Submission Packet v6.3 FINAL/figures_highres/Figure2_rfe_curve.png")
-OUT = ("/private/tmp/claude-501/-Users-armandogonzalez-Downloads-FIU-CAPSTONE-CODING/"
-       "a273b0b0-7020-407d-a1b6-10300e9d2743/scratchpad/Figure2_rfe_curve.png")
+from pathlib import Path as _Path
+
+_REPO = _Path(__file__).resolve().parents[2]
+SRC = str(_REPO / "figures_v5" / "v5_rfe_curve_pre_armando.png")
+OUT = str(_REPO / "figures_v5" / "v5_rfe_curve.png")
 
 ACCENT = np.array([231, 111, 81])      # threshold line + annotation colour
 GRID = np.array([231, 231, 231])

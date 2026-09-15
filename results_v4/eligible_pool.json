@@ -1,0 +1,407 @@
+{
+ "pool_total": 207,
+ "eligible": [
+  "admission_type",
+  "admission_location",
+  "discharge_location",
+  "age_at_admit",
+  "gender",
+  "los_days",
+  "discharge_hour",
+  "weekend_discharge",
+  "distinct_drugs",
+  "polypharmacy_flag",
+  "prior_admissions_6m",
+  "prior_mean_los_6m",
+  "prior_any_ed_6m",
+  "med_entropy_90d",
+  "los_trend_180d",
+  "n_meds_total",
+  "n_labs_total",
+  "n_lab_item_types",
+  "icu_flag",
+  "icu_total_hrs",
+  "prior_admissions_all",
+  "creatinine_last",
+  "creatinine_max",
+  "creatinine_delta",
+  "bun_last",
+  "hemoglobin_last",
+  "sodium_last",
+  "potassium_last",
+  "albumin_last",
+  "wbc_last",
+  "glucose_last",
+  "glucose_max",
+  "bnp_last",
+  "lactate_max",
+  "n_critical_labs",
+  "sodium_abnormal",
+  "potassium_abnormal",
+  "wbc_high",
+  "troponin_max",
+  "troponin_elevated",
+  "inr_max",
+  "bicarbonate_last",
+  "magnesium_last",
+  "phosphate_last",
+  "bilirubin_max",
+  "hr_std",
+  "sbp_std",
+  "gcs_min",
+  "vasopressor_flag",
+  "ventilator_flag",
+  "antibiotic_flag",
+  "culture_positive_flag",
+  "n_service_changes",
+  "stepdown_flag",
+  "ed_to_icu_flag",
+  "hypertension_flag",
+  "invasive_vent_flag",
+  "arterial_line_flag",
+  "central_line_flag",
+  "picc_line_flag",
+  "n_urine_measurements",
+  "oliguria_flag",
+  "n_discharge_drugs",
+  "severe_polypharmacy",
+  "opioid_at_discharge",
+  "anticoag_at_discharge",
+  "insulin_at_discharge",
+  "diuretic_at_discharge",
+  "n_order_types",
+  "orders_per_day",
+  "n_distinct_providers",
+  "n_lab_orders",
+  "n_consult_orders",
+  "n_nursing_orders",
+  "n_diet_orders",
+  "n_discontinued_orders",
+  "order_discontinuation_rate",
+  "n_late_orders",
+  "late_order_rate",
+  "pt_ot_flag",
+  "dme_flag",
+  "n_emar_details",
+  "n_incomplete_doses",
+  "incomplete_dose_rate",
+  "n_iv_administrations",
+  "iv_admin_rate",
+  "n_distinct_routes",
+  "n_datetime_events",
+  "n_distinct_dt_items",
+  "n_restraint_events",
+  "n_foley_events",
+  "n_drain_events",
+  "n_intubation_events",
+  "n_skin_wound_events",
+  "n_ingredient_events",
+  "n_distinct_ingredients",
+  "tpn_flag",
+  "total_dextrose_ml",
+  "iv_potassium_flag",
+  "iv_magnesium_flag",
+  "vasopressor_ingredient_flag",
+  "sedation_flag",
+  "total_volume_infused_ml",
+  "admit_month",
+  "admit_day_of_week",
+  "log_los_days",
+  "log_n_labs",
+  "lab_abnormal_rate",
+  "infection_flag",
+  "albumin_x_los",
+  "n_meds_x_age",
+  "creatinine_x_bun",
+  "bun_creatinine_ratio",
+  "is_readmission_90d",
+  "time_since_last_discharge",
+  "prior_readmission_count",
+  "orders_per_provider",
+  "med_orders_ratio",
+  "consult_per_day",
+  "late_order_burden",
+  "provider_fragmentation_x_los",
+  "prior_admits_6m_sq",
+  "discharge_location_te",
+  "prior_admits_x_age",
+  "renal_risk_x_age",
+  "freq_x_recency",
+  "high_risk_meds_x_age",
+  "orders_last_6h",
+  "los_trend_x_prior_6m",
+  "bmi_last",
+  "orders_first_24h",
+  "max_unit_los_days",
+  "anemia_x_prior_admits",
+  "los_trend_x_prior_admits",
+  "log_prior_readmit_count",
+  "log_prior_admits_6m",
+  "nonenglish_x_prior_admits",
+  "log_time_since_discharge",
+  "new_med_rate_48h",
+  "los_per_prior_admit",
+  "discharge_surge",
+  "bp_diastolic_outpatient",
+  "rapid_tfr_x_readmit"
+ ],
+ "n_eligible": 143,
+ "excluded": [
+  {
+   "feature": "cci_mi",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cci_chf",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cci_diab",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cci_copd",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cci_cvd",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cci_renal",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cci_cancer",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "drg_code",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "last_drg_dispo",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "n_diagnoses",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "n_procedures",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_arrhythmia",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_valve",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_pulm_circ",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_pvd",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_htn",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_htn_cx",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_paralysis",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_neuro_other",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_copd",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_dm",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_dm_cx",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_hypothyroid",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_renal",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_liver",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_peptic_ulcer",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_aids",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_lymphoma",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_mets",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_solid_tumor",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_rheumatoid",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_coagulopathy",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_obesity",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_weight_loss",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_fluid_electrolyte",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_anemia_blood_loss",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_anemia_deficiency",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_alcohol",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_drug",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_psychoses",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_depression",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "primary_dx_chapter",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "elix_vanwalraven_score",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "apr_drg_severity",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "apr_drg_mortality",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cardiac_surgery_flag",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "major_surgery_flag",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "transfusion_flag",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "n_procedure_orders",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "n_hcpcs_events",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "hcpcs_dialysis_flag",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "hcpcs_transfusion_flag",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "cci_score_total",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "los_x_n_diagnoses",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "prior_admits_x_comorbidity",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "severity_composite",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "clinical_complexity",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "primary_dx_chapter_te",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "drg_code_te",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "last_drg_dispo_te",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "severity_x_readmit",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "severity_x_lab_abnormal",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  },
+  {
+   "feature": "race_te",
+   "reason": "excluded: race-derived"
+  },
+  {
+   "feature": "comorbidity_pc4",
+   "reason": "excluded: billing-derived (coding-time availability not established)"
+  }
+ ]
+}

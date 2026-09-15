@@ -1,0 +1,6 @@
+{
+ "binary_readmissions_test": 10133,
+ "competing_risk_readmissions_test": 10117,
+ "moved_to_competing_death": 16,
+ "rule": "if dod <= readmission admittime (day granularity), death is treated as preceding; documented same-date rule"
+}

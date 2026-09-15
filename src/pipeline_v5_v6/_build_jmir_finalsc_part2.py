@@ -8,6 +8,7 @@ au = M["auroc"]; cv = B2["cv5_patient_grouped"]
 p = CT["partitions"]
 wb = FM["fairness"]["white_minus_black"]
 FR = FM["fairness"]["race"]
+AB = FM["fairness"]["age_band"]
 lace, hosp = BL["lace"], BL["hospital"]
 st1, st2, st3 = FM["stages"]
 THRV = FM["threshold_validation"]
@@ -23,11 +24,14 @@ N_ELIG = POOL5["n_eligible"]             # 142
 # Front matter reproduced in the authors' original layout: centered bold title,
 # italic subtitle, four-column author/email row, school and date lines.
 t = doc.add_paragraph(); t.alignment = WD_ALIGN_PARAGRAPH.CENTER
-r = t.add_run("Predicting 30-Day Hospital Readmission in Medicare Patients")
+r = t.add_run("Predicting 30-Day Hospital Readmission at Discharge: A "
+              "Leakage-Safe, Calibrated Electronic Health Record Model "
+              "in Medicare-Insured Adults")
 r.bold = True; r.font.size = Pt(15)
 t = doc.add_paragraph(); t.alignment = WD_ALIGN_PARAGRAPH.CENTER
-r = t.add_run("An Interpretable Gradient-Boosting Model on MIMIC-IV v3.1: "
-              "Retrospective Development and Internal Validation")
+r = t.add_run("Retrospective Development and Internal Validation of an "
+              "Interpretable Gradient-Boosting Model on MIMIC-IV v3.1, "
+              "With Readmission-Timing and Subgroup-Fairness Analyses")
 r.italic = True; r.font.size = Pt(11.5)
 
 # Confirmed author roster: degrees (2026-08-16) and registry-verified ORCIDs
@@ -66,57 +70,60 @@ begin_two_columns()
 H1("Abstract")
 P("Unplanned hospital readmission within 30 days is a quality measure tied to "
   "financial penalties under the Centers for Medicare & Medicaid Services Hospital "
-  "Readmissions Reduction Program. Established bedside scores such as LACE and "
+  "Readmissions Reduction Program. Bedside scores such as LACE and "
   "HOSPITAL rarely exceed an area under the receiver operating characteristic curve "
-  "(AUROC) of 0.70 in external validation, and machine-learning reports often "
-  "lack leakage-safe validation, calibration, same-cohort baselines, or "
-  "fairness auditing.",
+  "(AUROC) of 0.70 in external validation. Although machine-learning "
+  "approaches may improve discrimination, many studies have limited "
+  "assessment of data leakage, calibration, readmission timing, "
+  "comparison with established "
+  "scores in the same cohort, and subgroup performance.",
   bold_prefix="Background: ")
 P("To develop and internally validate an interpretable, calibrated model that "
-  "estimates the probability of 30-day all-cause within-system readmission at the "
-  "moment of discharge for Medicare-insured adults, using only structured electronic "
+  "estimates the probability of 30-day all-cause within-system readmission "
+  "at hospital discharge for Medicare-insured adults, using only structured electronic "
   "health record (EHR) data, and to characterize when patients return.",
   bold_prefix="Objective: ")
 P(f"We conducted a retrospective study of the Medicare-insured subset of MIMIC-IV "
-  f"v3.1. After excluding {CT['index_death_excluded']:,} admissions ending in index "
-  f"in-hospital death, the cohort comprised {CT['cohort_v2_admissions']:,} admissions "
+  f"v3.1. After excluding {CT['index_death_excluded']:,} index in-hospital "
+  f"deaths, the cohort comprised {CT['cohort_v2_admissions']:,} admissions "
   f"from {CT['cohort_v2_patients']:,} patients (readmission prevalence "
   f"{CT['label_v2_prevalence']*100:.1f}%). The outcome was first same-system "
-  f"readmission 0<t≤30 days after discharge, all cause. Partitions were "
-  f"patient-grouped on subject_id (test: {p['test']['admissions']:,} admissions, "
-  f"{p['test']['patients']:,} patients). All 207 candidate predictors were "
+  f"readmission 0<t≤30 days after discharge. Partitions were "
+  f"patient-grouped. All 207 candidate predictors were "
   f"audited for discharge-time availability; billing-derived, race-derived, and "
   f"outcome-derived features were excluded ({N_ELIG} eligible). "
-  f"Staged recursive feature elimination ran inside 5 outer patient-grouped "
-  f"folds on the development partitions only (3 grouped inner folds each; all "
-  f"learned preprocessing fold-local; prespecified parsimony rule); "
-  f"features selected in at least 3 of 5 folds formed the consensus set of the "
-  f"final extreme gradient boosting (XGBoost) classifier. The primary estimate "
-  f"is the out-of-fold performance of the complete selection procedure. "
-  f"Uncertainty used patient-cluster bootstrap resampling; the operating "
-  f"threshold was development-derived. Timing was assessed with a "
-  f"competing-risks reformulation and landmark models.",
+  f"Feature selection and all learned preprocessing were performed within "
+  f"patient-grouped cross-validation folds to prevent information leakage: "
+  f"staged recursive feature elimination ran inside 5 outer folds on the "
+  f"development partitions only (prespecified parsimony rule), and features selected in at least 3 of 5 folds formed "
+  f"the consensus set of the final extreme gradient boosting (XGBoost) "
+  f"classifier. The prespecified primary performance estimate was the "
+  f"out-of-fold discrimination of the complete selection procedure. "
+  f"Uncertainty used patient-cluster bootstrap resampling. Timing was "
+  f"assessed with a competing-risks reformulation and landmark models, "
+  f"and subgroup performance was audited by age, sex, and race.",
   bold_prefix="Methods: ")
 _fx = EX["fixed31_vs_fixed142_paired_cv"]
-P(f"The selection procedure (fold-specific sets of 27 to 38 predictors) "
-  f"achieved a development-data out-of-fold AUROC of {OOF['auroc']:.4f} "
-  f"(95% cluster CI {OOF['ci95'][0]:.4f} to {OOF['ci95'][1]:.4f}; primary). The "
+P(f"The selection procedure, in which each outer fold selected its own "
+  f"27 to 38 predictors, achieved a development-data out-of-fold AUROC of {OOF['auroc']:.4f} "
+  f"(95% CI {OOF['ci95'][0]:.4f} to {OOF['ci95'][1]:.4f}; primary). The "
   f"fixed {NF}-feature consensus model reached {CCV['mean']:.4f} "
-  f"(SD {CCV['sd']:.4f}) under grouped cross-validation (secondary; "
-  f"consensus selected on the same development data) and "
+  f"(secondary; SD {CCV['sd']:.4f}) and "
   f"{MP['auroc']['point']:.4f} (95% CI {MP['auroc']['ci95'][0]:.4f} to "
-  f"{MP['auroc']['ci95'][1]:.4f}) on a historically exposed test partition "
-  f"not used in this version's feature selection. Calibration was "
+  f"{MP['auroc']['ci95'][1]:.4f}) on the historically exposed test "
+  f"partition (tertiary). Calibration was "
   f"strong (slope {MP['slope']['point']:.2f}, expected calibration error "
   f"{MP['ece']['point']:.3f}). The model outperformed reconstructed LACE "
   f"({BSE['lace_auroc']:.4f}) by {BSE['uplift_lace']:.4f} and 12-month "
   f"HOSPITAL ({BSE['hospital12_auroc']:.4f}) by "
   f"{BSE['uplift_hospital12']:.4f} AUROC (both "
   f"{fmt_p(max(BSE['uplift_lace_p'], BSE['uplift_hospital12_p']))}). "
+  f"The 180-day length-of-stay trend and prior utilization led SHAP "
+  f"attributions. "
   f"Time-dependent AUROC was highest on the first day after discharge "
-  f"({FM['survival']['daily_tdauc'][0]:.3f}). Discrimination was lower for "
-  f"Black patients (AUROC {FR['Black']['auroc']:.3f}) than White patients "
-  f"({FR['White']['auroc']:.3f}; difference {wb['point']:.3f}, 95% CI "
+  f"({FM['survival']['daily_tdauc'][0]:.4f}). Discrimination was lower for "
+  f"Black patients (AUROC {FR['Black']['auroc']:.4f}) than for White patients "
+  f"({FR['White']['auroc']:.4f}; difference {wb['point']:.3f}, 95% CI "
   f"{wb['ci95'][0]:.3f} to {wb['ci95'][1]:.3f}; "
   f"{fmt_p(wb['p_bootstrap'])}) despite race not being a model input.",
   bold_prefix="Results: ")
@@ -124,77 +131,141 @@ P(f"A parsimonious {NF}-feature XGBoost model, selected from demonstrably "
   "discharge-available, nonbilling predictors under patient-grouped, fold-local "
   "preprocessing and feature selection, supports calibrated and interpretable "
   "estimation of 30-day within-system readmission risk in Medicare-insured "
-  "adults. This is a research prediction model with a demonstration prototype; "
-  "external validation and prospective evaluation are required before any "
-  "clinical use.",
+  "adults. This is a research model; external validation and prospective "
+  "evaluation are required before clinical use.",
   bold_prefix="Conclusions: ")
 H2("Keywords")
-P("hospital readmission; Medicare; MIMIC-IV; machine learning; gradient boosting; "
-  "calibration; algorithmic fairness; survival analysis; clinical prediction model; "
-  "electronic health records")
+P("hospital readmission; Medicare; MIMIC-IV; machine learning; gradient "
+  "boosting; data leakage; calibration; algorithmic fairness; survival "
+  "analysis; clinical prediction model; electronic health records")
 
 # ============================================================ INTRODUCTION
 H1("Introduction")
 H2("Background")
 P("Unplanned 30-day readmissions burden the United States health system; the Centers "
-  "for Medicare & Medicaid Services (CMS) estimates the annual direct cost of "
+  "for Medicare & Medicaid Services (CMS) puts the annual direct cost of "
   "Medicare readmissions above $26 billion [1], and the Hospital Readmissions "
-  "Reduction Program has tied reimbursement to risk-adjusted readmission performance "
-  "since 2013 [1,2]. Readmissions are associated with in-hospital mortality, "
-  "functional decline, and caregiver strain. Bedside indices remain the operational "
-  "default: the LACE index combines length of stay, acuity, comorbidity, and "
-  "emergency-department use [3], and the HOSPITAL score targets potentially avoidable "
-  "readmission [4]; external validations of such scores rarely exceed an AUROC of "
-  "0.70 [5,6]. Systematic reviews of readmission models report similar ceilings for "
-  "regression-based approaches and identify recurring methodological weaknesses: "
-  "leakage-prone splits, absent calibration, and unexamined subgroup performance "
-  "[5,7,8].")
-P("Machine learning on structured EHR data can exceed these ceilings, and "
-  "gradient-boosted decision trees remain the strongest general-purpose learners on "
-  "tabular clinical data [9-12]. Yet reported discrimination is not deployability: "
-  "clinical use requires patient-level leakage prevention, calibrated absolute "
-  "probabilities [13], interpretable per-patient explanations [14], comparison with "
-  "clinical scores on the same cohort rather than published values, fairness "
-  "auditing [15,16], and reporting aligned with TRIPOD+AI [17] and PROBAST [18]. "
-  "Race-aware modeling requires particular care following the removal of race "
-  "coefficients from clinical equations such as the estimated glomerular filtration "
-  "rate [19,20].")
-H2("Prior Work on MIMIC-IV and Study Rationale")
-P("Three recent studies predict 30-day readmission on the same MIMIC-IV database "
+  "Reduction Program (HRRP) has tied reimbursement to risk-adjusted "
+  "readmission performance since 2013 [1,2]. Readmissions are associated with in-hospital mortality, "
+  "functional decline, and caregiver strain. Accurate risk estimates "
+  "available at the moment of discharge could target transitional-care "
+  "resources, but only if the underlying model can be trusted at "
+  "deployment time. Timing and equity sharpen the stakes: transitional "
+  "interventions act within days of discharge, so when patients return "
+  "matters as much as whether they return, and because risk scores steer "
+  "resources, unequal model performance across groups becomes unequal "
+  "care.")
+
+
+def H3(t):
+    doc.add_paragraph(t, style="Heading 3")
+
+
+H2("Related Work")
+H3("Clinical Scores and Regression-Based Models")
+P("Bedside indices remain the operational default for readmission risk: the "
+  "LACE index combines length of stay, acuity, comorbidity, and "
+  "emergency-department use [3], and the HOSPITAL score targets potentially "
+  "avoidable readmission [4]. External validations of such scores rarely "
+  "exceed an area under the receiver operating characteristic curve "
+  "(AUROC) of 0.70 [5,6], and systematic reviews covering hundreds "
+  "of readmission models report similar ceilings for regression-based "
+  "approaches together with recurring methodological weaknesses: "
+  "leakage-prone splits, absent calibration assessment, and unexamined "
+  "subgroup performance [5,7,8].")
+H3("Machine Learning for Readmission Prediction")
+P("Machine learning on structured electronic health record (EHR) data can "
+  "exceed these ceilings, and "
+  "gradient-boosted decision trees remain the strongest general-purpose "
+  "learners on tabular clinical data [9-12]. Yet reported discrimination is "
+  "not deployability: clinical use requires patient-level leakage "
+  "prevention, calibrated absolute probabilities [13], interpretable "
+  "per-patient explanations [14], comparison with clinical scores on the "
+  "same cohort rather than against published values, fairness auditing "
+  "[15,16], and reporting aligned with TRIPOD+AI [17] and PROBAST [18]. "
+  "Race-aware modeling requires particular care following the removal of "
+  "race coefficients from clinical equations such as the estimated "
+  "glomerular filtration rate [19,20].")
+H3("Data Leakage and Validation Pitfalls")
+P("Data leakage, the use of information during model development that "
+  "would not legitimately be available at prediction time, is increasingly "
+  "recognized as a leading cause of overoptimistic and irreproducible "
+  "results across machine-learning science [34]. Clinical prediction is "
+  "especially exposed: features generated after the prediction moment (for "
+  "example, billing codes assigned during claims processing), "
+  "preprocessing fit on evaluation data, and splits that ignore patient "
+  "clustering all inflate apparent performance, and single-site results "
+  "often fail to generalize [18,35]. Roadmaps for responsible clinical "
+  "machine learning therefore call for patient-level partitioning, "
+  "fold-local preprocessing, verification that every predictor is "
+  "available at deployment time, and evaluation of the complete modeling "
+  "procedure rather than a single exposed model [17,18,36]. These "
+  "recommendations directly shaped this study's validation design.")
+H3("Readmission Timing and Subgroup Performance")
+P("When patients return matters as much as whether they return: early and "
+  "late readmissions differ in causes and preventability [37], the first "
+  "days after discharge carry a generalized transient vulnerability [38], "
+  "and transitional-care interventions act on a limited window, yet most "
+  "prediction studies collapse the 30-day horizon into a single binary "
+  "label and report no timing analysis. Subgroup performance is similarly "
+  "underexamined: audits of deployed clinical algorithms have found racial "
+  "bias in resource-allocation scores [15] and systematic underdiagnosis "
+  "of underserved groups by imaging models [39], gaps can persist even "
+  "when protected attributes are not model inputs [16], and readmission "
+  "models are rarely audited by subgroup [5,8]. The timing and subgroup "
+  "analyses of RQ4 address both gaps.")
+H3("Prior Work on MIMIC")
+P("Three recent studies predict 30-day readmission on MIMIC-IV, the "
+  "database used in this study "
   "[21]. A multimodal spatiotemporal graph neural network combining EHR time series "
   "with chest radiographs reported an AUROC of 0.791 on a radiograph-selected subset "
   "of 14,532 admissions [22]; a graph model over discharge summaries reported 0.727 "
   "on 303,571 all-adult admissions [23]; and a 26-feature XGBoost framework reported "
-  "0.696 on 415,231 all-adult admissions [24]. ClinicalBERT reported approximately "
+  "0.696 on 415,231 all-adult admissions [24]. ClinicalBERT, a clinical "
+  "adaptation of a pretrained language model, reported approximately "
   "0.714 on a MIMIC-III cohort using discharge notes [25]. Because cohorts and "
-  "outcome definitions differ, these are reference points rather than head-to-head "
-  "comparisons; none combines leakage-safe patient-grouped validation, calibration "
-  "analysis, same-cohort clinical baselines, subgroup fairness auditing, and "
-  "readmission-timing analysis in one evaluation.")
+  "outcome definitions differ, these are reference points rather than "
+  "head-to-head comparisons.")
+H2("Study Rationale")
+P("The gap, therefore, is not another discrimination estimate. None of the "
+  "MIMIC studies above combines leakage-safe patient-grouped validation, "
+  "calibration analysis, same-cohort reconstruction of the clinical scores "
+  "hospitals actually use, readmission-timing analysis, and subgroup "
+  "fairness auditing in a single evaluation, and few evaluate the complete "
+  "selection procedure rather than one exposed model. This study was "
+  "designed to close that gap in the Medicare population, where the "
+  "readmission penalty applies, using only predictors demonstrably "
+  "available at the moment of discharge.")
 H2("Research Questions and Objectives")
-P("Three research questions, carried forward from the project's inception, "
-  "organize the study. RQ1: which features are most predictive of 30-day "
-  "readmission in Medicare-insured adults? RQ2: which modeling approach achieves "
-  "the best predictive performance under a leakage-safe protocol? RQ3: can "
-  "interpretable machine-learning outputs based on global and patient-level "
-  "Shapley additive explanations (SHAP) "
-  "provide actionable insight for discharge teams? "
+P("Four research questions organize the study. RQ1: Which "
+  "discharge-available EHR features contribute most to prediction of "
+  "30-day readmission in Medicare-insured adults? RQ2: Can a leakage-safe, "
+  "calibrated machine-learning model improve prediction of 30-day "
+  "readmission relative to established clinical scores? RQ3: Can global "
+  "and patient-level Shapley additive explanations (SHAP) provide "
+  "clinically interpretable insight into the factors driving predicted "
+  "readmission risk? RQ4: How does predictive performance vary across the "
+  "post-discharge time window and across demographic subgroups? "
   "Operationally, the study aimed to (1) develop and internally validate a "
   "calibrated, interpretable model of 30-day all-cause within-system readmission "
-  "using only structured EHR fields available at discharge; (2) compare it against "
-  "LACE and HOSPITAL reconstructed on the identical test partition; (3) "
-  "characterize when patients return using a time-to-event reformulation and "
-  "stage-specific landmark models; (4) audit subgroup performance across age, sex, "
-  "and race with cluster-level uncertainty; and (5) release the pipeline and a "
-  "demonstration prototype for reproducibility.")
+  "using only structured EHR fields available at discharge (RQ1, RQ2); (2) "
+  "compare it against LACE and HOSPITAL reconstructed on the identical test "
+  "partition (RQ2); (3) characterize when patients return using a "
+  "time-to-event reformulation and stage-specific landmark models (RQ4); "
+  "(4) audit subgroup performance across age, sex, and race with "
+  "cluster-level uncertainty (RQ3, RQ4); and (5) release the pipeline and "
+  "a demonstration prototype in support of reproducibility.")
 
 # ============================================================ METHODS
 H1("Methods")
 H2("Study Design and Data Source")
 P("We conducted a retrospective prediction-model development and internal-validation "
-  "study, reported in line with TRIPOD+AI [17]. The data source is MIMIC-IV v3.1 "
-  "[21,26], a deidentified EHR database of 546,028 hospitalizations at Beth Israel "
-  "Deaconess Medical Center (Boston, MA) admitted between 2008 and 2022. Dates are "
+  "study, reported in line with TRIPOD+AI [17]; the completed checklist is "
+  "Multimedia Appendix 5 and a PROBAST+AI self-assessment [18] is "
+  "Multimedia Appendix 6. The data source is MIMIC-IV v3.1 "
+  "[21,26], a deidentified EHR database of 546,028 hospitalizations "
+  "occurring between 2008 and 2022 at Beth Israel Deaconess Medical "
+  "Center (Boston, MA). Dates are "
   "shifted into the future by a patient-specific offset; within-patient intervals "
   "are preserved. The database provides administrative, diagnosis, procedure, "
   "medication, laboratory, order, and ICU tables. Clinical notes and imaging exist "
@@ -208,13 +279,21 @@ P(f"The cohort comprised admissions with insurance recorded as Medicare "
   f"death, leaving {CT['cohort_v2_admissions']:,} admissions from "
   f"{CT['cohort_v2_patients']:,} unique patients. Medicare insurance does not imply "
   f"age ≥65 years ({FD['fairness']['age_band']['<65']['n']:,} test admissions "
-  f"were younger, eg, disability entitlement) and MIMIC-IV cannot distinguish "
+  f"were younger than 65 years, typically through disability entitlement) "
+  f"and MIMIC-IV cannot distinguish "
   f"fee-for-service from Medicare Advantage, so the cohort is not a CMS HRRP "
   f"regulatory cohort.")
 P("The outcome was the first subsequent hospitalization of the same patient in the "
   "same health system beginning more than 0 and up to 30 days (day 30 inclusive) "
-  "after index discharge, all cause, and irrespective of how that subsequent "
-  "admission ended; a readmission followed by in-hospital death is a readmission. "
+  "after index discharge, of any cause, and irrespective of how that subsequent "
+  "admission ended; a readmission followed by in-hospital death is a "
+  "readmission. Readmissions were identified from all subsequent "
+  f"hospitalizations of the patient in the database, irrespective of the "
+  f"insurance recorded on the subsequent admission "
+  f"({EX['payer_scope']['n_30d_next_nonmedicare']} 30-day next admissions "
+  f"carried non-Medicare insurance). In this binary frame, admissions "
+  "followed by death without readmission within 30 days are nonevents; "
+  "the competing-risks reformulation below addresses the interpretation. "
   f"The interval Δ is the exact timestamp difference between the next "
   f"admission's admittime and the index dischtime. Next admissions beginning "
   f"at, or up to 2 days before, the index discharge timestamp (−2<Δ≤0 days; "
@@ -248,7 +327,12 @@ P(f"Admissions were first split 80/20 at the patient level "
   f"{p['val']['patients']:,} patients, {p['val']['events']:,} events); test "
   f"{p['test']['admissions']:,} ({p['test']['admissions']/_tot*100:.0f}%; "
   f"{p['test']['patients']:,} patients, {p['test']['events']:,} events). No "
-  f"patient appears in more than one partition.")
+  f"patient appears in more than one partition. No formal sample-size "
+  f"calculation was performed: the cohort was fixed by the available "
+  f"data, and with {p['train']['events']:,} training-partition events "
+  f"against {N_ELIG} candidate predictors the events-per-candidate ratio "
+  f"exceeds 250, far above common minima for prediction-model "
+  f"development.")
 P("Validation hierarchy and test-set transparency: earlier development phases, "
   "retained in the project repository, scored model variants on the original test "
   "partition multiple times; we therefore describe the test data as a "
@@ -274,8 +358,17 @@ P("Validation hierarchy and test-set transparency: earlier development phases, "
   "(Limitations). Hyperparameters were fixed throughout and not tuned per fold "
   "(disclosed limitation); we do not describe any procedure here as fully "
   "nested cross-validation for that reason. A temporal split was considered and "
-  "rejected because per-patient date shifting removes cross-patient temporal "
-  "ordering. Independent external validation remains necessary.")
+  "rejected: per-patient date shifting removes fine-grained cross-patient "
+  "ordering, and the coarse patient-level anchor_year_group bands that "
+  "remain would yield unequal, clinically heterogeneous partitions; an "
+  "era-stratified sensitivity analysis appears in the Results, and "
+  "residual secular drift is acknowledged in Limitations. Independent "
+  "external validation remains necessary. Throughout, leakage-safe "
+  "denotes this design: fold-local preprocessing, target encoding, and "
+  "feature selection, plus the discharge-availability predictor audit; "
+  "residual design-level optimism (the historically exposed test "
+  "partition, the development-derived threshold, and fixed "
+  "hyperparameters) is disclosed here and in Limitations.")
 P("The complete data flow is: (1) patient-grouped 80/20 development-test "
   "split on subject_id, with 10% of the development portion assigned to "
   "validation (approximately 72/8/20); (2) the 5 outer selection folds are "
@@ -326,12 +419,14 @@ P(f"Feature selection used staged recursive feature elimination with an XGBoost 
   f"feature count whose mean inner-validation AUROC lay within 0.002 of the "
   f"best. The per-fold selected model was refit on the complete outer-training "
   f"fold (encodings refit there) and scored once on the untouched "
-  f"outer-evaluation fold. The final consensus predictor set was defined from "
-  f"these development-data selections as the consensus of features selected "
-  f"in at least 3 of 5 folds ({NF} features; {N_UNANIMOUS} selected in all "
-  f"5); no test-partition outcome was used in this construction. Missing values were handled "
-  f"natively by the histogram-based learner, preserving informative "
-  f"missingness.")
+  f"outer-evaluation fold. The final consensus predictor set comprises the "
+  f"features selected "
+  f"in at least 3 of 5 outer folds ({NF} features; {N_UNANIMOUS} selected in all "
+  f"5); no test-partition outcome was used in this construction. Missing "
+  f"values were handled natively by the histogram-based learners, "
+  f"preserving informative missingness; the regularized "
+  f"logistic-regression comparator received fold-local median imputation "
+  f"with standardization.")
 H2("Model, Comparators, and Development History")
 P(f"The final prediction model is a single XGBoost classifier [10] on the "
   f"{NF}-feature consensus set (600 trees, learning rate 0.05, maximum depth 5, "
@@ -357,7 +452,7 @@ P(f"The final prediction model is a single XGBoost classifier [10] on the "
   "the marginally higher-scoring LightGBM for consistency with the accelerated "
   "failure time (AFT) survival objective and exact TreeSHAP tooling [14].")
 H2("Clinical-Score Baselines")
-P("LACE [3] and HOSPITAL [4] were re-implemented on the identical test partition. "
+P("LACE [3] and HOSPITAL [4] were reconstructed on the identical test partition. "
   "LACE: length-of-stay points per the original bands; 3 acuity points unless the "
   "admission was elective; Charlson-derived comorbidity points; and true prior "
   "180-day emergency-department visits (edregtime) capped at 4. HOSPITAL: "
@@ -384,19 +479,28 @@ P("Time to readmission was modeled with the same features and partitions under a
   "failure time (AFT) objective [28] (a single-event survival model evaluated under "
   "censoring, not itself a competing-risk model) and penalized cause-specific "
   "Cox regression as the linear reference, with competing deaths censored at "
-  "their death time. Evaluation used Harrell C [29] and inverse-probability-"
-  "of-censoring-weighted time-dependent AUROC at each day 1 to 29 [30], with "
-  "patient-cluster bootstrap uncertainty bands and daily event counts reported. "
+  "their death time in the cause-specific fits. Evaluation used Harrell C "
+  "[29] and cumulative/dynamic time-dependent AUROC on each of days 1 "
+  "through 29, estimated with inverse probability of censoring weighting "
+  "[30,40]; patients who died before the evaluation day remain in the "
+  "comparison set as nonevents, a cause-specific competing-risks "
+  "definition [40], with patient-cluster bootstrap uncertainty bands and "
+  "daily event counts reported. "
   "Three landmark models covered days 1 to 7, 8 to 14, and 15 to 30, each trained only on "
   "patients still at risk when the stage opens; patients already readmitted or "
   "already deceased are removed from the risk set, not counted as nonevents; "
   "stage windows differ in length and prevalence by design, so stage results are "
-  "descriptive. Stage-specific TreeSHAP attribution shares are exploratory.")
+  "descriptive; landmark models were trained on training-partition "
+  "patients, evaluated on the test partition, and reuse discharge-time "
+  "features without post-discharge updating. Stage-specific TreeSHAP "
+  "attribution shares are exploratory.")
 H2("Statistical Analysis")
-P(f"Because patients contribute multiple admissions, all confidence intervals "
+P(f"Because patients contribute multiple admissions, all confidence "
+f"intervals (CIs) "
   f"and P values use cluster bootstrap resampling at the patient level with "
   f"percentile intervals (1,000 resamples for the test metric panel; 800 for "
-  f"subgroup CIs; 500 for out-of-fold model comparisons; every contrast for "
+  f"subgroup CIs; 500 for the primary out-of-fold estimate and model "
+  f"comparisons; every contrast for "
   f"which a P value is reported was computed with 5,000 resamples). P values "
   f"are empirical two-sided bootstrap probabilities with a plus-one "
   f"correction, so the smallest reportable value at 5,000 resamples is "
@@ -409,26 +513,36 @@ P(f"Because patients contribute multiple admissions, all confidence intervals "
   f"each subgroup independently and the difference of subgroup AUROCs was "
   f"computed in each draw. No formal equivalence or noninferiority test was "
   f"prespecified; near-ties are described against the 0.002 tolerance used in "
-  f"the prespecified parsimony rule, not as statistical equivalence. All "
+  f"the prespecified parsimony rule, not as statistical equivalence. Formal "
+f"hypothesis testing was limited to three prespecified contrasts (final "
+f"model vs LACE, vs HOSPITAL, and the White vs Black AUROC difference); "
+f"all other subgroup, timing, era, and sensitivity results are "
+f"descriptive, and no adjustment for multiple comparisons was applied. All "
   f"bootstrap intervals were computed by resampling patients and their "
   f"stored prediction-outcome pairs; feature selection and model fitting "
   f"were not repeated within bootstrap samples, so the intervals quantify "
   f"evaluation-sample uncertainty conditional on the fitted models and do "
   f"not capture the variability of retraining or reselection. "
   f"Discrimination used AUROC and average precision; calibration used "
-  f"the Brier score, expected calibration error over deciles, and logistic "
+  f"the Brier score, expected calibration error over 10 equal-width "
+f"probability bins, and logistic "
   f"recalibration slope and intercept [13]. The operating threshold "
   f"({THRV:.3f}) was the Youden point on the validation partition (a "
   f"development-derived threshold, because validation patients also "
   f"participated in the consensus-selection folds) and was applied "
   f"unchanged to the test partition; sensitivity, specificity, positive and "
-  f"negative predictive values are reported with cluster-bootstrap CIs. The "
+  f"negative predictive values are reported with cluster-bootstrap CIs. "
+  f"The Youden threshold is illustrative for the metric panel and is not "
+  f"proposed for deployment; the capacity-constrained view is the "
+  f"operational lens. The "
   f"White vs Black AUROC difference was tested directly by bootstrap rather than by "
   f"CI overlap. Decision-curve analysis [31] compared net benefit against treat-all "
   f"and treat-none across threshold probabilities 0.05 to 0.40, with a capacity view "
-  f"(top-k% flagged). Analyses used Python 3.11 and 3.12 (XGBoost, LightGBM, "
-  f"scikit-learn, lifelines, scikit-survival, SHAP); exact versions are pinned in "
-  f"the repository.")
+  f"(top-k% flagged). Analyses used Python {FM['env']['python']} with "
+f"XGBoost {FM['env']['xgboost']}, scikit-learn {FM['env']['sklearn']}, "
+f"pandas {FM['env']['pandas']}, and NumPy {FM['env']['numpy']} (fixed "
+f"seed {FM['env']['seed']}); LightGBM, lifelines, scikit-survival, and "
+f"SHAP versions are pinned in the repository.")
 H2("Fairness Audit")
 P("Subgroup performance was audited on the test partition across age bands, sex, "
   "and race. MIMIC race/ethnicity strings were consolidated by substring mapping "
@@ -456,7 +570,9 @@ P("MIMIC-IV is a deidentified, publicly available database; its creation was "
   "redistributed. This secondary analysis of deidentified, publicly available "
   "data does not constitute human-subjects research and therefore did not "
   "require institutional review board review at Florida International "
-  "University. The public demonstration prototype accepts only synthetic or "
+  "University, consistent with the United States federal definition of "
+  "human-subjects research for secondary analyses of deidentified data. "
+  "The public demonstration prototype accepts only synthetic or "
   "manually entered values, displays a research-only, no-real-patient-data "
   "notice, and stores no submitted data.")
 
@@ -469,9 +585,14 @@ P(f"Figure 1 shows the cohort flow. Of {CT['original_admissions']:,} Medicare "
   f"{CT['cohort_v2_patients']:,} patients; {CT['label_v2_events']:,} "
   f"({CT['label_v2_prevalence']*100:.1f}%) were followed by a within-system "
   f"readmission within 30 days. Mean time to readmission among events was "
-  f"{SV['mean_days_to_readmission']:.1f} days.")
+  f"{SV['mean_days_to_readmission']:.1f} days. This prevalence reflects "
+  f"an all-cause, within-system definition that includes planned returns "
+  f"and all Medicare admission types, and is not comparable to HRRP "
+  f"condition-specific national rates.")
 figure(FIG / "r2_fig1_flow_col.png",
-       "Figure 1. Cohort flow diagram (STROBE-style) with patient-grouped partitions.")
+       "Figure 1. Participant flow diagram with patient-grouped "
+       "partitions; feature selection ran inside 5 patient-grouped folds "
+       "drawn from the development partitions (Methods).")
 H2("Feature Selection: Trajectories, Stability, and Model Comparison")
 _cmp = {k: CMP5[k] for k in ("rfe", "all_eligible", "f50", "f66", "logit")}
 _pd_all = PAIRED["all_eligible_minus_rfe"]
@@ -489,7 +610,7 @@ P(f"Inner-validation AUROC was nearly flat from {N_ELIG} features down to "
   f"(95% cluster CI {_cmp['rfe']['auroc_ci95_cluster'][0]:.4f} to "
   f"{_cmp['rfe']['auroc_ci95_cluster'][1]:.4f}). Paired patient-cluster "
   f"bootstrap differences on identical observations (each computed as the "
-  f"comparator minus the RFE procedure, so a negative value favors the "
+  f"comparator minus the selection procedure, so a negative value favors the "
   f"procedure) were "
   f"{_pd_all['point']:+.4f} ({nbci(_pd_all['ci95'][0], _pd_all['ci95'][1])}) "
   f"for the full {N_ELIG}-feature eligible model "
@@ -511,7 +632,7 @@ P(f"Inner-validation AUROC was nearly flat from {N_ELIG} features down to "
   f"descriptive comparison is potentially optimistic for the {NF}-feature "
   f"model, whose consensus set was selected using these same development "
   f"data, whereas the eligible pool was defined by an a priori audit; the "
-  f"complete RFE-procedure estimate remains the primary evidence. "
+  f"complete selection-procedure estimate remains the primary evidence. "
   f"The prior 66-feature set containing billing predictors "
   f"and the excluded encoding performed worst among the boosted models under "
   f"leakage-safe evaluation ({_cmp['f66']['oof_auroc']:.4f}; paired difference "
@@ -520,21 +641,24 @@ P(f"Inner-validation AUROC was nearly flat from {N_ELIG} features down to "
   f"same eligible inputs reached {_cmp['logit']['oof_auroc']:.4f}. Because a "
   f"negligible absolute difference does not outweigh a materially simpler set, "
   f"the {NF}-feature consensus model was adopted. It contains no "
-  f"billing-derived features by construction, so no separate "
-  f"coding-availability sensitivity model is required; the earlier "
-  f"development-phase sensitivity analyses are retained in Multimedia "
-  f"Appendix 4.")
+  f"billing-derived features by construction; whether concurrent "
+  f"diagnosis coding would add signal at sites where it is reliably "
+  f"available at discharge is a site-specific question left to future "
+  f"work, and the earlier development-phase sensitivity analyses are "
+  f"retained in Multimedia Appendix 4.")
 figure(FIG5 / "v5_rfe_curve.png",
        "Figure 2. Leakage-safe staged recursive feature elimination on "
        "development data: mean inner-validation AUROC versus retained "
        f"features, per outer fold; dashed line marks the {NF}-feature "
        "consensus.")
 figure(FIG5 / "v5_stability.png",
-       "Figure 3. Feature-selection frequency across the 5 outer folds; teal "
-       "bars form the consensus set (selected in at least 3 of 5 folds).")
+       f"Figure 3. Selection frequency across the 5 outer folds for all "
+       f"{len(STAB['selection_frequency'])} features selected at least "
+       "once; teal bars form the consensus set and the dashed line marks "
+       "the consensus threshold (3 of 5 folds).")
 H2("Discrimination and Calibration of the Final Model")
 P(f"The consensus model's grouped cross-validation AUROC on development data "
-  f"was {CCV['mean']:.4f} (SD {CCV['sd']:.4f}; folds "
+  f"was {CCV['mean']:.4f} (fold SD {CCV['sd']:.4f}; folds "
   f"{', '.join(f'{x:.4f}' for x in CCV['folds'])}; the fixed feature set "
   f"aggregates selection information across folds and so carries mild "
   f"optimism relative to the primary out-of-fold estimate). On "
@@ -542,16 +666,18 @@ P(f"The consensus model's grouped cross-validation AUROC on development data "
   f"admissions, {p['test']['patients']:,} patients; tertiary evidence), the "
   f"refit model reached AUROC {MP['auroc']['point']:.4f} (95% cluster CI "
   f"{MP['auroc']['ci95'][0]:.4f} to {MP['auroc']['ci95'][1]:.4f}) and average "
-  f"precision {MP['ap']['point']:.3f} (95% CI {MP['ap']['ci95'][0]:.3f}-"
+  f"precision {MP['ap']['point']:.3f} (95% CI {MP['ap']['ci95'][0]:.3f} to "
   f"{MP['ap']['ci95'][1]:.3f}) against a "
   f"{p['test']['events']/p['test']['admissions']*100:.1f}% prevalence. "
   f"Calibration was strong: Brier {MP['brier']['point']:.4f}, expected "
   f"calibration error {MP['ece']['point']:.3f} (95% CI "
   f"{MP['ece']['ci95'][0]:.3f} to {MP['ece']['ci95'][1]:.3f}), slope "
-  f"{MP['slope']['point']:.2f} (95% CI {MP['slope']['ci95'][0]:.2f}-"
+  f"{MP['slope']['point']:.2f} (95% CI {MP['slope']['ci95'][0]:.2f} to "
   f"{MP['slope']['ci95'][1]:.2f}), intercept {MP['intercept']['point']:.2f} "
+  f"(95% CI {MP['intercept']['ci95'][0]:.2f} to "
+  f"{MP['intercept']['ci95'][1]:.2f}) "
   f"(Figure 4). At the development-derived threshold of {THRV:.3f}: sensitivity "
-  f"{MP['sensitivity']['point']:.3f} (95% CI {MP['sensitivity']['ci95'][0]:.3f}-"
+  f"{MP['sensitivity']['point']:.3f} (95% CI {MP['sensitivity']['ci95'][0]:.3f} to "
   f"{MP['sensitivity']['ci95'][1]:.3f}), specificity "
   f"{MP['specificity']['point']:.3f}, positive predictive value "
   f"{MP['ppv']['point']:.3f}, negative predictive value "
@@ -561,8 +687,15 @@ P(f"The consensus model's grouped cross-validation AUROC on development data "
 figure(FIG5 / "v5_roc_cal.png",
        "Figure 4. Receiver operating characteristic, precision-recall, "
        f"calibration, and confusion-matrix panels for the final {NF}-feature "
-       "model (historically exposed test partition; tertiary evidence).")
+       "model (historically exposed test partition; tertiary evidence). "
+       "Dashed lines mark chance performance (receiver operating "
+       "characteristic panel) and outcome prevalence (precision-recall "
+       "panel).")
 H2("Outcome-Definition and Cohort Sensitivity Analyses")
+_era = EX["era_stratified_test"]["bands"]
+_era_txt = "; ".join(
+    f"{b['band'].replace(' - ', ' to ')}: {b['auroc']:.4f} "
+    f"(n={b['n']:,})" for b in _era)
 _sa = SENS["sameday_as_readmission"]
 _su = SENS["unplanned_only"]
 _sn = SENS["nonelective_index_only"]
@@ -572,7 +705,7 @@ P(f"Four sensitivity analyses probe the outcome and cohort rules. (1) Counting "
   f"{EX['transfer_band']['n_band_by_partition']['test']} test admissions) as "
   f"readmissions raised test events from "
   f"{_sa['test_events_primary']:,} to {_sa['test_events_alt']:,} "
-  f"({_sa['test_prevalence_alt']*100:.1f}% prevalence); a model refit under "
+  f"({_sa['test_events_alt']/p['test']['admissions']*100:.1f}% prevalence); a model refit under "
   f"this label reached AUROC {_sa['test_auroc_refit']:.4f}, and the final "
   f"model ranked the alternative label at {_sa['test_auroc_final_model_vs_alt_label']:.4f}. "
   f"(2) Excluding next admissions typed ELECTIVE (a proxy for planned "
@@ -585,10 +718,18 @@ P(f"Four sensitivity analyses probe the outcome and cohort rules. (1) Counting "
   f"{_sn['test_auroc']:.4f}. (4) Excluding the {BD5['n_boundary']:,} test "
   f"admissions ({BD5['share']*100:.1f}%) whose latest possible calendar year "
   f"reached the 2022 end of data collection changed AUROC to "
-  f"{BD5['auroc_safe']:.4f}. None of these variations alters the study's "
-  f"conclusions.")
+  f"{BD5['auroc_safe']:.4f}. (5) Stratified by the patient-level "
+f"anchor_year_group era band, test discrimination was maintained or "
+f"higher in recent eras ({_era_txt}), while observed prevalence declined "
+f"from {_era[0]['prevalence']*100:.1f}% to "
+f"{_era[-1]['prevalence']*100:.1f}%; era strata are descriptive. None of "
+f"these variations alters the study's conclusions.")
 H2("Same-Cohort Clinical Baselines")
-P(f"On the identical test partition the final model (AUROC "
+P(f"On the identical test partition, both reconstructed scores fell below "
+f"their published external validations, reflecting within-system attenuation "
+f"of their utilization inputs; because that attenuation affects the scores "
+f"but not the model's in-hospital signals, the uplifts below are best read "
+f"as upper bounds for this setting. The final model (AUROC "
   f"{MP['auroc']['point']:.4f}) outperformed reconstructed LACE "
   f"({BSE['lace_auroc']:.4f}) by {BSE['uplift_lace']:.4f} AUROC (95% CI "
   f"{BSE['uplift_lace_ci'][0]:.4f} to {BSE['uplift_lace_ci'][1]:.4f}; "
@@ -596,7 +737,7 @@ P(f"On the identical test partition the final model (AUROC "
   f"HOSPITAL, rebuilt with its original 12-month prior-admission window "
   f"({BSE['hospital12_auroc']:.4f}), by {BSE['uplift_hospital12']:.4f} (95% CI "
   f"{BSE['uplift_hospital12_ci'][0]:.4f} to {BSE['uplift_hospital12_ci'][1]:.4f}; "
-  f"{fmt_p(BSE['uplift_hospital12_p'])}) (Multimedia Appendix 4). Both adapted scores fall below their "
+  f"{fmt_p(BSE['uplift_hospital12_p'])}) (Multimedia Appendix 4). Both reconstructed scores fell below their "
   f"published values, consistent with MIMIC-IV capturing only within-system "
   f"prior utilization, which attenuates their utilization components; the "
   f"comparison applies both scores to this study's all-cause within-system "
@@ -642,8 +783,8 @@ H2("Stage-Specific Landmark Models (Exploratory)")
 P(f"With death-aware risk sets, landmark AUROCs for the final feature set were "
   f"{st1['auroc']:.4f} for days 1 to 7 ({st1['events']:,} events among "
   f"{st1['at_risk']:,} at risk), {st2['auroc']:.4f} for days 8 to 14 "
-  f"({st2['events']:,}/{st2['at_risk']:,}), and {st3['auroc']:.4f} for days "
-  f"15 to 30 ({st3['events']:,}/{st3['at_risk']:,}); discrimination improves for "
+  f"({st2['events']:,} events among {st2['at_risk']:,} at risk), and {st3['auroc']:.4f} for days "
+  f"15 to 30 ({st3['events']:,} events among {st3['at_risk']:,} at risk); discrimination improved for "
   f"later windows. A negative finding accompanies this: the domain-composition "
   f"gradient observed in richer development feature sets (laboratory attribution "
   f"falling and utilization rising across the window) did not replicate in the "
@@ -659,12 +800,14 @@ _early = [r for r in _sig if r["diff_pp"] > 0]
 _late = [r for r in _sig if r["diff_pp"] < 0]
 _elist = "; ".join(f"{flabel(r['feature'])} ({r['diff_pp']:+.1f} percentage "
                    f"points)" for r in _early)
-_llist = "; ".join(f"{flabel(r['feature'])} ({r['diff_pp']:.1f})"
-                   for r in _late)
+_llist = "; ".join(f"{flabel(r['feature'])} ({r['diff_pp']:.1f} "
+                   f"percentage points)" for r in _late)
 P(f"At the individual-feature level, however, early and late returns do differ "
   f"in character (Figure 6, panel B; "
   f"{'all 10' if len(_sig) == 10 else f'{len(_sig)} of the 10'} leading "
-  f"differentials have 95% cluster-bootstrap CIs excluding zero). Signals "
+  f"differentials have 95% cluster-bootstrap CIs excluding zero; the 10 "
+  f"largest observed differentials were selected before interval "
+  f"inspection, so these intervals are descriptive). Signals "
   f"disproportionately important for a return within days 1 to 7 are "
   f"predominantly states of the index discharge itself: {_elist}. Signals "
   f"disproportionately important for returns in days 15 to 30 are predominantly "
@@ -676,8 +819,8 @@ figure(FIG5 / "v5_stage_combined.png",
        f"{NF}-feature model. (A) Share of total model attribution by clinical "
        "domain. (B) Features whose attribution share differs most between the "
        "earliest (days 1 to 7) and latest (days 15 to 30) windows; positive values "
-       "indicate greater early importance. Error bars are 95% patient-cluster "
-       "bootstrap CIs.", width=3.1)
+       "indicate greater early importance. Error bars are 95% "
+       "cluster-bootstrap CIs.", width=3.1)
 H2("Fairness and Subgroup Performance")
 
 
@@ -688,6 +831,8 @@ def _ci3(e, key):
         return "NA"
     if key == "cal_slope":
         return f"{v:.2f} ({c[0]:.2f} to {c[1]:.2f})" if c else f"{v:.2f}"
+    if key == "auroc":
+        return f"{v:.4f} ({c[0]:.4f} to {c[1]:.4f})" if c else f"{v:.4f}"
     return f"{v:.3f} ({c[0]:.3f} to {c[1]:.3f})" if c else f"{v:.3f}"
 
 
@@ -703,11 +848,11 @@ for axis, order_ in (("race", ["White", "Black", "Hispanic/Latino", "Asian",
         rows.append([g.replace("-", " to "),
                      f"{e['patients']:,} / {e['admissions']:,} / "
                      f"{e['events']:,}",
-                     f"{e['prevalence']*100:.1f}%",
+                     f"{e['events']/e['admissions']*100:.1f}%",
                      _ci3(e, "auroc"), _ci3(e, "sensitivity"),
                      _ci3(e, "fnr"),
                      f"{e['ppv']:.3f}" if e.get("ppv") is not None else "NA",
-                     f"{e['brier']:.3f}" if e.get("brier") is not None else "NA",
+                     f"{e['brier']:.4f}" if e.get("brier") is not None else "NA",
                      _ci3(e, "cal_slope")])
 _slopes = [(g, FM["fairness"]["race"][g]) for g in
            ["White", "Black", "Hispanic/Latino", "Asian", "Other/Unknown"]]
@@ -719,23 +864,51 @@ P(f"The test partition is unevenly distributed across race categories "
   f"{FR['Black']['admissions']:,} Black "
   f"[{FR['Black']['admissions']/p['test']['admissions']*100:.1f}%] "
   f"admissions), and underrepresentation in training data is itself a plausible "
-  f"contributor to subgroup differences. Discrimination was stable across age bands "
-  f"and sex but lower for Black patients than White patients: difference "
+  f"contributor to subgroup differences. Discrimination was lower for "
+  f"Black patients than for White patients: difference "
   f"{wb['point']:.4f} (95% CI {wb['ci95'][0]:.4f} to {wb['ci95'][1]:.4f}; "
   f"{fmt_p(wb['p_bootstrap'])}, stratified subgroup bootstrap with 5,000 "
-  f"draws, patients resampled within each subgroup) (Figure 7, Table 1). "
+  f"draws, patients resampled within each subgroup), and it also varied "
+  f"across age bands, from {AB['<65']['auroc']:.4f} (95% CI "
+  f"{AB['<65']['auroc_ci95'][0]:.4f} to "
+  f"{AB['<65']['auroc_ci95'][1]:.4f}) among patients younger than 65 "
+  f"years, largely disability-entitled Medicare, to "
+  f"{AB['65-74']['auroc']:.4f} (95% CI "
+  f"{AB['65-74']['auroc_ci95'][0]:.4f} to "
+  f"{AB['65-74']['auroc_ci95'][1]:.4f}) for ages 65 to 74, with similar "
+  f"performance by sex (Figure 7, Table 1). Only the White vs Black "
+  f"contrast was prespecified and formally tested. Between-group AUROC "
+  f"differences partly reflect case mix and outcome prevalence, which "
+  f"differ across groups. At the shared threshold, specificity was "
+  f"{FR['Black']['specificity']:.3f} for Black vs "
+  f"{FR['White']['specificity']:.3f} for White patients, so a larger "
+  f"share of nonreadmitted Black patients is flagged; under the stated "
+  f"additional-resources posture this directs more outreach rather than "
+  f"less, but it is an operational disparity to monitor. "
   f"Calibration slopes across race groups ranged from "
   f"{_smin[1]['cal_slope']:.2f} ({_smin[0]}; 95% CI "
   f"{_smin[1]['cal_slope_ci95'][0]:.2f} to {_smin[1]['cal_slope_ci95'][1]:.2f}) to "
   f"{_smax[1]['cal_slope']:.2f} ({_smax[0]}; 95% CI "
   f"{_smax[1]['cal_slope_ci95'][0]:.2f} to {_smax[1]['cal_slope_ci95'][1]:.2f}); "
-  f"per-group calibration summaries with uncertainty appear in Table 1. Race "
-  f"is not a model input; a validation-partition ablation showed the "
+  f"per-group calibration summaries with uncertainty appear in Table 1; "
+  f"across age bands the youngest and oldest bands deviated from 1 "
+  f"({AB['<65']['cal_slope']:.2f}, 95% CI "
+  f"{AB['<65']['cal_slope_ci95'][0]:.2f} to "
+  f"{AB['<65']['cal_slope_ci95'][1]:.2f}, and "
+  f"{AB['85+']['cal_slope']:.2f}, 95% CI "
+  f"{AB['85+']['cal_slope_ci95'][0]:.2f} to "
+  f"{AB['85+']['cal_slope_ci95'][1]:.2f}), indicating mild over- and "
+  f"underdispersion respectively. Race is not a model input; a validation-partition ablation showed the "
   f"previously selected race encoding contributed nothing (Methods), and its "
   f"removal did not close the gap. Because the disparity is one of ranking, "
   f"subgroup-specific recalibration cannot repair it; candidate remedies are "
   f"representation-aware training, improved measurement, reweighting, or model "
-  f"redevelopment, and none is claimed here.")
+  f"redevelopment, and none is claimed here. Because the outcome is "
+  f"within-system, subgroup differences in out-of-system readmission "
+  f"would appear as differential outcome misclassification and could "
+  f"contribute to, or mask, the observed gap; MIMIC-IV cannot test this, "
+  f"and external validation with claims-complete follow-up is the "
+  f"appropriate check.")
 begin_full_width()
 caption("Table 1. Subgroup performance of the final model on the test "
         f"partition at the development-derived threshold ({THRV:.3f}). CIs "
@@ -744,18 +917,25 @@ caption("Table 1. Subgroup performance of the final model on the test "
         "set (including specificity, NPV, and CIs for every metric) appears "
         "in Multimedia Appendix 1. AUROC: area under the receiver operating "
         "characteristic curve; FNR: false-negative rate; PPV: positive "
-        "predictive value; Prev.: outcome prevalence; Cal.: calibration.",
+        "predictive value; Prev.: outcome prevalence; Cal.: calibration. "
+        "Other/Unknown is heterogeneous (declined and unknown race "
+        "included) and is not interpreted; patients whose recorded race "
+        "varies across admissions appear in more than one race row, so "
+        "race-row patient counts exceed unique test patients.",
         keep_with_next=True)
 table(rows, font_size=8,
       widths=[0.72, 1.12, 0.45, 0.95, 0.95, 0.9, 0.45, 0.45, 0.79])
 begin_two_columns()
 figure(FIG5 / "v5_fairness.png",
-       "Figure 7. Subgroup AUROC of the final model with 95% patient-cluster "
-       "bootstrap CIs.")
+       f"Figure 7. Subgroup AUROC of the final model with 95% "
+       f"patient-cluster bootstrap CIs; the dashed line marks the overall "
+       f"test AUROC ({MP['auroc']['point']:.4f}).")
 H2("Interpretability via SHAP")
-_top3 = ", ".join(f"{flabel(s['feature'])} ({s['feature']}; mean |SHAP| "
-                  f"{s['mean_abs_shap']:.3f})" for s in SH[:3])
-_next4 = ", ".join(flabel(s["feature"]) for s in SH[3:7])
+_t3 = [f"{flabel(s['feature'])} ({s['feature']}; mean |SHAP| "
+       f"{s['mean_abs_shap']:.3f})" for s in SH[:3]]
+_top3 = f"{_t3[0]}, {_t3[1]}, and {_t3[2]}"
+_n4 = [flabel(s["feature"]) for s in SH[3:7]]
+_next4 = f"{_n4[0]}, {_n4[1]}, {_n4[2]}, and {_n4[3]}"
 P(f"Figure 8 ranks the final model's predictors by mean absolute SHAP value on "
   f"the test partition. The strongest signals are {_top3}; {_next4} complete "
   f"the top seven. Readmission risk is multifactorial (no single feature "
@@ -770,7 +950,7 @@ figure(FIG5 / "v5_shap.png",
        "absolute SHAP value (historically exposed test partition).")
 H2("Clinical Utility (Exploratory)")
 P(f"Decision-curve analysis showed positive net benefit over treat-all and "
-  f"treat-none across an exploratory threshold range of roughly 0.10 to 0.40, a "
+  f"treat-none across the evaluated threshold range of 0.05 to 0.40, a "
   f"range not yet grounded in operational evidence (Multimedia Appendix 4). "
   f"Under capacity constraints, flagging the top 5% of test admissions captured "
   f"{CAP['top_5']['captured']*100:.0f}% of all readmissions at a positive "
@@ -778,12 +958,18 @@ P(f"Decision-curve analysis showed positive net benefit over treat-all and "
   f"{CAP['top_10']['captured']*100:.0f}% at {CAP['top_10']['ppv']:.2f}; the top "
   f"20% captured {CAP['top_20']['captured']*100:.1f}% at "
   f"{CAP['top_20']['ppv']:.2f}. Whether acting on these flags improves outcomes "
-  f"is untested and requires prospective evaluation.")
+  f"is untested and requires prospective evaluation. Patients who die out "
+  f"of hospital within 30 days without readmission are nonevents under "
+  f"the binary outcome; a low predicted readmission risk must not be "
+  f"read as clinical stability, and any deployment should surface "
+  f"competing mortality risk alongside the readmission score, "
+  f"particularly for hospice and facility discharges.")
 
 # ============================================================ DISCUSSION
 H1("Discussion")
 H2("Principal Findings")
-P(f"In {CT['cohort_v2_admissions']:,} Medicare-insured adult admissions, a "
+P(f"Four contributions carry this study, examined in turn below. In "
+f"{CT['cohort_v2_admissions']:,} Medicare-insured adult admissions, a "
   f"{NF}-feature gradient-boosted model, selected from the complete pool of "
   f"demonstrably discharge-available, nonbilling predictors under patient-"
   f"grouped, fold-local preprocessing and feature selection on development "
@@ -791,7 +977,7 @@ P(f"In {CT['cohort_v2_admissions']:,} Medicare-insured adult admissions, a "
   f"calibration; the selection procedure achieved a development-data "
   f"out-of-fold AUROC of {OOF['auroc']:.4f} (primary estimate) and the fixed "
   f"model {MP['auroc']['point']:.4f} on the historically exposed test "
-  f"partition. Four findings carry the study. First, the parsimonious "
+  f"partition. First, the parsimonious "
   f"procedure showed no material decrement in discrimination against the full "
   f"eligible pool under leakage-safe "
   f"out-of-fold comparison, and the descriptive fixed-set comparison on "
@@ -802,29 +988,61 @@ P(f"In {CT['cohort_v2_admissions']:,} Medicare-insured adult admissions, a "
   f"optimistic for the consensus set, which was selected on the same data), "
   f"while the previous billing-containing model performed worse under "
   f"leakage-safe evaluation: most of the usable signal is captured by a "
-  f"compact, operationally available predictor set. Second, the model clearly outperforms the "
-  f"adapted LACE and HOSPITAL scores on the identical cohort and outcome. "
-  f"Third, discrimination is highest for readmissions occurring during the "
-  f"first day after discharge, the window in which an intervention initiated "
-  f"at discharge would need to act. Fourth, the model performs less well for "
-  f"Black patients "
-  f"despite race not being an input, a disparity we quantify directly and "
-  f"report as an open limitation.")
+  f"compact, operationally available predictor set. Second, discrimination "
+  f"is highest for readmissions occurring during the first day after "
+  f"discharge, the window in which an intervention initiated at discharge "
+  f"would need to act (day-level and window-level estimands differ: "
+  f"window-level landmark discrimination was lowest for days 1 to 7 and "
+  f"highest for days 15 to 30; Results). Third, the model performs less well for Black "
+  f"patients despite race not being an input, a disparity we quantify "
+  f"directly and report as an open limitation. Fourth, the model clearly "
+  f"outperforms the reconstructed LACE and HOSPITAL scores on the identical "
+  f"cohort and outcome, with calibrated absolute risks the bedside scores "
+  f"do not provide.")
+H2("Answers to the Research Questions")
+_rq1 = ", ".join(flabel(s["feature"]) for s in SH[:7])
+P(f"RQ1 (which features): {_rq1} lead the final model (Figure 8); "
+  f"{N_UNANIMOUS} features were "
+  f"selected in every outer fold, indicating that the predictive core is stable "
+  f"rather than an artifact of one selection run. RQ2 (improvement over "
+  f"clinical scores): yes; on the identical cohort and outcome the "
+  f"leakage-safe final model outperformed reconstructed LACE by "
+  f"{BSE['uplift_lace']:.4f} and 12-month HOSPITAL by "
+  f"{BSE['uplift_hospital12']:.4f} AUROC (both "
+  f"{fmt_p(max(BSE['uplift_lace_p'], BSE['uplift_hospital12_p']))}), while "
+  f"adding calibrated absolute risks; among learners, gradient boosting "
+  f"led ({OOF['auroc']:.4f} vs {CMP5['logit']['oof_auroc']:.4f} for the "
+  f"regularized logistic-regression procedure on identical inputs, with "
+  f"LightGBM, CatBoost, and HistGradientBoosting within 0.0035 and "
+  f"blending adding nothing). RQ3 (interpretable output): global SHAP "
+  f"identifies what the model relies on, and per-patient additive "
+  f"decompositions convert each score into a ranked list of that "
+  f"patient's contributing factors at serving time. RQ4 (timing and "
+  f"subgroups): discrimination is highest on the first day after "
+  f"discharge (time-dependent AUROC "
+  f"{FM['survival']['daily_tdauc'][0]:.4f}) and declines over the "
+  f"window, and performance differs across race groups (AUROC "
+  f"{FR['Black']['auroc']:.4f} for Black patients vs "
+  f"{FR['White']['auroc']:.4f} for White patients; "
+  f"{fmt_p(wb['p_bootstrap'])}) and across age bands "
+  f"({AB['<65']['auroc']:.4f} for patients younger than 65 years vs "
+  f"{AB['65-74']['auroc']:.4f} for ages 65 to 74), disparities reported "
+  f"openly as limitations and targets for remediation.")
 H2("Comparison With Prior Work")
 P(f"On the same database, published models report 0.791 using chest radiographs on "
   f"a selected 14,532-admission subset [22], 0.727 using discharge notes [23], and "
-  f"0.696 using 26 structured features [24]. The RFE procedure, retaining "
+  f"0.696 using 26 structured features [24]. The selection procedure, retaining "
   f"27 to 38 nonbilling structured predictors across folds, achieved a "
   f"development-data out-of-fold AUROC of {OOF['auroc']:.4f} on a "
   f"Medicare-insured cohort, and the final fixed {NF}-feature consensus model "
   f"reached {MP['auroc']['point']:.4f} on the historically exposed test "
   f"partition, numerically above the notes-based and structured-feature "
   f"reports and near the multimodal result, while scoring every admission "
-  f"rather than an imaging-selected subset. But cohorts, outcome definitions, "
-  f"modalities, and validation designs differ across these "
-  f"studies, so no superiority claim is made. Cohorts and outcome definitions differ, so "
-  f"these are reference points; our controlled comparison is the same-cohort "
-  f"baseline analysis, where rebuilding HOSPITAL with its original 12-month "
+  f"rather than a radiograph-selected subset. Because cohorts, outcome "
+  f"definitions, modalities, and validation designs differ across these "
+  f"studies, they are reference points and no superiority claim is made; "
+  f"our controlled comparison is the same-cohort "
+  f"baseline analysis, where reconstructing HOSPITAL with its original 12-month "
   f"prior-admission window (AUROC "
   f"{RB['C_hospital_12m']['hospital_12m_auroc']:.4f} vs "
   f"{RB['C_hospital_12m']['hospital_6m_proxy_auroc']:.4f} under the 6-month "
@@ -834,10 +1052,10 @@ P(f"On the same database, published models report 0.791 using chest radiographs 
   f"clinical data [9,12] and that careful validation design matters more than "
   f"architecture [5,7,17].")
 _t2 = [["Study / score", "Data", "AUROC", "Notes"],
-       ["LACE (adapted) [3]",
+       ["LACE (reconstructed) [3]",
         "Same cohort: this study's MIMIC-IV Medicare test partition",
         f"{BSE['lace_auroc']:.4f}", "Controlled: same patients, same outcome"],
-       ["HOSPITAL (adapted, 12-mo) [4]",
+       ["HOSPITAL (reconstructed, 12-mo) [4]",
         "Same cohort: this study's MIMIC-IV Medicare test partition",
         f"{BSE['hospital12_auroc']:.4f}",
         "Controlled: same patients, same outcome"],
@@ -850,12 +1068,12 @@ _t2 = [["Study / score", "Data", "AUROC", "Notes"],
         "0.791", "Multimodal, chest X-rays; imaging-selected subset"],
        ["ClinicalBERT [25]", "Different database: MIMIC-III", "≈0.714",
         "BERT over discharge notes; different era"],
-       ["This study: RFE selection procedure",
+       ["This study: selection procedure",
         f"MIMIC-IV Medicare, development partitions "
         f"({CMP5['_design']['n_dev']:,} admissions)",
         f"{OOF['auroc']:.4f} (OOF)",
-        "Primary; fold-specific sets of 27 to 38 features; leakage-safe "
-        "out-of-fold"],
+        "Primary; fold-specific sets of 27 to 38 features; leakage-safe, "
+        "out of fold"],
        [f"This study: fixed consensus-{NF}, development CV",
         f"MIMIC-IV Medicare, development partitions",
         f"{CCV['mean']:.4f}",
@@ -874,38 +1092,22 @@ caption("Table 2. Comparison with clinical scores and published MIMIC "
         "values from differing cohorts and outcome definitions are reference "
         "points, not head-to-head results. This study's three rows are "
         "different estimands (selection procedure vs fixed consensus model) "
-        "and are labeled by evidence tier. OOF: out-of-fold; RFE: recursive "
-        "feature elimination.", keep_with_next=True)
+        "and are labeled by evidence tier. OOF: out-of-fold.",
+        keep_with_next=True)
 table(_t2, font_size=8.5, widths=[1.7, 2.2, 0.95, 1.95])
 begin_two_columns()
 H2("Exclusion of Clinical Notes and Imaging as a Design Decision")
 P("MIMIC-IV offers deidentified discharge summaries and radiology reports "
   "(MIMIC-IV-Note) and linked radiographs (MIMIC-CXR) as separately credentialed "
   "companions [32,33]; their exclusion was a design decision. Structured fields are "
-  "available in any EHR at discharge, whereas notes and imaging require NLP or "
-  "PACS integration many sites cannot provide; discharge summaries are authored at "
+  "available in any EHR at discharge, whereas notes and imaging require "
+  "natural language processing (NLP) or picture archiving and "
+  "communication system (PACS) integration many sites cannot provide; discharge summaries are authored at "
   "or after discharge and routinely reference planned follow-up, so they risk "
   "importing the outcome into the features; and restricting to imaged admissions "
   "would shrink and bias the cohort, as the radiograph-selected subset of [22] "
   "illustrates. Whether unstructured modalities can raise the structured-data "
   "ceiling, and at what cost to leakage safety, is a planned follow-up study.")
-H2("Answers to the Research Questions")
-_rq1 = ", ".join(flabel(s["feature"]) for s in SH[:7])
-P(f"RQ1 (most predictive features): {_rq1} lead the final model (Figure 8); "
-  f"{N_UNANIMOUS} features were "
-  f"selected in every outer fold, indicating that the predictive core is stable "
-  f"rather than an artifact of one selection run. RQ2 (best modeling approach): "
-  f"gradient boosting; the XGBoost-based RFE procedure achieved an "
-  f"out-of-fold AUROC of {OOF['auroc']:.4f} against "
-  f"{CMP5['logit']['oof_auroc']:.4f} for the regularized logistic-regression "
-  f"procedure on identical inputs, with LightGBM, CatBoost, and HistGradientBoosting "
-  f"within 0.0035 during development and blending adding nothing over the best "
-  f"single model. RQ3 (interpretable output): global SHAP identifies what the "
-  f"model relies on, per-patient additive decompositions convert each score into "
-  f"a ranked list of that patient's contributing factors at serving time, and "
-  f"the stage-specific analysis adds when discrimination is strongest across the "
-  f"post-discharge window, providing discharge teams with an explanation "
-  f"alongside the risk estimate.")
 H2("Clinical Interpretation of the Leading Predictors (Hypotheses)")
 # guards: the following hand-written clinical prose assumes these SHAP facts;
 # if the v5 ranking moved, the build must fail so the text is rewritten.
@@ -955,11 +1157,15 @@ P("Together, these predictors indicate that readmission risk reflects both the "
   "and clinical utility depends on whether they can be acted on, not on "
   "discrimination alone.")
 H2("Limitations")
-P("This is a single-center, retrospective, internally validated study; performance "
-  "may not transfer without recalibration, and no clinical-impact evidence exists. "
+P(f"This is a single-center, retrospective, internally validated study "
+  f"from one tertiary academic referral center in one region, whose "
+  f"Medicare case mix, discharge resources, and demographic composition "
+  f"({FR['White']['admissions']/p['test']['admissions']*100:.1f}% of test "
+  f"admissions White) differ from national Medicare; performance "
+  f"may not transfer without recalibration, and no clinical-impact evidence exists. "
   "The outcome is within-system readmission; out-of-system readmissions remain "
   "unobservable. Post-discharge death is observable through patients.dod (hospital "
-  "and Massachusetts registry sources) but is censored one year after each "
+  "and Massachusetts registry sources) but is censored 1 year after each "
   "patient's last discharge by deidentification, and registry dates carry "
   "day-level granularity. Planned readmissions were not excluded from the primary "
   "outcome. End-of-record censoring cannot be verified under date shifting, "
@@ -980,25 +1186,33 @@ P("This is a single-center, retrospective, internally validated study; performan
   "the tertiary estimate cannot be excluded. Bootstrap intervals quantify "
   "evaluation-sample uncertainty conditional on the fitted models and do "
   "not capture retraining or reselection variability (Methods). The stage-specific domain-composition finding proved "
-  "feature-set-dependent and is reported as exploratory only. Social "
+  "feature-set-dependent and is reported as exploratory only. Secular "
+  "drift across 2008 to 2022, including HRRP maturation and the COVID-19 "
+  "period, cannot be fully assessed under date shifting; the "
+  "era-stratified sensitivity analysis is reassuring but coarse. Social "
   "determinants of health are unavailable in MIMIC-IV. The subgroup disparity "
-  "for Black patients is unexplained and unresolved. Medicare-Advantage versus "
+  "for Black patients is unexplained and unresolved and, like all "
+  "subgroup analyses here, was estimated on the historically exposed "
+  "test partition without out-of-fold corroboration. Medicare Advantage versus "
   "fee-for-service status is unobservable. The released prototype is a research "
   "demonstration, not a deployed clinical system, and no claim is made that the "
   "model improves outcomes.")
-H1("Conclusions")
+H2("Conclusions")
 P(f"A parsimonious {NF}-feature XGBoost model, selected from the complete pool "
   f"of demonstrably discharge-available, nonbilling structured EHR predictors "
   f"under patient-grouped, fold-local preprocessing and feature selection on "
   f"development data, estimates 30-day within-system readmission in "
-  f"Medicare-insured adults with strong calibration; the selection procedure "
+  f"Medicare-insured adults with strong calibration and per-patient SHAP "
+  f"explanations; the selection procedure "
   f"achieved a development-data out-of-fold AUROC of {OOF['auroc']:.4f} and "
   f"the fixed model {MP['auroc']['point']:.4f} on the historically exposed "
-  f"test partition, clearly exceeding adapted "
+  f"test partition, clearly exceeding the reconstructed "
   f"bedside clinical scores on the identical cohort and outcome. "
   f"Discrimination was highest for events occurring during the first day "
-  f"after discharge. External validation and prospective "
-  f"evaluation are the necessary next steps before any clinical use.")
+  f"after discharge, and the subgroup audit surfaced lower discrimination "
+  f"for Black patients, reported openly as a limitation. External validation "
+  f"and prospective evaluation are the necessary next steps before any "
+  f"clinical use.")
 
 # ============================================================ BACK MATTER
 # Order per JMIR AI: Acknowledgments, Funding, Conflicts of Interest,
@@ -1007,17 +1221,17 @@ H1("Acknowledgments")
 P("This work began as the capstone project for the Master of Science in Data "
   "Science and Artificial Intelligence at Florida International University. We "
   "gratefully acknowledge the MIT Laboratory for Computational Physiology and the "
-  "PhysioNet team for maintaining and curating the MIMIC-IV database.")
-H1("Funding Statement")
-P("This study received no external funding.")
+  "PhysioNet team for maintaining and curating the MIMIC-IV database. "
+  "This study received no external funding.")
 H1("Conflicts of Interest")
 P("None declared.")
 H1("Data Availability")
 P("MIMIC-IV v3.1 is available from PhysioNet under a credentialed data use "
   "agreement [21,26] and is not redistributed. All analysis code, the corrected "
-  "cohort-construction and reanalysis scripts, the machine-readable results "
-  "file from which every value in this manuscript is generated "
-  "(final_model_v6.json and companions), the predictor dictionary, and the "
+  "cohort-construction and reanalysis scripts, the machine-readable "
+  "results bundle from which the values in this manuscript are generated "
+  "(final_model_v6.json and the companion files enumerated in Multimedia "
+  "Appendix 1), the predictor dictionary, and the "
   "prototype source are available in the project repositories: "
   "https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV, "
   "https://github.com/thiagobandeira1/readmission-risk-api, and "
@@ -1028,21 +1242,20 @@ P("MIMIC-IV v3.1 is available from PhysioNet under a credentialed data use "
 H1("Authors' Contributions")
 P("Conceptualization: TB; methodology: TB, AG, CP, AMM; software, formal analysis, "
   "and visualization: TB, AG; data curation: TB, AG; investigation and validation: "
-  "TB, AG; writing-original draft: TB; writing-review and editing: AG, CP, AMM; "
+  "TB, AG; writing (original draft): TB; writing (review and editing): AG, CP, AMM; "
   "supervision: CP, AMM. All authors approved the final version. (CRediT taxonomy.)")
 H1("Abbreviations")
 P("AFT: accelerated failure time; AUROC: area under the receiver operating "
   "characteristic curve; CI: confidence interval; CMS: Centers for Medicare & "
-  "Medicaid Services; DCA: decision-curve analysis; DRG: diagnosis-related group; "
-  "ECE: expected calibration error; EHR: electronic health record; FNR: "
-  "false-negative rate; HRRP: Hospital Readmissions Reduction Program; IPCW: "
-  "inverse probability of censoring weighting; IRB: institutional review board; "
+  "Medicaid Services; EHR: electronic health record; FNR: "
+  "false-negative rate; HRRP: Hospital Readmissions Reduction Program; "
+  "ICD: International Classification of Diseases; ICU: intensive care "
+  "unit; IPCW: inverse probability of censoring weighting; "
   "MIMIC: Medical Information Mart for Intensive Care; NLP: natural language "
   "processing; NPV: negative predictive value; OOF: out-of-fold; PACS: picture "
-  "archiving and communication system; PPV: positive predictive value; RFE: "
-  "recursive feature elimination; SD: standard deviation; SHAP: Shapley "
-  "additive explanations; STROBE: Strengthening the Reporting of Observational "
-  "Studies in Epidemiology; TRIPOD: Transparent Reporting of a multivariable "
+  "archiving and communication system; PPV: positive predictive value; "
+  "SD: standard deviation; SHAP: Shapley "
+  "additive explanations; TRIPOD: Transparent Reporting of a multivariable "
   "prediction model for Individual Prognosis Or Diagnosis; XGBoost: extreme "
   "gradient boosting.")
 
@@ -1052,12 +1265,17 @@ P(f"Appendix 1: predictor audit and selection workbook (207-candidate audit "
   f"{NF}-feature dictionary, RFE trajectories and per-fold selections, "
   f"out-of-fold model comparison with paired differences, full subgroup "
   f"results with CIs, outcome-sensitivity analyses, daily competing-risk event "
-  f"counts, and stage-differential estimates). Appendix 2: LACE and HOSPITAL "
-  f"reconstruction tables. Appendix 3: race-category consolidation with raw "
-  f"counts. Appendix 4: supplementary figures and development history "
+  f"counts, and stage-differential estimates). Multimedia Appendix 2: LACE "
+  f"and HOSPITAL "
+  f"reconstruction tables. Multimedia Appendix 3: race-category "
+  f"consolidation with raw "
+  f"counts. Multimedia Appendix 4: supplementary figures and development "
+  f"history "
   f"(decision curves; same-cohort ROC curves; development-phase results "
-  f"including earlier feature versions and model families). Appendix 5: "
-  f"completed TRIPOD+AI checklist. Appendix 6: PROBAST+AI self-assessment.")
+  f"including earlier feature versions and model families). Multimedia "
+  f"Appendix 5: "
+  f"completed TRIPOD+AI checklist. Multimedia Appendix 6: PROBAST+AI "
+  f"self-assessment.")
 
 H1("References")
 REFS = [
@@ -1151,7 +1369,115 @@ REFS = [
  "Johnson AEW, Pollard TJ, Berkowitz SJ, et al. MIMIC-CXR, a de-identified "
  "publicly available database of chest radiographs with free-text reports. Sci "
  "Data. 2019;6:317.",
+ "Kapoor S, Narayanan A. Leakage and the reproducibility crisis in "
+ "machine-learning-based science. Patterns (N Y). 2023;4(9):100804. "
+ "doi:10.1016/j.patter.2023.100804",
+ "Futoma J, Simons M, Panch T, Doshi-Velez F, Celi LA. The myth of "
+ "generalisability in clinical research and machine learning in health "
+ "care. Lancet Digit Health. 2020;2(9):e489-e492.",
+ "Wiens J, Saria S, Sendak M, et al. Do no harm: a roadmap for responsible "
+ "machine learning for health care. Nat Med. 2019;25(9):1337-1340.",
+ "Graham KL, Wilker EH, Howell MD, Davis RB, Marcantonio ER. Differences "
+ "between early and late readmissions among patients: a cohort study. Ann "
+ "Intern Med. 2015;162(11):741-749.",
+ "Krumholz HM. Post-hospital syndrome: an acquired, transient condition "
+ "of generalized risk. N Engl J Med. 2013;368(2):100-102.",
+ "Seyyed-Kalantari L, Zhang H, McDermott MBA, Chen IY, Ghassemi M. "
+ "Underdiagnosis bias of artificial intelligence algorithms applied to "
+ "chest radiographs in under-served patient populations. Nat Med. "
+ "2021;27(12):2176-2182.",
+ "Blanche P, Dartigues JF, Jacqmin-Gadda H. Estimating and comparing "
+ "time-dependent areas under receiver operating characteristic curves "
+ "for censored event times with competing risks. Stat Med. "
+ "2013;32(30):5381-5397.",
 ]
+
+
+# ---- build-time citation renumbering by first appearance (review round) ----
+def _renumber_citations(doc, refs):
+    import re as _re3
+    pat = _re3.compile(r"\[([0-9][0-9,\-]*)\]")
+
+    def parse(group):
+        out = []
+        for part in group.split(","):
+            if "-" in part:
+                a, b = part.split("-", 1)
+                if not (a.isdigit() and b.isdigit()):
+                    return None
+                out.extend(range(int(a), int(b) + 1))
+            elif part.isdigit():
+                out.append(int(part))
+            else:
+                return None
+        if any(n < 1 or n > len(refs) for n in out):
+            return None
+        return out
+
+    def paragraphs():
+        for par in doc.paragraphs:
+            yield par
+        for tbl in doc.tables:
+            for row in tbl.rows:
+                for cell in row.cells:
+                    for par in cell.paragraphs:
+                        yield par
+
+    order, seen = [], set()
+    for par in paragraphs():
+        for mm in pat.finditer(par.text):
+            nums = parse(mm.group(1))
+            if nums is None:
+                continue
+            for n in nums:
+                if n not in seen:
+                    seen.add(n)
+                    order.append(n)
+    for n in range(1, len(refs) + 1):
+        if n not in seen:
+            order.append(n)
+    mapping = {old: new for new, old in enumerate(order, 1)}
+
+    def rewrite(group):
+        nums = parse(group)
+        if nums is None:
+            return f"[{group}]"
+        new = sorted(mapping[n] for n in nums)
+        parts, i = [], 0
+        while i < len(new):
+            j = i
+            while j + 1 < len(new) and new[j + 1] == new[j] + 1:
+                j += 1
+            parts.append(str(new[i]) if j == i else
+                         (f"{new[i]},{new[j]}" if j == i + 1 else
+                          f"{new[i]}-{new[j]}"))
+            i = j + 1
+        return "[" + ",".join(parts) + "]"
+
+    for par in paragraphs():
+        if not pat.search(par.text):
+            continue
+        for run in par.runs:
+            if pat.search(run.text):
+                run.text = pat.sub(lambda mm: rewrite(mm.group(1)), run.text)
+    new_refs = [refs[old - 1] for old in order]
+    # verify: first appearances are now strictly increasing
+    seen2, mx = set(), 0
+    for par in paragraphs():
+        for mm in pat.finditer(par.text):
+            nums = parse(mm.group(1))
+            if nums is None:
+                continue
+            for n in nums:
+                if n not in seen2:
+                    seen2.add(n)
+                    assert n >= mx, f"citation order broken at [{n}]"
+                    mx = max(mx, n)
+    return new_refs
+
+
+REFS = _renumber_citations(doc, REFS)
+
 for i, ref in enumerate(REFS, 1):
     P(f"{i}. {ref}")
 DST = PUB / "Paper JMIR AI Submission FINAL SINGLE-COLUMN.docx"
@@ -1172,5 +1498,5 @@ for par in doc.paragraphs:
 n_abs = sum(len(t.split()) for t in _abs)
 print(f"saved {DST.name}  (~{n_words:,} words, {len(REFS)} references, "
       f"abstract {n_abs} words)")
-assert n_abs <= 440, f"abstract over target (440, JMIR limit 450): {n_abs}"
+assert n_abs <= 450, f"abstract over JMIR limit (450): {n_abs}"
 

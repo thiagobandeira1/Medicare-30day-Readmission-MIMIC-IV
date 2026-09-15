@@ -76,3 +76,7 @@ catboost_info/
 Dataset/
 *.log
 *.log.err
+
+*.bak
+*.err
+

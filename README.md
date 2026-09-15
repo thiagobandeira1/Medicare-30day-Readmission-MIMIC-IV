@@ -395,7 +395,7 @@ medicare-30day-readmission-mimic-iv/
 │   ├── references.bib                       # BibTeX for §18 References
 │   └── missing_data_section_for_report.md   # standalone §5.3 for Word paste-in
 │
-├── src/                                     # 16 Python scripts (refactor + training pipelines)
+├── src/                                     # analysis and pipeline scripts; src/pipeline_v5_v6/ holds the JMIR reanalysis pipeline
 │   ├── run_progression.py                   # subprocess-per-version V1→V7 baseline training
 │   ├── run_v7_ensemble.py                   # subprocess-per-model 10-seed V7 training
 │   ├── run_5fold_cv.py                      # subprocess-per-model 5-fold CV stability check
@@ -477,7 +477,7 @@ python src/run_5fold_cv.py
 python src/execute_notebook.py
 ```
 
-`scripts/execute_notebook.py` writes outputs back to `notebooks/Capstone_Final_Notebook.ipynb` and PNGs to `figures/`. The decoupling of heavy training from the notebook is intentional: it sidesteps an XGBoost 3.2.0 GIL crash that occurs when running sustained multi-seed × multi-family loads inside a single Jupyter kernel.
+`src/execute_notebook.py` writes outputs back to `notebooks/Capstone_Final_Notebook.ipynb` and PNGs to `figures/`. The decoupling of heavy training from the notebook is intentional: it sidesteps an XGBoost 3.2.0 GIL crash that occurs when running sustained multi-seed × multi-family loads inside a single Jupyter kernel.
 
 ## Obtaining the MIMIC-IV Dataset
 

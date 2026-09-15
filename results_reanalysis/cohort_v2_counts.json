@@ -1,0 +1,38 @@
+{
+  "original_admissions": 244576,
+  "index_death_excluded": 7670,
+  "same_day_next_admit(delta<=0)": 650,
+  "cohort_v2_admissions": 236906,
+  "cohort_v2_patients": 87750,
+  "label_v2_events": 50793,
+  "label_v2_prevalence": 0.2144,
+  "label_sens_events": 49296,
+  "label_sens_prevalence": 0.2081,
+  "old_label_events_full_cohort": 51541,
+  "old_label_prevalence_full_cohort": 0.2107,
+  "label_agreement_on_cohort_v2": 0.99095,
+  "label_mismatches": 2144,
+  "partitions": {
+    "train": {
+      "admissions": 170677,
+      "patients": 63155,
+      "events": 36665,
+      "prevalence": 0.2148,
+      "index_deaths_dropped": 5593
+    },
+    "val": {
+      "admissions": 18557,
+      "patients": 7042,
+      "events": 3995,
+      "prevalence": 0.2153,
+      "index_deaths_dropped": 558
+    },
+    "test": {
+      "admissions": 47672,
+      "patients": 17553,
+      "events": 10133,
+      "prevalence": 0.2126,
+      "index_deaths_dropped": 1519
+    }
+  }
+}

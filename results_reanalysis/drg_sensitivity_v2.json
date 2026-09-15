@@ -1,0 +1,21 @@
+{
+  "drg_features_removed": [
+    "drg_code",
+    "last_drg_dispo",
+    "drg_code_te",
+    "last_drg_dispo_te"
+  ],
+  "with_drg": {
+    "val": 0.7949,
+    "test": 0.78
+  },
+  "without_drg": {
+    "val": 0.7925,
+    "test": 0.7784
+  },
+  "test_difference": 0.0016,
+  "test_difference_ci95_cluster": [
+    0.0006,
+    0.0026
+  ]
+}

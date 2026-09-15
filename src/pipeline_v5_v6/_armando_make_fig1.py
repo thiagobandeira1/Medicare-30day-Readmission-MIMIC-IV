@@ -112,6 +112,9 @@ ax.text(
     color=NAVY, linespacing=1.05, zorder=4,
 )
 
-out = "/private/tmp/claude-501/-Users-armandogonzalez-Downloads-FIU-CAPSTONE-CODING/a273b0b0-7020-407d-a1b6-10300e9d2743/scratchpad/Figure1_cohort_flow.png"
+from pathlib import Path as _Path
+
+out = str(_Path(__file__).resolve().parents[2] / "figures_reanalysis"
+          / "r2_fig1_flow_col.png")
 fig.savefig(out, dpi=DPI, facecolor="white")
 print("wrote", out)

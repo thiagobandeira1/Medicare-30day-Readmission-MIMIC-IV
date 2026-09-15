@@ -1,0 +1,477 @@
+{
+  "threshold": 0.20630842447280884,
+  "raw_race_categories_test": {
+    "WHITE": 32390,
+    "BLACK/AFRICAN AMERICAN": 5769,
+    "WHITE - OTHER EUROPEAN": 1466,
+    "OTHER": 1140,
+    "UNKNOWN": 976,
+    "WHITE - RUSSIAN": 965,
+    "HISPANIC/LATINO - PUERTO RICAN": 630,
+    "HISPANIC OR LATINO": 595,
+    "ASIAN - CHINESE": 508,
+    "BLACK/CAPE VERDEAN": 429,
+    "ASIAN": 376,
+    "HISPANIC/LATINO - DOMINICAN": 355,
+    "BLACK/CARIBBEAN ISLAND": 353,
+    "UNABLE TO OBTAIN": 243,
+    "WHITE - EASTERN EUROPEAN": 205,
+    "PORTUGUESE": 181,
+    "BLACK/AFRICAN": 164,
+    "PATIENT DECLINED TO ANSWER": 129,
+    "HISPANIC/LATINO - CUBAN": 114,
+    "HISPANIC/LATINO - GUATEMALAN": 109,
+    "ASIAN - SOUTH EAST ASIAN": 103,
+    "ASIAN - ASIAN INDIAN": 74,
+    "AMERICAN INDIAN/ALASKA NATIVE": 67,
+    "HISPANIC/LATINO - SALVADORAN": 48,
+    "ASIAN - KOREAN": 40,
+    "HISPANIC/LATINO - CENTRAL AMERICAN": 39,
+    "HISPANIC/LATINO - COLUMBIAN": 38,
+    "WHITE - BRAZILIAN": 33,
+    "HISPANIC/LATINO - HONDURAN": 33,
+    "SOUTH AMERICAN": 32,
+    "HISPANIC/LATINO - MEXICAN": 32,
+    "MULTIPLE RACE/ETHNICITY": 19,
+    "NATIVE HAWAIIAN OR OTHER PACIFIC ISLANDER": 17
+  },
+  "fairness": {
+    "race": {
+      "White": {
+        "n": 35059,
+        "events": 7362,
+        "auroc": 0.778411478770975,
+        "sensitivity": 0.7464004346644934,
+        "specificity": 0.6567498285012817,
+        "ppv": 0.36628449540061325,
+        "fnr": 0.25359956533550665,
+        "auroc_ci95": [
+          0.7711,
+          0.7852
+        ],
+        "sensitivity_ci95": [
+          0.7327,
+          0.7596
+        ],
+        "fnr_ci95": [
+          0.2404,
+          0.2673
+        ]
+      },
+      "Black": {
+        "n": 6715,
+        "events": 1536,
+        "auroc": 0.7436151656127309,
+        "sensitivity": 0.7610677083333334,
+        "specificity": 0.5750144815601468,
+        "ppv": 0.3468842729970326,
+        "fnr": 0.23893229166666666,
+        "auroc_ci95": [
+          0.7279,
+          0.7596
+        ],
+        "sensitivity_ci95": [
+          0.7316,
+          0.7884
+        ],
+        "fnr_ci95": [
+          0.2116,
+          0.2684
+        ]
+      },
+      "Hispanic/Latino": {
+        "n": 1993,
+        "events": 547,
+        "auroc": 0.8007881541717554,
+        "sensitivity": 0.8244972577696527,
+        "specificity": 0.5809128630705395,
+        "ppv": 0.4266792809839167,
+        "fnr": 0.17550274223034734,
+        "auroc_ci95": [
+          0.7495,
+          0.8399
+        ],
+        "sensitivity_ci95": [
+          0.7456,
+          0.8815
+        ],
+        "fnr_ci95": [
+          0.1185,
+          0.2544
+        ]
+      },
+      "Asian": {
+        "n": 1101,
+        "events": 261,
+        "auroc": 0.8168947272395548,
+        "sensitivity": 0.8505747126436781,
+        "specificity": 0.6428571428571429,
+        "ppv": 0.42528735632183906,
+        "fnr": 0.14942528735632185,
+        "auroc_ci95": [
+          0.7699,
+          0.8571
+        ],
+        "sensitivity_ci95": [
+          0.7854,
+          0.9024
+        ],
+        "fnr_ci95": [
+          0.0976,
+          0.2146
+        ]
+      },
+      "Other/Unknown": {
+        "n": 2804,
+        "events": 427,
+        "auroc": 0.83840650890314,
+        "sensitivity": 0.8126463700234192,
+        "specificity": 0.7240218763146824,
+        "ppv": 0.3459621136590229,
+        "fnr": 0.1873536299765808,
+        "auroc_ci95": [
+          0.8163,
+          0.8581
+        ],
+        "sensitivity_ci95": [
+          0.7656,
+          0.8535
+        ],
+        "fnr_ci95": [
+          0.1465,
+          0.2344
+        ]
+      }
+    },
+    "sex": {
+      "Female": {
+        "n": 24465,
+        "events": 4858,
+        "auroc": 0.7817076214557176,
+        "sensitivity": 0.7365170852202553,
+        "specificity": 0.670831845769368,
+        "ppv": 0.35665869218500795,
+        "fnr": 0.2634829147797447,
+        "auroc_ci95": [
+          0.7726,
+          0.7912
+        ],
+        "sensitivity_ci95": [
+          0.7195,
+          0.755
+        ],
+        "fnr_ci95": [
+          0.245,
+          0.2805
+        ]
+      },
+      "Male": {
+        "n": 23207,
+        "events": 5275,
+        "auroc": 0.776669408285963,
+        "sensitivity": 0.7783886255924171,
+        "specificity": 0.6198973901405309,
+        "ppv": 0.3759384728071782,
+        "fnr": 0.22161137440758294,
+        "auroc_ci95": [
+          0.767,
+          0.7853
+        ],
+        "sensitivity_ci95": [
+          0.762,
+          0.7946
+        ],
+        "fnr_ci95": [
+          0.2054,
+          0.238
+        ]
+      }
+    },
+    "age_band": {
+      "<65": {
+        "n": 10130,
+        "events": 2692,
+        "auroc": 0.7617938304845564,
+        "sensitivity": 0.8228083209509658,
+        "specificity": 0.5454423232051627,
+        "ppv": 0.3958184417441029,
+        "fnr": 0.17719167904903418,
+        "auroc_ci95": [
+          0.7481,
+          0.7754
+        ],
+        "sensitivity_ci95": [
+          0.8009,
+          0.8425
+        ],
+        "fnr_ci95": [
+          0.1575,
+          0.1991
+        ]
+      },
+      "65-74": {
+        "n": 14701,
+        "events": 3167,
+        "auroc": 0.7905644924310213,
+        "sensitivity": 0.7657088727502368,
+        "specificity": 0.6500780301716664,
+        "ppv": 0.37532889645565704,
+        "fnr": 0.23429112724976317,
+        "auroc_ci95": [
+          0.7783,
+          0.8011
+        ],
+        "sensitivity_ci95": [
+          0.7439,
+          0.7865
+        ],
+        "fnr_ci95": [
+          0.2135,
+          0.2561
+        ]
+      },
+      "75-84": {
+        "n": 13527,
+        "events": 2609,
+        "auroc": 0.7793428183515977,
+        "sensitivity": 0.7228823303947872,
+        "specificity": 0.6770470782194541,
+        "ppv": 0.3484848484848485,
+        "fnr": 0.2771176696052127,
+        "auroc_ci95": [
+          0.7674,
+          0.7913
+        ],
+        "sensitivity_ci95": [
+          0.6991,
+          0.7451
+        ],
+        "fnr_ci95": [
+          0.2549,
+          0.3009
+        ]
+      },
+      "85+": {
+        "n": 9314,
+        "events": 1665,
+        "auroc": 0.7687810179116232,
+        "sensitivity": 0.6954954954954955,
+        "specificity": 0.6957772257811479,
+        "ppv": 0.3322812051649928,
+        "fnr": 0.3045045045045045,
+        "auroc_ci95": [
+          0.7543,
+          0.7807
+        ],
+        "sensitivity_ci95": [
+          0.6676,
+          0.723
+        ],
+        "fnr_ci95": [
+          0.277,
+          0.3324
+        ]
+      }
+    },
+    "white_minus_black_auroc": {
+      "point": 0.0348,
+      "ci95": [
+        0.0175,
+        0.0515
+      ],
+      "p_value_bootstrap": 0.0
+    }
+  },
+  "dca": {
+    "thresholds": [
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.13,
+      0.14,
+      0.15,
+      0.16,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.23,
+      0.24,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29,
+      0.3,
+      0.31,
+      0.32,
+      0.33,
+      0.34,
+      0.35,
+      0.36,
+      0.37,
+      0.38,
+      0.39,
+      0.4
+    ],
+    "model": [
+      0.1765,
+      0.1702,
+      0.1639,
+      0.1578,
+      0.1519,
+      0.1458,
+      0.1397,
+      0.134,
+      0.1281,
+      0.1226,
+      0.1175,
+      0.1124,
+      0.1069,
+      0.1019,
+      0.0971,
+      0.092,
+      0.0871,
+      0.0836,
+      0.0792,
+      0.0753,
+      0.0713,
+      0.0679,
+      0.0644,
+      0.0612,
+      0.0579,
+      0.0549,
+      0.0517,
+      0.0493,
+      0.0458,
+      0.0443,
+      0.0421,
+      0.0394,
+      0.0363,
+      0.0341,
+      0.0328,
+      0.0308
+    ],
+    "treat_all": [
+      0.1711,
+      0.1623,
+      0.1533,
+      0.1441,
+      0.1347,
+      0.1251,
+      0.1152,
+      0.1052,
+      0.0949,
+      0.0844,
+      0.0736,
+      0.0626,
+      0.0513,
+      0.0397,
+      0.0278,
+      0.0157,
+      0.0032,
+      -0.0095,
+      -0.0227,
+      -0.0361,
+      -0.0499,
+      -0.0641,
+      -0.0787,
+      -0.0937,
+      -0.1091,
+      -0.1249,
+      -0.1412,
+      -0.158,
+      -0.1753,
+      -0.1931,
+      -0.2115,
+      -0.2304,
+      -0.2499,
+      -0.2701,
+      -0.2909,
+      -0.3124
+    ],
+    "treat_none": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ]
+  },
+  "capacity": {
+    "top_5pct": {
+      "n_flagged": 2383,
+      "events_captured": 1590,
+      "share_of_all_events": 0.157,
+      "ppv": 0.667
+    },
+    "top_10pct": {
+      "n_flagged": 4767,
+      "events_captured": 2758,
+      "share_of_all_events": 0.272,
+      "ppv": 0.579
+    },
+    "top_15pct": {
+      "n_flagged": 7150,
+      "events_captured": 3736,
+      "share_of_all_events": 0.369,
+      "ppv": 0.523
+    },
+    "top_20pct": {
+      "n_flagged": 9534,
+      "events_captured": 4636,
+      "share_of_all_events": 0.458,
+      "ppv": 0.486
+    },
+    "top_30pct": {
+      "n_flagged": 14301,
+      "events_captured": 6101,
+      "share_of_all_events": 0.602,
+      "ppv": 0.427
+    }
+  },
+  "race_ablation_validation": {
+    "with_race_te": 0.7954,
+    "without_race_te": 0.7949,
+    "difference": 0.0005,
+    "decision_basis": "validation partition only"
+  }
+}

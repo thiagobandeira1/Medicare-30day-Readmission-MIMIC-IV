@@ -1,0 +1,82 @@
+{
+  "stages": [
+    {
+      "stage": "days_1_7",
+      "test_at_risk": 47672,
+      "test_events": 4007,
+      "auroc": 0.7504,
+      "ci95_cluster": [
+        0.7407,
+        0.7594
+      ],
+      "domain_shares_pct": {
+        "Index-stay severity": 18.3,
+        "Other": 18.3,
+        "Prior utilization": 40.8,
+        "Laboratory / physiology": 22.6
+      },
+      "top_features": [
+        "los_trend_180d",
+        "los_trend_x_prior_admits",
+        "freq_x_recency",
+        "primary_dx_chapter_te",
+        "hemoglobin_last",
+        "prior_readmission_count",
+        "wbc_last",
+        "drg_code_te"
+      ]
+    },
+    {
+      "stage": "days_8_14",
+      "test_at_risk": 43665,
+      "test_events": 2550,
+      "auroc": 0.7528,
+      "ci95_cluster": [
+        0.7423,
+        0.7639
+      ],
+      "domain_shares_pct": {
+        "Index-stay severity": 17.4,
+        "Other": 14.5,
+        "Prior utilization": 46.1,
+        "Laboratory / physiology": 22.0
+      },
+      "top_features": [
+        "los_trend_180d",
+        "freq_x_recency",
+        "los_trend_x_prior_admits",
+        "drg_code_te",
+        "prior_admissions_6m",
+        "time_since_last_discharge",
+        "hemoglobin_last",
+        "lab_abnormal_rate"
+      ]
+    },
+    {
+      "stage": "days_15_30",
+      "test_at_risk": 41115,
+      "test_events": 3576,
+      "auroc": 0.7774,
+      "ci95_cluster": [
+        0.7687,
+        0.7854
+      ],
+      "domain_shares_pct": {
+        "Index-stay severity": 20.0,
+        "Other": 14.5,
+        "Prior utilization": 49.9,
+        "Laboratory / physiology": 15.6
+      },
+      "top_features": [
+        "los_trend_180d",
+        "freq_x_recency",
+        "los_trend_x_prior_admits",
+        "drg_code_te",
+        "prior_admissions_6m",
+        "prior_mean_los_6m",
+        "prior_admissions_all",
+        "time_since_last_discharge"
+      ]
+    }
+  ]
+}

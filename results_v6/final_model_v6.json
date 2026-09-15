@@ -1296,6 +1296,51 @@
    "rationale": "a subsequent record beginning at or within 48 hours before the index discharge timestamp reflects inter-unit transfer or administrative re-registration, not a community return; no records fall below the -2-day bound in this cohort"
   },
   "boot_draws": 5000,
-  "seed": 42
+  "seed": 42,
+  "era_stratified_test": {
+   "definition": "final-model test predictions stratified by the patient-level MIMIC-IV anchor_year_group band; descriptive, no CIs computed",
+   "bands": [
+    {
+     "band": "2008 - 2010",
+     "n": 22268,
+     "events": 5467,
+     "prevalence": 0.2455,
+     "auroc": 0.7437
+    },
+    {
+     "band": "2011 - 2013",
+     "n": 9806,
+     "events": 1878,
+     "prevalence": 0.1915,
+     "auroc": 0.7634
+    },
+    {
+     "band": "2014 - 2016",
+     "n": 7062,
+     "events": 1327,
+     "prevalence": 0.1879,
+     "auroc": 0.794
+    },
+    {
+     "band": "2017 - 2019",
+     "n": 5283,
+     "events": 903,
+     "prevalence": 0.1709,
+     "auroc": 0.8139
+    },
+    {
+     "band": "2020 - 2022",
+     "n": 3253,
+     "events": 558,
+     "prevalence": 0.1715,
+     "auroc": 0.8556
+    }
+   ]
+  },
+  "payer_scope": {
+   "definition": "the outcome search covers ALL subsequent hospitalizations of the patient regardless of the insurance recorded on the subsequent admission (verified empirically against raw admissions)",
+   "n_30d_next_nonmedicare": 743,
+   "n_counted_as_readmission": 741
+  }
  }
 }

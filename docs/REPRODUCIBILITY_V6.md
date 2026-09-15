@@ -94,3 +94,12 @@ Bootstrap scope (documented per item 6): all intervals resample patients and
 their stored prediction-outcome pairs; feature selection, encoding, and model
 fitting are NOT repeated inside resamples. Intervals are conditional on the
 fitted CV/test models and do not capture retraining or reselection variability.
+
+## Environment note (2026-09-15)
+
+The v5/v6 reanalysis pipeline environment of record is the env block inside
+results_v6/final_model_v6.json: Python 3.11.14, XGBoost 3.2.0, scikit-learn
+1.7.2, pandas 2.3.3, NumPy 1.26.4, seed 42. The root environment.yml and
+requirements.txt (scikit-learn 1.8) target the earlier capstone notebook
+pipeline, not the reanalysis; reproduce results_v5/results_v6 with the env
+block versions.

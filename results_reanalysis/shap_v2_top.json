@@ -1,0 +1,30 @@
+[
+ {
+  "feature": "los_trend_180d",
+  "mean_abs_shap": 0.4511
+ },
+ {
+  "feature": "freq_x_recency",
+  "mean_abs_shap": 0.2427
+ },
+ {
+  "feature": "los_trend_x_prior_admits",
+  "mean_abs_shap": 0.2061
+ },
+ {
+  "feature": "drg_code_te",
+  "mean_abs_shap": 0.1051
+ },
+ {
+  "feature": "prior_admissions_6m",
+  "mean_abs_shap": 0.0837
+ },
+ {
+  "feature": "hemoglobin_last",
+  "mean_abs_shap": 0.0771
+ },
+ {
+  "feature": "prior_readmission_count",
+  "mean_abs_shap": 0.0667
+ }
+]
