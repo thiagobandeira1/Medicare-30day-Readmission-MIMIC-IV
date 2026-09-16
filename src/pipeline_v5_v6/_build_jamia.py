@@ -330,7 +330,8 @@ PB(f"All 207 candidate predictors from the engineered feature tables were "
    f"context, medications, laboratory values, orders, intensive care "
    f"unit (ICU) documentation, "
    f"and prior-utilization history. Feature selection used staged "
-   f"recursive feature elimination with an XGBoost estimator inside 5 "
+   f"recursive feature elimination (RFE) with an extreme gradient "
+   f"boosting (XGBoost) estimator inside 5 "
    f"outer patient-grouped folds on development data only. Within each "
    f"outer-training fold, 3 grouped inner folds drove "
    f"elimination along a prespecified grid (142 to 18 features); all "
@@ -375,7 +376,7 @@ PB("Time to readmission was modeled with the same features and partitions "
    "cumulative incidence. The prognostic model is a cause-specific "
    "XGBoost accelerated failure time (AFT) model [28]. Evaluation "
    "used Harrell C [29] and cumulative/dynamic time-dependent AUROC on "
-   "each of days 1 through 29, estimated with inverse probability of "
+   "each of days 1 to 29, estimated with inverse probability of "
    "censoring weighting (IPCW) [30,40]; patients who died before the "
    "evaluation "
    "day remain in the comparison set as nonevents, a cause-specific "
@@ -660,7 +661,9 @@ caption("Table 1. Subgroup performance of the final model on the test "
         "rate; PPV: positive predictive value; Prev.: outcome prevalence; "
         "Cal.: calibration. Other/Unknown is heterogeneous and is not "
         "interpreted; patients whose recorded race varies across "
-        "admissions appear in more than one race row.",
+        "admissions, or whose age crosses a band boundary between "
+        "admissions, appear in more than one row of the corresponding "
+        "block.",
         keep_with_next=True)
 table(rows, font_size=8,
       widths=[0.72, 1.12, 0.45, 0.95, 0.95, 0.9, 0.45, 0.45, 0.79])
@@ -679,7 +682,7 @@ PB(f"Figure 6 ranks the final model's predictors by mean absolute SHAP "
    f"{_next4} complete the top seven. Readmission risk is multifactorial "
    f"(no single feature dominates), and the leading features map to "
    f"observables a discharge team can see: an escalating admission "
-   f"pattern, where the patient is going next, and unresolved laboratory "
+   f"pattern and unresolved laboratory "
    f"abnormalities. Per-patient additive SHAP decompositions are "
    f"produced at serving time by the released prototype.")
 figure(FIG5 / "v5_shap.png",
@@ -799,7 +802,8 @@ table(_t2, font_size=8.5, widths=[1.5, 2.0, 0.9, 1.8])
 HB2("Clinical Interpretation of the Leading Predictors (Hypotheses)")
 assert SH[0]["feature"] == "los_trend_180d", \
     f"clinical text assumes los_trend_180d leads; got {SH[0]['feature']}"
-PB("Throughout, driver means contribution to the model's prediction, not "
+PB("Throughout this section, a predictor's contribution describes the "
+   "model's reliance on it, not "
    "a demonstrated causal effect. The 180-day length-of-stay trend, the "
    "strongest signal, is best read as a compressed biomarker of disease "
    "trajectory: when recent admissions grow progressively longer, "
@@ -911,8 +915,9 @@ H1("Supplementary Material")
 P(f"Supplementary Material (single file): Supplementary Methods (full "
   f"cohort and outcome definitions, partition and data-flow detail, "
   f"selection, baseline, time-to-event, statistical, and prototype "
-  f"detail), Supplementary Results (sensitivity, payer-scope, tie-rule, "
-  f"and landmark analyses), and Supplementary Figures S1 and S2. "
+  f"detail), Supplementary Results (sensitivity, payer-scope, fixed-set "
+  f"comparison, tie-rule, and stage-specific attribution analyses), and "
+  f"Supplementary Figures S1 and S2. "
   f"Supplementary Appendix 1: predictor audit and selection workbook "
   f"(207-candidate audit, eligible pool, final {NF}-feature dictionary, "
   f"RFE trajectories, out-of-fold model comparison, full subgroup "
@@ -920,8 +925,9 @@ P(f"Supplementary Material (single file): Supplementary Methods (full "
   f"competing-risk event counts, stage-differential estimates). "
   f"Supplementary Appendix 2: LACE and HOSPITAL reconstruction tables. "
   f"Supplementary Appendix 3: race-category consolidation with raw "
-  f"counts. Supplementary Appendix 4: supplementary figures and "
-  f"development history. Supplementary Appendix 5: completed TRIPOD+AI "
+  f"counts. Supplementary Appendix 4: decision curves, same-cohort ROC "
+  f"curves, and development history including earlier feature versions "
+  f"and model families. Supplementary Appendix 5: completed TRIPOD+AI "
   f"checklist. Supplementary Appendix 6: PROBAST+AI self-assessment.")
 
 H1("References")

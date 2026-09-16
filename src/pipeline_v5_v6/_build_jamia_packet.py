@@ -69,7 +69,7 @@ FILES AND UPLOAD ROLES
    The same images are embedded in the main document.
 
 METADATA CHEAT SHEET (ScholarOne)
-Type: Research and Applications. Main text 3,993 words (cap 4,000);
+Type: Research and Applications. Main text 3,995 words (cap 4,000);
 abstract 246 words (cap 250); 2 tables (cap 4); 6 figures (cap 6); 40
 references; 7 supplementary files.
 Keywords (all five are exact MeSH descriptors): Patient Readmission;
