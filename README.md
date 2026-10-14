@@ -1,26 +1,11 @@
 # Predicting 30-Day Hospital Readmission in Medicare Patients
 
-![status](https://img.shields.io/badge/status-post--defense_revision-blue)
-![python](https://img.shields.io/badge/python-3.12-blue?logo=python&logoColor=white)
-![pandas](https://img.shields.io/badge/pandas-2.3-150458?logo=pandas&logoColor=white)
-![numpy](https://img.shields.io/badge/numpy-≥1.26-013243?logo=numpy&logoColor=white)
-![PyArrow](https://img.shields.io/badge/PyArrow-parquet-FFA500)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.8-F7931E?logo=scikit-learn&logoColor=white)
-![XGBoost](https://img.shields.io/badge/XGBoost-0.7935-C71585?logo=xgboost&logoColor=white)
-![LightGBM](https://img.shields.io/badge/LightGBM-0.7970-2E8B57)
-![CatBoost](https://img.shields.io/badge/CatBoost-0.7937-FFC107)
-![HistGBM](https://img.shields.io/badge/HistGBM-0.7943-8B5CF6)
-![Blend](https://img.shields.io/badge/4--GBM_blend-0.7968-4C72B0)
-![5-fold CV](https://img.shields.io/badge/5--fold_CV-0.7993_±_0.0027-1E88E5)
-![SHAP](https://img.shields.io/badge/SHAP-0.51-8E8E93)
+![status](https://img.shields.io/badge/status-JAMIA_submission_v7-blue)
+![python](https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white)
 ![MIMIC-IV](https://img.shields.io/badge/MIMIC--IV-v3.1-B22222)
-![admissions](https://img.shields.io/badge/Medicare_admissions-244,576-1F77B4)
-![cohort](https://img.shields.io/badge/readmit_30d-21.1%25-DD8452)
-![protocol](https://img.shields.io/badge/protocol-80%2F20_+_10%25_inner--val-2C5F2D)
-![test-AUROC](https://img.shields.io/badge/test_AUROC-0.7935_(deployed)-228B22)
-![vs LACE](https://img.shields.io/badge/vs_LACE-+0.110-00875A)
-![vs ClinicalBERT](https://img.shields.io/badge/vs_ClinicalBERT-+0.080-00875A)
-![validator](https://img.shields.io/badge/reproduction_validator-✓_all_targets_met-success)
+![out-of-fold AUROC](https://img.shields.io/badge/out--of--fold_AUROC-0.706-1E88E5)
+![test AUROC](https://img.shields.io/badge/test_AUROC-0.706-228B22)
+![calibration slope](https://img.shields.io/badge/calibration_slope-1.00-00875A)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
 > **TL;DR:** A reproducible supervised-ML pipeline that estimates the probability of **unplanned 30-day readmission at discharge** for Medicare-insured patients in **MIMIC-IV v3.1**. Starting from 244,576 Medicare admissions, we engineered seven dataset versions (V1 → V7) producing a 50-feature parsimonious set, trained four gradient-boosting families across ten seeds each, and deploy a single **XGBoost** model reaching **test AUROC 0.7935** (outperforming LACE by **+0.110** and ClinicalBERT by **+0.080** AUROC) with full **SHAP** interpretability. **This is a post-defense revision** of the original April 2026 capstone, with test-set early-stopping leakage removed (the test partition is touched exactly once); every per-model AUROC meets or exceeds the originally published target.
@@ -31,31 +16,39 @@
 
 ---
 
-## Current status: JMIR AI submission (August 2026)
+## Current status: JAMIA submission v7 (October 2026)
 
-> This repository now also hosts the peer-review reanalysis behind the JMIR AI
-> manuscript "Predicting 30-Day Hospital Readmission in Medicare Patients: An
-> Interpretable Gradient-Boosting Model on MIMIC-IV v3.1" (Bandeira, Gonzalez,
-> Poellabauer, Mondal). The submission pipeline lives in
-> [`src/pipeline_v5_v6/`](src/pipeline_v5_v6/); canonical results are
-> [`results_v6/final_model_v6.json`](results_v6/final_model_v6.json);
-> submission figures are in [`figures_v5/`](figures_v5/).
+> **Correction notice.** All results released before October 2026 (tags up to
+> `v6.4-submission`, the JMIR AI drafts, and the capstone numbers below,
+> including every badge value of 0.77 to 0.80) are inflated. A
+> prior-utilization feature, `los_trend_180d`, documented as using only
+> earlier stays, in fact encoded the patient's later admissions (among
+> first-ever admissions it was nonzero only for patients who would be admitted
+> again; AUROC 0.93 for any later admission). It and two interactions built
+> from it (`los_trend_x_prior_6m`, `los_trend_x_prior_admits`) were removed in
+> v7. See [`LEAKAGE_CORRECTION_v7.md`](LEAKAGE_CORRECTION_v7.md).
 >
-> Headline results, three evidence tiers: the complete leakage-safe selection
-> procedure reaches a development-data out-of-fold AUROC of 0.7748 (95% CI
-> 0.7715 to 0.7782, primary); the fixed consensus-31 feature set reaches
-> 0.7756 under grouped development cross-validation (secondary) and 0.7738
-> (95% CI 0.7671 to 0.7804) on the historically exposed test partition
-> (tertiary). Same-cohort baselines: adapted LACE 0.605 and 12-month HOSPITAL
-> 0.649, both P<.001 below the model.
-> Release: tag `v6.4-submission`; archival DOI
-> [10.5281/zenodo.21987702](https://doi.org/10.5281/zenodo.21987702).
+> The v7 manuscript, "Predicting 30-Day Hospital Readmission at Discharge: A
+> Leakage-Safe, Calibrated Electronic Health Record Model in Medicare-Insured
+> Adults" (Bandeira, Gonzalez, Poellabauer, Mondal), is generated by
+> [`src/pipeline_v7/`](src/pipeline_v7/); canonical results are
+> [`results_v7/final_model_v7.json`](results_v7/final_model_v7.json) with the
+> leakage test in [`results_v7/leak_test_v7.json`](results_v7/leak_test_v7.json);
+> figures are in [`figures_v7/`](figures_v7/).
 >
-> Everything below documents the earlier post-defense capstone revision (V7,
-> 50 features, deployed XGBoost 0.7935 under its own protocol). The JMIR
-> reanalysis supersedes those numbers for publication purposes; the capstone
-> material is retained as development history and is described as such in
-> Multimedia Appendix 4 of the manuscript.
+> Headline results (47-feature consensus model): out-of-fold AUROC of the
+> complete selection procedure 0.7058 (95% CI 0.7018 to 0.7104, primary);
+> test AUROC 0.7064 (95% CI 0.6973 to 0.7150) on the historically exposed test
+> partition, calibration slope 1.00, calibration-in-the-large close to 0.
+> Same-cohort baselines: LACE 0.605 and HOSPITAL 0.649 as integer scores
+> (both P<.001 below the model), 0.640 and 0.660 when refit.
+> Release: tag `v7.0-jamia`; Zenodo concept DOI
+> [10.5281/zenodo.21987701](https://doi.org/10.5281/zenodo.21987701)
+> (resolves to the latest version).
+>
+> Everything below documents the earlier capstone revision and is retained
+> only as development history. Its numbers were produced with billing-derived
+> features and the leaked variable and must not be cited.
 
 ---
 
@@ -395,7 +388,7 @@ medicare-30day-readmission-mimic-iv/
 │   ├── references.bib                       # BibTeX for §18 References
 │   └── missing_data_section_for_report.md   # standalone §5.3 for Word paste-in
 │
-├── src/                                     # analysis and pipeline scripts; src/pipeline_v5_v6/ holds the JMIR reanalysis pipeline
+├── src/                                     # analysis and pipeline scripts; src/pipeline_v7/ holds the JAMIA v7 pipeline (src/pipeline_v5_v6/ is superseded)
 │   ├── run_progression.py                   # subprocess-per-version V1→V7 baseline training
 │   ├── run_v7_ensemble.py                   # subprocess-per-model 10-seed V7 training
 │   ├── run_5fold_cv.py                      # subprocess-per-model 5-fold CV stability check

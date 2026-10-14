@@ -1,0 +1,507 @@
+{
+ "continuation_band": {
+  "window_hours": 1.0,
+  "events_all": 50793,
+  "events_in_band": 2368,
+  "share_of_events": 0.0466,
+  "events_in_band_test": 462,
+  "rate_per_hour": {
+   "0_1h": {
+    "events": 2368,
+    "per_hour": 2368.0
+   },
+   "1_2h": {
+    "events": 44,
+    "per_hour": 44.0
+   },
+   "2_4h": {
+    "events": 82,
+    "per_hour": 41.0
+   },
+   "4_6h": {
+    "events": 130,
+    "per_hour": 65.0
+   },
+   "6_12h": {
+    "events": 561,
+    "per_hour": 93.5
+   },
+   "12_24h": {
+    "events": 1105,
+    "per_hour": 92.1
+   },
+   "24_72h": {
+    "events": 5565,
+    "per_hour": 115.9
+   },
+   "72_168h": {
+    "events": 10201,
+    "per_hour": 106.3
+   },
+   "168_720h": {
+    "events": 30737,
+    "per_hour": 55.7
+   }
+  },
+  "later_rate_range_per_hour": [
+   41.0,
+   115.9
+  ],
+  "next_internal_psych_transfer": 0.5097,
+  "next_from_snf": 0.1444,
+  "next_ed_registration_before_index_discharge": 0.4041,
+  "index_discharge_location_missing": 0.6263,
+  "index_discharge_hospice": 0.144,
+  "index_discharge_psych_facility": 0.1605
+ },
+ "one_hour_rule": {
+  "test_events": 9671,
+  "test_prevalence": 0.2029,
+  "test_auroc_refit": 0.7044,
+  "test_auroc_final_model": 0.6952
+ },
+ "timing": {
+  "estimand": "cumulative/dynamic AUROC of the AFT risk score; cases readmitted by day t, controls all others including deaths before t; empirical (no censoring before day 30); 95% patient-cluster bootstrap bands, 500 draws",
+  "primary": {
+   "auc": [
+    0.8358,
+    0.7511,
+    0.7163,
+    0.6999,
+    0.6912,
+    0.6868,
+    0.6845,
+    0.6841,
+    0.6843,
+    0.6849,
+    0.6853,
+    0.6843,
+    0.6852,
+    0.6828,
+    0.6836,
+    0.6856,
+    0.6877,
+    0.6872,
+    0.6877,
+    0.6887,
+    0.6882,
+    0.6889,
+    0.6895,
+    0.6905,
+    0.6907,
+    0.6912,
+    0.6903,
+    0.6902,
+    0.691
+   ],
+   "lo": [
+    0.8144,
+    0.7321,
+    0.7002,
+    0.686,
+    0.678,
+    0.6747,
+    0.6723,
+    0.6718,
+    0.6726,
+    0.6725,
+    0.6741,
+    0.6736,
+    0.675,
+    0.6725,
+    0.6738,
+    0.6762,
+    0.6779,
+    0.6775,
+    0.6778,
+    0.6791,
+    0.6782,
+    0.6796,
+    0.6803,
+    0.6816,
+    0.6816,
+    0.6818,
+    0.6811,
+    0.6808,
+    0.6819
+   ],
+   "hi": [
+    0.8533,
+    0.7681,
+    0.7316,
+    0.7132,
+    0.7041,
+    0.6985,
+    0.6955,
+    0.6946,
+    0.6947,
+    0.6944,
+    0.6951,
+    0.694,
+    0.6946,
+    0.6922,
+    0.6931,
+    0.6948,
+    0.6964,
+    0.6961,
+    0.6961,
+    0.6968,
+    0.6963,
+    0.6969,
+    0.6977,
+    0.6983,
+    0.6987,
+    0.6993,
+    0.6982,
+    0.6981,
+    0.6988
+   ]
+  },
+  "one_hour_rule": {
+   "auc": [
+    0.6772,
+    0.6397,
+    0.633,
+    0.6332,
+    0.6347,
+    0.6382,
+    0.6412,
+    0.6445,
+    0.6476,
+    0.6507,
+    0.653,
+    0.6534,
+    0.6557,
+    0.6543,
+    0.656,
+    0.659,
+    0.6619,
+    0.662,
+    0.6631,
+    0.6646,
+    0.6645,
+    0.6656,
+    0.6666,
+    0.6679,
+    0.6685,
+    0.6692,
+    0.6686,
+    0.6687,
+    0.6698
+   ],
+   "lo": [
+    0.641,
+    0.6122,
+    0.6123,
+    0.6168,
+    0.6186,
+    0.6233,
+    0.6275,
+    0.6313,
+    0.6347,
+    0.6379,
+    0.6411,
+    0.642,
+    0.6453,
+    0.6435,
+    0.6455,
+    0.6489,
+    0.6517,
+    0.6518,
+    0.6521,
+    0.6542,
+    0.6544,
+    0.6559,
+    0.6567,
+    0.6585,
+    0.659,
+    0.6596,
+    0.6592,
+    0.6588,
+    0.6601
+   ],
+   "hi": [
+    0.7124,
+    0.6655,
+    0.6515,
+    0.6507,
+    0.6505,
+    0.6524,
+    0.6545,
+    0.6564,
+    0.6597,
+    0.6621,
+    0.6645,
+    0.6648,
+    0.6669,
+    0.6648,
+    0.6666,
+    0.6691,
+    0.6717,
+    0.6714,
+    0.6727,
+    0.6738,
+    0.6735,
+    0.6744,
+    0.6755,
+    0.6766,
+    0.6769,
+    0.6776,
+    0.6769,
+    0.6768,
+    0.678
+   ]
+  },
+  "day1_events_primary": 860,
+  "day1_events_one_hour_rule": 398,
+  "reclassified_test_events": 462,
+  "landmark_one_hour_rule": [
+   {
+    "stage": "1-7",
+    "at_risk": 47672,
+    "events": 3538,
+    "auroc": 0.6618
+   },
+   {
+    "stage": "8-14",
+    "at_risk": 43698,
+    "events": 2545,
+    "auroc": 0.6906
+   },
+   {
+    "stage": "15-30",
+    "at_risk": 40837,
+    "events": 3572,
+    "auroc": 0.7137
+   }
+  ]
+ },
+ "prior_utilization": {
+  "0": {
+   "admissions": 15639,
+   "patients": 15639,
+   "share": 0.3281,
+   "prevalence": 0.1462,
+   "auroc": 0.6597,
+   "auroc_ci95": [
+    0.6467,
+    0.6715
+   ],
+   "share_of_top10pct_flags": 0.0602
+  },
+  "1 to 2": {
+   "admissions": 13778,
+   "patients": 8877,
+   "share": 0.289,
+   "prevalence": 0.1818,
+   "auroc": 0.6703,
+   "auroc_ci95": [
+    0.6585,
+    0.6824
+   ],
+   "share_of_top10pct_flags": 0.1181
+  },
+  "3 to 9": {
+   "admissions": 12780,
+   "patients": 3993,
+   "share": 0.2681,
+   "prevalence": 0.2545,
+   "auroc": 0.6825,
+   "auroc_ci95": [
+    0.6687,
+    0.6962
+   ],
+   "share_of_top10pct_flags": 0.3596
+  },
+  "10 or more": {
+   "admissions": 5475,
+   "patients": 780,
+   "share": 0.1148,
+   "prevalence": 0.3817,
+   "auroc": 0.6984,
+   "auroc_ci95": [
+    0.6709,
+    0.7221
+   ],
+   "share_of_top10pct_flags": 0.4621
+  }
+ },
+ "race_by_utilization": {
+  "crude_gap": 0.0058,
+  "standardized_within_stratum_gap": 0.0025,
+  "standardized_ci95": [
+   -0.0152,
+   0.0232
+  ],
+  "within_stratum_gap": {
+   "0": -0.0135,
+   "1 to 2": 0.0066,
+   "3 to 9": 0.0038,
+   "10 or more": 0.0402
+  },
+  "white_stratum_mix": {
+   "0": 0.3368,
+   "1 to 2": 0.3009,
+   "3 to 9": 0.2605,
+   "10 or more": 0.1018
+  },
+  "black_stratum_mix": {
+   "0": 0.2153,
+   "1 to 2": 0.2614,
+   "3 to 9": 0.3388,
+   "10 or more": 0.1845
+  },
+  "median_prior_admissions": {
+   "White": 1.0,
+   "Black": 3.0
+  }
+ },
+ "era": [
+  {
+   "band": "2008 to 2010",
+   "n": 22268,
+   "auroc": 0.7064,
+   "emar_coverage": 0.3188,
+   "first_admission_share": 0.2122,
+   "auroc_first_admissions": 0.6554
+  },
+  {
+   "band": "2011 to 2013",
+   "n": 9806,
+   "auroc": 0.6949,
+   "emar_coverage": 0.4611,
+   "first_admission_share": 0.319,
+   "auroc_first_admissions": 0.6702
+  },
+  {
+   "band": "2014 to 2016",
+   "n": 7062,
+   "auroc": 0.6967,
+   "emar_coverage": 0.8992,
+   "first_admission_share": 0.4131,
+   "auroc_first_admissions": 0.6555
+  },
+  {
+   "band": "2017 to 2019",
+   "n": 5283,
+   "auroc": 0.6981,
+   "emar_coverage": 0.9885,
+   "first_admission_share": 0.5205,
+   "auroc_first_admissions": 0.6507
+  },
+  {
+   "band": "2020 to 2022",
+   "n": 3253,
+   "auroc": 0.6917,
+   "emar_coverage": 0.9837,
+   "first_admission_share": 0.6511,
+   "auroc_first_admissions": 0.6616
+  }
+ ],
+ "comparators": {
+  "reconstruction_match": {
+   "lace": 0.9991,
+   "hospital": 1.0
+  },
+  "lace_original": {
+   "auroc": 0.605,
+   "uplift": 0.1014,
+   "uplift_ci95": [
+    0.0924,
+    0.1113
+   ]
+  },
+  "hospital_original": {
+   "auroc": 0.6493,
+   "uplift": 0.057,
+   "uplift_ci95": [
+    0.0517,
+    0.0624
+   ]
+  },
+  "lace_refit": {
+   "auroc": 0.64,
+   "uplift": 0.0664,
+   "uplift_ci95": [
+    0.0605,
+    0.072
+   ]
+  },
+  "lace_refit_no_coded": {
+   "auroc": 0.6381,
+   "uplift": 0.0682,
+   "uplift_ci95": [
+    0.0623,
+    0.0739
+   ]
+  },
+  "hospital_refit": {
+   "auroc": 0.6601,
+   "uplift": 0.0462,
+   "uplift_ci95": [
+    0.0416,
+    0.0511
+   ]
+  },
+  "hospital_refit_no_coded": {
+   "auroc": 0.6572,
+   "uplift": 0.0492,
+   "uplift_ci95": [
+    0.0444,
+    0.054
+   ]
+  },
+  "lace_hospital_refit_no_coded": {
+   "auroc": 0.6646,
+   "uplift": 0.0417,
+   "uplift_ci95": [
+    0.0371,
+    0.0464
+   ]
+  }
+ },
+ "leakage_ablation": {
+  "reference_leakage_safe": {
+   "apparent_cv_auroc": 0.7061,
+   "heldout_test_auroc": 0.7064,
+   "optimism": -0.0002,
+   "n_features": 47
+  },
+  "admission_level_split": {
+   "apparent_cv_auroc": 0.7059,
+   "heldout_test_auroc": 0.7064,
+   "optimism": -0.0005,
+   "n_features": 47
+  },
+  "global_target_encoding": {
+   "apparent_cv_auroc": 0.706,
+   "heldout_test_auroc": 0.7064,
+   "optimism": -0.0003,
+   "n_features": 47
+  },
+  "plus_future_trend_features": {
+   "apparent_cv_auroc": 0.778,
+   "heldout_test_auroc": 0.7748,
+   "optimism": 0.0031,
+   "n_features": 50
+  },
+  "plus_legacy_precomputed_encodings": {
+   "apparent_cv_auroc": 0.7132,
+   "heldout_test_auroc": 0.7124,
+   "optimism": 0.0008,
+   "n_features": 51
+  },
+  "plus_billing_features": {
+   "apparent_cv_auroc": 0.7071,
+   "heldout_test_auroc": 0.7085,
+   "optimism": -0.0014,
+   "n_features": 107
+  },
+  "all_combined": {
+   "apparent_cv_auroc": 0.8068,
+   "heldout_test_auroc": 0.7686,
+   "optimism": 0.0382,
+   "n_features": 114
+  }
+ }
+}

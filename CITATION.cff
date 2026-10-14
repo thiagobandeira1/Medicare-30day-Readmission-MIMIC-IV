@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this work, please cite it as below."
 type: software
-title: "Predicting 30-Day Hospital Readmission in Medicare Patients: An Interpretable Gradient-Boosting Model on MIMIC-IV v3.1"
+title: "Predicting 30-Day Hospital Readmission at Discharge: A Leakage-Safe, Calibrated Electronic Health Record Model in Medicare-Insured Adults"
 authors:
   - family-names: "Bandeira"
     given-names: "Thiago"
@@ -21,23 +21,25 @@ authors:
     affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
     orcid: "https://orcid.org/0000-0002-4005-9942"
 year: 2026
-doi: "10.5281/zenodo.21987702"
+version: "v7.0-jamia"
+date-released: "2026-10-13"
+doi: "10.5281/zenodo.21987701"
 abstract: >-
-  Frozen software snapshot for the JMIR AI manuscript "Predicting 30-Day
-  Hospital Readmission in Medicare Patients: An Interpretable
-  Gradient-Boosting Model on MIMIC-IV v3.1". Contains the leakage-safe,
-  development-only staged recursive feature elimination pipeline and the
-  final consensus-31 XGBoost model (src/pipeline_v5_v6), canonical
-  machine-readable results (results_v6/final_model_v6.json and companions),
-  publication figures, the reproducibility report, the value-level
-  consistency report, and the 207-predictor audit workbook. Three evidence
-  tiers: development-data out-of-fold AUROC of the complete selection
-  procedure 0.7748 (95% CI 0.7715 to 0.7782, primary), grouped development
-  cross-validation of the fixed consensus-31 set 0.7756 (secondary), and
-  0.7738 (95% CI 0.7671 to 0.7804) on the historically exposed test
-  partition (tertiary). Same-cohort baselines: adapted LACE 0.605 and
-  12-month HOSPITAL 0.649. MIMIC-IV row-level data are not included, per
-  the PhysioNet Credentialed Health Data Use Agreement.
+  Software and aggregate results for the JAMIA manuscript "Predicting 30-Day
+  Hospital Readmission at Discharge: A Leakage-Safe, Calibrated Electronic
+  Health Record Model in Medicare-Insured Adults". Version v7 removes a
+  prior-utilization feature (los_trend_180d) and two derived interactions
+  that encoded later admissions; all earlier releases report inflated
+  performance (see LEAKAGE_CORRECTION_v7.md). Contains the leakage-safe
+  staged recursive feature elimination pipeline, the empirical
+  first-admission leakage test, the final 47-feature XGBoost model
+  (src/pipeline_v7), canonical machine-readable results
+  (results_v7/final_model_v7.json and companions), and figures. Out-of-fold
+  AUROC of the complete selection procedure 0.7058 (95% CI 0.7018 to
+  0.7104, primary); test AUROC 0.7064 (95% CI 0.6973 to 0.7150) on the
+  historically exposed test partition, calibration slope 1.00. Same-cohort
+  baselines: LACE 0.605 and HOSPITAL 0.649. MIMIC-IV row-level data are not
+  included, per the PhysioNet Credentialed Health Data Use Agreement.
 keywords:
   - "30-day readmission"
   - "Medicare"

@@ -1,0 +1,102 @@
+{
+ "first_ever_admissions": 78419,
+ "share_with_later_admission": 0.5154,
+ "los_trend_180d": {
+  "nonzero_share_first_ever": 0.442,
+  "later_admission_share_if_nonzero": 1.0,
+  "later_admission_share_if_zero": 0.1316,
+  "readmit30_if_nonzero": 0.2983,
+  "readmit30_if_zero": 0.0311,
+  "nonzero_share_without_any_later_admission": 0.0,
+  "auroc_nonzero_for_later_admission": 0.9288
+ },
+ "scan_top10": [
+  {
+   "feature": "los_trend_180d",
+   "p_mode_no_later": 1.0,
+   "p_mode_later": 0.1425,
+   "gap": 0.8575
+  },
+  {
+   "feature": "bp_diastolic_outpatient",
+   "p_mode_no_later": 0.7476,
+   "p_mode_later": 0.5999,
+   "gap": 0.1477
+  },
+  {
+   "feature": "bmi_last",
+   "p_mode_no_later": 0.6928,
+   "p_mode_later": 0.5992,
+   "gap": 0.0936
+  },
+  {
+   "feature": "elix_dm_cx",
+   "p_mode_no_later": 0.8333,
+   "p_mode_later": 0.7645,
+   "gap": 0.0689
+  },
+  {
+   "feature": "n_procedures",
+   "p_mode_no_later": 0.4406,
+   "p_mode_later": 0.3818,
+   "gap": 0.0589
+  },
+  {
+   "feature": "cci_diab",
+   "p_mode_no_later": 0.7557,
+   "p_mode_later": 0.7146,
+   "gap": 0.0411
+  },
+  {
+   "feature": "elix_dm",
+   "p_mode_no_later": 0.8417,
+   "p_mode_later": 0.8009,
+   "gap": 0.0408
+  },
+  {
+   "feature": "hypertension_flag",
+   "p_mode_no_later": 0.9208,
+   "p_mode_later": 0.8814,
+   "gap": 0.0394
+  },
+  {
+   "feature": "age_at_admit",
+   "p_mode_no_later": 0.1026,
+   "p_mode_later": 0.064,
+   "gap": 0.0387
+  },
+  {
+   "feature": "cci_score_total",
+   "p_mode_no_later": 0.4482,
+   "p_mode_later": 0.4108,
+   "gap": 0.0375
+  }
+ ],
+ "scan_deterministic_flags": [
+  "los_trend_180d"
+ ],
+ "scan_max_gap_final_features": 0.0387,
+ "outpatient_features_exact_match": {
+  "bmi_last": {
+   "on_or_before_discharge": 0.8649,
+   "overall_incl_future": 0.2793
+  },
+  "bp_diastolic_outpatient": {
+   "on_or_before_discharge": 0.9724,
+   "overall_incl_future": 0.2111
+  }
+ },
+ "formula_checks": {
+  "freq_x_recency = prior_admissions_all / (time_since_last_discharge + 1)": 1.0,
+  "los_per_prior_admit = los_days / (prior_admissions_all + 1)": 1.0,
+  "albumin_x_los = albumin_last * los_days": 1.0,
+  "provider_fragmentation_x_los = los_days * n_distinct_providers": 1.0,
+  "log_los_days = log1p(los_days)": 1.0,
+  "log_n_labs = log1p(n_labs_total)": 1.0,
+  "log_prior_readmit_count = log1p(prior_readmission_count)": 1.0,
+  "prior_admits_6m_sq = prior_admissions_6m squared": 1.0,
+  "prior_admissions_all = number of earlier admissions (any insurance)": 1.0
+ },
+ "time_since_last_discharge_first_ever_value": 80.22,
+ "time_since_last_discharge_first_ever_distinct": 1
+}
