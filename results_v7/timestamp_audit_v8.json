@@ -1,0 +1,81 @@
+{
+ "trend_patients_multi_admission": 45154,
+ "trend_constant_within_patient_share": 1.0,
+ "trend_reconstruction_match": {
+  "slope_all_los": 0.454,
+  "last_minus_first_los": 0.4534,
+  "slope_final180d_los": 0.5284,
+  "slope_all_losd": 0.7239,
+  "last_minus_first_losd": 0.6704,
+  "slope_final180d_losd": 0.6597
+ },
+ "history_recompute": {
+  "prior_admissions_all": {
+   "match_share": 1.0,
+   "mismatch_share_patients_with_later_admission": 0.0,
+   "mismatch_share_patients_without_later_admission": 0.0
+  },
+  "prior_admissions_6m": {
+   "match_share": 0.9814,
+   "mismatch_share_patients_with_later_admission": 0.023,
+   "mismatch_share_patients_without_later_admission": 0.0108
+  },
+  "prior_mean_los_6m": {
+   "match_share": 0.6075,
+   "mismatch_share_patients_with_later_admission": 0.4612,
+   "mismatch_share_patients_without_later_admission": 0.2717
+  },
+  "prior_any_ed_6m": {
+   "match_share": 0.9956,
+   "mismatch_share_patients_with_later_admission": 0.0047,
+   "mismatch_share_patients_without_later_admission": 0.004
+  },
+  "prior_readmission_count": {
+   "match_share": 0.6662,
+   "mismatch_share_patients_with_later_admission": 0.3926,
+   "mismatch_share_patients_without_later_admission": 0.2304
+  },
+  "time_since_last_discharge": {
+   "match_share": 0.9366,
+   "mismatch_share_patients_with_later_admission": 0.0553,
+   "mismatch_share_patients_without_later_admission": 0.0831
+  }
+ },
+ "first_ever_time_since_last_discharge_values": [
+  80.22
+ ],
+ "omr_audit": {
+  "bmi_last": {
+   "stored_missing_share": 0.3898,
+   "on_or_before_admission_time": {
+    "exact_match_any_value_on_last_date": 1.0,
+    "last_date_has_multiple_distinct_values": 0.0203
+   },
+   "on_or_before_discharge_date": {
+    "exact_match_any_value_on_last_date": 0.8955,
+    "last_date_has_multiple_distinct_values": 0.0197
+   },
+   "any_date": {
+    "exact_match_any_value_on_last_date": 0.4123,
+    "last_date_has_multiple_distinct_values": 0.0127
+   },
+   "admissions_with_value_charted_during_stay": 0.1096
+  },
+  "bp_diastolic_outpatient": {
+   "stored_missing_share": 0.3881,
+   "on_or_before_admission_time": {
+    "exact_match_any_value_on_last_date": 1.0,
+    "last_date_has_multiple_distinct_values": 0.0413
+   },
+   "on_or_before_discharge_date": {
+    "exact_match_any_value_on_last_date": 0.9959,
+    "last_date_has_multiple_distinct_values": 0.041
+   },
+   "any_date": {
+    "exact_match_any_value_on_last_date": 0.3755,
+    "last_date_has_multiple_distinct_values": 0.0427
+   },
+   "admissions_with_value_charted_during_stay": 0.0042
+  }
+ }
+}

@@ -104,8 +104,8 @@ for line in ("All authors: Knight Foundation School of Computing and "
     r = t.add_run(line); r.italic = True; r.font.size = Pt(10.5)
 t = doc.add_paragraph(); t.alignment = WD_ALIGN_PARAGRAPH.CENTER
 r = t.add_run("Corresponding author: Thiago Bandeira, MS (Thiago Batista "
-              "Nunes Bandeira); 21324 NE 2nd Ct, Miami, FL 33179, United "
-              "States; Phone: (815) 603-3286; Email: tbati006@fiu.edu")
+              "Nunes Bandeira); [address withheld], United "
+              "States; Phone: [phone withheld]; Email: tbati006@fiu.edu")
 r.font.size = Pt(9.5); r.font.name = "Times New Roman"
 t = doc.add_paragraph()
 r = t.add_run("Keywords: Patient Readmission; Medicare; Machine Learning; "

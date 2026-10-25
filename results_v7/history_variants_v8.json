@@ -1,0 +1,33 @@
+{
+ "n_cohort_admissions": 244576,
+ "prior_admissions_6m": {
+  "p6_admit180": 0.9814,
+  "p6_admit182": 0.9859,
+  "p6_disch180": 0.9971,
+  "p6_order180": 0.9814,
+  "p6_cohort180": 0.97
+ },
+ "prior_mean_los_6m": {
+  "mlos_floor_admit180": 0.9831,
+  "mlos_floor_disch180": 0.9983,
+  "mlos_floor_cohort": 0.9729,
+  "mlos_round_admit180": 0.6906,
+  "LEAK_mlos_window_pm180": 0.6261
+ },
+ "prior_readmission_count": {
+  "pr_is_readm_prior": 0.6662,
+  "pr_is_readm_incl_index": 0.7869,
+  "pr_followed_prior": 0.7869,
+  "pr_followed_cohort_prior": 0.8258,
+  "LEAK_pr_followed_incl_index": 0.6448,
+  "LEAK_pr_patient_total": 0.5177
+ },
+ "time_since_last_discharge": {
+  "match_all_admissions_nonfill": 0.6235,
+  "share_fill_value": 0.3731,
+  "fill_when_no_prior_any": 0.9611,
+  "fill_when_no_prior_cohort": 1.0,
+  "nonfill_match_cohort": 0.9999,
+  "nonfill_match_all": 0.9946
+ }
+}

@@ -1,0 +1,29 @@
+[
+ {
+  "stage": "1-7",
+  "shares": {
+   "Index-stay context": 21.1,
+   "Laboratory and physiology": 26.9,
+   "Medications and orders": 29.7,
+   "Prior utilization": 22.4
+  }
+ },
+ {
+  "stage": "8-14",
+  "shares": {
+   "Index-stay context": 20.0,
+   "Laboratory and physiology": 30.4,
+   "Medications and orders": 21.2,
+   "Prior utilization": 28.4
+  }
+ },
+ {
+  "stage": "15-30",
+  "shares": {
+   "Index-stay context": 16.1,
+   "Laboratory and physiology": 26.2,
+   "Medications and orders": 23.7,
+   "Prior utilization": 34.1
+  }
+ }
+]

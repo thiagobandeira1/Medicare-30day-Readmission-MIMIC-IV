@@ -1,0 +1,1337 @@
+{
+ "final_feature_set": [
+  "admission_location",
+  "admission_type",
+  "age_at_admit",
+  "albumin_last",
+  "albumin_x_los",
+  "antibiotic_flag",
+  "bilirubin_max",
+  "consult_per_day",
+  "discharge_location",
+  "discharge_surge",
+  "distinct_drugs",
+  "freq_x_recency",
+  "gcs_min",
+  "hemoglobin_last",
+  "hr_std",
+  "iv_admin_rate",
+  "lab_abnormal_rate",
+  "late_order_burden",
+  "late_order_rate",
+  "log_los_days",
+  "log_n_labs",
+  "log_prior_readmit_count",
+  "log_time_since_discharge",
+  "los_days",
+  "los_per_prior_admit",
+  "n_discharge_drugs",
+  "n_distinct_routes",
+  "n_emar_details",
+  "n_lab_orders",
+  "n_labs_total",
+  "n_late_orders",
+  "n_meds_total",
+  "n_order_types",
+  "orders_first_24h",
+  "orders_last_6h",
+  "orders_per_day",
+  "prior_admissions_6m",
+  "prior_admissions_all",
+  "prior_admits_6m_sq",
+  "prior_any_ed_6m",
+  "prior_mean_los_6m",
+  "prior_readmission_count",
+  "provider_fragmentation_x_los",
+  "sodium_last",
+  "stepdown_flag",
+  "time_since_last_discharge",
+  "ventilator_flag",
+  "wbc_last"
+ ],
+ "n_features": 48,
+ "validation_hierarchy": {
+  "primary_oof_procedure_dev_only": {
+   "auroc": 0.7058,
+   "ci95": [
+    0.7017,
+    0.7104
+   ],
+   "note": "out-of-fold performance of the complete selection procedure on development partitions (fold-specific feature sets); estimates the procedure, not the fixed consensus model"
+  },
+  "secondary_consensus_cv_dev_only": {
+   "folds": [
+    0.7061,
+    0.7031,
+    0.7043,
+    0.7061,
+    0.7092
+   ],
+   "mean": 0.7058,
+   "sd": 0.0021,
+   "note": "fixed consensus set; optimistic because the set aggregates selection information across folds"
+  },
+  "tertiary_test_historically_exposed": {
+   "point": 0.706,
+   "ci95": [
+    0.6969,
+    0.7151
+   ]
+  }
+ },
+ "threshold_validation": 0.2054,
+ "metric_panel": {
+  "auroc": {
+   "point": 0.706,
+   "ci95": [
+    0.6969,
+    0.7151
+   ]
+  },
+  "ap": {
+   "point": 0.4295,
+   "ci95": [
+    0.4076,
+    0.4508
+   ]
+  },
+  "brier": {
+   "point": 0.1489,
+   "ci95": [
+    0.1462,
+    0.1514
+   ]
+  },
+  "ece": {
+   "point": 0.0034,
+   "ci95": [
+    0.0024,
+    0.0078
+   ]
+  },
+  "slope": {
+   "point": 0.9928,
+   "ci95": [
+    0.9596,
+    1.0229
+   ]
+  },
+  "intercept": {
+   "point": -0.0182,
+   "ci95": [
+    -0.0668,
+    0.0288
+   ]
+  },
+  "citl": {
+   "point": -0.0096,
+   "ci95": [
+    -0.0345,
+    0.0128
+   ]
+  },
+  "sensitivity": {
+   "point": 0.626,
+   "ci95": [
+    0.6092,
+    0.642
+   ]
+  },
+  "specificity": {
+   "point": 0.67,
+   "ci95": [
+    0.662,
+    0.6777
+   ]
+  },
+  "ppv": {
+   "point": 0.3387,
+   "ci95": [
+    0.3271,
+    0.3509
+   ]
+  },
+  "npv": {
+   "point": 0.869,
+   "ci95": [
+    0.8649,
+    0.8733
+   ]
+  },
+  "fnr": {
+   "point": 0.374,
+   "ci95": [
+    0.358,
+    0.3908
+   ]
+  },
+  "mean_predicted": 0.214,
+  "observed_rate": 0.2126
+ },
+ "dca": {
+  "thresholds": [
+   0.05,
+   0.06,
+   0.07,
+   0.08,
+   0.09,
+   0.1,
+   0.11,
+   0.12,
+   0.13,
+   0.14,
+   0.15,
+   0.16,
+   0.17,
+   0.18,
+   0.19,
+   0.2,
+   0.21,
+   0.22,
+   0.23,
+   0.24,
+   0.25,
+   0.26,
+   0.27,
+   0.28,
+   0.29,
+   0.3,
+   0.31,
+   0.32,
+   0.33,
+   0.34,
+   0.35,
+   0.36,
+   0.37,
+   0.38,
+   0.39,
+   0.4
+  ],
+  "model": [
+   0.171,
+   0.162,
+   0.1529,
+   0.1443,
+   0.1363,
+   0.1288,
+   0.1213,
+   0.1136,
+   0.1066,
+   0.1003,
+   0.094,
+   0.0879,
+   0.0823,
+   0.0773,
+   0.0726,
+   0.0682,
+   0.0642,
+   0.0604,
+   0.0575,
+   0.0544,
+   0.0515,
+   0.0482,
+   0.045,
+   0.0429,
+   0.041,
+   0.0384,
+   0.0361,
+   0.0344,
+   0.0328,
+   0.0316,
+   0.0302,
+   0.028,
+   0.0258,
+   0.0244,
+   0.0234,
+   0.0222
+  ],
+  "treat_all": [
+   0.1711,
+   0.1623,
+   0.1533,
+   0.1441,
+   0.1347,
+   0.1251,
+   0.1152,
+   0.1052,
+   0.0949,
+   0.0844,
+   0.0736,
+   0.0626,
+   0.0513,
+   0.0397,
+   0.0278,
+   0.0157,
+   0.0032,
+   -0.0095,
+   -0.0227,
+   -0.0361,
+   -0.0499,
+   -0.0641,
+   -0.0787,
+   -0.0937,
+   -0.1091,
+   -0.1249,
+   -0.1412,
+   -0.158,
+   -0.1753,
+   -0.1931,
+   -0.2115,
+   -0.2304,
+   -0.2499,
+   -0.2701,
+   -0.2909,
+   -0.3124
+  ]
+ },
+ "capacity": {
+  "top_5": {
+   "captured": 0.148,
+   "ppv": 0.629,
+   "n": 2383
+  },
+  "top_10": {
+   "captured": 0.251,
+   "ppv": 0.533,
+   "n": 4767
+  },
+  "top_20": {
+   "captured": 0.409,
+   "ppv": 0.434,
+   "n": 9534
+  }
+ },
+ "shap": [
+  {
+   "feature": "freq_x_recency",
+   "mean_abs_shap": 0.1576
+  },
+  {
+   "feature": "lab_abnormal_rate",
+   "mean_abs_shap": 0.1041
+  },
+  {
+   "feature": "prior_admissions_6m",
+   "mean_abs_shap": 0.0932
+  },
+  {
+   "feature": "log_n_labs",
+   "mean_abs_shap": 0.088
+  },
+  {
+   "feature": "log_prior_readmit_count",
+   "mean_abs_shap": 0.077
+  },
+  {
+   "feature": "hemoglobin_last",
+   "mean_abs_shap": 0.0764
+  },
+  {
+   "feature": "n_emar_details",
+   "mean_abs_shap": 0.0721
+  },
+  {
+   "feature": "n_meds_total",
+   "mean_abs_shap": 0.0682
+  },
+  {
+   "feature": "discharge_location",
+   "mean_abs_shap": 0.0649
+  },
+  {
+   "feature": "sodium_last",
+   "mean_abs_shap": 0.0614
+  },
+  {
+   "feature": "n_discharge_drugs",
+   "mean_abs_shap": 0.0562
+  },
+  {
+   "feature": "prior_mean_los_6m",
+   "mean_abs_shap": 0.0535
+  },
+  {
+   "feature": "bilirubin_max",
+   "mean_abs_shap": 0.0522
+  },
+  {
+   "feature": "wbc_last",
+   "mean_abs_shap": 0.0502
+  },
+  {
+   "feature": "consult_per_day",
+   "mean_abs_shap": 0.0474
+  },
+  {
+   "feature": "n_lab_orders",
+   "mean_abs_shap": 0.0468
+  },
+  {
+   "feature": "distinct_drugs",
+   "mean_abs_shap": 0.0465
+  },
+  {
+   "feature": "prior_admissions_all",
+   "mean_abs_shap": 0.0419
+  },
+  {
+   "feature": "age_at_admit",
+   "mean_abs_shap": 0.0412
+  },
+  {
+   "feature": "log_time_since_discharge",
+   "mean_abs_shap": 0.0402
+  },
+  {
+   "feature": "hr_std",
+   "mean_abs_shap": 0.038
+  },
+  {
+   "feature": "prior_any_ed_6m",
+   "mean_abs_shap": 0.0369
+  },
+  {
+   "feature": "discharge_surge",
+   "mean_abs_shap": 0.0347
+  },
+  {
+   "feature": "admission_type",
+   "mean_abs_shap": 0.034
+  },
+  {
+   "feature": "antibiotic_flag",
+   "mean_abs_shap": 0.0294
+  },
+  {
+   "feature": "admission_location",
+   "mean_abs_shap": 0.0291
+  },
+  {
+   "feature": "log_los_days",
+   "mean_abs_shap": 0.0287
+  },
+  {
+   "feature": "orders_last_6h",
+   "mean_abs_shap": 0.026
+  },
+  {
+   "feature": "n_late_orders",
+   "mean_abs_shap": 0.0241
+  },
+  {
+   "feature": "orders_first_24h",
+   "mean_abs_shap": 0.0237
+  },
+  {
+   "feature": "albumin_last",
+   "mean_abs_shap": 0.0225
+  },
+  {
+   "feature": "provider_fragmentation_x_los",
+   "mean_abs_shap": 0.0218
+  },
+  {
+   "feature": "late_order_burden",
+   "mean_abs_shap": 0.0209
+  },
+  {
+   "feature": "albumin_x_los",
+   "mean_abs_shap": 0.0208
+  },
+  {
+   "feature": "iv_admin_rate",
+   "mean_abs_shap": 0.0203
+  },
+  {
+   "feature": "n_order_types",
+   "mean_abs_shap": 0.0201
+  },
+  {
+   "feature": "gcs_min",
+   "mean_abs_shap": 0.0182
+  },
+  {
+   "feature": "los_per_prior_admit",
+   "mean_abs_shap": 0.0182
+  },
+  {
+   "feature": "late_order_rate",
+   "mean_abs_shap": 0.0151
+  },
+  {
+   "feature": "stepdown_flag",
+   "mean_abs_shap": 0.0099
+  },
+  {
+   "feature": "time_since_last_discharge",
+   "mean_abs_shap": 0.0098
+  },
+  {
+   "feature": "n_distinct_routes",
+   "mean_abs_shap": 0.0092
+  },
+  {
+   "feature": "n_labs_total",
+   "mean_abs_shap": 0.0059
+  },
+  {
+   "feature": "orders_per_day",
+   "mean_abs_shap": 0.0036
+  },
+  {
+   "feature": "prior_admits_6m_sq",
+   "mean_abs_shap": 0.0028
+  },
+  {
+   "feature": "ventilator_flag",
+   "mean_abs_shap": 0.0022
+  },
+  {
+   "feature": "los_days",
+   "mean_abs_shap": 0.0012
+  },
+  {
+   "feature": "prior_readmission_count",
+   "mean_abs_shap": 0.0007
+  }
+ ],
+ "fairness": {
+  "race": {
+   "White": {
+    "patients": 13426,
+    "admissions": 35059,
+    "events": 7362,
+    "prevalence": 0.21,
+    "auroc": 0.6987,
+    "ap": 0.4165,
+    "brier": 0.1489,
+    "ece": 0.0043,
+    "cal_slope": 0.974,
+    "cal_intercept": -0.027,
+    "sensitivity": 0.603,
+    "specificity": 0.681,
+    "ppv": 0.334,
+    "npv": 0.866,
+    "fnr": 0.397,
+    "auroc_ci95": [
+     0.6892,
+     0.709
+    ],
+    "sensitivity_ci95": [
+     0.5848,
+     0.6206
+    ],
+    "specificity_ci95": [
+     0.6718,
+     0.6898
+    ],
+    "ppv_ci95": [
+     0.3221,
+     0.3484
+    ],
+    "npv_ci95": [
+     0.861,
+     0.8704
+    ],
+    "fnr_ci95": [
+     0.3794,
+     0.4152
+    ],
+    "brier_ci95": [
+     0.1456,
+     0.1518
+    ],
+    "cal_slope_ci95": [
+     0.9378,
+     1.0127
+    ]
+   },
+   "Black": {
+    "patients": 1827,
+    "admissions": 6715,
+    "events": 1536,
+    "prevalence": 0.2287,
+    "auroc": 0.6925,
+    "ap": 0.4162,
+    "brier": 0.1606,
+    "ece": 0.0104,
+    "cal_slope": 0.908,
+    "cal_intercept": -0.104,
+    "sensitivity": 0.67,
+    "specificity": 0.606,
+    "ppv": 0.335,
+    "npv": 0.861,
+    "fnr": 0.33,
+    "auroc_ci95": [
+     0.6722,
+     0.712
+    ],
+    "sensitivity_ci95": [
+     0.6282,
+     0.7068
+    ],
+    "specificity_ci95": [
+     0.5815,
+     0.632
+    ],
+    "ppv_ci95": [
+     0.3108,
+     0.3564
+    ],
+    "npv_ci95": [
+     0.8486,
+     0.872
+    ],
+    "fnr_ci95": [
+     0.2932,
+     0.3718
+    ],
+    "brier_ci95": [
+     0.1528,
+     0.1672
+    ],
+    "cal_slope_ci95": [
+     0.83,
+     0.9847
+    ]
+   },
+   "Hispanic/Latino": {
+    "patients": 564,
+    "admissions": 1993,
+    "events": 547,
+    "prevalence": 0.2745,
+    "auroc": 0.7614,
+    "ap": 0.5728,
+    "brier": 0.161,
+    "ece": 0.0216,
+    "cal_slope": 1.121,
+    "cal_intercept": 0.189,
+    "sensitivity": 0.77,
+    "specificity": 0.591,
+    "ppv": 0.416,
+    "npv": 0.871,
+    "fnr": 0.23,
+    "auroc_ci95": [
+     0.6949,
+     0.8076
+    ],
+    "sensitivity_ci95": [
+     0.6787,
+     0.8387
+    ],
+    "specificity_ci95": [
+     0.543,
+     0.6348
+    ],
+    "ppv_ci95": [
+     0.3198,
+     0.505
+    ],
+    "npv_ci95": [
+     0.8493,
+     0.892
+    ],
+    "fnr_ci95": [
+     0.1613,
+     0.3213
+    ],
+    "brier_ci95": [
+     0.1472,
+     0.1743
+    ],
+    "cal_slope_ci95": [
+     0.9574,
+     1.2296
+    ]
+   },
+   "Asian": {
+    "patients": 429,
+    "admissions": 1101,
+    "events": 261,
+    "prevalence": 0.2371,
+    "auroc": 0.7655,
+    "ap": 0.552,
+    "brier": 0.1462,
+    "ece": 0.0201,
+    "cal_slope": 1.16,
+    "cal_intercept": 0.226,
+    "sensitivity": 0.705,
+    "specificity": 0.681,
+    "ppv": 0.407,
+    "npv": 0.881,
+    "fnr": 0.295,
+    "auroc_ci95": [
+     0.7101,
+     0.8075
+    ],
+    "sensitivity_ci95": [
+     0.6052,
+     0.7802
+    ],
+    "specificity_ci95": [
+     0.6353,
+     0.7228
+    ],
+    "ppv_ci95": [
+     0.3307,
+     0.4781
+    ],
+    "npv_ci95": [
+     0.8567,
+     0.9039
+    ],
+    "fnr_ci95": [
+     0.2198,
+     0.3948
+    ],
+    "brier_ci95": [
+     0.1314,
+     0.1606
+    ],
+    "cal_slope_ci95": [
+     0.9467,
+     1.3359
+    ]
+   },
+   "Other/Unknown": {
+    "patients": 1854,
+    "admissions": 2804,
+    "events": 427,
+    "prevalence": 0.1523,
+    "auroc": 0.7367,
+    "ap": 0.4102,
+    "brier": 0.1134,
+    "ece": 0.0518,
+    "cal_slope": 1.203,
+    "cal_intercept": -0.094,
+    "sensitivity": 0.637,
+    "specificity": 0.727,
+    "ppv": 0.296,
+    "npv": 0.918,
+    "fnr": 0.363,
+    "auroc_ci95": [
+     0.6989,
+     0.7706
+    ],
+    "sensitivity_ci95": [
+     0.5704,
+     0.6965
+    ],
+    "specificity_ci95": [
+     0.7043,
+     0.748
+    ],
+    "ppv_ci95": [
+     0.2509,
+     0.3375
+    ],
+    "npv_ci95": [
+     0.904,
+     0.9299
+    ],
+    "fnr_ci95": [
+     0.3035,
+     0.4296
+    ],
+    "brier_ci95": [
+     0.1046,
+     0.1234
+    ],
+    "cal_slope_ci95": [
+     1.0396,
+     1.3508
+    ]
+   }
+  },
+  "sex": {
+   "Female": {
+    "patients": 9206,
+    "admissions": 24465,
+    "events": 4858,
+    "prevalence": 0.1986,
+    "auroc": 0.7082,
+    "ap": 0.4139,
+    "brier": 0.1418,
+    "ece": 0.0075,
+    "cal_slope": 1.015,
+    "cal_intercept": -0.026,
+    "sensitivity": 0.61,
+    "specificity": 0.694,
+    "ppv": 0.33,
+    "npv": 0.878,
+    "fnr": 0.39,
+    "auroc_ci95": [
+     0.6959,
+     0.7217
+    ],
+    "sensitivity_ci95": [
+     0.5854,
+     0.6339
+    ],
+    "specificity_ci95": [
+     0.6822,
+     0.7055
+    ],
+    "ppv_ci95": [
+     0.315,
+     0.347
+    ],
+    "npv_ci95": [
+     0.8724,
+     0.8826
+    ],
+    "fnr_ci95": [
+     0.3661,
+     0.4146
+    ],
+    "brier_ci95": [
+     0.1379,
+     0.1454
+    ],
+    "cal_slope_ci95": [
+     0.9698,
+     1.0642
+    ]
+   },
+   "Male": {
+    "patients": 8347,
+    "admissions": 23207,
+    "events": 5275,
+    "prevalence": 0.2273,
+    "auroc": 0.7019,
+    "ap": 0.4436,
+    "brier": 0.1563,
+    "ece": 0.0056,
+    "cal_slope": 0.966,
+    "cal_intercept": -0.014,
+    "sensitivity": 0.641,
+    "specificity": 0.644,
+    "ppv": 0.347,
+    "npv": 0.859,
+    "fnr": 0.359,
+    "auroc_ci95": [
+     0.6892,
+     0.7145
+    ],
+    "sensitivity_ci95": [
+     0.6184,
+     0.6634
+    ],
+    "specificity_ci95": [
+     0.6337,
+     0.6558
+    ],
+    "ppv_ci95": [
+     0.3304,
+     0.3644
+    ],
+    "npv_ci95": [
+     0.853,
+     0.8649
+    ],
+    "fnr_ci95": [
+     0.3366,
+     0.3816
+    ],
+    "brier_ci95": [
+     0.1529,
+     0.1598
+    ],
+    "cal_slope_ci95": [
+     0.9216,
+     1.0093
+    ]
+   }
+  },
+  "age_band": {
+   "<65": {
+    "patients": 3136,
+    "admissions": 10130,
+    "events": 2692,
+    "prevalence": 0.2657,
+    "auroc": 0.7157,
+    "ap": 0.4897,
+    "brier": 0.171,
+    "ece": 0.0072,
+    "cal_slope": 0.933,
+    "cal_intercept": -0.061,
+    "sensitivity": 0.748,
+    "specificity": 0.548,
+    "ppv": 0.375,
+    "npv": 0.857,
+    "fnr": 0.252,
+    "auroc_ci95": [
+     0.7007,
+     0.7309
+    ],
+    "sensitivity_ci95": [
+     0.7191,
+     0.773
+    ],
+    "specificity_ci95": [
+     0.5284,
+     0.5697
+    ],
+    "ppv_ci95": [
+     0.3549,
+     0.3933
+    ],
+    "npv_ci95": [
+     0.8468,
+     0.8672
+    ],
+    "fnr_ci95": [
+     0.227,
+     0.2809
+    ],
+    "brier_ci95": [
+     0.1653,
+     0.1769
+    ],
+    "cal_slope_ci95": [
+     0.8749,
+     0.9889
+    ]
+   },
+   "65-74": {
+    "patients": 6379,
+    "admissions": 14701,
+    "events": 3167,
+    "prevalence": 0.2154,
+    "auroc": 0.7217,
+    "ap": 0.4566,
+    "brier": 0.1472,
+    "ece": 0.0055,
+    "cal_slope": 1.034,
+    "cal_intercept": 0.038,
+    "sensitivity": 0.646,
+    "specificity": 0.676,
+    "ppv": 0.354,
+    "npv": 0.874,
+    "fnr": 0.354,
+    "auroc_ci95": [
+     0.7057,
+     0.7374
+    ],
+    "sensitivity_ci95": [
+     0.6186,
+     0.6742
+    ],
+    "specificity_ci95": [
+     0.6633,
+     0.6886
+    ],
+    "ppv_ci95": [
+     0.3332,
+     0.3778
+    ],
+    "npv_ci95": [
+     0.8662,
+     0.8807
+    ],
+    "fnr_ci95": [
+     0.3258,
+     0.3814
+    ],
+    "brier_ci95": [
+     0.1428,
+     0.1517
+    ],
+    "cal_slope_ci95": [
+     0.9784,
+     1.0889
+    ]
+   },
+   "75-84": {
+    "patients": 6090,
+    "admissions": 13527,
+    "events": 2609,
+    "prevalence": 0.1929,
+    "auroc": 0.6828,
+    "ap": 0.38,
+    "brier": 0.1423,
+    "ece": 0.0058,
+    "cal_slope": 0.972,
+    "cal_intercept": -0.06,
+    "sensitivity": 0.557,
+    "specificity": 0.703,
+    "ppv": 0.309,
+    "npv": 0.869,
+    "fnr": 0.443,
+    "auroc_ci95": [
+     0.6666,
+     0.6993
+    ],
+    "sensitivity_ci95": [
+     0.5307,
+     0.5867
+    ],
+    "specificity_ci95": [
+     0.6905,
+     0.7148
+    ],
+    "ppv_ci95": [
+     0.2904,
+     0.3304
+    ],
+    "npv_ci95": [
+     0.8625,
+     0.8759
+    ],
+    "fnr_ci95": [
+     0.4133,
+     0.4693
+    ],
+    "brier_ci95": [
+     0.1379,
+     0.1468
+    ],
+    "cal_slope_ci95": [
+     0.9035,
+     1.0404
+    ]
+   },
+   "85+": {
+    "patients": 3986,
+    "admissions": 9314,
+    "events": 1665,
+    "prevalence": 0.1788,
+    "auroc": 0.6717,
+    "ap": 0.333,
+    "brier": 0.137,
+    "ece": 0.0038,
+    "cal_slope": 1.036,
+    "cal_intercept": 0.038,
+    "sensitivity": 0.5,
+    "specificity": 0.733,
+    "ppv": 0.289,
+    "npv": 0.871,
+    "fnr": 0.5,
+    "auroc_ci95": [
+     0.6525,
+     0.6896
+    ],
+    "sensitivity_ci95": [
+     0.4628,
+     0.5344
+    ],
+    "specificity_ci95": [
+     0.7176,
+     0.7479
+    ],
+    "ppv_ci95": [
+     0.2681,
+     0.3102
+    ],
+    "npv_ci95": [
+     0.8621,
+     0.8784
+    ],
+    "fnr_ci95": [
+     0.4656,
+     0.5372
+    ],
+    "brier_ci95": [
+     0.1309,
+     0.1429
+    ],
+    "cal_slope_ci95": [
+     0.9387,
+     1.1237
+    ]
+   }
+  },
+  "white_minus_black": {
+   "point": 0.0062,
+   "ci95": [
+    -0.0156,
+    0.0286
+   ],
+   "p_bootstrap": 0.52
+  }
+ },
+ "baselines": {
+  "lace_auroc": 0.605,
+  "hospital12_auroc": 0.6468,
+  "uplift_lace": 0.1011,
+  "uplift_lace_ci": [
+   0.0924,
+   0.11
+  ],
+  "uplift_hospital12": 0.0592,
+  "uplift_hospital12_ci": [
+   0.054,
+   0.0652
+  ]
+ },
+ "sensitivity": {
+  "sameday_as_readmission": {
+   "definition": "next admission counted as readmission when exact-time delta <= 30 days INCLUDING the -2<delta<=0 band the primary label treats as transfers/continuations",
+   "test_events_primary": 10133,
+   "test_events_alt": 10273,
+   "test_prevalence_alt": 0.2155,
+   "test_auroc_refit": 0.7092,
+   "test_auroc_final_model_vs_alt_label": 0.7099
+  },
+  "unplanned_only": {
+   "definition": "readmission counted only when the subsequent admission is not typed ELECTIVE (proxy for excluding planned readmissions)",
+   "test_events_alt": 9852,
+   "test_prevalence_alt": 0.2067,
+   "test_auroc_refit": 0.7004,
+   "test_auroc_final_model_vs_alt_label": 0.7004
+  },
+  "nonelective_index_only": {
+   "test_admissions": 43012,
+   "test_events": 9309,
+   "test_prevalence": 0.2164,
+   "test_auroc": 0.7078
+  }
+ },
+ "daily_event_counts_test": [
+  {
+   "day": 1,
+   "readmissions": 860,
+   "deaths_before_readmission": 67
+  },
+  {
+   "day": 2,
+   "readmissions": 549,
+   "deaths_before_readmission": 73
+  },
+  {
+   "day": 3,
+   "readmissions": 554,
+   "deaths_before_readmission": 65
+  },
+  {
+   "day": 4,
+   "readmissions": 538,
+   "deaths_before_readmission": 65
+  },
+  {
+   "day": 5,
+   "readmissions": 491,
+   "deaths_before_readmission": 66
+  },
+  {
+   "day": 6,
+   "readmissions": 532,
+   "deaths_before_readmission": 51
+  },
+  {
+   "day": 7,
+   "readmissions": 476,
+   "deaths_before_readmission": 49
+  },
+  {
+   "day": 8,
+   "readmissions": 412,
+   "deaths_before_readmission": 55
+  },
+  {
+   "day": 9,
+   "readmissions": 391,
+   "deaths_before_readmission": 41
+  },
+  {
+   "day": 10,
+   "readmissions": 412,
+   "deaths_before_readmission": 51
+  },
+  {
+   "day": 11,
+   "readmissions": 341,
+   "deaths_before_readmission": 34
+  },
+  {
+   "day": 12,
+   "readmissions": 336,
+   "deaths_before_readmission": 42
+  },
+  {
+   "day": 13,
+   "readmissions": 339,
+   "deaths_before_readmission": 43
+  },
+  {
+   "day": 14,
+   "readmissions": 314,
+   "deaths_before_readmission": 50
+  },
+  {
+   "day": 15,
+   "readmissions": 294,
+   "deaths_before_readmission": 44
+  },
+  {
+   "day": 16,
+   "readmissions": 311,
+   "deaths_before_readmission": 24
+  },
+  {
+   "day": 17,
+   "readmissions": 261,
+   "deaths_before_readmission": 32
+  },
+  {
+   "day": 18,
+   "readmissions": 259,
+   "deaths_before_readmission": 33
+  },
+  {
+   "day": 19,
+   "readmissions": 234,
+   "deaths_before_readmission": 25
+  },
+  {
+   "day": 20,
+   "readmissions": 215,
+   "deaths_before_readmission": 27
+  },
+  {
+   "day": 21,
+   "readmissions": 253,
+   "deaths_before_readmission": 21
+  },
+  {
+   "day": 22,
+   "readmissions": 216,
+   "deaths_before_readmission": 31
+  },
+  {
+   "day": 23,
+   "readmissions": 191,
+   "deaths_before_readmission": 32
+  },
+  {
+   "day": 24,
+   "readmissions": 195,
+   "deaths_before_readmission": 17
+  },
+  {
+   "day": 25,
+   "readmissions": 206,
+   "deaths_before_readmission": 20
+  },
+  {
+   "day": 26,
+   "readmissions": 200,
+   "deaths_before_readmission": 24
+  },
+  {
+   "day": 27,
+   "readmissions": 202,
+   "deaths_before_readmission": 28
+  },
+  {
+   "day": 28,
+   "readmissions": 188,
+   "deaths_before_readmission": 20
+  },
+  {
+   "day": 29,
+   "readmissions": 194,
+   "deaths_before_readmission": 24
+  },
+  {
+   "day": 30,
+   "readmissions": 153,
+   "deaths_before_readmission": 16
+  }
+ ],
+ "survival": {
+  "aft_harrell_c": 0.6761,
+  "aft_best_iteration": 573,
+  "daily_tdauc": [
+   0.8355,
+   0.7508,
+   0.7159,
+   0.6995,
+   0.6913,
+   0.6862,
+   0.6842,
+   0.6835,
+   0.6837,
+   0.6844,
+   0.6849,
+   0.6836,
+   0.6844,
+   0.682,
+   0.6831,
+   0.6853,
+   0.6874,
+   0.6868,
+   0.6873,
+   0.6882,
+   0.6877,
+   0.6882,
+   0.6889,
+   0.6898,
+   0.6902,
+   0.6906,
+   0.6897,
+   0.6895,
+   0.6902
+  ],
+  "daily_tdauc_estimand": "cumulative/dynamic AUROC, deaths before day t kept among controls (Blanche definition 2); no censoring before day 30, so empirical",
+  "daily_tdauc_deaths_censored_ipcw": [
+   0.8356,
+   0.7513,
+   0.7168,
+   0.7007,
+   0.6929,
+   0.6881,
+   0.6863,
+   0.686,
+   0.6864,
+   0.6874,
+   0.688,
+   0.6869,
+   0.6879,
+   0.6859,
+   0.6872,
+   0.6896,
+   0.6919,
+   0.6915,
+   0.6923,
+   0.6934,
+   0.693,
+   0.6937,
+   0.6945,
+   0.6956,
+   0.6961,
+   0.6966,
+   0.6959,
+   0.6958,
+   0.6967
+  ]
+ },
+ "stages": [
+  {
+   "stage": "1-7",
+   "at_risk": 47672,
+   "events": 4000,
+   "auroc": 0.6867
+  },
+  {
+   "stage": "8-14",
+   "at_risk": 43236,
+   "events": 2545,
+   "auroc": 0.688
+  },
+  {
+   "stage": "15-30",
+   "at_risk": 40375,
+   "events": 3572,
+   "auroc": 0.7097
+  }
+ ],
+ "env": {
+  "python": "3.11.14",
+  "xgboost": "3.2.0",
+  "sklearn": "1.7.2",
+  "pandas": "2.3.3",
+  "numpy": "1.26.4",
+  "seed": 42
+ }
+}

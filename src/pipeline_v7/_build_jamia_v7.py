@@ -99,8 +99,8 @@ for txt, sz, it, b in (
          "Sciences, Florida International University, Miami, FL, United "
          "States", 10.5, True, False),
         ("Corresponding author: Thiago Bandeira, MS (Thiago Batista Nunes "
-         "Bandeira); 21324 NE 2nd Ct, Miami, FL 33179, United States; Phone: "
-         "(815) 603-3286; Email: tbati006@fiu.edu", 9.5, False, False)):
+         "Bandeira); [address withheld], United States; Phone: "
+         "[phone withheld]; Email: tbati006@fiu.edu", 9.5, False, False)):
     t = doc.add_paragraph(); t.alignment = WD_ALIGN_PARAGRAPH.CENTER
     r = t.add_run(txt); r.font.size = Pt(sz); r.italic = it; r.bold = b
 t = doc.add_paragraph()

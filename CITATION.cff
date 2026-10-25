@@ -21,22 +21,22 @@ authors:
     affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
     orcid: "https://orcid.org/0000-0002-4005-9942"
 year: 2026
-version: "v7.0-jamia"
-date-released: "2026-10-13"
+version: "v11.0-jamia"
+date-released: "2026-10-25"
 doi: "10.5281/zenodo.21987701"
 abstract: >-
   Software and aggregate results for the JAMIA manuscript "Predicting 30-Day
   Hospital Readmission at Discharge: A Leakage-Safe, Calibrated Electronic
-  Health Record Model in Medicare-Insured Adults". Version v7 removes a
+  Health Record Model in Medicare-Insured Adults". Versions v7 to v11 remove a
   prior-utilization feature (los_trend_180d) and two derived interactions
   that encoded later admissions; all earlier releases report inflated
   performance (see LEAKAGE_CORRECTION_v7.md). Contains the leakage-safe
   staged recursive feature elimination pipeline, the empirical
-  first-admission leakage test, the final 47-feature XGBoost model
-  (src/pipeline_v7), canonical machine-readable results
-  (results_v7/final_model_v7.json and companions), and figures. Out-of-fold
-  AUROC of the complete selection procedure 0.7058 (95% CI 0.7018 to
-  0.7104, primary); test AUROC 0.7064 (95% CI 0.6973 to 0.7150) on the
+  first-admission leakage test, the final 48-feature XGBoost model
+  (src/pipeline_v11), canonical machine-readable results
+  (results_v11/final_model_v11.json and companions), and figures. Version v11 also rebuilt the feature table without global imputation. Out-of-fold
+  AUROC of the complete selection procedure 0.7058 (95% CI 0.7017 to
+  0.7104, primary); test AUROC 0.7060 (95% CI 0.6969 to 0.7151) on the
   historically exposed test partition, calibration slope 1.00. Same-cohort
   baselines: LACE 0.605 and HOSPITAL 0.649. MIMIC-IV row-level data are not
   included, per the PhysioNet Credentialed Health Data Use Agreement.

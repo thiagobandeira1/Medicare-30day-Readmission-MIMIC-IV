@@ -1,0 +1,5 @@
+{
+ "orders_last_6h_eq_rate_x_late_orders": 1.0,
+ "n_labs_total_eq_numeric_results_in_hadm": 1.0,
+ "lab_abnormal_rate_eq_abnormal_rows_over_numeric_results": 1.0
+}

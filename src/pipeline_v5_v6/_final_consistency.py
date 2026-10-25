@@ -188,7 +188,7 @@ for name, v in [
     ("ORCID AG", "0009-0007-6777-6072"),
     ("ORCID CP", "0000-0002-0599-7941"),
     ("ORCID AMM", "0000-0002-4005-9942"),
-    ("corresponding block", "21324 NE 2nd Ct"),
+    ("corresponding block", "[address withheld]"),
     ("sole accessor", "the only author to access the raw data"),
     ("not HSR", "does not constitute human-subjects research"),
     ("funding final", "This study received no external funding."),

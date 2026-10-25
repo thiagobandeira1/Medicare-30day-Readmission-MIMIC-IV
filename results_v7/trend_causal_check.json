@@ -1,0 +1,45 @@
+{
+ "los_trend_180d_prior_first_ever_nonzero_share": 0.0,
+ "los_trend_prior_x_prior_6m_first_ever_nonzero_share": 0.0,
+ "los_trend_prior_x_prior_admits_first_ever_nonzero_share": 0.0,
+ "los_delta_prior_180d_first_ever_nonzero_share": 0.0,
+ "los_trend_180d_prior_auroc_later_admission_given_prior": 0.5128,
+ "los_trend_prior_x_prior_6m_auroc_later_admission_given_prior": 0.5135,
+ "los_trend_prior_x_prior_admits_auroc_later_admission_given_prior": 0.5146,
+ "los_delta_prior_180d_auroc_later_admission_given_prior": 0.5173,
+ "los_trend_180d_auroc_later_admission_given_prior": 0.5058,
+ "share_with_prior_stay_180d": 0.4056,
+ "val_auroc_v7_47": 0.7177,
+ "devcv_auroc_v7_47": [
+  0.706,
+  [
+   0.7059,
+   0.7038,
+   0.7048,
+   0.7067,
+   0.7088
+  ]
+ ],
+ "val_auroc_v7_47_plus_trend3": 0.7161,
+ "devcv_auroc_v7_47_plus_trend3": [
+  0.706,
+  [
+   0.7067,
+   0.7026,
+   0.7047,
+   0.7068,
+   0.7091
+  ]
+ ],
+ "val_auroc_v7_47_plus_all4": 0.717,
+ "devcv_auroc_v7_47_plus_all4": [
+  0.7058,
+  [
+   0.7065,
+   0.7028,
+   0.7041,
+   0.7065,
+   0.7091
+  ]
+ ]
+}

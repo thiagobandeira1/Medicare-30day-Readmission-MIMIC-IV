@@ -1,0 +1,21 @@
+{
+ "n_sample": 20000,
+ "labevents": {
+  "row_share_after_discharge": 0.0002,
+  "admissions_with_any_post_row": 0.0015,
+  "median_hours_after_discharge": 4.32,
+  "p90_hours_after_discharge": 6.57,
+  "readmit_rate_if_any_post": 0.1613,
+  "readmit_rate_if_none": 0.2169,
+  "auroc_any_post_for_outcome": 0.4997
+ },
+ "poe": {
+  "row_share_after_discharge": 0.0006,
+  "admissions_with_any_post_row": 0.0197,
+  "median_hours_after_discharge": 1.82,
+  "p90_hours_after_discharge": 11.06,
+  "readmit_rate_if_any_post": 0.2697,
+  "readmit_rate_if_none": 0.2157,
+  "auroc_any_post_for_outcome": 0.5031
+ }
+}

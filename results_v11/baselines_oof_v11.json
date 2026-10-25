@@ -1,0 +1,48 @@
+{
+ "n_dev": 189234,
+ "events_dev": 40660,
+ "oof_auroc_rfe": 0.7058,
+ "oof_auroc_lace": 0.6055,
+ "oof_auroc_hospital12": 0.6424,
+ "oof_uplift_lace": 0.1003,
+ "oof_uplift_lace_ci95": [
+  0.0962,
+  0.1042
+ ],
+ "oof_uplift_hospital12": 0.0635,
+ "oof_uplift_hospital12_ci95": [
+  0.0607,
+  0.0663
+ ],
+ "top10_capture_oof": {
+  "model": {
+   "captured": 0.248,
+   "ppv": 0.533
+  },
+  "lace": {
+   "captured": 0.159,
+   "ppv": 0.342
+  },
+  "hospital12": {
+   "captured": 0.201,
+   "ppv": 0.431
+  }
+ },
+ "test_auroc_lace": 0.605,
+ "test_auroc_hospital12": 0.6468,
+ "top10_capture_test": {
+  "model": {
+   "captured": 0.251,
+   "ppv": 0.533
+  },
+  "lace": {
+   "captured": 0.16,
+   "ppv": 0.34
+  },
+  "hospital12": {
+   "captured": 0.198,
+   "ppv": 0.422
+  }
+ },
+ "note": "LACE E component counts prior 180-day admissions with an emergency department registration; ED visits without admission are not in MIMIC-IV core tables (adapted LACE). HOSPITAL uses admissions in the prior 365 days (original 12-month window)."
+}

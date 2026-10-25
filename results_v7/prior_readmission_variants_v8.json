@@ -1,0 +1,27 @@
+{
+ "cum_excl": 0.8328,
+ "cum_incl": 0.6728,
+ "tot": 0.5411,
+ "cum_excl_lag2": 0.6916,
+ "diff_dist_vs_cum_excl": {
+  "0": 203685,
+  "-1": 17848,
+  "-2": 7851,
+  "-3": 4107,
+  "-4": 2293,
+  "-5": 1748
+ },
+ "mean_residual_if_index_readmit": -1.2251,
+ "mean_residual_if_not": -0.47,
+ "first_cohort_adm_nonzero_share": 0.0,
+ "first_cohort_adm_readmit_if_nonzero": null,
+ "first_cohort_adm_readmit_if_zero": 0.1472,
+ "lookback_variants": {
+  "admit_90": 0.8769,
+  "admit_180": 0.9206,
+  "admit_365": 1.0,
+  "admit_730": 0.9164,
+  "disch_180": 0.9233,
+  "disch_365": 0.9963
+ }
+}

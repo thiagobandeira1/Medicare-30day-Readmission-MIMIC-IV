@@ -58,3 +58,25 @@ reports the timing curve both with and without them.
 * Figures: `figures_v7/`.
 * Superseded: `results_v5/`, `results_v6/`, `src/pipeline_v5_v6/`, tag
   `v6.4-submission` and Zenodo version 10.5281/zenodo.21987702.
+
+# Versions 8 to 11 (October 2026)
+
+* **v8 to v10** added audits without changing the model: recomputation of
+  every history feature from raw admission timestamps, a within-patient
+  constancy scan, subgroup calibration, and a corrected continuation
+  sensitivity rule (chained 1-hour continuations merged into one stay with
+  the 30-day window starting at the end of that stay). Scripts are in
+  `src/pipeline_v8_v10/`; aggregate outputs in `results_v7/*_v8.json`,
+  `*_v9.json`, `*_v10.json`.
+* **v11** found a second defect by comparing stored columns with raw tables:
+  the inherited capstone feature table had imputed 16 continuous
+  measurements with medians computed over all partitions (including test)
+  and had zero-filled 5 others, so no final predictor showed any
+  missingness. The table was rebuilt from raw MIMIC-IV tables with missing
+  values preserved (laboratory results kept only when stored on or before
+  discharge) and the complete pipeline was rerun (`src/pipeline_v11/`,
+  `results_v11/`, `figures_v11/`). The consensus model has 48 features;
+  out-of-fold AUROC 0.7058 (unchanged), test AUROC 0.7060, calibration
+  slope 0.99. `results_v11/table_rebuild_v11.json` records, per feature,
+  the true missingness and the agreement with the old values where both
+  exist.

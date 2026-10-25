@@ -66,7 +66,7 @@ P("On behalf of: Armando Gonzalez, MS; Christian Poellabauer, PhD; Ananda "
   "Mohan Mondal, PhD")
 P("Knight Foundation School of Computing and Information Sciences, Florida "
   "International University, Miami, FL, United States")
-P("21324 NE 2nd Ct, Miami, FL 33179, United States; Phone: (815) 603-3286; "
+P("[address withheld], United States; Phone: [phone withheld]; "
   "Email: tbati006@fiu.edu")
 
 DST = PUB / "JAMIA Cover Letter DRAFT.docx"

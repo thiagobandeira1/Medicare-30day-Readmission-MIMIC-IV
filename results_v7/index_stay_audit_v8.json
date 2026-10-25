@@ -1,0 +1,77 @@
+{
+ "constant_within_patient_share": {
+  "los_trend_180d": 1.0,
+  "stepdown_flag": 0.8143,
+  "ventilator_flag": 0.7843,
+  "n_distinct_routes": 0.6172,
+  "icu_flag": 0.5852,
+  "gcs_min": 0.5738,
+  "antibiotic_flag": 0.5659,
+  "n_datetime_events": 0.5555,
+  "log_prior_readmit_count": 0.4771,
+  "prior_readmission_count": 0.4771,
+  "prior_any_ed_6m": 0.4216,
+  "albumin_x_los": 0.3828,
+  "albumin_last": 0.369,
+  "discharge_surge": 0.3422,
+  "prior_mean_los_6m": 0.3225,
+  "n_emar_details": 0.2947,
+  "admission_location": 0.2892,
+  "bilirubin_max": 0.2848,
+  "age_at_admit": 0.2718,
+  "prior_admissions_6m": 0.263,
+  "prior_admits_6m_sq": 0.263,
+  "discharge_location": 0.1832,
+  "admission_type": 0.1782,
+  "consult_per_day": 0.0967,
+  "n_order_types": 0.0892,
+  "sodium_last": 0.0727,
+  "log_los_days": 0.0604,
+  "los_days": 0.0604,
+  "los_per_prior_admit": 0.0381,
+  "n_discharge_drugs": 0.0357,
+  "hemoglobin_last": 0.032,
+  "wbc_last": 0.032,
+  "provider_fragmentation_x_los": 0.0289,
+  "late_order_burden": 0.0287,
+  "distinct_drugs": 0.0233,
+  "n_lab_item_types": 0.0217,
+  "lab_abnormal_rate": 0.02,
+  "n_late_orders": 0.0197,
+  "n_meds_total": 0.0188,
+  "n_lab_orders": 0.0187,
+  "log_n_labs": 0.0172,
+  "n_labs_total": 0.0172,
+  "late_order_rate": 0.0132,
+  "orders_last_6h": 0.0008,
+  "orders_per_day": 0.0003,
+  "freq_x_recency": 0.0,
+  "prior_admissions_all": 0.0,
+  "time_since_last_discharge": 0.0
+ },
+ "n_multi_admission_patients": 45154,
+ "raw_spot_check_n": 3000,
+ "raw_spot_check": {
+  "n_labs_total": {
+   "bounded_by_stay": 0.304,
+   "all_rows_of_hadm": 0.304
+  },
+  "n_lab_item_types": {
+   "bounded_by_stay": 0.8783,
+   "all_rows_of_hadm": 1.0
+  },
+  "lab_abnormal_rate": {
+   "bounded_by_stay": 0.1947,
+   "all_rows_of_hadm": 0.195
+  },
+  "orders_last_6h": {
+   "final_6h_before_discharge": 0.0243
+  },
+  "n_order_types": {
+   "bounded_by_stay": 0.6543,
+   "all_rows_of_hadm": 0.998
+  },
+  "lab_rows_after_discharge_share": 0.0013,
+  "poe_rows_after_discharge_share": 0.0019
+ }
+}

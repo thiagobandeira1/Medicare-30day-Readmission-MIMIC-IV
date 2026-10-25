@@ -1,0 +1,9 @@
+{
+ "band_events": 2368,
+ "band_test": 462,
+ "second_admission_within_30d_of_index_discharge": 436,
+ "second_admission_within_30d_of_continuation_discharge": 506,
+ "continuation_los_days_median": 7.05,
+ "share_hidden_if_relabeled": 0.1841,
+ "test_second_admission_within_30d_of_index_discharge": 76
+}

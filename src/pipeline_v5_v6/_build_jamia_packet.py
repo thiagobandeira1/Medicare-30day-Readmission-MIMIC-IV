@@ -80,8 +80,8 @@ Authors in order, one affiliation for all (Knight Foundation School of
 Computing and Information Sciences, Florida International University,
 Miami, FL, United States):
   Thiago Bandeira, MS, tbati006@fiu.edu, ORCID 0009-0006-0204-5298
-  (corresponding author; 21324 NE 2nd Ct, Miami, FL 33179, United
-  States; phone (815) 603-3286)
+  (corresponding author; [address withheld], United
+  States; phone [phone withheld])
   Armando Gonzalez, MS, agonz1689@fiu.edu, ORCID 0009-0007-6777-6072
   Christian Poellabauer, PhD, cpoellab@fiu.edu, ORCID 0000-0002-0599-7941
   Ananda Mohan Mondal, PhD, amondal@cis.fiu.edu, ORCID 0000-0002-4005-9942

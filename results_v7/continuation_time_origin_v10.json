@@ -1,0 +1,31 @@
+{
+ "n": 2368,
+ "gap_minutes_quantiles": [
+  1.0,
+  1.0,
+  1.0,
+  2.0,
+  8.0
+ ],
+ "continuation_los_days_quantiles": [
+  1.28,
+  3.8,
+  7.05,
+  14.0,
+  27.87
+ ],
+ "continuation_extends_past_day30_share": 0.0849,
+ "continuation_ends_in_death_share": 0.1191,
+ "continuation_admission_type_top": {
+  "URGENT": 0.533,
+  "EW EMER.": 0.23,
+  "DIRECT EMER.": 0.167,
+  "OBSERVATION ADMIT": 0.047,
+  "DIRECT OBSERVATION": 0.012
+ },
+ "return_within_30d_of_index_discharge": 436,
+ "return_within_30d_of_episode_end": 506,
+ "return_counted_only_by_episode_end": 92,
+ "return_counted_only_by_index_discharge": 22,
+ "median_days_of_window_spent_in_continuation": 7.05
+}

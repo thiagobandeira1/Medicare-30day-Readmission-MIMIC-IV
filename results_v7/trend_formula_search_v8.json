@@ -1,0 +1,15 @@
+{
+ "slope_idx_los": 0.5062,
+ "slope_days_los": 0.5397,
+ "lastminusfirst_los": 0.5056,
+ "slope_idx_last180_los": 0.5378,
+ "slope_idx_first180_los": 0.5384,
+ "last_minus_mean_los": 0.5054,
+ "slope_idx_losd": 0.8085,
+ "slope_days_losd": 0.5519,
+ "lastminusfirst_losd": 0.7391,
+ "slope_idx_last180_losd": 0.673,
+ "slope_idx_first180_losd": 0.6737,
+ "last_minus_mean_losd": 0.5404,
+ "share_patients_single_admission_nonzero": 0.0
+}

@@ -569,7 +569,7 @@ final pass (scientific content unchanged from frozen v6.4):
 - Title page: degrees (Bandeira MS, Gonzalez MS, Poellabauer PhD, Mondal
   PhD), registry-verified ORCIDs under each author, affiliation with
   city/state/country, full corresponding-author block (T. Batista Nunes
-  Bandeira, 21324 NE 2nd Ct, Miami FL 33179; (815) 603-3286;
+  Bandeira, [address withheld]; [phone withheld];
   tbati006@fiu.edu).
 - Ethical Considerations: bracket-free final wording — TB sole raw-data
   accessor under the PhysioNet Credentialed Health DUA with CITI Data or
