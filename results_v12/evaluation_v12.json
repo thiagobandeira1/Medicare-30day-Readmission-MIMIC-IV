@@ -1,0 +1,131 @@
+{
+ "val_auroc_full": 0.717,
+ "util_features": [
+  "prior_admissions_6m",
+  "prior_admissions_all",
+  "freq_x_recency",
+  "time_since_last_discharge",
+  "log_prior_readmit_count",
+  "prior_admits_6m_sq"
+ ],
+ "single_feature_val_auroc": {
+  "prior_admissions_6m": 0.638,
+  "prior_admissions_all": 0.6231,
+  "freq_x_recency": 0.638,
+  "time_since_last_discharge": 0.6109,
+  "log_prior_readmit_count": 0.6266,
+  "prior_admits_6m_sq": 0.638,
+  "hemoglobin_last": 0.5585,
+  "lab_abnormal_rate": 0.5481,
+  "los_days": 0.5228
+ },
+ "util_xgb_val_auroc": 0.6426,
+ "full_minus_util_ci95": [
+  0.0744,
+  [
+   0.0658,
+   0.0841
+  ]
+ ],
+ "logit_47_val_auroc": 0.6866,
+ "seed_val_auroc": [
+  0.7174,
+  0.7174,
+  0.7174,
+  0.7177,
+  0.7165
+ ],
+ "hyperparam_val_auroc": {
+  "depth3_lr0.05_trees600": 0.7125,
+  "depth3_lr0.03_trees1000": 0.7125,
+  "depth3_lr0.1_trees300": 0.7116,
+  "depth4_lr0.05_trees600": 0.716,
+  "depth4_lr0.03_trees1000": 0.7161,
+  "depth4_lr0.1_trees300": 0.7153,
+  "depth5_lr0.05_trees600": 0.717,
+  "depth5_lr0.03_trees1000": 0.7177,
+  "depth5_lr0.1_trees300": 0.7154,
+  "depth6_lr0.05_trees600": 0.7166,
+  "depth6_lr0.03_trees1000": 0.719,
+  "depth6_lr0.1_trees300": 0.7146,
+  "depth8_lr0.05_trees600": 0.7117,
+  "depth8_lr0.03_trees1000": 0.7155,
+  "depth8_lr0.1_trees300": 0.71
+ },
+ "learning_curve_val_auroc": {
+  "0.1": 0.6839,
+  "0.25": 0.7032,
+  "0.5": 0.7134,
+  "0.75": 0.7156,
+  "1.0": 0.717
+ },
+ "val_calibration_deciles": [
+  {
+   "decile": 1,
+   "mean_pred": 0.0743,
+   "observed": 0.0727,
+   "n": 1856
+  },
+  {
+   "decile": 2,
+   "mean_pred": 0.0985,
+   "observed": 0.097,
+   "n": 1856
+  },
+  {
+   "decile": 3,
+   "mean_pred": 0.1176,
+   "observed": 0.1084,
+   "n": 1855
+  },
+  {
+   "decile": 4,
+   "mean_pred": 0.1371,
+   "observed": 0.1325,
+   "n": 1856
+  },
+  {
+   "decile": 5,
+   "mean_pred": 0.1584,
+   "observed": 0.1595,
+   "n": 1856
+  },
+  {
+   "decile": 6,
+   "mean_pred": 0.1843,
+   "observed": 0.1962,
+   "n": 1855
+  },
+  {
+   "decile": 7,
+   "mean_pred": 0.2173,
+   "observed": 0.2188,
+   "n": 1856
+  },
+  {
+   "decile": 8,
+   "mean_pred": 0.263,
+   "observed": 0.2577,
+   "n": 1855
+  },
+  {
+   "decile": 9,
+   "mean_pred": 0.3375,
+   "observed": 0.3405,
+   "n": 1856
+  },
+  {
+   "decile": 10,
+   "mean_pred": 0.5504,
+   "observed": 0.5695,
+   "n": 1856
+  }
+ ],
+ "train_auroc": 0.7614,
+ "test_auroc_full": 0.7055,
+ "test_auroc_util_only": 0.6424,
+ "test_full_minus_util_ci95": [
+  0.0578,
+  0.0683
+ ]
+}

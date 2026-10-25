@@ -1,0 +1,280 @@
+{
+ "rfe": {
+  "n_features": "per-fold [45, 55]",
+  "oof_auroc": 0.7057,
+  "auroc_ci95_cluster": [
+   0.7018,
+   0.7104
+  ],
+  "ap": 0.4288,
+  "brier": 0.1503,
+  "ece": 0.0026,
+  "cal_slope": 1.004,
+  "cal_intercept": 0.009,
+  "top10pct_events_captured": 0.249,
+  "top10pct_ppv": 0.534
+ },
+ "all_eligible": {
+  "n_features": 137,
+  "oof_auroc": 0.7061,
+  "auroc_ci95_cluster": [
+   0.702,
+   0.7106
+  ],
+  "ap": 0.4295,
+  "brier": 0.1502,
+  "ece": 0.0023,
+  "cal_slope": 1.013,
+  "cal_intercept": 0.02,
+  "top10pct_events_captured": 0.248,
+  "top10pct_ppv": 0.534
+ },
+ "hist_clean": {
+  "n_features": 47,
+  "oof_auroc": 0.7048,
+  "auroc_ci95_cluster": [
+   0.7007,
+   0.7094
+  ],
+  "ap": 0.4288,
+  "brier": 0.1504,
+  "ece": 0.0029,
+  "cal_slope": 1.009,
+  "cal_intercept": 0.015,
+  "top10pct_events_captured": 0.248,
+  "top10pct_ppv": 0.532
+ },
+ "f66": {
+  "n_features": 66,
+  "oof_auroc": 0.7638,
+  "auroc_ci95_cluster": [
+   0.7607,
+   0.7676
+  ],
+  "ap": 0.4632,
+  "brier": 0.1431,
+  "ece": 0.0116,
+  "cal_slope": 0.934,
+  "cal_intercept": -0.044,
+  "top10pct_events_captured": 0.255,
+  "top10pct_ppv": 0.549
+ },
+ "logit": {
+  "n_features": 137,
+  "oof_auroc": 0.686,
+  "auroc_ci95_cluster": [
+   0.6818,
+   0.6907
+  ],
+  "ap": 0.4007,
+  "brier": 0.1538,
+  "ece": 0.0053,
+  "cal_slope": 0.986,
+  "cal_intercept": -0.016,
+  "top10pct_events_captured": 0.233,
+  "top10pct_ppv": 0.5
+ },
+ "_paired_differences_vs_rfe": {
+  "all_eligible_minus_rfe": {
+   "point": 0.0004,
+   "ci95": [
+    -0.0003,
+    0.0011
+   ],
+   "p_bootstrap_2sided": 0.316
+  },
+  "hist_clean_minus_rfe": {
+   "point": -0.0009,
+   "ci95": [
+    -0.0017,
+    -0.0002
+   ],
+   "p_bootstrap_2sided": 0.016
+  },
+  "f66_minus_rfe": {
+   "point": 0.058,
+   "ci95": [
+    0.0549,
+    0.0607
+   ],
+   "p_bootstrap_2sided": 0.004
+  },
+  "logit_minus_rfe": {
+   "point": -0.0197,
+   "ci95": [
+    -0.0212,
+    -0.0182
+   ],
+   "p_bootstrap_2sided": 0.004
+  }
+ },
+ "_stability": {
+  "fold_counts": {
+   "1": 55,
+   "2": 45,
+   "3": 45,
+   "4": 55,
+   "5": 45
+  },
+  "jaccard_mean": 0.761,
+  "jaccard_pairwise": [
+   0.695,
+   0.695,
+   0.774,
+   0.724,
+   0.8,
+   0.695,
+   0.875,
+   0.724,
+   0.875,
+   0.754
+  ],
+  "selection_frequency": {
+   "freq_x_recency": 5,
+   "lab_abnormal_rate": 5,
+   "orders_last_6h": 5,
+   "discharge_location": 5,
+   "n_late_orders": 5,
+   "albumin_x_los": 5,
+   "discharge_surge": 5,
+   "distinct_drugs": 5,
+   "prior_admits_6m_sq": 5,
+   "admission_type": 5,
+   "prior_readmission_count": 5,
+   "hr_std": 5,
+   "n_meds_total": 5,
+   "prior_mean_los_6m": 5,
+   "prior_admissions_all": 5,
+   "n_emar_details": 5,
+   "albumin_last": 5,
+   "prior_admissions_6m": 5,
+   "sodium_last": 5,
+   "bilirubin_max": 5,
+   "log_time_since_discharge": 5,
+   "late_order_burden": 5,
+   "n_labs_total": 5,
+   "n_discharge_drugs": 5,
+   "wbc_last": 5,
+   "consult_per_day": 5,
+   "gcs_min": 5,
+   "log_n_labs": 5,
+   "late_order_rate": 5,
+   "age_at_admit": 5,
+   "hemoglobin_last": 5,
+   "antibiotic_flag": 5,
+   "n_lab_orders": 5,
+   "n_order_types": 5,
+   "provider_fragmentation_x_los": 5,
+   "los_days": 4,
+   "time_since_last_discharge": 4,
+   "n_distinct_routes": 4,
+   "admission_location": 4,
+   "iv_admin_rate": 4,
+   "orders_per_day": 4,
+   "prior_any_ed_6m": 4,
+   "log_prior_readmit_count": 4,
+   "log_los_days": 4,
+   "los_per_prior_admit": 3,
+   "gender": 3,
+   "creatinine_x_bun": 3,
+   "stepdown_flag": 3,
+   "bp_diastolic_outpatient": 2,
+   "sodium_abnormal": 2,
+   "creatinine_max": 2,
+   "n_lab_item_types": 2,
+   "opioid_at_discharge": 2,
+   "ventilator_flag": 2,
+   "bun_last": 1,
+   "infection_flag": 1,
+   "med_entropy_90d": 1,
+   "icu_total_hrs": 1,
+   "max_unit_los_days": 1,
+   "n_iv_administrations": 1,
+   "new_med_rate_48h": 1,
+   "arterial_line_flag": 1,
+   "n_consult_orders": 1,
+   "inr_max": 1
+  },
+  "consensus_majority_features": [
+   "admission_location",
+   "admission_type",
+   "age_at_admit",
+   "albumin_last",
+   "albumin_x_los",
+   "antibiotic_flag",
+   "bilirubin_max",
+   "consult_per_day",
+   "creatinine_x_bun",
+   "discharge_location",
+   "discharge_surge",
+   "distinct_drugs",
+   "freq_x_recency",
+   "gcs_min",
+   "gender",
+   "hemoglobin_last",
+   "hr_std",
+   "iv_admin_rate",
+   "lab_abnormal_rate",
+   "late_order_burden",
+   "late_order_rate",
+   "log_los_days",
+   "log_n_labs",
+   "log_prior_readmit_count",
+   "log_time_since_discharge",
+   "los_days",
+   "los_per_prior_admit",
+   "n_discharge_drugs",
+   "n_distinct_routes",
+   "n_emar_details",
+   "n_lab_orders",
+   "n_labs_total",
+   "n_late_orders",
+   "n_meds_total",
+   "n_order_types",
+   "orders_last_6h",
+   "orders_per_day",
+   "prior_admissions_6m",
+   "prior_admissions_all",
+   "prior_admits_6m_sq",
+   "prior_any_ed_6m",
+   "prior_mean_los_6m",
+   "prior_readmission_count",
+   "provider_fragmentation_x_los",
+   "sodium_last",
+   "stepdown_flag",
+   "time_since_last_discharge",
+   "wbc_last"
+  ],
+  "n_consensus": 48
+ },
+ "_design": {
+  "cohort": "development partitions only (train+val), test untouched",
+  "n_dev": 189234,
+  "n_patients_dev": 70197,
+  "removed_from_pool": [
+   "los_trend_180d",
+   "los_trend_x_prior_6m",
+   "los_trend_x_prior_admits",
+   "orders_first_24h",
+   "nonenglish_x_prior_admits"
+  ],
+  "grid": [
+   137,
+   120,
+   100,
+   80,
+   65,
+   55,
+   45,
+   38,
+   32,
+   27,
+   22,
+   18
+  ],
+  "margin": 0.002,
+  "seed": 42,
+  "hist_clean_n": 47,
+  "f66_n": 66
+ }
+}
