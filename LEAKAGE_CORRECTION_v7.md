@@ -59,7 +59,7 @@ reports the timing curve both with and without them.
 * Superseded: `results_v5/`, `results_v6/`, `src/pipeline_v5_v6/`, tag
   `v6.4-submission` and Zenodo version 10.5281/zenodo.21987702.
 
-# Versions 8 to 11 (October 2026)
+# Versions 8 to 15 (October 2026)
 
 * **v8 to v10** added audits without changing the model: recomputation of
   every history feature from raw admission timestamps, a within-patient
@@ -80,3 +80,27 @@ reports the timing curve both with and without them.
   slope 0.99. `results_v11/table_rebuild_v11.json` records, per feature,
   the true missingness and the agreement with the old values where both
   exist.
+* **v12** enforced the discharge cutoff on the aggregates that had been
+  counted over every row of the admission (laboratory result count, abnormal
+  rate, test types, critical results, prescription count; 4.0% of laboratory
+  counts and 22.8% of medication counts changed) and removed two pool
+  features that were exact copies of others (`orders_first_24h`,
+  `nonenglish_x_prior_admits`). Rerun: `src/pipeline_v12/`, `results_v12/`.
+* **v13** enforced documentation time as well as event time (chartevents
+  storetime; eMAR storetime; pharmacy entertime for prescriptions) on every
+  chart, medication-administration, and prescription feature, and recomputed
+  the discharge interval from any earlier admission (missing only for first
+  observed admissions, instead of the inherited 80.22-day fill). Among
+  records already filtered by event time, 3,662 of 21.6M eMAR records,
+  16,621 of 11.6M chart records, and 161 of 10.5M prescriptions were
+  documented after discharge and are excluded; the cutoff changed at most
+  1.2% of any feature's values. Rerun: `src/pipeline_v13/`, `results_v13/`,
+  `figures_v13/`. The consensus model has 44 features; out-of-fold AUROC
+  0.7057 (95% CI 0.7016 to 0.7102), test AUROC 0.7056 (95% CI 0.6964 to
+  0.7145), calibration slope 0.990. `results_v13/table_rebuild_v13.json`
+  records every rebuild, including the v11 and v12 entries. The White versus
+  Black contrasts use a joint patient-level bootstrap over the union of the
+  two patient sets (`results_v13/subgroup_calibration_v13.json`).
+* **v14 and v15** changed reporting only (document consistency, workbook
+  labels, checklist wording); the model and results are those of v13.
+  Builders: `src/pipeline_v14/`, `src/pipeline_v15/`.
