@@ -1,0 +1,331 @@
+{
+ "creatinine_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1394,
+  "agree_where_both_present": 0.9982,
+  "old_value_where_new_missing_mode": 0.9
+ },
+ "creatinine_max": {
+  "old_missing": 0.0,
+  "new_missing": 0.1394,
+  "agree_where_both_present": 0.9995,
+  "old_value_where_new_missing_mode": 1.1
+ },
+ "creatinine_delta": {
+  "old_missing": 0.0,
+  "new_missing": 0.1394,
+  "agree_where_both_present": 0.998,
+  "old_value_where_new_missing_mode": 0.0
+ },
+ "bun_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1423,
+  "agree_where_both_present": 0.9979,
+  "old_value_where_new_missing_mode": 0.0
+ },
+ "hemoglobin_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.152,
+  "agree_where_both_present": 0.999,
+  "old_value_where_new_missing_mode": 0.0
+ },
+ "sodium_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1447,
+  "agree_where_both_present": 0.9977,
+  "old_value_where_new_missing_mode": 139.0
+ },
+ "potassium_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1408,
+  "agree_where_both_present": 0.9975,
+  "old_value_where_new_missing_mode": 4.1
+ },
+ "albumin_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.684,
+  "agree_where_both_present": 0.9987,
+  "old_value_where_new_missing_mode": 0.0
+ },
+ "wbc_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1533,
+  "agree_where_both_present": 0.9989,
+  "old_value_where_new_missing_mode": 7.4
+ },
+ "glucose_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1535,
+  "agree_where_both_present": 0.9977,
+  "old_value_where_new_missing_mode": 106.0
+ },
+ "glucose_max": {
+  "old_missing": 0.0,
+  "new_missing": 0.1535,
+  "agree_where_both_present": 0.9993,
+  "old_value_where_new_missing_mode": 136.0
+ },
+ "bnp_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.9346,
+  "agree_where_both_present": 0.9981,
+  "old_value_where_new_missing_mode": 2342.0
+ },
+ "lactate_max": {
+  "old_missing": 0.0,
+  "new_missing": 0.7535,
+  "agree_where_both_present": 0.9993,
+  "old_value_where_new_missing_mode": 1.8
+ },
+ "inr_max": {
+  "old_missing": 0.0,
+  "new_missing": 0.404,
+  "agree_where_both_present": 0.9994,
+  "old_value_where_new_missing_mode": 1.3
+ },
+ "bicarbonate_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1515,
+  "agree_where_both_present": 0.9978,
+  "old_value_where_new_missing_mode": 26.0
+ },
+ "magnesium_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.1971,
+  "agree_where_both_present": 0.9982,
+  "old_value_where_new_missing_mode": 2.0
+ },
+ "phosphate_last": {
+  "old_missing": 0.0,
+  "new_missing": 0.2165,
+  "agree_where_both_present": 0.998,
+  "old_value_where_new_missing_mode": 3.4
+ },
+ "bilirubin_max": {
+  "old_missing": 0.0,
+  "new_missing": 0.5899,
+  "agree_where_both_present": 0.9996,
+  "old_value_where_new_missing_mode": 0.0
+ },
+ "hr_std": {
+  "old_missing": 0.0,
+  "new_missing": 0.8098,
+  "agree_where_both_present": 1.0,
+  "old_value_where_new_missing_mode": 9.111397924020597
+ },
+ "sbp_std": {
+  "old_missing": 0.0,
+  "new_missing": 0.927,
+  "agree_where_both_present": 1.0,
+  "old_value_where_new_missing_mode": 15.091664894639598
+ },
+ "gcs_min": {
+  "old_missing": 0.0,
+  "new_missing": 0.8101,
+  "agree_where_both_present": 1.0,
+  "old_value_where_new_missing_mode": 10.0
+ },
+ "icu_total_hrs": {
+  "old_missing": 0.0,
+  "new_missing": 0.0,
+  "agree_where_both_present": 0.1906,
+  "old_value_where_new_missing_mode": null
+ },
+ "max_unit_los_days": {
+  "old_missing": 0.0,
+  "new_missing": 0.0,
+  "agree_where_both_present": 0.1727,
+  "old_value_where_new_missing_mode": null
+ },
+ "sodium_abnormal": {
+  "agree_with_old": 0.9994
+ },
+ "potassium_abnormal": {
+  "agree_with_old": 0.9993
+ },
+ "wbc_high": {
+  "agree_with_old": 0.9645
+ },
+ "time_since_last_discharge": {
+  "set_missing_share": 0.3342
+ },
+ "lab_rows_stored_after_discharge": {
+  "n_rows": 14905537,
+  "n_stored_after": 6205,
+  "share": 0.00042
+ },
+ "seconds": 71,
+ "v12_cutoff_enforced": {
+  "n_labs_total": {
+   "share_changed": 0.0403,
+   "share_decreased": 0.0403,
+   "mean_old": 166.988,
+   "mean_new": 166.709
+  },
+  "n_lab_item_types": {
+   "share_changed": 0.0494,
+   "share_decreased": 0.0494,
+   "mean_old": 42.201,
+   "mean_new": 42.022
+  },
+  "n_critical_labs": {
+   "share_changed": 0.0007,
+   "share_decreased": 0.0007,
+   "mean_old": 0.557,
+   "mean_new": 0.556
+  },
+  "n_meds_total": {
+   "share_changed": 0.2278,
+   "share_decreased": 0.2278,
+   "mean_old": 43.261,
+   "mean_new": 42.806
+  },
+  "log_n_labs": {
+   "share_changed": 0.0403
+  },
+  "lab_abnormal_rate": {
+   "share_changed": 0.0404
+  }
+ },
+ "v12_duplicates_removed_from_pool": {
+  "orders_first_24h": "identical to orders_per_day (proxy)",
+  "nonenglish_x_prior_admits": "identical to prior_admissions_6m"
+ },
+ "v12_seconds": 30,
+ "v13_documentation_time_enforced": {
+  "_emar_rows": {
+   "charted_before_discharge": 21614955,
+   "stored_after_discharge": 3662
+  },
+  "_prescription_rows": {
+   "started_before_discharge": 10469390,
+   "entered_after_discharge": 161
+  },
+  "_chart_rows": {
+   "charted_before_discharge": 11589196,
+   "stored_after_discharge": 16621
+  },
+  "antibiotic_flag": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.275,
+   "mean_after": 0.275
+  },
+  "n_emar_details": {
+   "definition_match_without_documentation_cutoff": 0.9996,
+   "share_changed_by_documentation_cutoff": 0.0072,
+   "mean_before": 178.9946,
+   "mean_after": 178.972
+  },
+  "n_incomplete_doses": {
+   "definition_match_without_documentation_cutoff": 0.9837,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.0,
+   "mean_after": 0.0
+  },
+  "incomplete_dose_rate": {
+   "definition_match_without_documentation_cutoff": 0.9837,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.0,
+   "mean_after": 0.0
+  },
+  "n_iv_administrations": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0036,
+   "mean_before": 16.6584,
+   "mean_after": 16.6512
+  },
+  "iv_admin_rate": {
+   "definition_match_without_documentation_cutoff": 0.9996,
+   "share_changed_by_documentation_cutoff": 0.0065,
+   "mean_before": 0.0514,
+   "mean_after": 0.0513
+  },
+  "n_distinct_routes": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.5665,
+   "mean_after": 0.5665
+  },
+  "n_meds_total": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0004,
+   "mean_before": 42.8063,
+   "mean_after": 42.8056
+  },
+  "distinct_drugs": {
+   "definition_match_without_documentation_cutoff": 0.993,
+   "share_changed_by_documentation_cutoff": 0.0002,
+   "mean_before": 23.4581,
+   "mean_after": 23.4577
+  },
+  "n_discharge_drugs": {
+   "definition_match_without_documentation_cutoff": 0.9993,
+   "share_changed_by_documentation_cutoff": 0.0003,
+   "mean_before": 14.9966,
+   "mean_after": 14.9962
+  },
+  "opioid_at_discharge": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.4308,
+   "mean_after": 0.4308
+  },
+  "anticoag_at_discharge": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.6684,
+   "mean_after": 0.6684
+  },
+  "insulin_at_discharge": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.2942,
+   "mean_after": 0.2941
+  },
+  "diuretic_at_discharge": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.218,
+   "mean_after": 0.2179
+  },
+  "severe_polypharmacy": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.7865,
+   "mean_after": 0.7865
+  },
+  "hr_std": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0122,
+   "mean_before": 1.9914,
+   "mean_after": 1.9745
+  },
+  "sbp_std": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0036,
+   "mean_before": 1.2446,
+   "mean_after": 1.2359
+  },
+  "gcs_min": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0005,
+   "mean_before": 1.8126,
+   "mean_after": 1.8135
+  },
+  "ventilator_flag": {
+   "definition_match_without_documentation_cutoff": 1.0,
+   "share_changed_by_documentation_cutoff": 0.0,
+   "mean_before": 0.0833,
+   "mean_after": 0.0833
+  },
+  "time_since_last_discharge": {
+   "definition": "days from the previous discharge of any insurance to the index admission; missing if none",
+   "share_missing_new": 0.3342,
+   "share_missing_old": 0.3342,
+   "share_old_fill_80_22_remaining": 0.0388,
+   "share_changed": 0.0422
+  }
+ },
+ "v13_seconds": 118
+}

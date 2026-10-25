@@ -1,0 +1,3107 @@
+{
+ "admission_type": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "admission_location": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "discharge_location": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "age_at_admit": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "gender": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_mi": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_chf": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_diab": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_copd": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_cvd": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_renal": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_cancer": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "drg_code": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "los_days": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "discharge_hour": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "weekend_discharge": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "distinct_drugs": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "polypharmacy_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "prior_admissions_6m": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "prior_mean_los_6m": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "prior_any_ed_6m": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "last_drg_dispo": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "med_entropy_90d": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "los_trend_180d": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_diagnoses": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_procedures": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_meds_total": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_labs_total": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_lab_item_types": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "icu_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "icu_total_hrs": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "prior_admissions_all": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "creatinine_last": {
+  "overall": 0.141,
+  "by_partition": {
+   "train": 0.1398,
+   "val": 0.1474,
+   "test": 0.1429
+  },
+  "by_race_group": {
+   "White": 0.1329,
+   "Black": 0.1895,
+   "Hispanic": 0.1974,
+   "Asian": 0.1235,
+   "Other": 0.0985
+  }
+ },
+ "creatinine_max": {
+  "overall": 0.141,
+  "by_partition": {
+   "train": 0.1398,
+   "val": 0.1474,
+   "test": 0.1429
+  },
+  "by_race_group": {
+   "White": 0.1329,
+   "Black": 0.1895,
+   "Hispanic": 0.1974,
+   "Asian": 0.1235,
+   "Other": 0.0985
+  }
+ },
+ "creatinine_delta": {
+  "overall": 0.141,
+  "by_partition": {
+   "train": 0.1398,
+   "val": 0.1474,
+   "test": 0.1429
+  },
+  "by_race_group": {
+   "White": 0.1329,
+   "Black": 0.1895,
+   "Hispanic": 0.1974,
+   "Asian": 0.1235,
+   "Other": 0.0985
+  }
+ },
+ "bun_last": {
+  "overall": 0.1441,
+  "by_partition": {
+   "train": 0.1428,
+   "val": 0.1502,
+   "test": 0.1461
+  },
+  "by_race_group": {
+   "White": 0.1358,
+   "Black": 0.1929,
+   "Hispanic": 0.2006,
+   "Asian": 0.1262,
+   "Other": 0.1017
+  }
+ },
+ "hemoglobin_last": {
+  "overall": 0.154,
+  "by_partition": {
+   "train": 0.1526,
+   "val": 0.1607,
+   "test": 0.1564
+  },
+  "by_race_group": {
+   "White": 0.1472,
+   "Black": 0.1974,
+   "Hispanic": 0.208,
+   "Asian": 0.1312,
+   "Other": 0.1105
+  }
+ },
+ "sodium_last": {
+  "overall": 0.1465,
+  "by_partition": {
+   "train": 0.1452,
+   "val": 0.1531,
+   "test": 0.1489
+  },
+  "by_race_group": {
+   "White": 0.1389,
+   "Black": 0.1932,
+   "Hispanic": 0.2026,
+   "Asian": 0.1281,
+   "Other": 0.1035
+  }
+ },
+ "potassium_last": {
+  "overall": 0.1425,
+  "by_partition": {
+   "train": 0.1411,
+   "val": 0.1491,
+   "test": 0.145
+  },
+  "by_race_group": {
+   "White": 0.1341,
+   "Black": 0.1918,
+   "Hispanic": 0.1999,
+   "Asian": 0.1264,
+   "Other": 0.1001
+  }
+ },
+ "albumin_last": {
+  "overall": 0.6944,
+  "by_partition": {
+   "train": 0.6936,
+   "val": 0.7,
+   "test": 0.6948
+  },
+  "by_race_group": {
+   "White": 0.6968,
+   "Black": 0.7195,
+   "Hispanic": 0.7115,
+   "Asian": 0.6407,
+   "Other": 0.6165
+  }
+ },
+ "wbc_last": {
+  "overall": 0.1554,
+  "by_partition": {
+   "train": 0.1539,
+   "val": 0.1621,
+   "test": 0.1579
+  },
+  "by_race_group": {
+   "White": 0.1485,
+   "Black": 0.1992,
+   "Hispanic": 0.2093,
+   "Asian": 0.1323,
+   "Other": 0.112
+  }
+ },
+ "glucose_last": {
+  "overall": 0.1555,
+  "by_partition": {
+   "train": 0.154,
+   "val": 0.1633,
+   "test": 0.1579
+  },
+  "by_race_group": {
+   "White": 0.1488,
+   "Black": 0.1975,
+   "Hispanic": 0.2082,
+   "Asian": 0.1347,
+   "Other": 0.114
+  }
+ },
+ "glucose_max": {
+  "overall": 0.1555,
+  "by_partition": {
+   "train": 0.154,
+   "val": 0.1633,
+   "test": 0.1579
+  },
+  "by_race_group": {
+   "White": 0.1488,
+   "Black": 0.1975,
+   "Hispanic": 0.2082,
+   "Asian": 0.1347,
+   "Other": 0.114
+  }
+ },
+ "bnp_last": {
+  "overall": 0.9379,
+  "by_partition": {
+   "train": 0.9379,
+   "val": 0.9387,
+   "test": 0.9376
+  },
+  "by_race_group": {
+   "White": 0.9378,
+   "Black": 0.9384,
+   "Hispanic": 0.9511,
+   "Asian": 0.9395,
+   "Other": 0.9292
+  }
+ },
+ "lactate_max": {
+  "overall": 0.7708,
+  "by_partition": {
+   "train": 0.7707,
+   "val": 0.7671,
+   "test": 0.7725
+  },
+  "by_race_group": {
+   "White": 0.7746,
+   "Black": 0.7927,
+   "Hispanic": 0.7998,
+   "Asian": 0.7478,
+   "Other": 0.6655
+  }
+ },
+ "n_critical_labs": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "sodium_abnormal": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "potassium_abnormal": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "wbc_high": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "troponin_max": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "troponin_elevated": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "inr_max": {
+  "overall": 0.4127,
+  "by_partition": {
+   "train": 0.4112,
+   "val": 0.4184,
+   "test": 0.4158
+  },
+  "by_race_group": {
+   "White": 0.4023,
+   "Black": 0.4882,
+   "Hispanic": 0.4837,
+   "Asian": 0.4007,
+   "Other": 0.3246
+  }
+ },
+ "bicarbonate_last": {
+  "overall": 0.1535,
+  "by_partition": {
+   "train": 0.152,
+   "val": 0.1611,
+   "test": 0.1558
+  },
+  "by_race_group": {
+   "White": 0.1466,
+   "Black": 0.1965,
+   "Hispanic": 0.2066,
+   "Asian": 0.1327,
+   "Other": 0.1121
+  }
+ },
+ "magnesium_last": {
+  "overall": 0.2003,
+  "by_partition": {
+   "train": 0.1988,
+   "val": 0.2077,
+   "test": 0.2026
+  },
+  "by_race_group": {
+   "White": 0.1932,
+   "Black": 0.2489,
+   "Hispanic": 0.2601,
+   "Asian": 0.1751,
+   "Other": 0.1453
+  }
+ },
+ "phosphate_last": {
+  "overall": 0.2203,
+  "by_partition": {
+   "train": 0.219,
+   "val": 0.2277,
+   "test": 0.2221
+  },
+  "by_race_group": {
+   "White": 0.2147,
+   "Black": 0.2633,
+   "Hispanic": 0.2752,
+   "Asian": 0.1932,
+   "Other": 0.1641
+  }
+ },
+ "bilirubin_max": {
+  "overall": 0.6008,
+  "by_partition": {
+   "train": 0.5999,
+   "val": 0.6032,
+   "test": 0.6032
+  },
+  "by_race_group": {
+   "White": 0.604,
+   "Black": 0.6295,
+   "Hispanic": 0.6149,
+   "Asian": 0.5301,
+   "Other": 0.5137
+  }
+ },
+ "hr_std": {
+  "overall": 0.8296,
+  "by_partition": {
+   "train": 0.8302,
+   "val": 0.8282,
+   "test": 0.828
+  },
+  "by_race_group": {
+   "White": 0.8324,
+   "Black": 0.8775,
+   "Hispanic": 0.8847,
+   "Asian": 0.8276,
+   "Other": 0.6529
+  }
+ },
+ "sbp_std": {
+  "overall": 0.9374,
+  "by_partition": {
+   "train": 0.9374,
+   "val": 0.9386,
+   "test": 0.9367
+  },
+  "by_race_group": {
+   "White": 0.9374,
+   "Black": 0.9708,
+   "Hispanic": 0.9627,
+   "Asian": 0.9466,
+   "Other": 0.842
+  }
+ },
+ "gcs_min": {
+  "overall": 0.8297,
+  "by_partition": {
+   "train": 0.8303,
+   "val": 0.8284,
+   "test": 0.8281
+  },
+  "by_race_group": {
+   "White": 0.8326,
+   "Black": 0.8775,
+   "Hispanic": 0.885,
+   "Asian": 0.8276,
+   "Other": 0.653
+  }
+ },
+ "vasopressor_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "ventilator_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "antibiotic_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "culture_positive_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_service_changes": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "stepdown_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "ed_to_icu_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "hypertension_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_arrhythmia": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_valve": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_pulm_circ": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_pvd": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_htn": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_htn_cx": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_paralysis": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_neuro_other": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_copd": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_dm": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_dm_cx": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_hypothyroid": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_renal": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_liver": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_peptic_ulcer": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_aids": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_lymphoma": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_mets": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_solid_tumor": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_rheumatoid": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_coagulopathy": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_obesity": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_weight_loss": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_fluid_electrolyte": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_anemia_blood_loss": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_anemia_deficiency": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_alcohol": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_drug": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_psychoses": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_depression": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "primary_dx_chapter": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "elix_vanwalraven_score": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "apr_drg_severity": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "apr_drg_mortality": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cardiac_surgery_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "major_surgery_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "transfusion_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "invasive_vent_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "arterial_line_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "central_line_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "picc_line_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_urine_measurements": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "oliguria_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_discharge_drugs": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "severe_polypharmacy": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "opioid_at_discharge": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "anticoag_at_discharge": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "insulin_at_discharge": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "diuretic_at_discharge": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_order_types": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "orders_per_day": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_distinct_providers": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_lab_orders": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_consult_orders": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_nursing_orders": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_procedure_orders": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_diet_orders": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_discontinued_orders": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "order_discontinuation_rate": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_late_orders": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "late_order_rate": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_hcpcs_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "pt_ot_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "hcpcs_dialysis_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "hcpcs_transfusion_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "dme_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_emar_details": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_incomplete_doses": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "incomplete_dose_rate": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_iv_administrations": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "iv_admin_rate": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_distinct_routes": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_datetime_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_distinct_dt_items": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_restraint_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_foley_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_drain_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_intubation_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_skin_wound_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_ingredient_events": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_distinct_ingredients": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "tpn_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "total_dextrose_ml": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "iv_potassium_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "iv_magnesium_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "vasopressor_ingredient_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "sedation_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "total_volume_infused_ml": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "admit_month": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "admit_day_of_week": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "cci_score_total": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "log_los_days": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "log_n_labs": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "lab_abnormal_rate": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "infection_flag": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "albumin_x_los": {
+  "overall": 0.6944,
+  "by_partition": {
+   "train": 0.6936,
+   "val": 0.7,
+   "test": 0.6948
+  },
+  "by_race_group": {
+   "White": 0.6968,
+   "Black": 0.7195,
+   "Hispanic": 0.7115,
+   "Asian": 0.6407,
+   "Other": 0.6165
+  }
+ },
+ "los_x_n_diagnoses": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "prior_admits_x_comorbidity": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "n_meds_x_age": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "creatinine_x_bun": {
+  "overall": 0.1443,
+  "by_partition": {
+   "train": 0.1431,
+   "val": 0.1505,
+   "test": 0.1463
+  },
+  "by_race_group": {
+   "White": 0.1361,
+   "Black": 0.1932,
+   "Hispanic": 0.2008,
+   "Asian": 0.1266,
+   "Other": 0.102
+  }
+ },
+ "bun_creatinine_ratio": {
+  "overall": 0.1443,
+  "by_partition": {
+   "train": 0.1431,
+   "val": 0.1505,
+   "test": 0.1463
+  },
+  "by_race_group": {
+   "White": 0.1361,
+   "Black": 0.1932,
+   "Hispanic": 0.2008,
+   "Asian": 0.1266,
+   "Other": 0.102
+  }
+ },
+ "severity_composite": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "is_readmission_90d": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "time_since_last_discharge": {
+  "overall": 0.331,
+  "by_partition": {
+   "train": 0.3307,
+   "val": 0.3412,
+   "test": 0.3281
+  },
+  "by_race_group": {
+   "White": 0.3384,
+   "Black": 0.2154,
+   "Hispanic": 0.2407,
+   "Asian": 0.3389,
+   "Other": 0.56
+  }
+ },
+ "prior_readmission_count": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "orders_per_provider": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "med_orders_ratio": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "consult_per_day": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "clinical_complexity": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "late_order_burden": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "provider_fragmentation_x_los": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "primary_dx_chapter_te": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "prior_admits_6m_sq": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "discharge_location_te": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "prior_admits_x_age": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "drg_code_te": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "renal_risk_x_age": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "freq_x_recency": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "high_risk_meds_x_age": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "orders_last_6h": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "last_drg_dispo_te": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "los_trend_x_prior_6m": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "bmi_last": {
+  "overall": 0.3851,
+  "by_partition": {
+   "train": 0.3848,
+   "val": 0.3893,
+   "test": 0.3849
+  },
+  "by_race_group": {
+   "White": 0.3924,
+   "Black": 0.3054,
+   "Hispanic": 0.3391,
+   "Asian": 0.3444,
+   "Other": 0.5236
+  }
+ },
+ "orders_first_24h": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "severity_x_readmit": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "severity_x_lab_abnormal": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "max_unit_los_days": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "anemia_x_prior_admits": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "los_trend_x_prior_admits": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "log_prior_readmit_count": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "log_prior_admits_6m": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "nonenglish_x_prior_admits": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "log_time_since_discharge": {
+  "overall": 0.331,
+  "by_partition": {
+   "train": 0.3307,
+   "val": 0.3412,
+   "test": 0.3281
+  },
+  "by_race_group": {
+   "White": 0.3384,
+   "Black": 0.2154,
+   "Hispanic": 0.2407,
+   "Asian": 0.3389,
+   "Other": 0.56
+  }
+ },
+ "new_med_rate_48h": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "los_per_prior_admit": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "discharge_surge": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "race_te": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "bp_diastolic_outpatient": {
+  "overall": 0.3838,
+  "by_partition": {
+   "train": 0.382,
+   "val": 0.4001,
+   "test": 0.3837
+  },
+  "by_race_group": {
+   "White": 0.3922,
+   "Black": 0.2969,
+   "Hispanic": 0.2937,
+   "Asian": 0.3419,
+   "Other": 0.5522
+  }
+ },
+ "comorbidity_pc4": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ },
+ "rapid_tfr_x_readmit": {
+  "overall": 0.0,
+  "by_partition": {
+   "train": 0.0,
+   "val": 0.0,
+   "test": 0.0
+  },
+  "by_race_group": {
+   "White": 0.0,
+   "Black": 0.0,
+   "Hispanic": 0.0,
+   "Asian": 0.0,
+   "Other": 0.0
+  }
+ }
+}

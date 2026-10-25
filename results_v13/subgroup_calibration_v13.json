@@ -1,0 +1,208 @@
+{
+ "race:Asian": {
+  "mean_pred": 0.23,
+  "observed": 0.2371,
+  "o_e": 1.0306,
+  "citl": 0.0468,
+  "spec": 0.6929,
+  "o_e_ci95": [
+   0.9301,
+   1.1186
+  ],
+  "citl_ci95": [
+   -0.1089,
+   0.1854
+  ],
+  "spec_ci95": [
+   0.6509,
+   0.7373
+  ]
+ },
+ "race:Black": {
+  "mean_pred": 0.2289,
+  "observed": 0.2287,
+  "o_e": 0.9993,
+  "citl": -0.001,
+  "spec": 0.6105,
+  "o_e_ci95": [
+   0.9571,
+   1.0401
+  ],
+  "citl_ci95": [
+   -0.0624,
+   0.059
+  ],
+  "spec_ci95": [
+   0.5855,
+   0.6355
+  ]
+ },
+ "race:Hispanic/Latino": {
+  "mean_pred": 0.2616,
+  "observed": 0.2745,
+  "o_e": 1.049,
+  "citl": 0.0776,
+  "spec": 0.5858,
+  "o_e_ci95": [
+   0.9371,
+   1.1277
+  ],
+  "citl_ci95": [
+   -0.092,
+   0.2165
+  ],
+  "spec_ci95": [
+   0.5397,
+   0.6318
+  ]
+ },
+ "race:Other/Unknown": {
+  "mean_pred": 0.1962,
+  "observed": 0.1523,
+  "o_e": 0.7761,
+  "citl": -0.3396,
+  "spec": 0.7291,
+  "o_e_ci95": [
+   0.6884,
+   0.851
+  ],
+  "citl_ci95": [
+   -0.4842,
+   -0.2219
+  ],
+  "spec_ci95": [
+   0.7071,
+   0.7511
+  ]
+ },
+ "race:White": {
+  "mean_pred": 0.2093,
+  "observed": 0.21,
+  "o_e": 1.0033,
+  "citl": 0.0047,
+  "spec": 0.6853,
+  "o_e_ci95": [
+   0.9838,
+   1.0228
+  ],
+  "citl_ci95": [
+   -0.0229,
+   0.0323
+  ],
+  "spec_ci95": [
+   0.6772,
+   0.6944
+  ]
+ },
+ "age_band:65-74": {
+  "mean_pred": 0.2156,
+  "observed": 0.2154,
+  "o_e": 0.999,
+  "citl": -0.0014,
+  "spec": 0.6805,
+  "o_e_ci95": [
+   0.9703,
+   1.0309
+  ],
+  "citl_ci95": [
+   -0.0422,
+   0.0449
+  ],
+  "spec_ci95": [
+   0.6666,
+   0.6943
+  ]
+ },
+ "age_band:75-84": {
+  "mean_pred": 0.1962,
+  "observed": 0.1929,
+  "o_e": 0.9828,
+  "citl": -0.0236,
+  "spec": 0.7071,
+  "o_e_ci95": [
+   0.9488,
+   1.0144
+  ],
+  "citl_ci95": [
+   -0.0703,
+   0.0198
+  ],
+  "spec_ci95": [
+   0.6953,
+   0.7191
+  ]
+ },
+ "age_band:85+": {
+  "mean_pred": 0.1804,
+  "observed": 0.1788,
+  "o_e": 0.9907,
+  "citl": -0.0121,
+  "spec": 0.7376,
+  "o_e_ci95": [
+   0.9474,
+   1.0316
+  ],
+  "citl_ci95": [
+   -0.0698,
+   0.0408
+  ],
+  "spec_ci95": [
+   0.722,
+   0.7523
+  ]
+ },
+ "age_band:<65": {
+  "mean_pred": 0.266,
+  "observed": 0.2657,
+  "o_e": 0.9992,
+  "citl": -0.0012,
+  "spec": 0.5503,
+  "o_e_ci95": [
+   0.9662,
+   1.0297
+  ],
+  "citl_ci95": [
+   -0.0527,
+   0.0475
+  ],
+  "spec_ci95": [
+   0.5301,
+   0.5727
+  ]
+ },
+ "white_minus_black_specificity": {
+  "point": 0.0747,
+  "ci95": [
+   0.048,
+   0.1029
+  ],
+  "n_boot": 2000,
+  "descriptive": true
+ },
+ "threshold": 0.2069,
+ "patients_in_both_white_and_black": 6,
+ "patients_white": 13426,
+ "patients_black": 1827,
+ "white_minus_black_auroc_joint": {
+  "point_observed": 0.0029,
+  "bootstrap_mean": 0.0031,
+  "ci95": [
+   -0.0184,
+   0.0237
+  ],
+  "p_two_sided_plus1": 0.78,
+  "n_boot": 5000,
+  "design": "joint patient-level cluster bootstrap over the union of White and Black patients; shared patients receive the same multiplicity in both groups"
+ },
+ "white_minus_black_specificity_joint": {
+  "point_observed": 0.0747,
+  "bootstrap_mean": 0.0748,
+  "ci95": [
+   0.0481,
+   0.1023
+  ],
+  "p_two_sided_plus1": 0.0004,
+  "n_boot": 5000,
+  "design": "joint patient-level cluster bootstrap over the union of White and Black patients; shared patients receive the same multiplicity in both groups"
+ }
+}

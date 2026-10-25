@@ -1,0 +1,112 @@
+[
+ {
+  "feature": "freq_x_recency",
+  "early_share": 8.39,
+  "late_share": 12.95,
+  "diff_pp": -4.56,
+  "ci95": [
+   -4.69,
+   -4.43
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "lab_abnormal_rate",
+  "early_share": 3.83,
+  "late_share": 7.1,
+  "diff_pp": -3.26,
+  "ci95": [
+   -3.33,
+   -3.18
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "n_late_orders",
+  "early_share": 3.53,
+  "late_share": 0.8,
+  "diff_pp": 2.72,
+  "ci95": [
+   2.63,
+   2.82
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "prior_mean_los_6m",
+  "early_share": 0.82,
+  "late_share": 3.53,
+  "diff_pp": -2.71,
+  "ci95": [
+   -2.74,
+   -2.67
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "n_discharge_drugs",
+  "early_share": 1.02,
+  "late_share": 3.58,
+  "diff_pp": -2.56,
+  "ci95": [
+   -2.61,
+   -2.52
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "discharge_location",
+  "early_share": 4.65,
+  "late_share": 2.18,
+  "diff_pp": 2.47,
+  "ci95": [
+   2.35,
+   2.6
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "log_n_labs",
+  "early_share": 2.11,
+  "late_share": 4.45,
+  "diff_pp": -2.34,
+  "ci95": [
+   -2.39,
+   -2.28
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "wbc_last",
+  "early_share": 4.2,
+  "late_share": 1.96,
+  "diff_pp": 2.24,
+  "ci95": [
+   2.16,
+   2.29
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "log_prior_readmit_count",
+  "early_share": 4.93,
+  "late_share": 2.8,
+  "diff_pp": 2.13,
+  "ci95": [
+   1.94,
+   2.36
+  ],
+  "excludes_zero": true
+ },
+ {
+  "feature": "prior_admissions_6m",
+  "early_share": 1.96,
+  "late_share": 4.08,
+  "diff_pp": -2.12,
+  "ci95": [
+   -2.25,
+   -2.02
+  ],
+  "excludes_zero": true
+ }
+]

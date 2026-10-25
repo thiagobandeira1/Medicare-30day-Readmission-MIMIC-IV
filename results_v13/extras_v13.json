@@ -1,0 +1,125 @@
+{
+ "fixed_consensus_vs_eligible_cv": {
+  "n_consensus": 44,
+  "n_eligible": 137,
+  "auroc_consensus_cv": 0.7057,
+  "auroc_eligible_cv": 0.7065,
+  "paired_diff_consensus_minus_eligible": -0.0008,
+  "ci95": [
+   -0.0017,
+   0.0001
+  ],
+  "p_two_sided_plus1": 0.0708,
+  "n_boot": 5000
+ },
+ "highdraw_contrasts_5000": {
+  "lace_uplift": {
+   "point": 0.1005,
+   "ci95": [
+    0.0916,
+    0.1098
+   ],
+   "p_two_sided_plus1": 0.0004,
+   "n_boot": 5000,
+   "design": "paired same-draw patient-cluster bootstrap"
+  },
+  "hospital12_uplift": {
+   "point": 0.0587,
+   "ci95": [
+    0.053,
+    0.0644
+   ],
+   "p_two_sided_plus1": 0.0004,
+   "n_boot": 5000,
+   "design": "paired same-draw patient-cluster bootstrap"
+  },
+  "white_minus_black": {
+   "point": 0.0033,
+   "ci95": [
+    -0.0187,
+    0.0247
+   ],
+   "p_two_sided_plus1": 0.77,
+   "n_boot": 5000,
+   "design": "stratified patient-cluster bootstrap: patients resampled within each subgroup independently; disjoint groups, not a paired comparison"
+  }
+ },
+ "tie_rule_sensitivity": {
+  "death_first_primary": {
+   "test_readmissions": 10117,
+   "test_deaths": 1170,
+   "harrell_c": 0.6757,
+   "tdauc_day1": 0.8363,
+   "tdauc_day29": 0.6898,
+   "aj_cif30_readmission": 0.2122,
+   "aj_cif30_death": 0.0245
+  },
+  "readmission_first": {
+   "test_readmissions": 10133,
+   "test_deaths": 1154,
+   "harrell_c": 0.6761,
+   "tdauc_day1": 0.8346,
+   "tdauc_day29": 0.6904,
+   "aj_cif30_readmission": 0.2126,
+   "aj_cif30_death": 0.0242
+  },
+  "n_ties": 66,
+  "n_ties_test": 16
+ },
+ "transfer_band": {
+  "primary_label": "readmission iff 0 < delta <= 30",
+  "transfer_band": "-2 < delta <= 0 (treated as transfer/continuation)",
+  "n_band_total": 650,
+  "n_band_by_partition": {
+   "train": 458,
+   "val": 52,
+   "test": 140
+  },
+  "n_delta_below_minus2": 0
+ },
+ "era_stratified_test": {
+  "bands": [
+   {
+    "band": "2008 - 2010",
+    "n": 22268,
+    "events": 5467,
+    "prevalence": 0.2455,
+    "auroc": 0.7063
+   },
+   {
+    "band": "2011 - 2013",
+    "n": 9806,
+    "events": 1878,
+    "prevalence": 0.1915,
+    "auroc": 0.6939
+   },
+   {
+    "band": "2014 - 2016",
+    "n": 7062,
+    "events": 1327,
+    "prevalence": 0.1879,
+    "auroc": 0.6931
+   },
+   {
+    "band": "2017 - 2019",
+    "n": 5283,
+    "events": 903,
+    "prevalence": 0.1709,
+    "auroc": 0.6952
+   },
+   {
+    "band": "2020 - 2022",
+    "n": 3253,
+    "events": 558,
+    "prevalence": 0.1715,
+    "auroc": 0.6963
+   }
+  ]
+ },
+ "payer_scope": {
+  "n_30d_next_nonmedicare": 743,
+  "n_counted_as_readmission": 741
+ },
+ "boot_draws": 5000,
+ "seed": 42
+}

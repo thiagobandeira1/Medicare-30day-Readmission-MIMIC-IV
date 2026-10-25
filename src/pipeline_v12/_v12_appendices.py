@@ -77,12 +77,13 @@ VDEF = {
  "prior_mean_los_6m": ("Mean whole-day length of stay of earlier admissions discharged in the prior 180 days (0 if none)", "prior 180 days", HV["prior_mean_los_6m"]["mlos_floor_disch180"]),
  "prior_any_ed_6m": ("Any earlier admission in the prior 180 days with an emergency department registration", "prior 180 days", TA["history_recompute"]["prior_any_ed_6m"]["match_share"]),
  "prior_readmission_count": ("Earlier Medicare-insured admissions in the prior 365 days followed by a readmission within 30 days", "prior 365 days", PRV["lookback_variants"]["admit_365"]),
- "time_since_last_discharge": ("Days from the previous Medicare-insured discharge to the index admission; missing if none (v7 to v10 used the global median, 80.22)", "all earlier admissions", HV["time_since_last_discharge"]["nonfill_match_cohort"]),
+ "time_since_last_discharge": ("Days from the previous discharge of any insurance to the index admission; missing for first observed admissions (v13; v7 to v10 used the previous Medicare-insured discharge and the global median 80.22)", "all earlier admissions", 1.0),
  "prior_admissions_all": ("Earlier admissions of the patient (any insurance)", "all earlier admissions", TA["history_recompute"]["prior_admissions_all"]["match_share"]),
  "orders_last_6h": ("late_order_rate multiplied by n_late_orders (name does not reflect content)", "index stay", DCK["orders_last_6h_eq_rate_x_late_orders"]),
- "n_labs_total": ("Numeric laboratory results recorded under the hospital admission", "index admission (all rows)", DCK["n_labs_total_eq_numeric_results_in_hadm"]),
- "lab_abnormal_rate": ("Abnormal laboratory rows divided by numeric laboratory results", "index admission (all rows)", DCK["lab_abnormal_rate_eq_abnormal_rows_over_numeric_results"]),
- "n_lab_item_types": ("Distinct laboratory test types recorded under the hospital admission", "index admission (all rows)", IA["raw_spot_check"]["n_lab_item_types"]["all_rows_of_hadm"]),
+ "n_labs_total": ("Numeric laboratory results charted and stored on or before discharge (v12 cutoff rebuild)", "index stay, on or before discharge", 1.0),
+ "lab_abnormal_rate": ("Abnormal laboratory rows divided by numeric results, both charted and stored on or before discharge (v12)", "index stay, on or before discharge", 1.0),
+ "n_lab_item_types": ("Distinct laboratory test types charted and stored on or before discharge (v12)", "index stay, on or before discharge", 1.0),
+ "n_meds_total": ("Prescriptions started on or before discharge (v12)", "index stay, on or before discharge", 1.0),
  "n_order_types": ("Distinct provider order types recorded under the hospital admission", "index admission (all rows)", IA["raw_spot_check"]["n_order_types"]["all_rows_of_hadm"]),
  "bmi_last": ("Last outpatient body-mass index dated on or before the admission time", "before admission", TA["omr_audit"]["bmi_last"]["on_or_before_admission_time"]["exact_match_any_value_on_last_date"]),
  "bp_diastolic_outpatient": ("Last outpatient diastolic pressure dated on or before the admission time", "before admission", TA["omr_audit"]["bp_diastolic_outpatient"]["on_or_before_admission_time"]["exact_match_any_value_on_last_date"])}
@@ -208,8 +209,14 @@ with pd.ExcelWriter(xlsx) as w:
         w, sheet_name="Outcome_Sensitivity", index=False)
     pd.DataFrame([{"step": k, "n": v} for k, v in ER["flow"].items()]).to_excel(
         w, sheet_name="Episode_Flow", index=False)
-    pd.DataFrame([{"feature": k, **v} for k, v in TB.items() if isinstance(v, dict) and "new_missing" in v]
+    pd.DataFrame([{"feature": k, "population": "all 244,576 Medicare admissions (before death exclusion)",
+                   "version": "v11", **v} for k, v in TB.items() if isinstance(v, dict) and "new_missing" in v]
                  ).to_excel(w, sheet_name="Table_Rebuild", index=False)
+    pd.DataFrame([{"feature": k, "version": "v12 (discharge cutoff on counts)", **v}
+                  for k, v in TB.get("v12_cutoff_enforced", {}).items()] +
+                 [{"feature": k, "version": "v13 (documentation-time cutoff)", **v}
+                  for k, v in TB.get("v13_documentation_time_enforced", {}).items()]
+                 ).to_excel(w, sheet_name="Cutoff_Rebuild", index=False)
     pd.DataFrame([{"metric": k, "value": (str(v) if isinstance(v, (dict, list)) else v)}
                   for k, v in BO.items()]).to_excel(w, sheet_name="Baselines_OOF", index=False)
     pd.DataFrame(RV["era"]).to_excel(w, sheet_name="Era_Bands", index=False)
