@@ -187,7 +187,7 @@ for k, traj in TR.items():
     ax.plot(ns, a, "o-", ms=3, lw=1.2, alpha=0.8, label=f"outer fold {k}")
 ax.axvline(NF, color=CORAL, ls="--", lw=1.4)
 ax.annotate(f"consensus\nn={NF}", xy=(NF, ax.get_ylim()[0]),
-            xytext=(NF + 8, ax.get_ylim()[0] + 0.0008),
+            xytext=(NF + 2, ax.get_ylim()[0] + 0.0008), ha="right",
             color=CORAL, fontweight="bold", fontsize=9)
 ax.set_xlabel("Features retained"); ax.set_ylabel("Inner-validation AUROC")
 ax.legend(fontsize=7); ax.grid(alpha=0.3)
