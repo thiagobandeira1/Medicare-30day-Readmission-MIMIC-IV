@@ -48,7 +48,7 @@ POOL5 = json.loads((OUT7 / "eligible_pool_v7.json").read_text())
 
 
 def fmt_p(p):
-    """Empirical bootstrap P with plus-one correction, JMIR style."""
+    """Empirical bootstrap P with plus-one correction."""
     return "P<.001" if p < 0.001 else f"P={p:.3f}".replace("0.", ".")
 
 
@@ -58,7 +58,7 @@ _NBHY = "‑"      # non-breaking hyphen (keeps a signed number intact)
 
 def nbci(lo, hi, d=4):
     """A '95% CI x to y' rendered as an unbreakable unit so it never splits
-    across a line/column boundary (JMIR-style typesetting)."""
+    across a line/column boundary (journal typesetting)."""
     def f(x):
         # U+2212 true minus: correct glyph and not a break opportunity
         return f"{x:.{d}f}".replace("-", "−")
@@ -173,7 +173,7 @@ for attr in ("left_margin", "right_margin", "top_margin", "bottom_margin"):
 
 
 def _add_line_numbers(section):
-    """Continuous line numbering (reviewers prefer it, per JMIR)."""
+    """Continuous line numbering (reviewers prefer it)."""
     from docx.oxml.ns import qn
     sectPr = section._sectPr
     ln = sectPr.find(qn("w:lnNumType"))

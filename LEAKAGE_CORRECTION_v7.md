@@ -56,8 +56,9 @@ reports the timing curve both with and without them.
 * Results: `results_v7/` (aggregate JSON only; row-level predictions are
   not committed, per the PhysioNet data use agreement).
 * Figures: `figures_v7/`.
-* Superseded: `results_v5/`, `results_v6/`, `src/pipeline_v5_v6/`, tag
-  `v6.4-submission` and Zenodo version 10.5281/zenodo.21987702.
+* Superseded: `results_v5/`, `results_v6/`, tag `v6.4-submission` and
+  Zenodo version 10.5281/zenodo.21987702 (which also holds the superseded
+  v5/v6 pipeline code, removed from the current tree).
 
 # Versions 8 to 16 (October to November 2026)
 

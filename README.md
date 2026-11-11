@@ -19,7 +19,7 @@
 ## Current status: JAMIA submission v16 (November 2026)
 
 > **Correction notice.** All results released before October 2026 (tags up to
-> `v6.4-submission`, the JMIR AI drafts, and every capstone number below,
+> `v6.4-submission`, the earlier manuscript drafts, and every capstone number below,
 > mostly 0.77 to 0.80 AUROC) are inflated. A
 > prior-utilization feature, `los_trend_180d`, documented as using only
 > earlier stays, in fact encoded the patient's later admissions (among

@@ -1,5 +1,5 @@
 {
- "note": "keys are the BUILDER-INTERNAL source numbering of the REFS list in _build_jamia.py (identical to the pre-renumber REFS order in the JMIR part2 builder), NOT the renumbered JMIR dump",
+ "note": "keys are the BUILDER-INTERNAL source numbering of the REFS list in _build_jamia.py (the pre-renumber source order), NOT the renumbered reference list",
  "mapping": {
   "1": 1,
   "2": 2,

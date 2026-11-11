@@ -22,7 +22,7 @@ md(r"""# Statistical Rigor (Tier 1)
 ## Confidence intervals, model comparison, calibration, Table 1, and cohort flow
 
 This notebook adds the quantitative-rigor elements that reputable clinical-prediction venues
-(JMIR, IEEE J-BHI) expect and that the manuscript currently lacks:
+(health informatics journals) expect and that the manuscript currently lacks:
 
 1. **Bootstrap 95% confidence intervals** on every headline AUROC / AUPRC.
 2. **Paired bootstrap comparison** (difference CI + p-value) between the GBM families, and between the
