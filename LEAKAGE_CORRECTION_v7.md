@@ -3,11 +3,11 @@
 ## What was wrong
 
 `los_trend_180d` was documented as a 180-day length-of-stay trend computed
-from the patient's earlier stays. An empirical test on first-ever admissions
-(patients with no earlier admission of any kind, so a history feature can
+from the patient's earlier stays. An empirical test on first observed admissions
+(patients with no earlier admission in MIMIC-IV, so a history feature can
 carry no information) showed that it encodes later admissions instead:
 
-| Check (78,419 first-ever cohort admissions) | Value |
+| Check (78,419 first observed cohort admissions) | Value |
 |---|---|
 | Share with a nonzero value | 44.2% |
 | Later admission among nonzero | 100% |
@@ -28,13 +28,13 @@ to use only records dated on or before discharge.
 | Out-of-fold AUROC, complete selection procedure | 0.7748 | 0.7058 (95% CI 0.7018 to 0.7104) |
 | Test AUROC, final model | 0.7738 | 0.7064 (95% CI 0.6973 to 0.7150) |
 | White minus Black test AUROC | 0.034 (P<.001) | 0.006 (P=.57) |
-| AUROC trend across calendar eras | 0.744 to 0.856 | 0.692 to 0.706 (flat) |
+| AUROC trend across calendar periods | 0.744 to 0.856 | 0.692 to 0.706 (flat) |
 | Consensus feature set | 31 features | 47 features |
 
-The leak also explained the apparent advantage for first-time admissions, the
-rising AUROC across calendar eras, and the apparent racial gap in
+The leak also explained the apparent advantage for first observed admissions, the
+rising AUROC across calendar periods, and the apparent racial gap in
 discrimination; all disappeared after the correction. A separate review found
-that the apparent day-1 discrimination peak reflects 2,368 administrative
+that the apparent day-1 discrimination peak reflects 2,368 probable administrative
 continuations beginning within 1 hour of discharge; the manuscript now
 reports the timing curve both with and without them.
 
@@ -59,7 +59,7 @@ reports the timing curve both with and without them.
 * Superseded: `results_v5/`, `results_v6/`, `src/pipeline_v5_v6/`, tag
   `v6.4-submission` and Zenodo version 10.5281/zenodo.21987702.
 
-# Versions 8 to 15 (October 2026)
+# Versions 8 to 16 (October to November 2026)
 
 * **v8 to v10** added audits without changing the model: recomputation of
   every history feature from raw admission timestamps, a within-patient
@@ -104,3 +104,12 @@ reports the timing curve both with and without them.
 * **v14 and v15** changed reporting only (document consistency, workbook
   labels, checklist wording); the model and results are those of v13.
   Builders: `src/pipeline_v14/`, `src/pipeline_v15/`.
+* **v16** (November 2026) applied the co-authors' review of v15: wording
+  only ("calendar period" replaces "era"; clearer abstract wording), the
+  Data Availability Statement now names `final_model_v13.json`, page numbers
+  were added, and the corresponding author's address is the school address.
+  The model and results are those of v13. Builders: `src/pipeline_v16/`;
+  public copies withhold the corresponding author's phone number. The
+  capstone report, its draft additions, and the capstone slide deck, which
+  report pre-correction results, were removed from the current tree; they
+  remain in the `v6.4-submission` archive.

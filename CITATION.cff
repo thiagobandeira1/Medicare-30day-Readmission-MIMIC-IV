@@ -20,15 +20,14 @@ authors:
     given-names: "Ananda Mohan"
     affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
     orcid: "https://orcid.org/0000-0002-4005-9942"
-year: 2026
-version: "v15.0-jamia"
-date-released: "2026-10-25"
+version: "v16.0-jamia"
+date-released: "2026-11-10"
 doi: "10.5281/zenodo.21987701"
 abstract: >-
   Software and aggregate results for the JAMIA manuscript "Future-Information
   Leakage in 30-Day Readmission Prediction: An Empirical Audit and a
   Calibrated Electronic Health Record Model in Medicare-Insured Adults".
-  Versions v7 to v15 remove a prior-utilization feature (los_trend_180d) and
+  Versions v7 to v16 remove a prior-utilization feature (los_trend_180d) and
   two derived interactions that encoded later admissions, rebuild the feature
   table from the raw MIMIC-IV tables without global imputation and with
   discharge and documentation-time cutoffs, and rerun the complete pipeline;
@@ -36,7 +35,7 @@ abstract: >-
   LEAKAGE_CORRECTION_v7.md). Contains the leakage-safe staged recursive
   feature elimination pipeline, the empirical first-admission leakage test,
   the final 44-feature XGBoost model (src/pipeline_v13; document builders in
-  src/pipeline_v15), canonical machine-readable results
+  src/pipeline_v16), canonical machine-readable results
   (results_v13/final_model_v13.json and companions), and figures.
   Out-of-fold AUROC of the complete selection procedure 0.7057 (95% CI
   0.7016 to 0.7102, primary); test AUROC 0.7056 (95% CI 0.6964 to 0.7145) on
@@ -52,6 +51,7 @@ keywords:
   - "XGBoost"
   - "SHAP"
   - "interpretable machine learning"
-  - "clinical decision support"
+  - "data leakage"
+  - "calibration"
 license: MIT
 repository-code: "https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV"

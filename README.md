@@ -1,29 +1,29 @@
-# Predicting 30-Day Hospital Readmission in Medicare Patients
+# Future-Information Leakage in 30-Day Readmission Prediction (Medicare, MIMIC-IV v3.1)
 
-![status](https://img.shields.io/badge/status-JAMIA_submission_v7-blue)
+![status](https://img.shields.io/badge/status-JAMIA_submission_v16-blue)
 ![python](https://img.shields.io/badge/python-3.11-blue?logo=python&logoColor=white)
 ![MIMIC-IV](https://img.shields.io/badge/MIMIC--IV-v3.1-B22222)
 ![out-of-fold AUROC](https://img.shields.io/badge/out--of--fold_AUROC-0.706-1E88E5)
 ![test AUROC](https://img.shields.io/badge/test_AUROC-0.706-228B22)
-![calibration slope](https://img.shields.io/badge/calibration_slope-1.00-00875A)
+![calibration slope](https://img.shields.io/badge/calibration_slope-0.99-00875A)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
-> **TL;DR:** A reproducible supervised-ML pipeline that estimates the probability of **unplanned 30-day readmission at discharge** for Medicare-insured patients in **MIMIC-IV v3.1**. Starting from 244,576 Medicare admissions, we engineered seven dataset versions (V1 → V7) producing a 50-feature parsimonious set, trained four gradient-boosting families across ten seeds each, and deploy a single **XGBoost** model reaching **test AUROC 0.7935** (outperforming LACE by **+0.110** and ClinicalBERT by **+0.080** AUROC) with full **SHAP** interpretability. **This is a post-defense revision** of the original April 2026 capstone, with test-set early-stopping leakage removed (the test partition is touched exactly once); every per-model AUROC meets or exceeds the originally published target.
+> **TL;DR:** Code and aggregate results for the JAMIA submission "Future-Information Leakage in 30-Day Readmission Prediction: An Empirical Audit and a Calibrated Electronic Health Record Model in Medicare-Insured Adults". In 236,906 Medicare-insured admissions from **MIMIC-IV v3.1**, a 44-feature **XGBoost** model selected inside patient-grouped folds reaches an **out-of-fold AUROC of 0.706** with a test-partition calibration slope of 0.99 and exceeds the LACE and HOSPITAL scores on the same patients. Simple empirical checks exposed a documented history feature that had encoded later admissions; removing it and two derived interactions lowered test AUROC from 0.774 to 0.706 and removed spurious subgroup and calendar-period findings. MIMIC-IV row-level data are not included, per the PhysioNet Credentialed Health Data Use Agreement.
 
-**Authors** · Thiago Bandeira (first author) · Armando Gonzalez · Dr. Christian Poellabauer
+**Authors** · Thiago Bandeira (first author) · Armando Gonzalez · Dr. Christian Poellabauer · Dr. Ananda Mohan Mondal
 **Institution** · Knight Foundation School of Computing and Information Sciences, Florida International University
-**Original defense** · April 2026 · **This revision** · May 2026 · **GitHub** · [thiagobandeira1/medicare-30day-readmission-mimic-iv](https://github.com/thiagobandeira1/medicare-30day-readmission-mimic-iv)
+**Origin** · Master of Science capstone project (April 2026) · **Current version** · JAMIA submission v16 (November 2026) · **GitHub** · [thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV](https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV)
 
 ---
 
-## Current status: JAMIA submission v15 (October 2026)
+## Current status: JAMIA submission v16 (November 2026)
 
 > **Correction notice.** All results released before October 2026 (tags up to
-> `v6.4-submission`, the JMIR AI drafts, and the capstone numbers below,
-> including every badge value of 0.77 to 0.80) are inflated. A
+> `v6.4-submission`, the JMIR AI drafts, and every capstone number below,
+> mostly 0.77 to 0.80 AUROC) are inflated. A
 > prior-utilization feature, `los_trend_180d`, documented as using only
 > earlier stays, in fact encoded the patient's later admissions (among
-> first-ever admissions it was nonzero only for patients who would be admitted
+> first observed admissions it was nonzero only for patients who would be admitted
 > again; AUROC 0.93 for any later admission). It and two interactions built
 > from it (`los_trend_x_prior_6m`, `los_trend_x_prior_admits`) were removed in
 > v7. Versions 11 to 13 then rebuilt the feature table from the raw tables
@@ -37,13 +37,20 @@
 > Model in Medicare-Insured Adults" (Bandeira, Gonzalez, Poellabauer,
 > Mondal), reports the v13 model. The model pipeline is
 > [`src/pipeline_v13/`](src/pipeline_v13/) and the document builders are
-> [`src/pipeline_v15/`](src/pipeline_v15/) (v14 and v15 changed reporting
-> only); canonical results are
+> [`src/pipeline_v16/`](src/pipeline_v16/) (v14 to v16 changed reporting
+> only; v16 applies the co-authors' review); canonical results are
 > [`results_v13/final_model_v13.json`](results_v13/final_model_v13.json) with
 > the leakage test in [`results_v13/leak_test_v13.json`](results_v13/leak_test_v13.json)
 > and the table rebuild record in
 > [`results_v13/table_rebuild_v13.json`](results_v13/table_rebuild_v13.json);
-> figures are in [`figures_v13/`](figures_v13/).
+> figures are in [`figures_v13/`](figures_v13/). Public copies of the
+> document builders withhold the corresponding author's phone number. The
+> v13 results were produced with Python 3.11.14, XGBoost 3.2.0,
+> scikit-learn 1.7.2, pandas 2.3.3, and NumPy 1.26.4 (the `env` block of
+> `final_model_v13.json`); `environment.yml` and `requirements.txt` pin the
+> earlier capstone environment. The builders run from a working folder next
+> to the repository, with the helper modules of `src/pipeline_v13/` and
+> `src/pipeline_v7/` on the Python path.
 >
 > Headline results (44-feature consensus model): out-of-fold AUROC of the
 > complete selection procedure 0.7057 (95% CI 0.7016 to 0.7102, primary);
@@ -52,22 +59,28 @@
 > calibration-in-the-large close to 0. Same-cohort baselines on the test
 > partition: LACE 0.605 and HOSPITAL 0.647 as integer scores (both below the
 > model; AUROC uplift 0.101 and 0.059, 5,000-draw bootstrap P<.001); on the
-> out-of-fold development partition, LACE 0.606 and HOSPITAL 0.642.
-> Release: the submitted version will be tagged `v15.0-jamia` and archived
+> out-of-fold development partition, LACE 0.6055 and HOSPITAL 0.6424.
+> Release: the submitted version is tagged `v16.0-jamia` and archived
 > under the Zenodo concept DOI
 > [10.5281/zenodo.21987701](https://doi.org/10.5281/zenodo.21987701)
-> (resolves to the latest version; earlier Zenodo versions predate the
-> corrections).
+> (resolves to the latest version; versions dated before October 2026
+> predate the corrections).
 >
-> Everything below documents the earlier capstone revision and is retained
-> only as development history. Its numbers were produced with billing-derived
-> features and the leaked variable and must not be cited.
+> The capstone report, its draft additions, and the capstone slide deck were
+> removed from the current tree in v16 because they report pre-correction
+> results; they remain in the `v6.4-submission` archive
+> ([10.5281/zenodo.21987702](https://doi.org/10.5281/zenodo.21987702)).
+>
+> The sections from Overview to Future Work document the earlier capstone
+> revision and are retained only as development history. Their numbers were
+> produced with billing-derived features and the leaked variable and **must
+> not be cited**. The citation under Authors & Citation is current.
 
 ---
 
 ## Table of Contents
 
-- [Current status: JMIR AI submission (August 2026)](#current-status-jmir-ai-submission-august-2026)
+- [Current status: JAMIA submission v16 (November 2026)](#current-status-jamia-submission-v16-november-2026)
 - [Overview](#overview)
 - [Research Questions](#research-questions)
 - [Headline Results](#headline-results)
@@ -396,17 +409,17 @@ medicare-30day-readmission-mimic-iv/
 ├── notebooks/
 │   └── Capstone_Final_Notebook.ipynb        # source-of-truth analysis notebook (73 cells)
 │
-├── paper/
-│   ├── Capstone_Final_Report_Revised_2026-05.docx   # post-defense revised manuscript
-│   ├── references.bib                       # BibTeX for §18 References
-│   └── missing_data_section_for_report.md   # standalone §5.3 for Word paste-in
+├── paper/                                   # capstone-era text files (the capstone report and slides were removed in v16)
+│   ├── references.bib                       # BibTeX for the capstone report
+│   ├── TRIPOD_AI_Checklist.md               # capstone-era checklist (superseded by Supplementary Appendix 5)
+│   └── missing_data_section_for_report.md   # capstone-era text (the imputation it describes was rebuilt in v11)
 │
-├── src/                                     # analysis and pipeline scripts; src/pipeline_v7/ holds the JAMIA v7 pipeline (src/pipeline_v5_v6/ is superseded)
+├── src/                                     # analysis and pipeline scripts; src/pipeline_v13/ holds the model pipeline and src/pipeline_v16/ the document builders (earlier pipeline folders are superseded)
 │   ├── run_progression.py                   # subprocess-per-version V1→V7 baseline training
 │   ├── run_v7_ensemble.py                   # subprocess-per-model 10-seed V7 training
 │   ├── run_5fold_cv.py                      # subprocess-per-model 5-fold CV stability check
 │   ├── execute_notebook.py                  # headless notebook runner
-│   ├── build_revised_report.py              # generates the .docx
+│   ├── build_revised_report.py              # generated the capstone report .docx (removed in v16; kept in v6.4-submission)
 │   ├── refactor_notebook.py                 # initial capstone → publication refactor
 │   ├── add_reproduction_validator.py        # inserts §10.3b
 │   ├── add_cv_stability_section.py          # inserts §10.3c
@@ -420,7 +433,7 @@ medicare-30day-readmission-mimic-iv/
 │   ├── missing_data_profile_v7.csv          # §5.3 per-column NaN profile
 │   └── v7_feature_importance_current_run.csv
 │
-├── figures/                                 # 18 PNGs rendered by the notebook
+├── figures/                                 # capstone figures rendered by the notebook
 │   ├── eda_*.png                            # §6 EDA panels
 │   ├── fig_b_logreg_v1v6.png                # §9.1 LogReg progression
 │   ├── fig_cde_lgbm_xgb_mlp_v1v6.png        # §9.2-9.4 GBM/MLP progression
@@ -431,8 +444,7 @@ medicare-30day-readmission-mimic-iv/
 │   ├── ensemble_blend_weights.png           # §10.3 blend-weight donut
 │   ├── benchmark_comparison.png             # §11.3 benchmark bars
 │   ├── cv5_stability.png                    # §10.3c 5-fold CV stability
-│   ├── v7_feature_importance.png            # §10.4 feature-importance ranking
-│   └── _archive/                            # original capstone figures (visual diff baseline)
+│   └── v7_feature_importance.png            # §10.4 feature-importance ranking
 │
 ├── docs/                                    # methodology deep-dives
 └── data/                                    # empty; MIMIC-IV not redistributed
@@ -531,13 +543,15 @@ Questions about credentialing are best raised on the [PhysioNet community forum]
 ### Code
 
 ```bibtex
-@software{bandeira_gonzalez_poellabauer_mimic_readmission_2026,
-  author      = {Bandeira, Thiago and Gonzalez, Armando and Poellabauer, Christian and Mondal, Ananda Mohan},
-  title       = {Predicting 30-Day Hospital Readmission in Medicare Patients:
-                 An Interpretable Gradient-Boosting Model on MIMIC-IV v3.1},
-  year        = {2026},
-  institution = {Florida International University},
-  url         = {https://github.com/thiagobandeira1/medicare-30day-readmission-mimic-iv}
+@software{bandeira_gonzalez_poellabauer_mondal_leakage_2026,
+  author    = {Bandeira, Thiago and Gonzalez, Armando and Poellabauer, Christian and Mondal, Ananda Mohan},
+  title     = {Future-Information Leakage in 30-Day Readmission Prediction:
+               An Empirical Audit and a Calibrated Electronic Health Record Model in Medicare-Insured Adults},
+  version   = {v16.0-jamia},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21987701},
+  url       = {https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV}
 }
 ```
 
