@@ -114,3 +114,15 @@ reports the timing curve both with and without them.
   capstone report, its draft additions, and the capstone slide deck, which
   report pre-correction results, were removed from the current tree; they
   remain in the `v6.4-submission` archive.
+* **v16.1** (November 2026) applies a pre-submission audit: wording,
+  supplementary material, and four reported numbers corrected to match the
+  results files; no model or results file changed. The ethics
+  sentence now names the BIDMC institutional review board alone, as the
+  MIMIC-IV article does; unsupported cost and score-range statements were
+  corrected; Table 4 is cited in the text; Appendix 4 shows the v13
+  decision curve; and the original capstone code of the leaked feature,
+  recovered in the audit, is described in Supplement S3 (it reproduces
+  the stored values for every admission; `results_v13/trend_code_recovery_v16.json`).
+  The submitted Supplementary Appendices 1 to 6 are in `supplementary/`.
+  The consistency reports of the superseded v6.4 manuscript were removed
+  from `docs/`; they remain in the `v6.4-submission` archive.

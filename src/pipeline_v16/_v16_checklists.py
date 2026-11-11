@@ -113,19 +113,19 @@ T = [
  ("Fairness", "14", "D;E", "Describe any approaches that were used to address model fairness and their rationale", "Race excluded as input; performance, specificity, and calibration audited by race, sex, age, and prior utilization", loc("Subgroup Audit", "Subgroup Performance")),
  ("Model output", "15", "D", "Specify the output of the prediction model. Provide details and rationale for any classification and how the thresholds were identified", "Probability of 30-day readmission; validation-partition Youden threshold; capacity view", loc("Model and Comparators", "Clinical Utility (Exploratory)")),
  ("Training versus evaluation", "16", "D;E", "Identify any differences between the development data and the evaluation data in healthcare setting, eligibility criteria, outcome, and predictors", "Same source and definitions; test partition historically exposed; characteristics by partition in Table 1", loc("Partitions and Validation Design", "Table 1.")),
- ("Ethical approval", "17", "D;E", "Name the institutional research board or ethics committee that approved the study and describe the participant-informed consent or the waiver", "MIT and BIDMC IRBs with waiver of consent; PhysioNet DUA; no FIU IRB review required", loc("Ethical Considerations")),
+ ("Ethical approval", "17", "D;E", "Name the institutional research board or ethics committee that approved the study and describe the participant-informed consent or the waiver", "BIDMC IRB granted a waiver of informed consent and approved sharing of MIMIC-IV; PhysioNet DUA; no FIU IRB review required", loc("Ethical Considerations")),
  ("Funding", "18a", "D;E", "Give the source of funding and the role of the funders", "No external funding", loc("Funding")),
  ("Conflicts of interest", "18b", "D;E", "Declare any conflicts of interest and financial disclosures for all authors", "None declared", loc("Conflict of Interest Statement")),
  ("Protocol", "18c", "D;E", "Indicate where the study protocol can be accessed or state that a protocol was not prepared", "No protocol was prepared (stated in Ethical Considerations); the analysis plan evolved and the changes are disclosed", loc("Ethical Considerations", "Statistical Analysis")),
  ("Registration", "18d", "D;E", "Provide registration information for the study, or state that the study was not registered", "The study was not registered (stated in Ethical Considerations)", loc("Ethical Considerations")),
  ("Data sharing", "18e", "D;E", "Provide details of the availability of the study data", "MIMIC-IV via PhysioNet credentialed access; no row-level data redistributed", loc("Data Availability Statement")),
- ("Code sharing", "18f", "D;E", "Provide details of the availability of the analytical code", "Public repository; the submitted version will be tagged and archived at Zenodo before publication", loc("Data Availability Statement")),
+ ("Code sharing", "18f", "D;E", "Provide details of the availability of the analytical code", "Public repository; archived at Zenodo under concept DOI 10.5281/zenodo.21987701", loc("Data Availability Statement")),
  ("Patient and public involvement", "19", "D;E", "Provide details of any patient and public involvement or state no involvement", "No patient or public involvement (stated in Ethical Considerations)", loc("Ethical Considerations")),
  ("Participants", "20a", "D;E", "Describe the flow of participants through the study, including the number with and without the outcome", "Figure 1 flow; events per partition", loc("Figure 1.", "Cohort")),
  ("", "20b", "D;E", "Report the characteristics overall and for each data source or setting, including key dates, key predictors, sample size, outcome events, follow-up time, and missing data", "Table 1 characteristics by partition; missingness per predictor in Appendix 1", loc("Table 1.")),
  ("", "20c", "E", "For model evaluation, show a comparison with the development data of the distribution of important predictors", "Table 1 compares development and test partitions", loc("Table 1.")),
  ("Model development", "21", "D;E", "Specify the number of participants and outcome events in each analysis", "Per partition, per fold, per subgroup, and per landmark stage", loc("Partitions and Validation Design", "Table 4.", "S6.")),
- ("Model specification", "22", "D", "Provide details of the full prediction model to allow predictions in new individuals and to enable third-party evaluation", "Model artifact, encodings, and feature order are in the public repository (MIT license) and will be in the tagged release", loc("Data Availability Statement")),
+ ("Model specification", "22", "D", "Provide details of the full prediction model to allow predictions in new individuals and to enable third-party evaluation", "Model artifact, encodings, and feature order are in the public repository (MIT license) and its Zenodo archive (concept DOI 10.5281/zenodo.21987701)", loc("Data Availability Statement")),
  ("Model performance", "23a", "D;E", "Report model performance estimates with confidence intervals, including for any key subgroups", "Out-of-fold and test estimates with cluster-bootstrap CIs; subgroups in Table 4 and Figure 5", loc("Discrimination and Calibration", "Table 4.")),
  ("", "23b", "D;E", "If examined, report results of any heterogeneity in model performance across clusters", "Calendar-period bands only (single center)", loc("Table S1.")),
  ("Model updating", "24", "E", "Report the results from any model updating", "Not performed", loc("Model and Comparators")),
@@ -138,8 +138,8 @@ T = [
 d = new_doc("Supplementary Appendix 5. TRIPOD+AI Checklist",
             "Items and wording follow the official TRIPOD+AI checklist (Collins et al, BMJ "
             "2024;385:e078378; checklist version 11-January-2024; 27 items). D: development; E: "
-            "evaluation. Page numbers refer to the manuscript PDF (p) and the Supplementary "
-            "Material PDF (p S).")
+            "evaluation. Page numbers refer to the manuscript as paginated in the journal's "
+            "reviewer PDF (p) and to the Supplementary Material PDF (p S).")
 table(d, [["Section", "Item", "D/E", "Checklist item", "How addressed", "Location"]] +
       [list(r) for r in T], fs=7.5)
 d.save(str(PKT / "Supplementary Appendix 5 TRIPOD-AI Checklist.docx"))

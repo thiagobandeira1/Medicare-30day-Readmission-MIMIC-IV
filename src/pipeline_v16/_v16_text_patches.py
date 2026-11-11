@@ -13,11 +13,27 @@ from pathlib import Path
 
 H = Path(__file__).resolve().parent
 
+# Results of earlier pairs that a later pair (audit corrections, 2026-11-11)
+# rewrites on purpose. When neither side of such an earlier pair is present,
+# the pair is skipped as superseded; every other pair must still match.
+SUPERSEDED = (
+    "The submitted version will be tagged v16.0-jamia",
+    "(CMS) estimates the annual",
+    "for regression models, along with recurring weaknesses: ",
+    "value in this manuscript is generated (final_model_v13.json, the v8 ",
+    "data can improve on these scores [42]",
+    "and is not intended for real patient ",
+    "author's Master of Science capstone report (May 2026)",
+)
+
 
 def patch(fn, pairs):
     p = H / fn; s = p.read_text(encoding="utf-8")
     for a, b in pairs:
         if s.count(b) >= 1:          # already applied (also when b contains a)
+            continue
+        if s.count(a) == 0 and any(m in b for m in SUPERSEDED):
+            print("  superseded by a later pair:", fn, "|", b.strip()[:60])
             continue
         assert s.count(a) == 1, (fn, s.count(a), a[:70])
         s = s.replace(a, b)
@@ -277,4 +293,225 @@ patch("_build_jamia_v16.py", [
 patch("_build_jamia_cover_v16.py", [
  ('''P("[address withheld], United States; Phone: [phone withheld]; "''',
   '''P("11200 SW 8th St, Miami, FL 33199, United States; Phone: [phone withheld]; "'''),
+])
+
+# ------------------------------------------- AUDIT CORRECTIONS (2026-11-11)
+# Pre-submission audit, 2026-11-11 (summary in LEAKAGE_CORRECTION_v7.md,
+# v16.1 entry). Factual corrections and JAMIA
+# compliance only; no analysis or result changes.
+patch("_build_jamia_v16.py", [
+ # The cited CMS page (ref 1) does not report a $26 billion cost; keep only
+ # what refs 1 and 2 support (HRRP payment adjustments since fiscal year 2013).
+ ('''PB("Unplanned 30-day readmissions burden the United States health system: "
+   "the Centers for Medicare & Medicaid Services (CMS) estimates the annual "
+   "direct cost of Medicare readmissions above $26 billion [1], and the "
+   "Hospital Readmissions Reduction Program (HRRP) has tied reimbursement to "
+   "risk-adjusted readmission performance since 2013 [1,2]. Risk estimates "''',
+  '''PB("Unplanned 30-day readmissions burden the United States health system, "
+   "and the Hospital Readmissions Reduction Program (HRRP) of the Centers "
+   "for Medicare & Medicaid Services has tied reimbursement to "
+   "risk-adjusted readmission performance since 2013 [1,2]. Risk estimates "'''),
+ # Cited studies give C statistics of about 0.68 (LACE derivation) to 0.77
+ # (LACE, UK validation); HOSPITAL 0.71 (derivation) and 0.72 (validation).
+ ('''   "the HOSPITAL score [8] reach AUROCs of roughly 0.60 to 0.72 in external "
+   "validation [9,10,41], and systematic reviews report similar ceilings "
+   "for regression models, along with recurring weaknesses: "''',
+  '''   "the HOSPITAL score [8] reach AUROCs of about 0.68 to 0.77 in derivation "
+   "and validation studies [7,8,10,41]; a systematic review found that most "
+   "readmission risk models perform poorly [9], and reviews note recurring "
+   "weaknesses: "'''),
+ ('''   "data can exceed these ceilings [42], and gradient-boosted trees remain "''',
+  '''   "data can improve on these scores [42], and gradient-boosted trees remain "'''),
+ # RQ3: only global and stage-level SHAP results are reported.
+ ('''   "established clinical scores? RQ3: Can global and patient-level Shapley "''',
+  '''   "established clinical scores? RQ3: Can global Shapley "'''),
+ # JAMIA: tables cited in numerical order; Table 4 cited in the text.
+ ('''   "with the held-out test AUROC of the model each choice would deploy "
+   "(Table 2).")''',
+  '''   "with the held-out test AUROC of the model each choice would deploy.")'''),
+ ('''   f"detected (AUROC {f4(FR['Black']['auroc'])} vs {f4(FR['White']['auroc'])}; "''',
+  '''   f"detected (Table 4; AUROC {f4(FR['Black']['auroc'])} vs {f4(FR['White']['auroc'])}; "'''),
+ # Table 2: apparent AUROC rose by 0.071 and held-out AUROC by 0.069.
+ ('''   f"and held-out AUROC alike (by {_opt_trend:.3f}), because the future "''',
+  '''   f"and held-out AUROC alike (by {_opt_trend:.3f} and "
+   f"{ABP['heldout_test_auroc'] - ABR['heldout_test_auroc']:.3f}), because the future "'''),
+ # prior_any_ed_6m is not a final-model feature; the range is 99.7% to 100%.
+ ('''              TA["history_recompute"]["prior_any_ed_6m"]["match_share"],
+''',
+  '''              # prior_any_ed_6m dropped: not a final-model feature (audit 2026-11-11)
+'''),
+ # The original capstone code was recovered (results_v13/trend_code_recovery_v16.json).
+ ('''   f"feature table; it was rebuilt before this version. The original "
+   f"code of the leaked feature was not "
+   f"retained, so its exact formula is inferred from its signatures. "''',
+  '''   f"feature table; it was rebuilt before this version. The original "
+   f"code of the leaked feature, recovered in a final audit, confirms "
+   f"the mechanism the checks inferred. "'''),
+ # MIMIC-IV (ref 27): the BIDMC IRB granted the waiver and approved sharing.
+ ('''PB("MIMIC-IV creation was approved by the institutional review boards of "
+   "the Massachusetts Institute of Technology and Beth Israel Deaconess "
+   "Medical Center with a waiver of informed consent [27,32]. The first "''',
+  '''PB("The institutional review board of Beth Israel Deaconess Medical "
+   "Center granted a waiver of informed consent for MIMIC-IV and approved "
+   "its sharing [27]. The first "'''),
+ # Data Availability: the upstream feature extraction is not in the
+ # repository; the v16 archive already exists.
+ ('''  "agreement [27,32] and is not redistributed. All analysis code, the "
+  "leakage tests, and the machine-readable results files from which every "
+  "value in this manuscript is generated (final_model_v13.json, the v8 "
+  "to v13 audit files, and companions) are available at "
+  "https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV. "
+  "The submitted version will be tagged v16.0-jamia and archived at Zenodo "
+  "under concept DOI 10.5281/zenodo.21987701 before publication; Zenodo "''',
+  '''  "agreement [27,32] and is not redistributed. The analysis code from the "
+  "source feature table onward, the leakage tests, and the machine-readable "
+  "results files from which every value in this manuscript is generated "
+  "(final_model_v13.json, the v8 to v13 audit files, and companions) are "
+  "available at "
+  "https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV "
+  "and archived at Zenodo "
+  "under concept DOI 10.5281/zenodo.21987701; Zenodo "'''),
+])
+patch("_v16_checklists.py", [
+ ('''"Public repository; the submitted version will be tagged and archived at Zenodo before publication"''',
+  '''"Public repository; archived at Zenodo under concept DOI 10.5281/zenodo.21987701"'''),
+])
+patch("_build_jamia_supp_v16.py", [
+ ('''SC = json.loads((OUT7 / "subgroup_calibration_v13.json").read_text())''',
+  '''SC = json.loads((OUT7 / "subgroup_calibration_v13.json").read_text())
+TCR = json.loads((OUT7 / "trend_code_recovery_v16.json").read_text())
+_FMR = json.loads((OUT7 / "final_model_v13.json").read_text())["fairness"]["race"]'''),
+ # S3: the recovered capstone code reproduces the stored feature exactly.
+ ('''  f"of the whole longitudinal record. The original extraction code was not "
+  f"retained, and no candidate reconstruction reproduced it exactly (the "
+  f"closest, the slope of whole-day length of stay across all of a "
+  f"patient's Medicare admissions, matched {pct(TFS['slope_idx_losd'])} of "
+  f"patients, including single-admission patients for whom every candidate "
+  f"is zero). "''',
+  '''  f"of the whole longitudinal record. A final audit recovered the original "
+  f"capstone code, which confirms this: for each admission it took the "
+  f"length of stay minus that of the patient's previous admission, averaged "
+  f"these differences over the patient's whole record, and attached the "
+  f"mean to every admission (zero for patients with one admission), with "
+  f"no 180-day window. Applied to the source table, it reproduces the "
+  f"stored values for {pct(TCR['admissions_exact_share'], 0)} of its "
+  f"{TCR['n_admissions']:,} admissions. "'''),
+ # S8: describe the demonstration prototype as its repositories document it.
+ ('''P("The public demonstration prototype accepts only synthetic or manually "
+  "entered values, displays a research-only notice, and stores no data. It "
+  "runs an earlier development model, not the model reported here.")''',
+  '''P("The public demonstration prototype is documented as a research "
+  "prototype, not a medical device, and is not intended for real patient "
+  "data. It runs an earlier development model, not the model reported here.")'''),
+ # S11: the 15-entry grid includes the fixed setting, so 14 alternatives.
+ ('''  f"{EVL['val_auroc_full']:.4f}; {len(_hp)} alternative settings (maximum "''',
+  '''  f"{EVL['val_auroc_full']:.4f}; {len(_hp) - 1} alternative settings (maximum "'''),
+ # S13: specificity from the same source as the main text (0.610, not 0.611).
+ ('''  f"{_g8['White']['spec']:.3f} for White and {_g8['Black']['spec']:.3f} for "''',
+  '''  f"{_FMR['White']['specificity']:.3f} for White and {_FMR['Black']['specificity']:.3f} for "'''),
+])
+patch("_v16_appendices.py", [
+ # Appendix 4: the reported (v13) decision curve, as in Supplementary Figure S3.
+ ('''d.add_paragraph().add_run().add_picture(str(FIG7 / "v7_dca.png"), width=Inches(5.5))''',
+  '''d.add_paragraph().add_run().add_picture(str(REPO / "figures_v13" / "v13_dca.png"), width=Inches(4.75))'''),
+ ('''        ["v5/v6 leakage-safe consensus model (31 features)",''',
+  '''        ["v5/v6 consensus model (31 features)",'''),
+ ('''        ["v7 to v10 leak-free consensus model (47 features)",''',
+  '''        ["v7 to v10 consensus model without the trend features (47 features)",'''),
+])
+patch("_build_jamia_cover_v16.py", [
+ ('''  "yet most published models are evaluated in ways that overstate what a "''',
+  '''  "yet many published models are evaluated in ways that overstate what a "'''),
+ ('''  "development, gives secondary detail only (AUROC 0.706, good calibration). "''',
+  '''  "development, provides supporting detail only (AUROC 0.706, good calibration). "'''),
+ ('''  "gradient, all of which disappear once it is removed. The same comparison "''',
+  '''  "gradient, all of which disappear once it is removed. A later comparison "'''),
+ ('''  "and the complete pipeline is public.")''',
+  '''  "and the analysis code from the source feature table onward is public.")'''),
+ # Related material disclosed (JAMIA cover letter rules); preprint plan.
+ ('''  "any journal; this is its first submission. Analysis code and results "
+  "files from earlier versions of this work are archived in a public "
+  "repository (Zenodo); the corrected version will be archived there on "
+  "submission. The authors have no related papers published or under "
+  "consideration. The study is a "
+  "secondary analysis of the deidentified, publicly available MIMIC-IV "''',
+  '''  "any journal; this is its first submission. Analysis code and results "
+  "files from earlier versions of this work, together with the first "
+  "author's Master of Science capstone report (May 2026), which reports "
+  "pre-correction results, are archived in a public repository (Zenodo, "
+  "doi:10.5281/zenodo.21987702); the corrected version is archived there "
+  "as well. We intend to post this submitted version "
+  "as a preprint on arXiv (cs.LG) under the arXiv non-exclusive license and "
+  "will send the identifier to the editorial office once it is announced. "
+  "The study is a "
+  "secondary analysis of the deidentified, credentialed-access MIMIC-IV "'''),
+])
+
+# ------------------------------------ AUDIT CORRECTIONS, ROUND 2 (2026-11-11)
+# A second verification pass found these.
+patch("_build_jamia_v16.py", [
+ # Ref 14 (Rajkomar 2018) used full EHR data (including notes) and compared
+ # against a model refit on the HOSPITAL score variables.
+ ('''   "subgroup performance [9,11,12]. Machine learning on structured EHR "
+   "data can improve on these scores [42], and gradient-boosted trees remain "''',
+  '''   "subgroup performance [9,11,12]. Machine learning on EHR "
+   "data can improve on HOSPITAL-type scores [42], and gradient-boosted trees remain "'''),
+ # Results and Supplement S4: the imputation was found by comparing stored
+ # columns with raw tables.
+ ('''   "decisive step; it also exposed median imputation fitted on all "''',
+  '''   "decisive step; comparing stored columns with raw tables also exposed "
+   "median imputation fitted on all "'''),
+ # final_model_v13.json dca: near-equal to treat-all at 0.05 to 0.07
+ # (differences 0.0000 to -0.0002), above it from 0.08.
+ ('''PB(f"Decision curves showed positive net benefit over treat-all and "
+   f"treat-none across thresholds 0.05 to 0.40 (Supplementary Appendix "''',
+  '''PB(f"Decision curves showed net benefit above treat-none across "
+   f"thresholds 0.05 to 0.40 and above treat-all from 0.08 to 0.40 (Supplementary Appendix "'''),
+])
+patch("_build_jamia_supp_v16.py", [
+ # S8: keep only what the public repositories document.
+ ('''P("The public demonstration prototype is documented as a research "
+  "prototype, not a medical device, and is not intended for real patient "
+  "data. It runs an earlier development model, not the model reported here.")''',
+  '''P("The public demonstration prototype is documented as a research "
+  "prototype, not a medical device. It runs an earlier development model, "
+  "not the model reported here.")'''),
+])
+patch("_v16_checklists.py", [
+ ('''"MIT and BIDMC IRBs with waiver of consent; PhysioNet DUA; no FIU IRB review required"''',
+  '''"BIDMC IRB granted a waiver of informed consent and approved sharing of MIMIC-IV; PhysioNet DUA; no FIU IRB review required"'''),
+ ('''"Model artifact, encodings, and feature order are in the public repository (MIT license) and will be in the tagged release"''',
+  '''"Model artifact, encodings, and feature order are in the public repository (MIT license) and its Zenodo archive (concept DOI 10.5281/zenodo.21987701)"'''),
+])
+patch("_build_jamia_cover_v16.py", [
+ # Name the capstone report's authors and cite the concept DOI.
+ ('''  "files from earlier versions of this work, together with the first "
+  "author's Master of Science capstone report (May 2026), which reports "
+  "pre-correction results, are archived in a public repository (Zenodo, "
+  "doi:10.5281/zenodo.21987702); the corrected version is archived there "
+  "as well. We intend to post this submitted version "''',
+  '''  "files from earlier versions of this work, together with the capstone "
+  "report of the first two authors with Dr. Poellabauer as senior author "
+  "(April 2026, revised May 2026), which reports pre-correction results, "
+  "are archived on Zenodo (doi:10.5281/zenodo.21987702, an August 2026 "
+  "version under concept doi:10.5281/zenodo.21987701); the corrected "
+  "version is archived under the same concept DOI. We intend to post this "
+  "submitted version "'''),
+])
+
+# ------------------------------------ AUDIT CORRECTIONS, ROUND 3 (2026-11-11)
+# Ref 14 (Rajkomar 2018) used two US health systems' EHR data, not MIMIC-IV.
+patch("_build_jamia_v16.py", [
+ ('''   f"(0.727) [29], multimodal (0.791) [28], and full-EHR deep-learning "
+   f"(0.75 to 0.76) [42] reports, which differ in cohort, outcome, and "''',
+  '''   f"(0.727) [29] and multimodal (0.791) [28] reports and full-EHR deep "
+   f"learning elsewhere (0.75 to 0.76) [42], which differ in cohort, outcome, and "'''),
+])
+patch("_v16_checklists.py", [
+ # Appendix 5 page anchors now come from the journal's reviewer PDF, whose
+ # rendering paginates the manuscript in 29 pages (Word: 30).
+ ('''            "evaluation. Page numbers refer to the manuscript PDF (p) and the Supplementary "
+            "Material PDF (p S).")''',
+  '''            "evaluation. Page numbers refer to the manuscript as paginated in the journal's "
+            "reviewer PDF (p) and to the Supplementary Material PDF (p S).")'''),
 ])

@@ -1,0 +1,16 @@
+{
+ "description": "Recovered capstone formula for the leaked feature (per-patient mean of consecutive length-of-stay differences over the whole record, attached to every admission; 0 for single-admission patients) compared with the stored los_trend_180d column of the source feature table.",
+ "source_notebooks": [
+  "Capstone Notebook v2.ipynb",
+  "Capstone Notebook v3.2 01-26-2026.ipynb"
+ ],
+ "source_cell": "cell 16, block 'Service intensity trend'",
+ "tolerance_abs": 1e-06,
+ "n_admissions": 244576,
+ "admissions_exact_share": 1.0,
+ "n_patients": 91245,
+ "patients_all_exact_share": 1.0,
+ "n_multi_admission_patients": 45154,
+ "multi_admission_patients_all_exact_share": 1.0,
+ "generated_utc": "2026-11-11T08:20:38+00:00"
+}

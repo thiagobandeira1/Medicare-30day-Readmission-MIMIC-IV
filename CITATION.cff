@@ -20,16 +20,16 @@ authors:
     given-names: "Ananda Mohan"
     affiliation: "Knight Foundation School of Computing and Information Sciences, Florida International University, Miami, FL, USA"
     orcid: "https://orcid.org/0000-0002-4005-9942"
-version: "v16.0-jamia"
-date-released: "2026-11-10"
+version: "v16.1-jamia"
+date-released: "2026-11-11"
 doi: "10.5281/zenodo.21987701"
 abstract: >-
   Software and aggregate results for the JAMIA manuscript "Future-Information
   Leakage in 30-Day Readmission Prediction: An Empirical Audit and a
   Calibrated Electronic Health Record Model in Medicare-Insured Adults".
   Versions v7 to v16 remove a prior-utilization feature (los_trend_180d) and
-  two derived interactions that encoded later admissions, rebuild the feature
-  table from the raw MIMIC-IV tables without global imputation and with
+  two derived interactions that encoded later admissions, rebuild the affected
+  features from the raw MIMIC-IV tables without global imputation and with
   discharge and documentation-time cutoffs, and rerun the complete pipeline;
   all earlier releases report inflated performance (see
   LEAKAGE_CORRECTION_v7.md). Contains the leakage-safe staged recursive

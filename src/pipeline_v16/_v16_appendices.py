@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-"""Build Supplementary Appendices 1 to 4 and 6 for the v7 JAMIA submission
-(leak-free rebuild) into 'JAMIA Submission Packet v7'. Appendix 5 (TRIPOD+AI)
-is copied from the v6 packet and checked for stale section names."""
+"""Build Supplementary Appendices 1 to 4 for the v16 JAMIA submission into
+'JAMIA Submission Packet v16'. Appendices 5 and 6 (TRIPOD+AI and PROBAST+AI)
+are written by _v16_checklists.py."""
 import json
 from pathlib import Path
 import pandas as pd
@@ -371,7 +371,7 @@ print("A3 written")
 # ================================================================ Appendix 4
 d = new_doc("Supplementary Appendix 4. Decision Curves and Development History")
 p = d.add_paragraph(); r = p.add_run("Decision curves, final model"); r.bold = True
-d.add_paragraph().add_run().add_picture(str(FIG7 / "v7_dca.png"), width=Inches(5.5))
+d.add_paragraph().add_run().add_picture(str(REPO / "figures_v13" / "v13_dca.png"), width=Inches(4.75))
 p = d.add_paragraph(); r = p.add_run("Development history"); r.bold = True
 d.add_paragraph(
     "Earlier versions of this pipeline, including all versions released "
@@ -386,11 +386,11 @@ hist = [["Version", "Result", "Status"],
          "Pre-correction cohort; leaked variables"],
         ["Corrected cohort, 66-feature model", "test 0.7800",
          "Billing features and leaked variables"],
-        ["v5/v6 leakage-safe consensus model (31 features)",
+        ["v5/v6 consensus model (31 features)",
          f"out of fold {OLD['validation_hierarchy']['primary_oof_procedure_dev_only']['auroc']:.4f}; "
          f"test {OLD['metric_panel']['auroc']['point']:.4f}",
          "Contained the leaked trend feature; superseded"],
-        ["v7 to v10 leak-free consensus model (47 features)",
+        ["v7 to v10 consensus model without the trend features (47 features)",
          "out of fold 0.7058; test 0.7064",
          "Used a source table with global median imputation; superseded"],
         ["v11 consensus model (48 features) on the table rebuilt without global imputation",
@@ -406,4 +406,4 @@ add_table(d, hist, fs=8.5)
 d.save(str(PKT / "Supplementary Appendix 4 Decision Curves and Development History.docx"))
 print("A4 written")
 
-print("A5 and A6 are written by _v11_checklists.py (reused for v12)")
+print("A5 and A6 are written by _v16_checklists.py")

@@ -21,6 +21,8 @@ PDR = json.loads((OUT7OLD / "postdischarge_rows_v8.json").read_text())
 DCK = json.loads((OUT7OLD / "definition_checks_v8.json").read_text())
 TFS = json.loads((OUT7OLD / "trend_formula_search_v8.json").read_text())
 SC = json.loads((OUT7 / "subgroup_calibration_v13.json").read_text())
+TCR = json.loads((OUT7 / "trend_code_recovery_v16.json").read_text())
+_FMR = json.loads((OUT7 / "final_model_v13.json").read_text())["fairness"]["race"]
 EVL = json.loads((OUT7 / "evaluation_v13.json").read_text())
 TB = json.loads((OUT7 / "table_rebuild_v13.json").read_text())
 BO = json.loads((OUT7 / "baselines_oof_v13.json").read_text())
@@ -173,12 +175,14 @@ P(f"Among {LK['first_ever_admissions']:,} first observed index admissions (no "
   f"{TA['trend_patients_multi_admission']:,} cohort patients with more than one "
   f"admission ({pct(TA['trend_constant_within_patient_share'])}) and zero for "
   f"every patient with a single admission, so it was a per-patient summary "
-  f"of the whole longitudinal record. The original extraction code was not "
-  f"retained, and no candidate reconstruction reproduced it exactly (the "
-  f"closest, the slope of whole-day length of stay across all of a "
-  f"patient's Medicare admissions, matched {pct(TFS['slope_idx_losd'])} of "
-  f"patients, including single-admission patients for whom every candidate "
-  f"is zero). "
+  f"of the whole longitudinal record. A final audit recovered the original "
+  f"capstone code, which confirms this: for each admission it took the "
+  f"length of stay minus that of the patient's previous admission, averaged "
+  f"these differences over the patient's whole record, and attached the "
+  f"mean to every admission (zero for patients with one admission), with "
+  f"no 180-day window. Applied to the source table, it reproduces the "
+  f"stored values for {pct(TCR['admissions_exact_share'], 0)} of its "
+  f"{TCR['n_admissions']:,} admissions. "
   f"The trend and the two interaction terms built from it were removed. "
   f"To test whether the trend concept itself carried signal, we rebuilt it "
   f"causally: the least-squares slope of length of stay across the "
@@ -428,9 +432,9 @@ P("Resample counts: 1,000 for the test panel; 800 for subgroup and "
   "unknown). Prior admissions count every earlier admission of the patient "
   "in MIMIC-IV regardless of insurance.")
 H2("S8. Demonstration Prototype")
-P("The public demonstration prototype accepts only synthetic or manually "
-  "entered values, displays a research-only notice, and stores no data. It "
-  "runs an earlier development model, not the model reported here.")
+P("The public demonstration prototype is documented as a research "
+  "prototype, not a medical device. It runs an earlier development model, "
+  "not the model reported here.")
 
 H1("Supplementary Results")
 H2("S9. Sensitivity and Calendar-Period Analyses")
@@ -487,7 +491,7 @@ _hp = EVL["hyperparam_val_auroc"]
 P(f"Post hoc robustness checks on the validation partition (not used to "
   f"change the model): with the final features fitted on the training "
   f"partition, the fixed hyperparameters gave AUROC "
-  f"{EVL['val_auroc_full']:.4f}; {len(_hp)} alternative settings (maximum "
+  f"{EVL['val_auroc_full']:.4f}; {len(_hp) - 1} alternative settings (maximum "
   f"depth 3 to 8, learning rate 0.03 to 0.1 with matched tree counts) gave "
   f"{min(_hp.values()):.4f} to {max(_hp.values()):.4f}; five further seeds "
   f"gave {min(EVL['seed_val_auroc']):.4f} to {max(EVL['seed_val_auroc']):.4f}; "
@@ -550,7 +554,7 @@ P("Calibration-in-the-large by subgroup (observed to expected ratio, 95% "
   + f". On average calibration only the heterogeneous other or unknown group "
   f"was miscalibrated (risk overestimated); the Black calibration-slope "
   f"interval excludes 1 (Table 4). Specificity at the shared threshold was "
-  f"{_g8['White']['spec']:.3f} for White and {_g8['Black']['spec']:.3f} for "
+  f"{_FMR['White']['specificity']:.3f} for White and {_FMR['Black']['specificity']:.3f} for "
   f"Black patients (difference "
   f"{SC['white_minus_black_specificity_joint']['point_observed']:.3f}, 95% CI "
   f"{SC['white_minus_black_specificity_joint']['ci95'][0]:.3f} to "

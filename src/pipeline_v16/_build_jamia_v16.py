@@ -31,7 +31,7 @@ FIG8 = REPO / "figures_v13"
 HIST_MATCH = [TA["history_recompute"]["prior_admissions_all"]["match_share"],
               HV["prior_admissions_6m"]["p6_disch180"],
               HV["prior_mean_los_6m"]["mlos_floor_disch180"],
-              TA["history_recompute"]["prior_any_ed_6m"]["match_share"],
+              # prior_any_ed_6m dropped: not a final-model feature (audit 2026-11-11)
               HV["time_since_last_discharge"]["nonfill_match_cohort"],
               PRV["lookback_variants"]["admit_365"]]
 CONST = IA["constant_within_patient_share"]
@@ -196,22 +196,22 @@ doc.add_page_break()
 
 # ================================================ BACKGROUND AND SIGNIFICANCE
 HB1("Background and Significance")
-PB("Unplanned 30-day readmissions burden the United States health system: "
-   "the Centers for Medicare & Medicaid Services (CMS) estimates the annual "
-   "direct cost of Medicare readmissions above $26 billion [1], and the "
-   "Hospital Readmissions Reduction Program (HRRP) has tied reimbursement to "
+PB("Unplanned 30-day readmissions burden the United States health system, "
+   "and the Hospital Readmissions Reduction Program (HRRP) of the Centers "
+   "for Medicare & Medicaid Services has tied reimbursement to "
    "risk-adjusted readmission performance since 2013 [1,2]. Risk estimates "
    "available at discharge could target transitional care if the "
    "model can be trusted at deployment. Timing and equity sharpen the "
    "stakes: early and late readmissions differ in causes [3,4], and unequal "
    "model performance across groups can lead to unequal care [5,6].")
 PB("Bedside indices remain the default. The LACE index [7] and "
-   "the HOSPITAL score [8] reach AUROCs of roughly 0.60 to 0.72 in external "
-   "validation [9,10,41], and systematic reviews report similar ceilings "
-   "for regression models, along with recurring weaknesses: "
+   "the HOSPITAL score [8] reach AUROCs of about 0.68 to 0.77 in derivation "
+   "and validation studies [7,8,10,41]; a systematic review found that most "
+   "readmission risk models perform poorly [9], and reviews note recurring "
+   "weaknesses: "
    "leakage-prone splits, absence of calibration assessment, and unexamined "
-   "subgroup performance [9,11,12]. Machine learning on structured EHR "
-   "data can exceed these ceilings [42], and gradient-boosted trees remain "
+   "subgroup performance [9,11,12]. Machine learning on EHR "
+   "data can improve on HOSPITAL-type scores [42], and gradient-boosted trees remain "
    "strong learners on tabular clinical data [13-16]. Clinical use also "
    "requires calibrated probabilities [17], interpretable explanations "
    "[18], same-cohort comparison with the scores hospitals use, fairness "
@@ -240,7 +240,7 @@ PB("Five research questions (RQs) organize the study. RQ1: Which "
    "discharge-available EHR features contribute most to prediction of "
    "30-day readmission in Medicare-insured adults? RQ2: Can a leakage-safe, "
    "calibrated machine-learning model improve prediction relative to "
-   "established clinical scores? RQ3: Can global and patient-level Shapley "
+   "established clinical scores? RQ3: Can global Shapley "
    "additive explanations (SHAP) provide clinically interpretable insight "
    "into predicted risk? RQ4: How does performance vary across the "
    "post-discharge time window and across demographic subgroups? RQ5: How "
@@ -362,8 +362,7 @@ PB("LACE [7] and HOSPITAL [8] were reconstructed for every admission, "
 HB2("Leakage Ablation")
 PB("To quantify how common pipeline choices inflate apparent performance, "
    "we compared the cross-validated (apparent) AUROC on development data "
-   "with the held-out test AUROC of the model each choice would deploy "
-   "(Table 2).")
+   "with the held-out test AUROC of the model each choice would deploy.")
 HB2("Time-to-Event Analyses")
 PB("Time to readmission used a competing-risks event process (readmission; "
    "death before readmission from hospital and Massachusetts registry "
@@ -400,9 +399,9 @@ PB("Performance was audited on the test partition by age band, sex, race, "
    "3). Race is not a model input; auditing by race is deliberate because "
    "omitting an attribute does not guarantee equal performance [5,19,20].")
 HB2("Ethical Considerations")
-PB("MIMIC-IV creation was approved by the institutional review boards of "
-   "the Massachusetts Institute of Technology and Beth Israel Deaconess "
-   "Medical Center with a waiver of informed consent [27,32]. The first "
+PB("The institutional review board of Beth Israel Deaconess Medical "
+   "Center granted a waiver of informed consent for MIMIC-IV and approved "
+   "its sharing [27]. The first "
    "author accessed the data under the PhysioNet Credentialed Health Data "
    "Use Agreement after required training; co-authors used only aggregate "
    "results, and no row-level data are redistributed. This secondary "
@@ -492,7 +491,8 @@ table(_ab_rows, font_size=8.5, widths=[2.4, 0.8, 1.15, 1.15, 0.9])
 _opt_trend = ABP["apparent_cv_auroc"] - ABR["apparent_cv_auroc"]
 _ac = ABL["all_combined"]
 PB(f"In the ablation (Table 2), adding the trend features raised apparent "
-   f"and held-out AUROC alike (by {_opt_trend:.3f}), because the future "
+   f"and held-out AUROC alike (by {_opt_trend:.3f} and "
+   f"{ABP['heldout_test_auroc'] - ABR['heldout_test_auroc']:.3f}), because the future "
    f"information was present in the test data too: internal validation "
    f"cannot detect this kind of leak. Combining all choices produced "
    f"apparent AUROC {_ac['apparent_cv_auroc']:.3f} against "
@@ -696,7 +696,7 @@ figure(FIG8 / "v13_daily_episode.png",
 HB2("Subgroup Performance")
 _s0, _s10 = PU["0"], PU["10 or more"]
 PB(f"No difference in discrimination between Black and White patients was "
-   f"detected (AUROC {f4(FR['Black']['auroc'])} vs {f4(FR['White']['auroc'])}; "
+   f"detected (Table 4; AUROC {f4(FR['Black']['auroc'])} vs {f4(FR['White']['auroc'])}; "
    f"difference {wb['point']:.4f}, 95% CI {c4(wb['ci95'])}; "
    f"{fmt_p(wb['p_bootstrap'])}), but the interval does not exclude "
    f"differences of up to about {max(abs(wb['ci95'][0]), abs(wb['ci95'][1])):.2f}, "
@@ -788,8 +788,8 @@ figure(FIG7 / "v13_shap.png",
            f"leading features; the largest is {_t[0]} at "
            f"{SH[0]['mean_abs_shap']:.3f}, followed by {_t[1]} and {_t[2]}.")
 HB2("Clinical Utility (Exploratory)")
-PB(f"Decision curves showed positive net benefit over treat-all and "
-   f"treat-none across thresholds 0.05 to 0.40 (Supplementary Appendix "
+PB(f"Decision curves showed net benefit above treat-none across "
+   f"thresholds 0.05 to 0.40 and above treat-all from 0.08 to 0.40 (Supplementary Appendix "
    f"4). Flagging the top "
    f"10% of admissions captured {CAP['top_10']['captured']*100:.0f}% of "
    f"readmissions at a positive predictive value of "
@@ -836,7 +836,8 @@ PB("The leaked feature was documented as a prior 180-day window and "
    "are screens, not proof: constancy within patients also describes "
    "legitimate unit flags, and a first-admission test cannot detect every "
    "form of future information; recomputation from raw timestamps is the "
-   "decisive step; it also exposed median imputation fitted on all "
+   "decisive step; comparing stored columns with raw tables also exposed "
+   "median imputation fitted on all "
    "partitions, a quieter defect that leaks only the predictor distribution "
    "but contradicts a fold-local claim. These checks do not test whether "
    "index-stay features include events after discharge, which requires "
@@ -848,8 +849,8 @@ PB("The leaked feature was documented as a prior 180-day window and "
 HB2("Comparison With Prior Work")
 PB(f"On MIMIC-IV, our out-of-fold AUROC of {OOF['auroc']:.3f} is comparable "
    f"to the structured-feature report (0.696) [30] and below notes-based "
-   f"(0.727) [29], multimodal (0.791) [28], and full-EHR deep-learning "
-   f"(0.75 to 0.76) [42] reports, which differ in cohort, outcome, and "
+   f"(0.727) [29] and multimodal (0.791) [28] reports and full-EHR deep "
+   f"learning elsewhere (0.75 to 0.76) [42], which differ in cohort, outcome, and "
    f"validation design. We cannot exclude similar "
    f"leakage in published models that engineer history features.")
 HB2("Clinical Interpretation (Hypotheses)")
@@ -879,8 +880,8 @@ PB(f"This is a single-center, retrospective, internally validated study "
    f"The validation partition participated in consensus selection and set "
    f"the threshold. Earlier analysis versions used the globally imputed "
    f"feature table; it was rebuilt before this version. The original "
-   f"code of the leaked feature was not "
-   f"retained, so its exact formula is inferred from its signatures. "
+   f"code of the leaked feature, recovered in a final audit, confirms "
+   f"the mechanism the checks inferred. "
    f"Order and transfer features were extracted with a discharge-time filter "
    f"in the source pipeline and spot-checked, not fully recomputed, against "
    f"raw tables. The primary "
@@ -917,13 +918,14 @@ H1("Funding")
 P("This study received no external funding.")
 H1("Data Availability Statement")
 P("MIMIC-IV v3.1 is available from PhysioNet under a credentialed data use "
-  "agreement [27,32] and is not redistributed. All analysis code, the "
-  "leakage tests, and the machine-readable results files from which every "
-  "value in this manuscript is generated (final_model_v13.json, the v8 "
-  "to v13 audit files, and companions) are available at "
-  "https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV. "
-  "The submitted version will be tagged v16.0-jamia and archived at Zenodo "
-  "under concept DOI 10.5281/zenodo.21987701 before publication; Zenodo "
+  "agreement [27,32] and is not redistributed. The analysis code from the "
+  "source feature table onward, the leakage tests, and the machine-readable "
+  "results files from which every value in this manuscript is generated "
+  "(final_model_v13.json, the v8 to v13 audit files, and companions) are "
+  "available at "
+  "https://github.com/thiagobandeira1/Medicare-30day-Readmission-MIMIC-IV "
+  "and archived at Zenodo "
+  "under concept DOI 10.5281/zenodo.21987701; Zenodo "
   "versions under that DOI dated before October 2026 predate the "
   "corrections. A "
   "demonstration prototype in the companion repositories "

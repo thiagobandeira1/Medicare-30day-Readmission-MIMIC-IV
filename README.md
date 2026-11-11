@@ -38,12 +38,15 @@
 > Mondal), reports the v13 model. The model pipeline is
 > [`src/pipeline_v13/`](src/pipeline_v13/) and the document builders are
 > [`src/pipeline_v16/`](src/pipeline_v16/) (v14 to v16 changed reporting
-> only; v16 applies the co-authors' review); canonical results are
+> only; v16 applies the co-authors' review and the 2026-11-11 pre-submission
+> audit corrections); canonical results are
 > [`results_v13/final_model_v13.json`](results_v13/final_model_v13.json) with
 > the leakage test in [`results_v13/leak_test_v13.json`](results_v13/leak_test_v13.json)
 > and the table rebuild record in
 > [`results_v13/table_rebuild_v13.json`](results_v13/table_rebuild_v13.json);
-> figures are in [`figures_v13/`](figures_v13/). Public copies of the
+> figures are in [`figures_v13/`](figures_v13/). Supplementary Appendices 1
+> to 6 of the submitted manuscript are in [`supplementary/`](supplementary/).
+> Public copies of the
 > document builders withhold the corresponding author's phone number. The
 > v13 results were produced with Python 3.11.14, XGBoost 3.2.0,
 > scikit-learn 1.7.2, pandas 2.3.3, and NumPy 1.26.4 (the `env` block of
@@ -60,7 +63,7 @@
 > partition: LACE 0.605 and HOSPITAL 0.647 as integer scores (both below the
 > model; AUROC uplift 0.101 and 0.059, 5,000-draw bootstrap P<.001); on the
 > out-of-fold development partition, LACE 0.6055 and HOSPITAL 0.6424.
-> Release: the submitted version is tagged `v16.0-jamia` and archived
+> Release: the submitted version is tagged `v16.1-jamia` and archived
 > under the Zenodo concept DOI
 > [10.5281/zenodo.21987701](https://doi.org/10.5281/zenodo.21987701)
 > (resolves to the latest version; versions dated before October 2026
@@ -106,7 +109,7 @@
 
 ## Overview
 
-Thirty-day unplanned readmission is a CMS-penalised quality measure under the **Hospital Readmissions Reduction Program (HRRP)**, costing Medicare an estimated **$26B per year**. Traditional clinical scores such as **LACE** (AUROC ≈ 0.684) and note-based deep-learning pipelines such as **ClinicalBERT** (AUROC ≈ 0.714) leave significant headroom on this task.
+Thirty-day unplanned readmission is a CMS-penalised quality measure under the **Hospital Readmissions Reduction Program (HRRP)**. Traditional clinical scores such as **LACE** (AUROC ≈ 0.684) and note-based deep-learning pipelines such as **ClinicalBERT** (AUROC ≈ 0.714) leave significant headroom on this task.
 
 This work develops an interpretable, clinically deployable risk-assessment tool trained end-to-end on the **Medicare subset of MIMIC-IV v3.1** (244,576 admissions, 21.1% positive rate). Every deliverable (cohort construction, feature engineering, model training, ensembling, SHAP interpretation, reproduction validator, and the 5-fold CV stability check) is wired into the source-of-truth notebook [`notebooks/Capstone_Final_Notebook.ipynb`](notebooks/Capstone_Final_Notebook.ipynb).
 
@@ -139,7 +142,7 @@ The revised pipeline corrects a methodological flaw in the original April 2026 c
 
 ## What's new vs. the original capstone
 
-This is a **post-defense revision** of the original April 2026 capstone. Methodology and conclusions are unchanged; numbers are now produced under a stricter no-leakage protocol and the model-selection narrative is updated.
+This is a **post-defense revision** of the original April 2026 capstone. Methodology and conclusions are unchanged; numbers are now produced under a stricter protocol (early stopping on an inner validation slice instead of the test set) and the model-selection narrative is updated.
 
 | | Original capstone | This revision |
 |---|---|---|
@@ -344,7 +347,7 @@ REPRODUCTION VALIDATOR: this run vs. original capstone report
   This   n_val (inner, for early stopping): 19,115
 ```
 
-Verdict legend: **✓** within ±0.003 · **~** within ±0.008 · **✗** outside ±0.008. Every per-model AUROC meets or exceeds the original target under the stricter no-leakage protocol.
+Verdict legend: **✓** within ±0.003 · **~** within ±0.008 · **✗** outside ±0.008. Every per-model AUROC meets or exceeds the original target under the stricter protocol.
 
 ## 5-Fold CV Stability Check
 
@@ -446,7 +449,7 @@ medicare-30day-readmission-mimic-iv/
 │   ├── cv5_stability.png                    # §10.3c 5-fold CV stability
 │   └── v7_feature_importance.png            # §10.4 feature-importance ranking
 │
-├── docs/                                    # methodology deep-dives
+├── supplementary/                           # submitted Supplementary Appendices 1 to 6
 └── data/                                    # empty; MIMIC-IV not redistributed
 ```
 
@@ -547,7 +550,7 @@ Questions about credentialing are best raised on the [PhysioNet community forum]
   author    = {Bandeira, Thiago and Gonzalez, Armando and Poellabauer, Christian and Mondal, Ananda Mohan},
   title     = {Future-Information Leakage in 30-Day Readmission Prediction:
                An Empirical Audit and a Calibrated Electronic Health Record Model in Medicare-Insured Adults},
-  version   = {v16.0-jamia},
+  version   = {v16.1-jamia},
   year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.21987701},
